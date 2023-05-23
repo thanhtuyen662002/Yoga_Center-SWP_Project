@@ -15,21 +15,18 @@ public class CoursesDTO {
     private String description;
     private int price;
     private String courseImage;
-    private byte status;
 
     public CoursesDTO() {
     }
 
-    public CoursesDTO(int courseID, String courseName, String description, int price, String courseImage, byte status) {
+    public CoursesDTO(int courseID, String courseName, String description, String courseImage,int price) {
         this.courseID = courseID;
         this.courseName = courseName;
         this.description = description;
-        this.price = price;
         this.courseImage = courseImage;
-        this.status = status;
+        this.price = price;
     }
 
-    
 
     public int getCourseID() {
         return courseID;
@@ -71,19 +68,12 @@ public class CoursesDTO {
         this.courseImage = courseImage;
     }
 
-    public byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(byte status) {
-        this.status = status;
-    }
-
     @Override
     public String toString() {
-        return "CoursesDTO{" + "courseID=" + courseID + ", courseName=" + courseName + ", description=" + description + ", price=" + price + ", courseImage=" + courseImage + ", status=" + status + '}';
+        return "courseID=" + courseID + ", courseName=" + courseName + ", description=" + description + ", courseImage=" + courseImage + ", price=" + price;
     }
-    
+
+ 
     
     
 }

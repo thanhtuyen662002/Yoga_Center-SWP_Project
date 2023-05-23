@@ -19,12 +19,12 @@ import yogacenter.utils.DBUtils;
  * @author HP Pro
  */
 //Ham chuc nang cua khoa hoc
-public class CourseDAO {
+public class CoursesDAO {
 
-    private static final String SHOW = "SELECT * FROM tblCourses";
-    private static final String UPDATE = "UPDATE tblCourses SET name=?, description=?, image=?, price=? WHERE courseID=?";
-    private static final String DELETE = "DELETE tblCourses WHERE courseID=?";
-    private static final String INSERT = "INSERT INTO tblCourses(courseID, name, description, image, price,status)" + "VALUE(?,?,?,?,?,?)";
+    private static final String SHOW = "SELECT * FROM Courses";
+    //private static final String UPDATE = "UPDATE Courses SET name='?', description='?', image='?', price=? WHERE courseID=?";
+    private static final String DELETE = "DELETE Courses WHERE courseID=?";
+    //private static final String INSERT = "SET IDENTITY_INSERT Courses ON" + "INSERT INTO Courses(courseID, name, description, image, price)" + "VALUE(?,'?','?','?',?)";
 
     //Ham hien thi toan bo cac khoa hoc
     public List<CoursesDTO> getAllCourses() throws SQLException {
@@ -42,10 +42,9 @@ public class CourseDAO {
                     int courseID = rs.getInt("courseID");
                     String courseName = rs.getString("name");
                     String description = rs.getString("description");
+                    String image = rs.getString("image");
                     int price = rs.getInt("price");
-                    String image = rs.getString("courseImage");
-                    byte status = rs.getByte("status");
-                    list.add(new CoursesDTO(courseID, courseName, description, price, courseName, status));
+                    list.add(new CoursesDTO(courseID, courseName, description, image, price));
                 }
             }
         } catch (Exception e) {
@@ -72,12 +71,9 @@ public class CourseDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                ptm = conn.prepareStatement(UPDATE);
-                ptm.setString(1, courses.getCourseName());
-                ptm.setString(2, courses.getDescription());
-                ptm.setInt(3, courses.getPrice());
-                ptm.setString(4, courses.getCourseImage());
-                ptm.setByte(5, courses.getStatus());
+                String sql = "UPDATE Courses SET name=" + "'" + courses.getCourseName() + "'" + ", description= " +  "'" + courses.getDescription() +  "'" +
+                        ", image= " + "'" + courses.getCourseImage() + "'" + ", price= " + courses.getPrice() + " WHERE courseID= " + courses.getCourseID();
+                ptm = conn.prepareStatement(sql); 
                 checkUpdate = ptm.executeUpdate() > 0 ? true : false; //kiem tra xem da cap nhat thanh cong hay chua,
                 //neu thanh cong = true, khong thanh cong = false
             }
@@ -95,7 +91,7 @@ public class CourseDAO {
     }
 
     //Ham xoa khoa hoc
-    public boolean deleteCourses(String courseID) throws SQLException {
+    public boolean deleteCourses(int courseID) throws SQLException {
         boolean checkDelete = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -103,7 +99,7 @@ public class CourseDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(DELETE);
-                ptm.setString(1, courseID);
+                ptm.setInt(1, courseID);
                 checkDelete = ptm.executeUpdate() > 0 ? true : false; //Kiem tra xem khoa hoc da duoc xoa hay chua
                 //neu da xoa = true, chua xoa duoc = false
             }
@@ -128,13 +124,9 @@ public class CourseDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                ptm = conn.prepareStatement(INSERT);
-                ptm.setInt(1, courses.getCourseID());
-                ptm.setString(2, courses.getCourseName());
-                ptm.setString(3, courses.getDescription());
-                ptm.setString(4, courses.getCourseImage());
-                ptm.setInt(5, courses.getPrice());
-                ptm.setByte(6, courses.getStatus());
+                String sql = "SET IDENTITY_INSERT Courses ON " + "INSERT INTO Courses(courseID, name, description, image, price)" + 
+                        "VALUES(" + courses.getCourseID() + "," + "'" + courses.getCourseName() + "'" + "," + "'" + courses.getDescription() + "'" + "," + "'" + courses.getCourseImage() + "'" + "," + courses.getPrice() + ")";
+                ptm = conn.prepareStatement(sql);
                 checkInsert = ptm.executeUpdate() > 0 ? true : false; //kiem tra xem da them khoa hoc thanh cong hay chua
                 //neu them thanh cong = true, them that bai = false
             }
