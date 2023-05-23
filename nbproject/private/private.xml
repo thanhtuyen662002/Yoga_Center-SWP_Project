@@ -3,12 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FPT/FPT/PRJ/Yoga%20Center/src/java/yogacenter/dao/CourseDAO.java</file>
-            <file>file:/D:/FPT/FPT/PRJ/Yoga%20Center/src/java/yogacenter/dto/UserDTO.java</file>
-            <file>file:/D:/FPT/FPT/PRJ/Yoga%20Center/src/java/yogacenter/utils/DBUtils.java</file>
-            <file>file:/D:/FPT/FPT/PRJ/Yoga%20Center/src/java/yogacenter/dto/ProductDTO.java</file>
-            <file>file:/D:/FPT/FPT/PRJ/Yoga%20Center/src/java/yogacenter/dto/ScheduleDTO.java</file>
-            <file>file:/D:/FPT/FPT/PRJ/Yoga%20Center/src/java/yogacenter/dto/CoursesDTO.java</file>
+            <file>file:/D:/FPT/FPT/SWP/Yoga_Center-SWP_Project/web/clb/clb.html</file>
+            <file>file:/D:/FPT/FPT/SWP/Yoga_Center-SWP_Project/test/test/Courses/TestUpdateCourse.java</file>
+            <file>file:/D:/FPT/FPT/SWP/Yoga_Center-SWP_Project/web/home/home.html</file>
+            <file>file:/D:/FPT/FPT/SWP/Yoga_Center-SWP_Project/web/news/news.css</file>
+            <file>file:/D:/FPT/FPT/SWP/Yoga_Center-SWP_Project/test/test/Courses/TestShowListCourses.java</file>
+            <file>file:/D:/FPT/FPT/SWP/Yoga_Center-SWP_Project/web/clb/clb.css</file>
+            <file>file:/D:/FPT/FPT/SWP/Yoga_Center-SWP_Project/web/login/login.css</file>
+            <file>file:/D:/FPT/FPT/SWP/Yoga_Center-SWP_Project/web/news/news.html</file>
+            <file>file:/D:/FPT/FPT/SWP/Yoga_Center-SWP_Project/web/home/home.css</file>
+            <file>file:/D:/FPT/FPT/SWP/Yoga_Center-SWP_Project/web/login/login.html</file>
+            <file>file:/D:/FPT/FPT/SWP/Yoga_Center-SWP_Project/web/home/home.js</file>
+            <file>file:/D:/FPT/FPT/SWP/Yoga_Center-SWP_Project/test/test/Courses/TestDeleteCourse.java</file>
         </group>
     </open-files>
 </project-private>
