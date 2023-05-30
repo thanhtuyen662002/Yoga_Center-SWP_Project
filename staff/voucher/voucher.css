@@ -1,0 +1,262 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: roboto;
+}
+
+body {
+    font-size: 1.6rem;
+    font-family: roboto;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1320px;
+}
+
+.nav-background {
+    background-color: #fafafa;
+    height: 10rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    height: 10rem;
+    align-items: center;
+}
+
+.nav-menu-list {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+}
+
+/* làm logo */
+.nav-logo a {
+    font-size: 35px;
+    font-weight: 700;
+    text-decoration: none;
+    color: #03a4ed;
+    letter-spacing: 6px;
+}
+
+.nav-logo span {
+    color: #fe3f40;
+}
+
+#toggler,
+.nav label {
+    display: none;
+}
+
+/* làm menu */
+.nav-menu-link {
+    padding: 0 2rem;
+    text-decoration: none;
+    color: #2a2a2a;
+    font-weight: bold;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.nav-menu-link:hover {
+    color: #fe3f40;
+    transition: 0.3s;
+}
+
+.btn_contact {
+    background-color: #fe3f40;
+    padding: 1.5rem 2rem;
+    border: none;
+    color: black;
+    border-radius: 20px;
+    transition: 0.3s;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.btn_contact:hover {
+    color: white;
+    transition: 0.3s;
+}
+
+.actived {
+    color: #fe3f40;
+}
+
+@media screen and (max-width: 993px) {
+    /* .nav {
+      position: relative;
+      justify-content: space-between;
+    } */
+
+    .nav label {
+        display: block;
+    }
+
+    .nav-menu {
+        flex-direction: column;
+        background-color: #fafafa;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%, 0);
+        z-index: 999;
+        height: 0;
+        width: 100%;
+        overflow: hidden;
+        /* transition: 0.3s; */
+    }
+
+    .nav-menu-list {
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .nav-menu-item {
+        padding: 20px 0;
+    }
+
+    .nav label {
+        cursor: pointer;
+    }
+
+    #toggler:checked~.nav-menu {
+        height: auto;
+        transition: 0.3s;
+    }
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(45deg, #5b84b6, #b64d5d);
+    font-family: sans-serif;
+    font-weight: 100;
+}
+
+.voucher {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.voucher h1{
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #3b3b3b;
+    font-size: 36px;
+}
+table {
+    width: 800px;
+    border-collapse: collapse;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+th {
+    text-align: left;
+}
+
+thead th {
+     
+        background-color: #55608f;
+    
+}
+
+tbody tr:hover {
+
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.btn-update{
+    padding: 3px 12px;
+    border-radius: 5px;
+    background-color: #cc7683;
+}
+.btn-update:hover{
+    background-color: aqua;
+    color: #fff;
+}
+.btn-delete{
+    padding: 3px 12px;
+    border-radius: 5px;
+    background-color: #d47a87;
+    
+}
+.btn-delete:hover{
+    background-color: rgb(215, 9, 9);
+    color: #fff;
+
+}
+
+.insert {
+    position: relative;
+    /* width: 200px; */
+    height: 200px;
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center
+    
+  }
+  
+.hand{
+    margin-right: 5rem;
+    animation: move 1s infinite linear;
+
+}
+.hand i{
+    font-size: 3em;
+}
+.content button{
+    padding: 10px 35px;
+    border-radius: 8px;
+    font-weight: bold;
+    background: bisque;
+}
+.content button:hover{
+    background-color: aquamarine;
+}
+@keyframes move {
+    0% {
+      transform: translateX(0%);
+    }
+    50% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+
+  
