@@ -259,4 +259,18 @@ tbody tr:hover {
     }
   }
 
-  
+.alert{
+    animation: updown 2s infinite linear;
+
+}
+@keyframes updown {
+    0% {
+      transform: translateX(0%);
+    }
+    50% {
+      transform: translateY(100%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
