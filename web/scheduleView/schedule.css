@@ -1,0 +1,78 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+#wrapper {
+    min-height: 100%;
+}
+
+.back {
+    background: #e2e2e2;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+
+.div-center {
+    width: 600px;
+    height: 70%;
+    background-color: #fff;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: auto;
+    padding: 48px 16px 10px 16px;
+    border-bottom: 2px solid #ccc;
+    display: table;
+    border-radius: 12px;
+}
+
+.login-head-title {
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.login-btn-wrapper {
+    position: relative;
+    width: 100%;
+    .img-login-btn {
+        position: absolute;
+        left: 12px;
+        top: 8px;
+    }
+    .txt-login-btn {
+        color: #35414c;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        outline: 0;
+    }
+}
+
+.login-btn-wrapper:hover {
+    background-color: grey;
+}
+
+.new-user-signup {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.back-to-login-btn {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+}
+
+.form-input-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #000000;
+}
