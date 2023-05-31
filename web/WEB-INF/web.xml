@@ -10,7 +10,7 @@
     </servlet>
     <servlet>
         <servlet-name>listScheduleController</servlet-name>
-        <servlet-class>yogacenter.controllers.listScheduleController</servlet-class>
+        <servlet-class>yogacenter.controllers.listScheduleController_Nhat</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MainController</servlet-name>
@@ -18,11 +18,11 @@
     </servlet>
     <servlet>
         <servlet-name>viewScheduleController</servlet-name>
-        <servlet-class>yogacenter.controllers.viewScheduleController</servlet-class>
+        <servlet-class>yogacenter.controllers.viewScheduleController_Nhat</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>insertScheduleController</servlet-name>
-        <servlet-class>yogacenter.controllers.insertScheduleController</servlet-class>
+        <servlet-class>yogacenter.controllers.insertScheduleController_Nhat</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>TestServlet</servlet-name>

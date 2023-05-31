@@ -28,7 +28,7 @@ import yogacenter.dto.UserDTO_Nhat;
  *
  * @author dell
  */
-public class insertScheduleController extends HttpServlet {
+public class insertScheduleController_Nhat extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

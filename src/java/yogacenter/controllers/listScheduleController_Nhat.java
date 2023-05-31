@@ -30,7 +30,7 @@ import yogacenter.dto.ScheduleDTO_Nhat;
  *
  * @author dell
  */
-public class listScheduleController extends HttpServlet {
+public class listScheduleController_Nhat extends HttpServlet {
 
     public ArrayList<LocalDate> getAllMonday() {
         int year = 2023; // Năm bạn muốn lấy các ngày đầu tiên và cuối cùng của tuần
@@ -153,9 +153,9 @@ public class listScheduleController extends HttpServlet {
             request.setAttribute("schedule", listSchedule);
             request.getRequestDispatcher("/scheduleView/listSchedule.jsp").forward(request, response);
         } catch (ServletException ex) {
-            Logger.getLogger(listScheduleController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(listScheduleController_Nhat.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(listScheduleController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(listScheduleController_Nhat.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
