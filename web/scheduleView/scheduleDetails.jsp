@@ -79,7 +79,7 @@
                                                         ${(r.id eq schedule.room.id)?"selected":""}>${r.id}</option>
                                             </c:forEach>   
                                         </select>
-                                        <label for="form6Example6">Roome</label>
+                                        <label for="form6Example6">Room</label>
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +102,7 @@
                                 <div class="form-outline mb-4">
                                     <div class="form-floating mb-4">
                                         <input value="${schedule.date}"  name="day"
-                                               type="text" id="dateInput" class="form-control" placeholder="Example" />
+                                               type="date" id="dateInput" class="form-control" placeholder="Example" />
                                         <label for="form12">Day</label>
                                     </div>
                                 </div>
