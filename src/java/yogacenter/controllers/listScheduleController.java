@@ -16,6 +16,8 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -129,13 +131,20 @@ public class listScheduleController extends HttpServlet {
 
             List<ScheduleDTO_Nhat> listSchedule
                     = sDao.getAllCustomerSchedule("C0001", monday, sunday);
-            ArrayList<ClassSlotDTO_Nhat> slots = slotDao.getAllSlot();
+            ArrayList<ClassSlotDTO_Nhat> slots = slotDao.getAll();
 
             ArrayList<Date> sqlDates = new ArrayList<>();
             for (LocalDate localDate : week) {
                 Date sqlDate = Date.valueOf(localDate);
                 sqlDates.add(sqlDate);
             }
+
+            Collections.sort(listSchedule, new Comparator<ScheduleDTO_Nhat>() {
+                @Override
+                public int compare(ScheduleDTO_Nhat o1, ScheduleDTO_Nhat o2) {
+                    return o1.getDate().compareTo(o2.getDate());
+                }
+            });
 
             request.setAttribute("slots", slots);
             request.setAttribute("mondays", mondays);
@@ -150,7 +159,7 @@ public class listScheduleController extends HttpServlet {
         }
 
     }
-
+//
 //    public static void main(String[] args) {
 //        LocalDate currentDate = LocalDate.now();
 //        LocalDate mondayOfWeek = getMondayOfWeek(currentDate);
@@ -161,8 +170,7 @@ public class listScheduleController extends HttpServlet {
 //        List< ScheduleDTO_Nhat> listSchedule
 //                = sDao.getAllCustomerSchedule("C0001", monday, sunday);
 //        for (ScheduleDTO_Nhat scheduleDTO_Nhat : listSchedule) {
-//            System.out.println(scheduleDTO_Nhat.getDate());
+//            System.out.println(scheduleDTO_Nhat.getId());
 //        }
 //    }
-
 }

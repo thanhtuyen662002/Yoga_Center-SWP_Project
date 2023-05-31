@@ -9,6 +9,7 @@
 <%@ page import="java.time.LocalDate" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -85,22 +86,49 @@
                     </thead>
                     <tbody>
                         <c:set var="sche" value="${schedule}" />
-                        <c:set var="dayc" value="${week}" />
-                        <c:forEach var="slot" items="${slots}">
-                            <tr style="background-color: gray;">
-                                <th>Slot ${slot.id}</th>
-                                    <c:forEach var="i" begin="0" step="1" end="6">
-                                        <c:forEach var="j" begin="0" step="1" end="7">
-                                            <c:if test="${dayc[i] eq sche[j].date}">
-                                            <th>${sche[j].date}-${dayc[i]}</th>
-                                            </c:if>
-                                            <c:if test="${dayc[i] ne sche[j].date}">
-                                            <th>${sche[j].date}</th>
-                                            </c:if>
-                                        </c:forEach>
-                                    </c:forEach>
-                            </tr>
+                        <c:set var="day" value="${week}" />
+                        <c:set var="slot" value="${slots}" />
+                        <c:set var="slotsSize" value="${fn:length(slots)}" />
+                        <c:forEach var="i" begin="0" end="${slotsSize-1}" step="1">
+                            <tr style="background-color: white;">
+                                <th>Slot ${slot[i].id}<br>(${slot[i].startTime}-${slot[i].endTime})</th>
+                                    <c:forEach var="j" begin="0" end="6" step="1">
+                            <form id="frm${i}${j}" action="viewSchedule" method="get">
+                                <input type="hidden" name="id" id="id${i}${j}"/>
+                                <input type="hidden" name="action" value="ViewDetails"/>
+                            </form>
+                            <th id="${i}${j}">-</th>
+                            </c:forEach>
+                        </tr>
+                    </c:forEach>
+                    <c:forEach var="sc" items="${schedule}">
+                        <c:forEach var="i" begin="0" end="${slotsSize-1}" step="1">
+                            <c:if test="${sc.slot.id eq slot[i].id}">
+                                <c:set var="row" value="${i}" />
+                            </c:if>
                         </c:forEach>
+                        <c:forEach var="j" begin="0" end="6" step="1">
+                            <c:if test="${sc.date eq day[j]}">
+                                <c:set var="column" value="${j}" />
+                            </c:if>
+                        </c:forEach>
+                        <script>
+                            var header = document.getElementById("${row}${column}");
+                            header.innerHTML = "<c:out value='${sc.classStudy.course.name}'/>" + "<br>" + "at" + "<br>" +
+                                    "<c:out value='${sc.room.id}'/>";
+                            var input = document.getElementById("id${row}${column}");
+                            // Set the value of the input element
+                            input.value = "<c:out value='${sc.id}'/>";
+
+                            var frm = document.getElementById("frm${i}${j}");
+
+                            var thElement = document.getElementById("${row}${column}");
+                            // Add onclick event listener
+                            thElement.addEventListener("click", function () {
+                                document.getElementById("frm${row}${column}").submit();
+                            });
+                        </script>
+                    </c:forEach>
                     </tbody>
                 </table>
             </section>
@@ -111,14 +139,14 @@
         crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/8d39de38b8.js" crossorigin="anonymous"></script>
         <script>
-            // Get the select element
-            var selectElement = document.getElementById("mySelect");
+                            // Get the select element
+                            var selectElement = document.getElementById("mySelect");
 
-            // Add an event listener for the change event
-            selectElement.addEventListener("change", function () {
-                // Submit the form when the option changes
-                document.getElementById("myForm").submit();
-            });
+                            // Add an event listener for the change event
+                            selectElement.addEventListener("change", function () {
+                                // Submit the form when the option changes
+                                document.getElementById("myForm").submit();
+                            });
         </script>
     </body>
 

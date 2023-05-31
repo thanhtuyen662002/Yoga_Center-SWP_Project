@@ -27,93 +27,162 @@
             <section class="table-section" style="padding: 40px">
                 <div style="background-color: whitesmoke; border-radius: 5px;padding: 5%">
                     <p style="text-align: center; font-size: 24px; font-style: italic;font-weight: bold" >Schedule Details</p>
-                    <form style="padding: 24px;">
+                    <form style="padding: 24px;" action="viewSchedule" method="post">
                         <!-- 2 column grid layout with text inputs for the first and last names -->
                         <div class="row">
                             <!-- Text input -->
                             <div class="col-md-6">
                                 <div class="form-floating mb-4">
-                                    <input type="text" id="form12" class="form-control" placeholder="Example" />
-                                    <label for="form12">Example label</label>
+                                    <input value="${schedule.id}" name="id"
+                                           type="text" id="form12" class="form-control" placeholder="Example" readonly/>
+                                    <label for="form12">Schedule ID</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- Email input -->
+                            <div class="col-md-6">
+                                <div class="form-outline mb-4">
+                                    <div class="form-floating mb-4">
+                                        <select class="form-control" id="form6Example6" name="class">
+                                            <c:forEach var="cl" items="${className}">
+                                                <option value="${cl.id}" 
+                                                        ${(cl.id eq schedule.classStudy.id)?"selected":""}>${cl.name}</option>
+                                            </c:forEach>    
+                                        </select>
+                                        <label for="form6Example6">Class</label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-floating mb-4">
-                                    <input type="text" id="form12" class="form-control" placeholder="Example" />
-                                    <label for="form12">Example label</label>
+                                <div class="form-outline mb-4">
+                                    <div class="form-floating mb-4">
+                                        <select class="form-control" id="form6Example6" name="pt">
+                                            <c:forEach var="pt" items="${pt}">
+                                                <option value="${pt.phone}" 
+                                                        ${(pt.phone eq schedule.pt.phone)?"selected":""}>${pt.name}</option>
+                                            </c:forEach>   
+                                        </select>
+                                        <label for="form6Example6">PT</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Email input -->
-                        <div class="form-outline mb-4">
-                            <div class="form-floating mb-4">
-                                <input type="email" id="form12" class="form-control" placeholder="Example" />
-                                <label for="form12">Email</label>
-                            </div>
-                        </div>
-
-                        <!-- Number input -->
-                        <div class="form-floating mb-4">
-                            <input type="number" id="form6Example6" class="form-control" placeholder="Enter Phone" />
-                            <label for="form6Example6">Phone</label>
-                        </div>
-
-                        <!-- Message input -->
-                        <div class="form-floating mb-4">
-                            <textarea class="form-control" id="form6Example7" rows="4"
-                                      placeholder="Additional information"></textarea>
-                            <label class="form-label" for="form6Example7">Additional information</label>
-                        </div>
-
-                        <!-- Form switch, radio button -->
-                        <div class="row mb-4">
-                            <div class="col-6 form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                                <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
-                                           value="option1" checked>
-                                    <label class="form-check-label" for="exampleRadios1">
-                                        Default radio
-                                    </label>
+                        <div class="row">
+                            <!-- Email input -->
+                            <div class="col-md-6">
+                                <div class="form-outline mb-4">
+                                    <div class="form-floating mb-4">
+                                        <select class="form-control" id="form6Example6" name="room">
+                                            <c:forEach var="r" items="${room}">
+                                                <option value="${r.id}" 
+                                                        ${(r.id eq schedule.room.id)?"selected":""}>${r.id}</option>
+                                            </c:forEach>   
+                                        </select>
+                                        <label for="form6Example6">Roome</label>
+                                    </div>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
-                                           value="option2">
-                                    <label class="form-check-label" for="exampleRadios2">
-                                        Second default radio
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3"
-                                           value="option3" disabled>
-                                    <label class="form-check-label" for="exampleRadios3">
-                                        Disabled radio
-                                    </label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-outline mb-4">
+                                    <div class="form-floating mb-4">
+                                        <select class="form-control" id="form6Example6" name="slot">
+                                            <c:forEach var="sl" items="${slot}">
+                                                <option value="${sl.id}" 
+                                                        ${(sl.id eq schedule.slot.id)?"selected":""}>${sl.id}</option>
+                                            </c:forEach>  
+                                        </select>
+                                        <label for="form6Example6">Slot</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Checkbox -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-outline mb-4">
+                                    <div class="form-floating mb-4">
+                                        <input value="${schedule.date}"  name="day"
+                                               type="text" id="dateInput" class="form-control" placeholder="Example" />
+                                        <label for="form12">Day</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--                         Form switch, radio button 
+                                                <div class="row mb-4">
+                                                    <div class="col-6 form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                                                        <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                                                                   value="option1" checked>
+                                                            <label class="form-check-label" for="exampleRadios1">
+                                                                Default radio
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                                                                   value="option2">
+                                                            <label class="form-check-label" for="exampleRadios2">
+                                                                Second default radio
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3"
+                                                                   value="option3" disabled>
+                                                            <label class="form-check-label" for="exampleRadios3">
+                                                                Disabled radio
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                        
+                                                 Checkbox 
+                                                <div class="form-check d-flex justify-content-center mb-4">
+                                                    <input class="form-check-input me-2" type="checkbox" value="" id="form6Example8" checked />
+                                                    <label class="form-check-label" for="form6Example8"> Create an account? </label>
+                                                    <br>
+                        
+                                                </div>-->
                         <div class="form-check d-flex justify-content-center mb-4">
-                            <input class="form-check-input me-2" type="checkbox" value="" id="form6Example8" checked />
-                            <label class="form-check-label" for="form6Example8"> Create an account? </label>
-                        </div>
-
-                        <!-- Submit button -->
-                        <button type="submit" class="btn btn-primary btn-block mb-4 w-40">Create Schedule</button>
+                            <!-- Submit button -->
+                            <input type="hidden" value="update" name="action"/>
+                            <button type="submit" class="btn btn-primary btn-block mb-4 w-40" style="margin-right: 2%">Save</button>
+                    </form>
+                    <form action="viewSchedule" method="post">
+                        <input type="hidden" value="${schedule.id}" name="id"/>
+                        <input type="hidden" value="delete" name="action"/>
+                        <button type="submit" class="btn btn-primary btn-block mb-4 w-40">Delete</button>
                     </form>
                 </div>
-            </section>
-        </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-        crossorigin="anonymous"></script>
-        <script src="https://kit.fontawesome.com/8d39de38b8.js" crossorigin="anonymous"></script>
-    </body>
+                </form>
+        </div>
+    </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/8d39de38b8.js" crossorigin="anonymous"></script>
+<script>
+    function validateInputDate() {
+        var dateInput = document.getElementById("dateInput").value;
+        var regex = /^\d{0,4}-\d{0,2}-\d{0,2}$/;
+        var keyCode = event.which || event.keyCode;
+
+        if (keyCode === 8) {
+            // Allow Backspace key
+            return;
+        }
+
+        if (!regex.test(dateInput)) {
+            event.target.value = dateInput.slice(0, -1);
+        }
+    }
+</script>
+</body>
 
 </html>

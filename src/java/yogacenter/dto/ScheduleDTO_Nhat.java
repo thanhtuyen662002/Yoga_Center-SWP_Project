@@ -12,6 +12,8 @@ import java.sql.Date;
  * @author HP Pro
  */
 public class ScheduleDTO_Nhat {
+
+    private int id;
     private ClassDTO_Nhat classStudy;
     private UserDTO_Nhat pt;
     private ClassSlotDTO_Nhat slot;
@@ -19,13 +21,30 @@ public class ScheduleDTO_Nhat {
     private Date date;
     private CustomerDTO_Nhat customer;
 
-    public ScheduleDTO_Nhat(ClassDTO_Nhat classStudy, UserDTO_Nhat pt, ClassSlotDTO_Nhat slot, RoomDTO_Nhat room, Date date, CustomerDTO_Nhat customer) {
+    public ScheduleDTO_Nhat(int id, ClassDTO_Nhat classStudy, UserDTO_Nhat pt, ClassSlotDTO_Nhat slot, RoomDTO_Nhat room, Date date, CustomerDTO_Nhat customer) {
+        this.id = id;
         this.classStudy = classStudy;
         this.pt = pt;
         this.slot = slot;
         this.room = room;
         this.date = date;
         this.customer = customer;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public UserDTO_Nhat getPt() {
+        return pt;
+    }
+
+    public void setPt(UserDTO_Nhat pt) {
+        this.pt = pt;
     }
 
     public ScheduleDTO_Nhat() {
@@ -83,7 +102,5 @@ public class ScheduleDTO_Nhat {
     public String toString() {
         return "ScheduleDTO_Nhat{" + "classStudy=" + classStudy + ", pt=" + pt + ", slot=" + slot + ", room=" + room + ", date=" + date + ", customer=" + customer + '}';
     }
-    
-    
-    
+
 }

@@ -20,4 +20,23 @@ import yogacenter.utils.DBUtils;
  * @author dell
  */
 public class ClassDAO_Nhat {
+
+    public ArrayList<ClassDTO_Nhat> getAll() {
+        ArrayList<ClassDTO_Nhat> list = new ArrayList<>();
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM Class";
+            PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                list.add(new ClassDTO_Nhat(rs.getInt("classID"),
+                        rs.getString("name")));
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ClassSlotDAO_Nhat.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClassSlotDAO_Nhat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
 }

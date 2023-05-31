@@ -20,6 +20,8 @@ public class MainController_Nhat extends HttpServlet {
     private static final String ERROR = "error.jsp";
     private static final String ViewSchedule = "ViewSchedule";
     private static final String ListSchedule_CONTROLLER = "listSchedule";
+    private static final String ViewDetails = "ViewDetails";
+    private static final String ViewSchedule_CONTROLLER = "viewSchedule";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -29,6 +31,9 @@ public class MainController_Nhat extends HttpServlet {
             String action = request.getParameter("action");//Search
             if (ViewSchedule.equals(action)) {
                 url = ListSchedule_CONTROLLER;
+            }
+            if (ViewDetails.equals(action)) {
+                url = ViewSchedule_CONTROLLER;
             } else {
                 request.setAttribute("ERROR", "Your action is not support!");
             }
@@ -44,13 +49,11 @@ public class MainController_Nhat extends HttpServlet {
             throws ServletException, IOException {
     }
 
-    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
 
-    
     @Override
     public String getServletInfo() {
         return "Short description";

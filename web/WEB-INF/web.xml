@@ -16,6 +16,14 @@
         <servlet-name>MainController</servlet-name>
         <servlet-class>yogacenter.controllers.MainController_Nhat</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewScheduleController</servlet-name>
+        <servlet-class>yogacenter.controllers.viewScheduleController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>insertScheduleController</servlet-name>
+        <servlet-class>yogacenter.controllers.insertScheduleController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TestServlet</servlet-name>
         <url-pattern>/TestServlet</url-pattern>
@@ -31,6 +39,14 @@
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/main</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewScheduleController</servlet-name>
+        <url-pattern>/viewSchedule</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>insertScheduleController</servlet-name>
+        <url-pattern>/insertSchedule</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

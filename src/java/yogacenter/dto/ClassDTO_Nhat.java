@@ -9,6 +9,7 @@ package yogacenter.dto;
  * @author dell
  */
 public class ClassDTO_Nhat {
+
     private int id;
     private CourseDTO_Nhat course;
     private UserDTO_Nhat pt;
@@ -32,6 +33,11 @@ public class ClassDTO_Nhat {
 
     public ClassDTO_Nhat(int aInt, String string, String string0, String string1, boolean aBoolean) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public ClassDTO_Nhat(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public int getId() {
@@ -94,6 +100,5 @@ public class ClassDTO_Nhat {
     public String toString() {
         return "ClassDTO_Nhat{" + "id=" + id + ", course=" + course + ", pt=" + pt + ", name=" + name + ", description=" + description + ", total_sessions=" + total_sessions + ", capacity=" + capacity + '}';
     }
-    
-    
+
 }

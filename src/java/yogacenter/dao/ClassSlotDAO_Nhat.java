@@ -19,7 +19,7 @@ import yogacenter.utils.DBUtils;
  */
 public class ClassSlotDAO_Nhat {
 
-    public ArrayList<ClassSlotDTO_Nhat> getAllSlot() {
+    public ArrayList<ClassSlotDTO_Nhat> getAll() {
         ArrayList<ClassSlotDTO_Nhat> list = new ArrayList<>();
         try {
             String sql = "SELECT *\n"
