@@ -1,20 +1,19 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model.dto;
 
 /**
  *
- * @author HP Pro
+ * @author dell
  */
 public class UserDTO {
 
     private String phone;
-    private String userLogin;
-    private String name;
     private String password;
+    private String userlogin;
+    private String name;
     private String address;
     private String gender;
     private String roleID;
@@ -23,15 +22,26 @@ public class UserDTO {
     public UserDTO() {
     }
 
-    public UserDTO(String phone, String userLogin, String name, String password, String address, String gender, String roleID, boolean status) {
+    public UserDTO(String phone, String password, String userlogin, String name, String address, String gender, String role, boolean status) {
         this.phone = phone;
-        this.userLogin = userLogin;
-        this.name = name;
         this.password = password;
+        this.userlogin = userlogin;
+        this.name = name;
         this.address = address;
         this.gender = gender;
-        this.roleID = roleID;
+        this.roleID = role;
         this.status = status;
+    }
+
+    public UserDTO(String phone, String name) {
+        this.phone = phone;
+        this.name = name;
+    }
+
+    public UserDTO(String phone, String name, String role) {
+        this.phone = phone;
+        this.name = name;
+        this.roleID = role;
     }
 
     public String getPhone() {
@@ -42,12 +52,20 @@ public class UserDTO {
         this.phone = phone;
     }
 
-    public String getUserLogin() {
-        return userLogin;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserLogin(String userLogin) {
-        this.userLogin = userLogin;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUserlogin() {
+        return userlogin;
+    }
+
+    public void setUserlogin(String userlogin) {
+        this.userlogin = userlogin;
     }
 
     public String getName() {
@@ -56,14 +74,6 @@ public class UserDTO {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getAddress() {
@@ -98,11 +108,9 @@ public class UserDTO {
         this.status = status;
     }
 
-
-
     @Override
     public String toString() {
-        return "UserDTO{" + "phone=" + phone + ", userLogin=" + userLogin + ", name=" + name + ", password=" + password + ", address=" + address + ", gender=" + gender + ", roleID=" + roleID + ", status=" + status + '}';
+        return "UserDTO_Nhat{" + "phone=" + phone + ", password=" + password + ", userlogin=" + userlogin + ", name=" + name + ", address=" + address + ", gender=" + gender + ", role=" + roleID + ", status=" + status + '}';
     }
 
 }
