@@ -1,0 +1,214 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: roboto;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: roboto;
+}
+
+.course-body {
+  margin-top: 20rem;
+  margin-left: 0;
+  transition: 0.3 ease;
+  /* text-align: center;   */
+}
+
+.header-nav {
+  overflow: hidden;
+  width: 3em;
+  height: 3em;
+  display: flex;
+  background: #a5000a;
+  align-items: center;
+  position: fixed;
+  top: 0;
+}
+.header-nav .h2 {
+  color: #fff;
+}
+.header-nav .h2 span {
+  color: #b8ccf7;
+}
+
+.header-nav .header-button {
+  margin-left: 0.7em;
+  margin-top: 0.4em;
+  margin-right: 2.7em;
+  padding-right: 0.3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: none;
+  background: none;
+  width: 2em;
+  height: 1.2em;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s ease all;
+  outline: none;
+}
+.header-nav .header-button .header-button-li {
+  width: 2em;
+  height: 0.25em;
+  background: #fff;
+  transition: 0.3s ease all;
+  border-radius: 0.2em;
+}
+.header-nav .header-button .line2 {
+  transform: rotate(45deg) translateY(9px);
+  margin-left: 15px;
+  transition: 0.3s ease all;
+}
+.header-nav .header-button .line1 {
+  display: none;
+  transition: 0.3s ease all;
+}
+.header-nav .header-button .line3 {
+  transform: rotate(-45deg) translateY(-9px);
+  margin-left: 15px;
+  transition: 0.3s ease all;
+}
+
+.nav-content1 {
+  color: #fff;
+  overflow: hidden;
+  width: 3em;
+  min-height: 100vh;
+  background: #a5000a;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 3em;
+}
+.nav-content-list {
+  font-family: "Lato", sans-serif;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-left: 0px;
+  height: min-content;
+  transition: hover 0.5s ease;
+  border-bottom: 0.001em solid rgba(255, 255, 255, 0.205);
+}
+.nav-content-list li {
+  position: relative;
+  padding: 0.5em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.nav-content-list li i {
+  font-size: 1.2em;
+  padding: 1em 0.2em;
+  padding-left: 0.3em;
+  text-align: center;
+}
+.nav-content-list li span {
+  position: absolute;
+  left: 5em;
+  text-align: center;
+}
+.nav-content-list :hover {
+  background: #003dc0;
+}
+
+.logo-btn {
+  width: 18em;
+  display: flex;
+  align-items: center;
+  transition: 0.5s ease;
+}
+
+.widthLess {
+  width: 3em;
+  transition: 0.7s ease;
+}
+.table {
+  margin-top: 5rem;
+}
+#id {
+  max-width: 20px;
+}
+#image {
+  max-width: 80px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#title {
+  max-width: 80px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#content {
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.course-body table tr {
+  /* height: 5rem; */
+}
+.course-body-title h1 {
+  text-align: center;
+}
+.logo:active .course-body-title h1 {
+  text-align: center;
+  font-weight: bold;
+}
+.hihi {
+  margin-left: 240px;
+}
+.hehe {
+  transition: 0.3 ease;
+}
+
+.insert {
+  position: relative;
+  /* width: 200px; */
+  height: 200px;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hand {
+  margin-right: 5rem;
+  animation: move 1s infinite linear;
+}
+.hand i {
+  font-size: 3em;
+}
+.content button {
+  padding: 10px 35px;
+  border-radius: 8px;
+  font-weight: bold;
+  background: bisque;
+}
+.content button:hover {
+  background-color: aquamarine;
+}
+@keyframes move {
+  0% {
+    transform: translateX(0%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
