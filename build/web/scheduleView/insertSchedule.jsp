@@ -86,7 +86,7 @@
                             <div class="col-md-6">
                                 <div class="form-outline mb-4">
                                     <div class="form-floating mb-4">
-                                        <input value="${schedule.date}"  name="day"
+                                        <input value="${schedule.date}"  name="day" required 
                                                type="date" id="dateInput" class="form-control" placeholder="Example" />
                                         <label for="form12">Day</label>
                                     </div>

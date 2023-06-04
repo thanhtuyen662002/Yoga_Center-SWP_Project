@@ -208,15 +208,18 @@ public class ScheduleDAO_Nhat extends DBUtils {
         }
     }
 
-    public boolean isScheduleExist(int slotId, String phonePT, Date date) {
+    public boolean isScheduleExist(int slotId, Date date, String customerId, String roomID, int classID) {
         try {
             String sql = "SELECT *\n"
                     + "  FROM [Schedule]\n"
-                    + "  where ptPhone = ? and slotID = ? and day = ?";
+                    + "  where slotID = ? and day = ? and customerID = ? and roomID= ? and classID = ?";
             PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
-            stm.setString(1, phonePT);
-            stm.setInt(2, slotId);
-            stm.setDate(3, date);
+//            stm.setString(1, phonePT);
+            stm.setInt(1, slotId);
+            stm.setDate(2, date);
+            stm.setString(3, customerId);
+            stm.setString(4, roomID);
+            stm.setInt(5, classID);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 return true;

@@ -93,9 +93,10 @@ public class listScheduleController_Nhat extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        UserDAO_Nhat uDao = new UserDAO_Nhat();
-//        UserDTO user = uDao.getUserByID("0987654444");
-//        request.getSession().setAttribute("user", user);
+        UserDAO_Nhat uDao = new UserDAO_Nhat();
+        UserDTO user = uDao.getUserByID("0913277862");
+        //ST 0987654444 0913277862 US 0987658686 0987657766
+        request.getSession().setAttribute("user", user);
         //get current date
         LocalDate currentDate = LocalDate.now();
         getScheduleByDate(currentDate, request, response);

@@ -104,7 +104,7 @@ public class insertScheduleController_Nhat extends HttpServlet {
         int slotId = Integer.parseInt(request.getParameter("slot"));
         Date date = Date.valueOf(request.getParameter("day"));
         String customerId = request.getParameter("cusId");
-        boolean isExist = scheDao.isScheduleExist(slotId, phonePT,date);
+        boolean isExist = scheDao.isScheduleExist(slotId, date, customerId, roomId, classId);
         if (!isExist) {
             scheDao.insert(classId, phonePT, roomId, slotId, date, customerId);
             request.getSession().setAttribute("error", false);
