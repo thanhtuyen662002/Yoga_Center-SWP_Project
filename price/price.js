@@ -1,8 +1,8 @@
 const priceTitle = [
-  { value: "CLASSIC", id: "classic" },
-  { value: "CLASSIC-PLUS", id: "classicPlus" },
-  { value: "ROYAL", id: "royal" },
-  { value: "SIGNATURE", id: "signature" },
+  { value: "BASIC", id: "classic" },
+  { value: "ADVANCE", id: "classicPlus" },
+  { value: "TEACHER", id: "royal" },
+  { value: "THERAPY", id: "signature" },
 ];
 
 const priceData = [
@@ -84,13 +84,22 @@ let prePartNode;
 //render price title
 const renderPriceTitle = () => {
   const priceListUI = document.getElementById("price-title-list");
-  priceTitle.forEach((element) => {
+  priceTitle.forEach((element, index) => {
     const list_item = document.createElement("li");
     list_item.id = element.id;
     list_item.className = "price-title-li";
+    if (index == 0) {
+      list_item.classList.add("active");
+      prePriceTitleNode = list_item;
+    }
     list_item.innerHTML = `${element.value}`;
     priceListUI.appendChild(list_item);
   });
+  let prePartName = priceData.find(
+    (item) => item.priceTitle == prePriceTitleNode.id
+  ).part;
+  renderPartInit(prePriceTitleNode.id);
+  renderPriceInforInit(prePriceTitleNode.id, prePartName);
 };
 
 //click vào danh sách Title và render part tương ứng, từ đó render  price Detail(bằng renderPriceInforInit)
@@ -110,38 +119,25 @@ const renderPart = () => {
       prePriceTitleNode = event.target; //lưu lại pt price title sẽ active
       prePriceTitleNode.classList.add("active"); //thêm active cho price title
       //tìm những thằng có price title giống thằng bị actived
-      const listPart = priceData.filter(
-        (item) => item.priceTitle == idPriceTitle
-      );
 
       //render ra những thằng part tương ứng
-      const partListUI = document.getElementById("price-detail-left");
-      partListUI.innerHTML = "";
-      listPart.forEach((element, index) => {
-        const partNode = document.createElement("a");
-        if (index == 0) {
-          prePartNode = partNode;
-          partNode.classList.add("active");
-        }
-        partNode.href = "#";
-        partNode.id = element.part;
-        partNode.innerHTML = `<div class="left-months">${element.part}</div> THÁNG`;
-        partListUI.appendChild(partNode);
-      });
+      renderPartInit(idPriceTitle);
       //render
-      renderPriceInforInit(prePriceTitleNode, prePartNode);
+      renderPriceInforInit(prePriceTitleNode.id, prePartNode.id);
     }
   });
 };
 
 // render price Detail dựa vào pricetile đã click và prePartNode đã click
-const renderPriceInforInit = (prePriceTitleNode, prePartNode) => {
+const renderPriceInforInit = (prePriceTitleName, prePartNodeName) => {
   const priceInforUI = document.getElementById("price-info");
   console.log("prePriceTitleNode = ", prePriceTitleNode);
   console.log("prePartNode = ", prePartNode);
+  console.log("prePriceTitleName = ", prePriceTitleName);
+
   //tìm price detail tương ứng
   const priceDetail = priceData.find((item) => {
-    if (item.priceTitle == prePriceTitleNode.id && item.part == prePartNode.id)
+    if (item.priceTitle == prePriceTitleName && item.part == prePartNodeName)
       return item;
   });
   //render
@@ -192,11 +188,36 @@ const renderPriceInfor = () => {
     if (idPart) {
       prePartNode = event.target.closest("a"); //lưu prePartNode mới
       prePartNode.classList.add("active");
-      renderPriceInforInit(prePriceTitleNode, prePartNode);
+      renderPriceInforInit(prePriceTitleNode.id, prePartNode.id);
     }
   });
 };
 
+const renderPartInit = (PriceTitleName) => {
+  const partListUI = document.getElementById("price-detail-left");
+  const listPart = priceData.filter(
+    (item) => item.priceTitle == PriceTitleName
+  );
+  partListUI.innerHTML = "";
+  partListUI.className =
+    PriceTitleName === "classicPlus"
+      ? "price-detail-left-classicPlus"
+      : "" || PriceTitleName === "royal"
+      ? "price-detail-left-royal"
+      : "";
+  listPart.forEach((element, index) => {
+    const partNode = document.createElement("a");
+    if (index == 0) {
+      prePartNode = partNode;
+      partNode.classList.add("active");
+    }
+    partNode.href = "#";
+    partNode.id = element.part;
+    partNode.innerHTML = `<div class="left-months">${element.part}</div> THÁNG`;
+
+    partListUI.appendChild(partNode);
+  });
+};
 // main
 window.addEventListener("DOMContentLoaded", function () {
   renderPriceTitle();

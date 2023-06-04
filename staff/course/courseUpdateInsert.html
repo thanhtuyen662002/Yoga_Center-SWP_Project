@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <link rel="stylesheet" href="/ckeditor/contents.css" /> -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -15,8 +14,8 @@
       integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="./updateNews.css" />
-    <title>UpdateNews</title>
+    <link rel="stylesheet" href="./courseUpdateInsert.css" />
+    <title>Update|Insert Course</title>
   </head>
   <body>
     <div class="header-nav logo widthLess" id="logo">
@@ -53,21 +52,23 @@
         </li>
       </ul>
     </nav>
+
+    <!-- Body -->
     <div class="container">
       <div class="updateNews">
-        <h1>Chỉnh Sửa Tin Tức</h1>
+        <h1>Chỉnh Sửa Khóa Học</h1>
         <div class="update-box">
           <div class="update-title">
             <form action="">
-              <label for="title">Title</label>
+              <label for="title">Name</label>
               <input type="text" name="title" />
             </form>
           </div>
 
           <div class="update-cate">
             <form action="">
-              <label for="cate">CateID</label>
-              <input type="text" name="cate" />
+              <label for="cate">Price</label>
+              <input type="number" name="cate" />
             </form>
           </div>
           <div class="update-image">
@@ -78,7 +79,7 @@
           </div>
           <div class="update-content">
             <form action="">
-              <label for="">Post Content</label>
+              <label for="">Describe</label>
               <textarea id="myTextarea"></textarea>
             </form>
           </div>
@@ -92,6 +93,6 @@
     <script>
       CKEDITOR.replace("myTextarea");
     </script>
-    <script src="./updateNews.js"></script>
+    <script src="../voucher/updateNews.js"></script>
   </body>
 </html>

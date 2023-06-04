@@ -140,12 +140,15 @@ body {
 .table {
   margin-top: 5rem;
 }
-#desc {
+#desc,
+#image,
+#name {
   max-width: 150px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .course-body table tr {
   /* height: 5rem; */
 }

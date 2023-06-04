@@ -15,14 +15,6 @@ body {
   font-family: roboto;
   background-color: antiquewhite;
 }
-
-.course-body {
-  margin-top: 20rem;
-  margin-left: 0;
-  transition: 0.3 ease;
-  /* text-align: center;   */
-}
-
 .header-nav {
   overflow: hidden;
   width: 3em;
@@ -134,6 +126,8 @@ body {
   width: 3em;
   transition: 0.7s ease;
 }
+
+/* Body */
 .table {
   margin-top: 5rem;
 }
@@ -152,8 +146,8 @@ body {
   margin-left: 240px;
 }
 /* .hehe {
-  transition: 0.3 ease;
-} */
+    transition: 0.3 ease;
+  } */
 .updateNews {
   margin-top: 10rem;
 }
