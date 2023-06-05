@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
+        <servlet-name>listScheduleController</servlet-name>
+        <servlet-class>controller.schedule.listScheduleController_Nhat</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MainController</servlet-name>
+        <servlet-class>controller.schedule.MainController_Nhat</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewScheduleController</servlet-name>
+        <servlet-class>controller.schedule.viewScheduleController_Nhat</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>insertScheduleController</servlet-name>
+        <servlet-class>controller.schedule.insertScheduleController_Nhat</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>CoursesServlet</servlet-name>
         <servlet-class>controller.course.CoursesServlet</servlet-class>
     </servlet>
@@ -71,6 +87,22 @@
     <servlet-mapping>
         <servlet-name>UpdateCourseServlet</servlet-name>
         <url-pattern>/updateCourse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>listScheduleController</servlet-name>
+        <url-pattern>/listSchedule</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MainController</servlet-name>
+        <url-pattern>/main</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewScheduleController</servlet-name>
+        <url-pattern>/viewSchedule</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>insertScheduleController</servlet-name>
+        <url-pattern>/insertSchedule</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
