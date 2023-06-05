@@ -43,7 +43,7 @@
             <ul class="nav-content-list">
                 <li>
                     <i class="fa-solid fa-calendar-days"></i>
-                    <span><a>LỊCH DẠY</a></span>
+                    <span><a href="mainController?action=listSchedule">LỊCH DẠY</a></span>
                 </li>
                 <li>
                     <i class="fa-solid fa-people-group"></i>

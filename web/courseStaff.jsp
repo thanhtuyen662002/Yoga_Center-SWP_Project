@@ -14,15 +14,15 @@
         <title>Course Staff</title>
     </head>
     <body>
-         <div class="header-nav logo widthLess" id="logo">
-        <button class="header-button">
-          <div class="header-button-li btn1"></div>
-          <div class="header-button-li btn2"></div>
-          <div class="header-button-li btn3"></div>
-        </button>
-        <h2 class="h2">RO<span>LE</span> STA<span>FF</span></h2>
-      </div>
-      <nav class="nav-content1 widthLess" id="nav">
+        <div class="header-nav logo widthLess" id="logo">
+            <button class="header-button">
+                <div class="header-button-li btn1"></div>
+                <div class="header-button-li btn2"></div>
+                <div class="header-button-li btn3"></div>
+            </button>
+            <h2 class="h2">RO<span>LE</span> STA<span>FF</span></h2>
+        </div>
+        <nav class="nav-content1 widthLess" id="nav">
             <ul class="nav-content-list">
                 <li>
                     <i class="fa-solid fa-book"></i>
@@ -36,7 +36,7 @@
             <ul class="nav-content-list">
                 <li>
                     <i class="fa-solid fa-calendar-days"></i>
-                    <span><a>LỊCH DẠY</a></span>
+                    <span><a href="mainController?action=listSchedule">LỊCH DẠY</a></span>
                 </li>
                 <li>
                     <i class="fa-solid fa-people-group"></i>

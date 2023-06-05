@@ -44,7 +44,7 @@
                                      <a class="nav-menu-link" href="mainController?action=courses">KHÓA HỌC</a>
                                 </li>
                                 <li class="nav-menu-item">
-                                    <a class="nav-menu-link" >LỊCH HỌC</a>
+                                    <a class="nav-menu-link" href="mainController?action=listSchedule">LỊCH HỌC</a>
                                 </li>
                                 <li class="nav-menu-item">
                                     <a class="nav-menu-link" href="mainController?action=event">SỰ KIỆN</a>
