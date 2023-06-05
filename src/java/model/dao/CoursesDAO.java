@@ -146,7 +146,7 @@ public class CoursesDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "INSERT INTO Courses(name, description, image, price)"
-                        + "VALUES('" + name + "','" + description + "','" + image + "','" + price + "')";
+                        + "VALUES('" + name + "','" + description + "','" + image + "'," + price + ")";
                 ptm = conn.prepareStatement(sql);
                 ptm.executeUpdate();
             }

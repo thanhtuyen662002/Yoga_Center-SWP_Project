@@ -10,41 +10,48 @@
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-        <link rel="stylesheet" href="./css/courseStaff.css">
-        <title>Document</title>
+        <link rel="stylesheet" href="./css/updateInsertCourse.css">
+        <title>Course Staff</title>
     </head>
     <body>
-        <div class="nav-background">
-            <div class="container">
-                <div class="nav">
-                    <div class="nav-logo">
-                        <a href="./home.html">YO<span>GA</span> </a>
-                    </div>
-                    <input type="checkbox" id="toggler">
-                    <label for="toggler"><i class="fas fa-bars fa-2xl"></i></label>
-                    <div class="nav-menu">
-                        <ul class="nav-menu-list">
-                            <li class="nav-menu-item">
-                                <a class="nav-menu-link" href="mainController?action=club">CLB</a>
-                            </li>
-                            <li class="nav-menu-item">
-                                <a class="nav-menu-link" href="mainController?action=courses">KHÓA HỌC</a>
-                            </li>
-                            <li class="nav-menu-item">
-                                <a class="nav-menu-link" href="mainController?action=schedule">LỊCH HỌC</a>
-                            </li>
-                            <li class="nav-menu-item">
-                                <a class="nav-menu-link" href="mainController?action=voucher">KHUYẾN MÃI</a>
-                            </li>
-                            <li class="nav-menu-item">
-                                <a class="nav-menu-link" href="mainController?action=news">TIN TỨC</a>
-                            </li>
-                        </ul>
-                        <button class="btn_contact">ĐĂNG NHẬP</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+         <div class="header-nav logo widthLess" id="logo">
+        <button class="header-button">
+          <div class="header-button-li btn1"></div>
+          <div class="header-button-li btn2"></div>
+          <div class="header-button-li btn3"></div>
+        </button>
+        <h2 class="h2">RO<span>LE</span> STA<span>FF</span></h2>
+      </div>
+      <nav class="nav-content1 widthLess" id="nav">
+            <ul class="nav-content-list">
+                <li>
+                    <i class="fa-solid fa-book"></i>
+                    <span><a href="mainController?action=courses">KHÓA HỌC</a></span>
+                </li>
+                <li>
+                    <i class="fa-solid fa-newspaper"></i>
+                    <span><a href="mainController?action=news">TIN TỨC</a></span>
+                </li>
+            </ul>
+            <ul class="nav-content-list">
+                <li>
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span><a>LỊCH DẠY</a></span>
+                </li>
+                <li>
+                    <i class="fa-solid fa-people-group"></i>
+                    <span><a>KHÁCH HÀNG</a></span>
+                </li>
+                <li>
+                    <i class="fa-sharp fa-solid fa-tag"></i>
+                    <span><a href="mainController?action=event">SỰ KIỆN</a></span>
+                </li>
+                <li>
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span><a href="logout">ĐĂNG XUẤT</a></span>
+                </li>
+            </ul>
+        </nav>
 
         <div class="container">
             <div class="course-body">
@@ -76,11 +83,12 @@
                             </c:forEach>
                         </tbody>
                     </table>
-                    <a href="insertCourse.jsp">THÊM</a>
+                    <a href="insertCourse.jsp" style="margin-left: 10rem">THÊM</a>
                 </div>
             </div>
         </div>
 
     </body>
-    <script src="./js/courses.js"></script>
+    <!--<script src="./js/updateInsert.js"></script>-->
+    <script src="./js/courseStaff.js"></script>
 </html>

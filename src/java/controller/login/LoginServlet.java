@@ -12,16 +12,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.dao.UserDAO;
 import model.dto.UserDTO;
 
 /**
  *
- * @author HP Pro
+ * @author HOANG ANH
  */
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,21 +35,46 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            String phone = request.getParameter("txtPhone");
-            String password = request.getParameter("txtPassword");
-            UserDTO user = UserDAO.getUser(phone, password);
-            if (user != null){
-                if(user.getRoleID().equals("US")){
-                    request.getRequestDispatcher("customer.jsp").forward(request, response);
-                }else if (user.getRoleID().equals("ST")){
-                    request.getRequestDispatcher("staff.jsp").forward(request, response);
-                }else if (user.getRoleID().equals("MN")){
-                    request.getRequestDispatcher("manager.jsp").forward(request, response);
+        String phone = request.getParameter("txtPhone");
+        String password = request.getParameter("txtPassword");
+        UserDTO user = UserDAO.getUser(phone, password);
+        try {
+            if (user != null) {
+                if (user.getRoleID().equals("AD")) {
+                    HttpSession session = request.getSession(true);
+                    if (session != null) {
+                        session.setAttribute("txtphone", user.getPhone());
+                        session.setAttribute("txtname", user.getName());
+                        session.setAttribute("user", user);
+                        request.getRequestDispatcher("home.jsp").forward(request, response);
+
+                    }
+                } else if (user.getRoleID().equals("ST")) {
+                    HttpSession session = request.getSession(true);
+                    if (session != null) {
+                        session.setAttribute("txtSTphone", user.getPhone());
+                        session.setAttribute("txtname", user.getName());
+                        session.setAttribute("user", user);
+                        request.getRequestDispatcher("homeStaff.jsp").forward(request, response);
+                    }
+                } else if (user.getRoleID().equals("US")) {
+                    HttpSession session = request.getSession(true);
+                    if (session != null) {
+                        session.setAttribute("txtphone", user.getPhone());
+                        session.setAttribute("txtname", user.getName());
+                        session.setAttribute("user", user);
+                        request.getRequestDispatcher("home.jsp").forward(request, response);
+
+                    }
                 }
-            }else{
+            } else {
+                request.setAttribute("message", "Login fail");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
+
             }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

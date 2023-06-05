@@ -1,0 +1,125 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: roboto;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: roboto;
+}
+.header-nav {
+  overflow: hidden;
+  width: 3em;
+  height: 3em;
+  display: flex;
+  background: #a5000a;
+  align-items: center;
+  position: fixed;
+  top: 0;
+}
+.header-nav .h2 {
+  color: #fff;
+}
+.header-nav .h2 span {
+  color: #b8ccf7;
+}
+
+.header-nav .header-button {
+  margin-left: 0.7em;
+  margin-top: 0.4em;
+  margin-right: 2.7em;
+  padding-right: 0.3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: none;
+  background: none;
+  width: 2em;
+  height: 1.2em;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s ease all;
+  outline: none;
+}
+.header-nav .header-button .header-button-li {
+  width: 2em;
+  height: 0.25em;
+  background: #fff;
+  transition: 0.3s ease all;
+  border-radius: 0.2em;
+}
+.header-nav .header-button .line2 {
+  transform: rotate(45deg) translateY(9px);
+  margin-left: 15px;
+  transition: 0.3s ease all;
+}
+.header-nav .header-button .line1 {
+  display: none;
+  transition: 0.3s ease all;
+}
+.header-nav .header-button .line3 {
+  transform: rotate(-45deg) translateY(-9px);
+  margin-left: 15px;
+  transition: 0.3s ease all;
+}
+.nav-content1 {
+  color: #fff;
+  overflow: hidden;
+  width: 3em;
+  min-height: 100vh;
+  background: #a5000a;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 3em;
+}
+.nav-content-list {
+  font-family: "Lato", sans-serif;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-left: 0px;
+  height: min-content;
+  transition: hover 0.5s ease;
+  border-bottom: 0.001em solid rgba(255, 255, 255, 0.205);
+}
+.nav-content-list li {
+  position: relative;
+  padding: 0.5em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.nav-content-list li i {
+  font-size: 1.2em;
+  padding: 1em 0.2em;
+  padding-left: 0.3em;
+  text-align: center;
+}
+.nav-content-list li span {
+  position: absolute;
+  left: 5em;
+  text-align: center;
+}
+.nav-content-list :hover {
+  background: #003dc0;
+}
+@keyframes move {
+  0% {
+    transform: translateX(0%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}

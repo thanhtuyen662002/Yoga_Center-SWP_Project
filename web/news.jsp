@@ -31,22 +31,22 @@
                 <div class="nav-menu">
                     <ul class="nav-menu-list">
                         <li class="nav-menu-item">
-                                    <a class="nav-menu-link" href="mainController?action=club">CLB</a>
+                                    <a class="nav-menu-link" href="clb.jsp">CLB</a>
                                 </li>
                                 <li class="nav-menu-item">
-                                     <a class="nav-menu-link" href="mainController?action=courses">KHÓA HỌC</a>
+                                     <a class="nav-menu-link" href="courses.jsp">KHÓA HỌC</a>
                                 </li>
                                 <li class="nav-menu-item">
-                                    <a class="nav-menu-link" href="mainController?action=schedule">LỊCH HỌC</a>
+                                    <a class="nav-menu-link" href="#">LỊCH HỌC</a>
                                 </li>
                                 <li class="nav-menu-item">
-                                    <a class="nav-menu-link" href="mainController?action=voucher">KHUYẾN MÃI</a>
+                                    <a class="nav-menu-link" href="event.jsp">SỰ KIỆN</a>
                                 </li>
                                 <li class="nav-menu-item">
-                                    <a class="nav-menu-link" href="mainController?action=news">TIN TỨC</a>
+                                    <a class="nav-menu-link" href="news.jsp">TIN TỨC</a>
                                 </li>
                     </ul>
-                    <button class="btn_contact">ĐĂNG NHẬP</button>
+                    <a class="btn_contact" href="login.jsp">ĐĂNG NHẬP</a>
                 </div>
             </div>
         </div>

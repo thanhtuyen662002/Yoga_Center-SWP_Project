@@ -25,7 +25,7 @@
         </div>
         <div class="right">
             <span class="boderLine">
-                <form action="mainController" method="post">
+                <form action="mainController" method="POST">
                 <h2>Sign In</h2>
                 <div class="right-input">
                     <input type="text" required = "required" name="txtPhone">

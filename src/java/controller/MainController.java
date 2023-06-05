@@ -45,15 +45,19 @@ public class MainController extends HttpServlet {
                 url = "club";
             } else if (action.equals("news")){
                 url = "news";
-            } else if (action.equals("voucher")){
-                url = "voucher";
+            } else if (action.equals("event")){
+                url = "event";
             } else if (action.equals("schedule")){
+                url = "schedule";
+            } else if (action.equals("insertCourse")){
+                url = "insertCourse";
+            }  else if (action.equals("schedule")){
                 url = "listSchedule";
             } else if (action.equals("InsertSchedule")){
                 url = "insertSchedule";
             } else if (action.equals("ViewDetails")){
                 url = "viewSchedule";
-            } 
+            }
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }

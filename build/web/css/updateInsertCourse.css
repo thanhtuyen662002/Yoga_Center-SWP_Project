@@ -1,0 +1,212 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: roboto;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: roboto;
+  background-color: antiquewhite;
+}
+.header-nav {
+  overflow: hidden;
+  width: 3em;
+  height: 3em;
+  display: flex;
+  background: #a5000a;
+  align-items: center;
+  position: fixed;
+  top: 0;
+}
+.header-nav .h2 {
+  color: #fff;
+}
+.header-nav .h2 span {
+  color: #b8ccf7;
+}
+
+.header-nav .header-button {
+  margin-left: 0.7em;
+  margin-top: 0.4em;
+  margin-right: 2.7em;
+  padding-right: 0.3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: none;
+  background: none;
+  width: 2em;
+  height: 1.2em;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s ease all;
+  outline: none;
+}
+.header-nav .header-button .header-button-li {
+  width: 2em;
+  height: 0.25em;
+  background: #fff;
+  transition: 0.3s ease all;
+  border-radius: 0.2em;
+}
+.header-nav .header-button .line2 {
+  transform: rotate(45deg) translateY(9px);
+  margin-left: 15px;
+  transition: 0.3s ease all;
+}
+.header-nav .header-button .line1 {
+  display: none;
+  transition: 0.3s ease all;
+}
+.header-nav .header-button .line3 {
+  transform: rotate(-45deg) translateY(-9px);
+  margin-left: 15px;
+  transition: 0.3s ease all;
+}
+
+.nav-content1 {
+  color: #fff;
+  overflow: hidden;
+  width: 3em;
+  min-height: 100vh;
+  background: #a5000a;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 3em;
+}
+.nav-content-list {
+  font-family: "Lato", sans-serif;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-left: 0px;
+  height: min-content;
+  transition: hover 0.5s ease;
+  border-bottom: 0.001em solid rgba(255, 255, 255, 0.205);
+}
+.nav-content-list li {
+  position: relative;
+  padding: 0.5em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.nav-content-list li i {
+  font-size: 1.2em;
+  padding: 1em 0.2em;
+  padding-left: 0.3em;
+  text-align: center;
+}
+.nav-content-list li span {
+  position: absolute;
+  left: 5em;
+  text-align: center;
+}
+.nav-content-list :hover {
+  background: #003dc0;
+}
+
+.logo-btn {
+  width: 18em;
+  display: flex;
+  align-items: center;
+  transition: 0.5s ease;
+}
+
+.widthLess {
+  width: 3em;
+  transition: 0.7s ease;
+}
+
+/* Body */
+.table {
+  margin-top: 5rem;
+}
+
+.course-body table tr {
+  /* height: 5rem; */
+}
+.course-body-title h1 {
+  text-align: center;
+}
+.logo:active .course-body-title h1 {
+  text-align: center;
+  font-weight: bold;
+}
+.hehe {
+  margin-left: 240px;
+}
+/* .hehe {
+    transition: 0.3 ease;
+  } */
+.updateNews {
+  margin-top: 10rem;
+}
+.updateNews h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.update-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+.updateNews h1 {
+  text-align: center;
+}
+.update-title,
+.update-cate {
+  grid-column: span 1;
+}
+
+.update-image,
+.update-content input{
+   
+}
+.update-title input,
+.update-cate input {
+  border: none;
+  height: 40px;
+  padding-left: 10px;
+}
+.update-title form,
+.update-cate form,
+.update-image form {
+  display: flex;
+  flex-direction: column;
+}
+.update-image input {
+  /* border: 1px solid black; */
+  background-color: #fff;
+  width: 50%;
+  padding: 5px 20px;
+}
+.update-box label {
+  font-weight: 700;
+  font-size: 1.2em;
+}
+.update-btn {
+  text-align: center;
+  margin-top: 10px;
+  grid-column: span 3;
+}
+.update-btn button {
+  padding: 5px 45px;
+  border-radius: 5px;
+  text-align: center;
+  border: 1px solid #b8ccf7;
+}
+.update-btn button:hover {
+  background-color: #a5000a;
+  color: #fff;
+}

@@ -53,7 +53,16 @@ public class InsertCourseServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+                try {
+        String cname = request.getParameter("name");
+        String cdes = request.getParameter("description");
+        String cimage = request.getParameter("image");
+        String cprice = request.getParameter("price");
+        CoursesDAO dao = new CoursesDAO();
+        dao.insertCourses(cname, cdes, cimage, cprice);
+        response.sendRedirect("courses");
+        } catch (SQLException ex) {
+        }
     }
 
     /**
@@ -67,16 +76,7 @@ public class InsertCourseServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-        String cname = request.getParameter("name");
-        String cdes = request.getParameter("description");
-        String cimage = request.getParameter("image");
-        String cprice = request.getParameter("price");
-        CoursesDAO dao = new CoursesDAO();
-        dao.insertCourses(cname, cdes, cimage, cprice);
-        response.sendRedirect("courses");
-        } catch (SQLException ex) {
-        }
+
     }
 
     @Override

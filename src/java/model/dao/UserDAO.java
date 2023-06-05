@@ -8,6 +8,8 @@ package model.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.naming.NamingException;
 import model.dto.UserDTO;
 import utils.DBUtils;
 
@@ -53,5 +55,33 @@ public class UserDAO {
         }
         return user;
     }
-
+    private static final String CHECK_DUPLICATE_ACCOUNT = "SELECT * FROM [User] WHERE [phone] = '?'";
+    public UserDTO getUserByPhone(String phone) throws SQLException, NamingException, ClassNotFoundException {
+        UserDTO user = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(CHECK_DUPLICATE_ACCOUNT);
+                ptm.setString(1, phone);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    user = new UserDTO(rs.getString(1), rs.getString(2),rs.getString(3),rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), true);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+return user;
+    }
 }
