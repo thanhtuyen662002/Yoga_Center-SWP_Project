@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-    />
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="./voucher.css" />
-    <title>Course</title>
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+  />
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="./updateNews.css" />
+    <title>UpdateCourse</title>
   </head>
   <body>
     <div class="wrapper d-flex align-items-stretch">
@@ -53,71 +53,70 @@
         <div class="course-link">
           <ul>
             <li><a href="">Staff</a></li>
-            <li><a href="" id="active">Khuyến Mãi</a></li>
+            <li><a href="">Khóa Học</a></li>
+            <li><a href="" id="active">Chỉnh Sửa</a></li>
+
           </ul>
         </div>
         <div class="course-title" >
         <div class="text">WELCOME STAFF</div>
-       <div class="insert"><a type="submit" name="insert">Insert</a></div>
+       <div class="insert"><a type="submit" name="insert">BACK</a></div>
         </div>
         <div class="table-name">
-          <h1>BẢNG DỮ LIỆU KHUYẾN MÃI</h1>
+          <h1>CHỈNH SỬA TIN TỨC</h1>
         </div>
-        <table id="course" class="display" style="width:100%">
-          <thead>
-              <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Course ID</th>
-                  <th>Discount</th>
-                  <th>DayStart</th>
-                  <th>DayEnd</th>
-                  <th>Action</th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr>
-                  <td>Jena Gaines</td>
-                  <td>Office Manager</td>
-                  <td>London</td>
-                  <td>30</td>
-                  <td>$90,560</td>
-                  <td>$90,560</td>
-                  <td id="tool">
-                    <a href="#"><i class="fa-solid fa-eye "></i></a>
-                    <a href="#"><i class="fa-solid fa-pen"></i></a>
-                    <a href="#"> <i class="fa-sharp fa-solid fa-trash"></i></a>
-                  </td>
-              </tr>
-
-          </tbody>
-          <tfoot>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Course ID</th>
-                <th>Discount</th>
-                <th>DayStart</th>
-                <th>DayEnd</th>
-                <th>Action</th>
-
-              </tr>
-          </tfoot>
-      </table>
-       
+        <div class="update-box">
+          <div class="update-title">
+            <label for="title">Title</label>
+            <input type="text" name="title" />
+          </div>
+          <div class="update-cate">
+            <label for="cate">Price</label>
+            <input type="file" name="cate" id="fileInput" onchange="previewImage(event)" accept="image/*" />
+            <div class="file-img">
+              <img id="preview" src="#" alt="Preview" />
+            </div>
+          </div>
+          <div class="update-content-wrapper">
+            <div class="update-content">
+              <label for="">Content</label>
+              <textarea id="myTextarea"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="table-btn">
+          <a href="#">UPDATE</a>
+        </div>
       </div>
+      <script>
+        function previewImage(event) {
+  var reader = new FileReader();
+  reader.onload = function () {
+    var output = document.getElementById("preview");
+    output.src = reader.result;
+  };
 
+  var fileInput = event.target;
+  var files = fileInput.files;
+
+  if (files.length > 0) {
+    reader.readAsDataURL(files[0]);
+  } else {
+    // Nếu không có file được chọn, đặt lại ảnh về trạng thái ban đầu
+    var output = document.getElementById("preview");
+    output.src = "#";
+  }
+}
+      </script>
       <script src="/courseNav/bootstrap.min.js"></script>
       <script src="/courseNav/jquery.min.js"></script>
       <script src="/courseNav/main.js"></script>
       <script src="/courseNav/popper.js"></script>
-      <script>
-       $(document).ready(function () {
-    $('#course').DataTable();
-});
-    </script>
           <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
           <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script src="./course.js"></script>
+          <script src="/ckeditor/ckeditor.js"></script>
+          <script>
+            CKEDITOR.replace("myTextarea");
+          </script>
   </body>
 </html>

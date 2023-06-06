@@ -11007,8 +11007,8 @@ a[data-toggle="collapse"] {
 }
 #tool {
   font-size: 22px;
-  color: #808080;
 }
+
 .table-name {
   text-align: center;
   margin: 0 50px;
@@ -11019,4 +11019,13 @@ a[data-toggle="collapse"] {
 .table-name h1 {
   font-weight: 700;
   color: #808080;
+}
+.table-noidung {
+  max-width: 250px;
+  max-height: 10rem;
+  overflow: hidden;
+  width: 100%;
+}
+#table-img img {
+  height: 12rem;
 }

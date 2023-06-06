@@ -10699,7 +10699,7 @@ h5,
 
 #sidebar {
   min-width: 450px;
-  max-width: 450px;
+  max-width: 45 0px;
   background: #32373d;
   color: #fff;
   -webkit-transition: all 0.3s;
@@ -10941,6 +10941,7 @@ a[data-toggle="collapse"] {
   background: #4897fc;
 }
 
+/* này là làm title link */
 /* này làm link title */
 .course-link ul {
   list-style: none;
@@ -10972,6 +10973,7 @@ a[data-toggle="collapse"] {
 .course-link li #active {
   color: #a50001;
 }
+/* này là dưới title link */
 /* Dưới title */
 .course-title {
   display: flex;
@@ -10998,17 +11000,7 @@ a[data-toggle="collapse"] {
   background-color: #a50001;
   color: #fff;
 }
-/* này là table */
-.dataTables_wrapper {
-  margin: 50px;
-  padding: 20px;
-  border-radius: 15px;
-  background-color: #fff;
-}
-#tool {
-  font-size: 22px;
-  color: #808080;
-}
+/* này là Name  */
 .table-name {
   text-align: center;
   margin: 0 50px;
@@ -11019,4 +11011,62 @@ a[data-toggle="collapse"] {
 .table-name h1 {
   font-weight: 700;
   color: #808080;
+}
+
+/* UPDATE */
+.update-box {
+  display: grid;
+  margin: 0 50px;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.update-title,
+.update-cate,
+.update-dayend {
+  grid-column: span 1;
+  grid-row: span 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* .update-dayend {
+  grid-column: span 1;
+} */
+
+.update-dayend {
+  display: grid;
+  grid-template-columns: 1fr;
+  float: right;
+}
+.update-title input,
+.update-cate input,
+.update-dayend input {
+  padding: 5px;
+  font-size: 20px;
+  border-radius: 5px;
+}
+.update-title label,
+.update-cate label,
+.update-dayend label {
+  font-size: 16px;
+}
+.table-btn {
+  margin-top: 10rem;
+  text-align: center;
+}
+.table-btn a {
+  text-align: center;
+  border: 1px solid #808080;
+  padding: 10px 40px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 24px;
+  color: #808080;
+  background-color: #fff;
+}
+.table-btn a:hover {
+  background-color: #0b2e13;
+  color: #fff;
 }
