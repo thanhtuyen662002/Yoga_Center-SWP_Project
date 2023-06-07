@@ -64,7 +64,6 @@ public class listScheduleController_Nhat extends HttpServlet {
         LocalDate mondayOfWeek = date.minusDays(daysToSubtract);
         return mondayOfWeek;
     }
-
     public static LocalDate getSundayOfWeek(LocalDate now) {
         // Create a LocalDate object for the specific date
         LocalDate date = now;
