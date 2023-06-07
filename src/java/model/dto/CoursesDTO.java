@@ -17,16 +17,18 @@ public class CoursesDTO implements Serializable{
     private String description;
     private float price;
     private String courseImage;
+    private boolean status;
 
     public CoursesDTO() {
     }
     
-    public CoursesDTO(int courseID, String courseName, String description, String courseImage,float price) {
+    public CoursesDTO(int courseID, String courseName, String description, String courseImage, float price, boolean status) {
         this.courseID = courseID;
         this.courseName = courseName;
         this.description = description;
         this.courseImage = courseImage;
         this.price = price;
+        this.status = status;
     }
 
 
@@ -70,9 +72,18 @@ public class CoursesDTO implements Serializable{
         this.courseImage = courseImage;
     }
 
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    
     @Override
     public String toString() {
-        return "courseID=" + courseID + ", courseName=" + courseName + ", description=" + description + ", courseImage=" + courseImage + ", price=" + price;
+        return "courseID=" + courseID + ", courseName=" + courseName + ", description=" + description + ", courseImage=" + courseImage + ", price=" + price + ", status=" + status;
     }
 
  

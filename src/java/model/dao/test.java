@@ -6,7 +6,8 @@
 package model.dao;
 
 import java.sql.SQLException;
-import model.dto.EventDTO;
+import java.util.List;
+import model.dto.CoursesDTO;
 
 /**
  *
@@ -18,9 +19,11 @@ public class test {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException {
-        EventDAO dao = new EventDAO();
-        EventDTO e =   dao.getEventByID("1");
-        System.out.println(e);
+        List<CoursesDTO> c = CoursesDAO.getAllCourses();
+        for (CoursesDTO coursesDTO : c) {
+           System.out.println(coursesDTO); 
+        }
+        
     }
     
 }
