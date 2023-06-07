@@ -15,6 +15,11 @@ html, body {
     bottom: 0;
 }
 
+.btn-back:hover{
+    background-color: grey;
+}
+
+
 .div-center {
     width: 600px;
     height: 70%;

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import model.dao.ClassDAO_Nhat;
 import model.dao.ClassSlotDAO_Nhat;
@@ -40,7 +41,7 @@ public class insertScheduleController_Nhat extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -78,6 +79,11 @@ public class insertScheduleController_Nhat extends HttpServlet {
         ArrayList<ClassSlotDTO_Nhat> listSlot = slotDao.getAll();
         ArrayList<RoomDTO_Nhat> listRoom = rDao.getAll();
 
+        //-----------------------------------------
+        LocalDate now = LocalDate.now();
+        LocalDate nextDate = now.plusDays(1);
+        request.setAttribute("minDate", nextDate);
+
         request.setAttribute("className", listClass);
         request.setAttribute("customer", listCustomer);
         request.setAttribute("room", listRoom);
@@ -106,7 +112,11 @@ public class insertScheduleController_Nhat extends HttpServlet {
         String customerId = request.getParameter("cusId");
         boolean isExist = scheDao.isScheduleExist(slotId, date, customerId, roomId, classId);
         if (!isExist) {
-            scheDao.insert(classId, phonePT, roomId, slotId, date, customerId);
+            try {
+                scheDao.insert(classId, phonePT, roomId, slotId, date, customerId);
+            } catch (Exception e) {
+                response.getWriter().print(e.getMessage());
+            }
             request.getSession().setAttribute("error", false);
             response.sendRedirect("listSchedule");
         } else {

@@ -18,6 +18,11 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
         <script src="script.js"></script>
+        <style>
+            .btn-back:hover{
+                background-color: grey;
+            }
+        </style>
     </head>
 
     <body>
@@ -26,6 +31,7 @@
              ">
             <section class="table-section" style="padding: 40px">
                 <div style="background-color: whitesmoke; border-radius: 5px;padding: 5%">
+                    <button class="btn-back" type="button" style="margin-left: 0px;border-radius: 5px;border: none" onclick="goBack()">< Back</button>
                     <p style="text-align: center; font-size: 24px; font-style: italic;font-weight: bold" >Create Schedule</p>
                     <form style="padding: 24px;" action="insertSchedule" method="post">
                         <div class="row">
@@ -86,7 +92,7 @@
                             <div class="col-md-6">
                                 <div class="form-outline mb-4">
                                     <div class="form-floating mb-4">
-                                        <input value="${schedule.date}"  name="day" required 
+                                        <input value="${schedule.date}"  name="day" min="${minDate}" required 
                                                type="date" id="dateInput" class="form-control" placeholder="Example" />
                                         <label for="form12">Day</label>
                                     </div>
@@ -169,6 +175,9 @@ crossorigin="anonymous"></script>
                                     if (!regex.test(dateInput)) {
                                         event.target.value = dateInput.slice(0, -1);
                                     }
+                                }
+                                function goBack() {
+                                    window.history.back();
                                 }
 </script>
 </body>

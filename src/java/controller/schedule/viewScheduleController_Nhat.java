@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import model.dao.ClassDAO_Nhat;
 import model.dao.ClassSlotDAO_Nhat;
@@ -43,7 +44,7 @@ public class viewScheduleController_Nhat extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -90,6 +91,12 @@ public class viewScheduleController_Nhat extends HttpServlet {
         request.setAttribute("room", listRoom);
         request.setAttribute("slot", listSlot);
         if (user.getRoleID().equalsIgnoreCase("ST")) {
+           
+            //-----------------------------------------------
+            LocalDate now = LocalDate.now();
+            LocalDate nextDate = now.plusDays(1);
+            request.setAttribute("minDate", nextDate);
+            
             request.getRequestDispatcher("/scheduleView/scheduleDetails.jsp").forward(request, response);
         } else if (user.getRoleID().equalsIgnoreCase("US")) {
             request.getRequestDispatcher("/scheduleView/viewScheduleCustomer.jsp").forward(request, response);

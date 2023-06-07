@@ -25,7 +25,6 @@ import model.dto.ClassSlotDTO_Nhat;
 import model.dto.ScheduleDTO_Nhat;
 import model.dto.UserDTO;
 
-
 /**
  *
  * @author dell
@@ -97,7 +96,7 @@ public class listScheduleController_Nhat extends HttpServlet {
 //        UserDTO user = uDao.getUserByID("0987654444");
 //        //ST 0987654444 0913277862 US 0987658686 0987657766
 //        request.getSession().setAttribute("user", user);
-        //get current date
+//        get current date
         LocalDate currentDate = LocalDate.now();
         getScheduleByDate(currentDate, request, response);
     }
@@ -116,10 +115,10 @@ public class listScheduleController_Nhat extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void getScheduleByDate(LocalDate currentDate, HttpServletRequest request, HttpServletResponse response) { 
+    private void getScheduleByDate(LocalDate currentDate, HttpServletRequest request, HttpServletResponse response) {
         try {
-            UserDTO user = (UserDTO)request.getSession().getAttribute("user");
-            
+            UserDTO user = (UserDTO) request.getSession().getAttribute("user");
+
             ScheduleDAO_Nhat sDao = new ScheduleDAO_Nhat();
             ClassSlotDAO_Nhat slotDao = new ClassSlotDAO_Nhat();
 
@@ -138,7 +137,7 @@ public class listScheduleController_Nhat extends HttpServlet {
                     = new ArrayList<>();
             if (user.getRoleID().equals("US")) {
                 listSchedule = sDao.getAllCustomerSchedule(user.getPhone(), monday, sunday);
-            }else if(user.getRoleID().equals("ST")){
+            } else if (user.getRoleID().equals("ST")) {
                 listSchedule = sDao.getAllPTSchedule(user.getPhone(), monday, sunday);
             }
             ArrayList<ClassSlotDTO_Nhat> slots = slotDao.getAll();
@@ -163,11 +162,26 @@ public class listScheduleController_Nhat extends HttpServlet {
 
     }
 //
-//    public static void main(String[] args) {
-//        UserDAO_Nhat uDao = new UserDAO_Nhat();
-//        UserDTO user = uDao.getUserByID("0987654444");
-//        System.out.println(user.getRoleID());
-//
-//    }
+
+    public static void main(String[] args) {
+        
+        LocalDate currentDate = LocalDate.now();
+
+        ScheduleDAO_Nhat sDao = new ScheduleDAO_Nhat();
+        ClassSlotDAO_Nhat slotDao = new ClassSlotDAO_Nhat();
+
+        //Find the day on monday of the week
+        LocalDate mondayOfWeek = getMondayOfWeek(currentDate);
+        LocalDate sundayOfWeek = getSundayOfWeek(currentDate);
+        Date monday = Date.valueOf(mondayOfWeek);
+        Date sunday = Date.valueOf(sundayOfWeek);
+
+        ArrayList<LocalDate> week = getWeek(mondayOfWeek);
+
+        List<ScheduleDTO_Nhat> listSchedule = sDao.getAllPTSchedule("0987654444", monday, sunday);
+        for (ScheduleDTO_Nhat scheduleDTO_Nhat : listSchedule) {
+            System.out.println(scheduleDTO_Nhat.getClassStudy().toString());
+        }
+    }
 
 }

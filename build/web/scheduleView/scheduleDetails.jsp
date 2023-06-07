@@ -18,6 +18,11 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
         <script src="script.js"></script>
+        <style>
+            .btn-back:hover{
+                background-color: grey;
+            }
+        </style>
     </head>
 
     <body>
@@ -26,6 +31,7 @@
              ">
             <section class="table-section" style="padding: 40px">
                 <div style="background-color: whitesmoke; border-radius: 5px;padding: 5%">
+                    <button class="btn-back" type="button" style="margin-left: 0px;border-radius: 5px;border: none" onclick="goBack()">< Back</button>
                     <p style="text-align: center; font-size: 24px; font-style: italic;font-weight: bold" >Schedule Details</p>
                     <form style="padding: 24px;" action="viewSchedule" method="post">
                         <!-- 2 column grid layout with text inputs for the first and last names -->
@@ -93,7 +99,7 @@
                             <div class="col-md-6">
                                 <div class="form-outline mb-4">
                                     <div class="form-floating mb-4">
-                                        <input value="${schedule.date}"  name="day"
+                                        <input value="${schedule.date}"  name="day" min="${minDate}"
                                                type="date" id="dateInput" class="form-control" placeholder="Example" />
                                         <label for="form12">Day</label>
                                     </div>
@@ -152,10 +158,10 @@
                             <input type="hidden" value="update" name="action"/>
                             <button type="submit" class="btn btn-primary btn-block mb-4 w-40" style="margin-right: 2%">Save</button>
                     </form>
-                    <form action="viewSchedule" method="post">
+                    <form id="frm-delete" action="viewSchedule" method="post">
                         <input type="hidden" value="${schedule.id}" name="id"/>
                         <input type="hidden" value="delete" name="action"/>
-                        <button type="submit" class="btn btn-primary btn-block mb-4 w-40">Delete</button>
+                        <button type="button" class="btn btn-primary btn-block mb-4 w-40" onclick="doDelete()">Delete</button>
                     </form>
                 </div>
 
@@ -168,20 +174,18 @@
 crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/8d39de38b8.js" crossorigin="anonymous"></script>
 <script>
-                                function validateInputDate() {
-                                    var dateInput = document.getElementById("dateInput").value;
-                                    var regex = /^\d{0,4}-\d{0,2}-\d{0,2}$/;
-                                    var keyCode = event.which || event.keyCode;
+                            
+                            function goBack() {
+                                window.history.back();
+                            }
 
-                                    if (keyCode === 8) {
-                                        // Allow Backspace key
-                                        return;
-                                    }
-
-                                    if (!regex.test(dateInput)) {
-                                        event.target.value = dateInput.slice(0, -1);
-                                    }
+                            function doDelete() {
+                                let choice = confirm("Are you sure to delete?");
+                                if (choice) {
+                                    var frmSublit = document.getElementById("frm-delete");
+                                    frmSublit.submit();
                                 }
+                            }
 </script>
 </body>
 

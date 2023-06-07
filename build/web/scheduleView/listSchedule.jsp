@@ -22,6 +22,19 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
         <script src="script.js"></script>
+        <style>
+            .left-button {
+                float: left;
+            }
+
+            .right-button {
+                float: right;
+            }
+
+            .btn-back:hover{
+                background-color: grey;
+            }
+        </style>
     </head>
     <body>
         <div class="back" style="background-image: url(	https://img6.thuthuatphanmem.vn/uploads/2022/07/01/anh-nen-dep-yoga_011708114.jpg);
@@ -29,12 +42,15 @@
              ">
             <section class="table-section" style="padding: 40px">
                 <p style="text-align: center; font-size: 24px; font-style: italic;font-weight: bold" >Schedule Details</p>
-                <c:if test="${sessionScope.user.roleID == 'ST'}">
-                    <form action="mainController" method="get">
-                        <input hidden name="action" value="InsertSchedule"/>
-                        <button class="btn-primary mb-4" style="border-radius: 5px;border: none">Create Schedule</button>
-                    </form>
-                </c:if>
+                <div style="width: 100%; display: block">
+                    <c:if test="${sessionScope.user.roleID == 'ST'}">
+                        <form action="mainController" method="get">
+                            <button class="left-button btn-back" type="button" style="margin-left: 0px;border-radius: 5px;border: none" onclick="goBack()">Back</button>
+                            <input hidden name="action" value="InsertSchedule"/>
+                            <button class="btn-primary mb-4 right-button" style="border-radius: 5px;border: none;margin-right: 0px">Create Schedule</button>
+                        </form>
+                    </c:if>
+                </div>
                 <table class="table">
                     <thead>
                         <tr style="background-color: #6b90d9;">
@@ -152,6 +168,10 @@
                                 // Submit the form when the option changes
                                 document.getElementById("myForm").submit();
                             });
+                            function goBack() {
+                                window.history.back();
+                            }
         </script>
+
     </body>
 </html>

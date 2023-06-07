@@ -17,12 +17,12 @@ import utils.DBUtils;
  *
  * @author dell
  */
-public class CourseDAO_Nhat {
+public class CourseDAO_Nhat extends DBUtils{
 
     public CourseDTO_Nhat getCourseByID(int id) {
         try {
             String sql = "SELECT *\n"
-                    + "  FROM [Yoga Center].[dbo].[Courses]\n"
+                    + "  FROM  [Courses]\n"
                     + "  where courseID = ?";
             PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
             stm.setInt(1, id);

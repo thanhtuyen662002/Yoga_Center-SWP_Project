@@ -41,13 +41,13 @@ public class ClassDAO_Nhat {
     public ClassDTO_Nhat getClassByID(int id) {
         CourseDAO_Nhat cDao = new CourseDAO_Nhat();
         UserDAO_Nhat uDao = new UserDAO_Nhat();
-        
+
         CourseDTO_Nhat course;
         UserDTO pt;
-        
+
         try {
             String sql = "SELECT *\n"
-                    + "  FROM Class Where classID = ?";
+                    + "  FROM [Class] where classID = ?";
             PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
