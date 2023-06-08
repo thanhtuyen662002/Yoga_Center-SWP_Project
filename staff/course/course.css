@@ -11020,3 +11020,12 @@ a[data-toggle="collapse"] {
   font-weight: 700;
   color: #808080;
 }
+.table-noidung {
+  max-width: 250px;
+  max-height: 10rem;
+  overflow: hidden;
+  width: 100%;
+}
+#table-img img {
+  height: 12rem;
+}
