@@ -205,9 +205,9 @@ public final class courseStaff_jsp extends org.apache.jasper.runtime.HttpJspBase
           out.write("                                <td>");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${c.description}", java.lang.String.class, (PageContext)_jspx_page_context, null));
           out.write("</td>\r\n");
-          out.write("                                <td>");
+          out.write("                                <td><a href=\"");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${c.courseImage}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-          out.write("</td>\r\n");
+          out.write("\"></a></td>\r\n");
           out.write("                                <td>");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${c.price}", java.lang.String.class, (PageContext)_jspx_page_context, null));
           out.write("</td>\r\n");

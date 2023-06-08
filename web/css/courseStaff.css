@@ -10698,8 +10698,8 @@ h5,
 }
 
 #sidebar {
-  min-width: 450px;
-  max-width: 450px;
+  min-width: 20rem;
+  max-width: 20rem;
   background: #32373d;
   color: #fff;
   -webkit-transition: all 0.3s;

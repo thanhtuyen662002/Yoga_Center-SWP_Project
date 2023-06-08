@@ -148,7 +148,7 @@ public class listScheduleController_Nhat extends HttpServlet {
             }
 
             Collections.sort(listSchedule, (ScheduleDTO_Nhat o1, ScheduleDTO_Nhat o2) -> o1.getDate().compareTo(o2.getDate()));
-
+            
             request.setAttribute("slots", slots);
             request.setAttribute("mondays", mondays);
             request.setAttribute("currentMonday", mondayOfWeek);
