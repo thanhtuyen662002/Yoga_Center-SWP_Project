@@ -74,6 +74,13 @@
             <label for="cate">Price</label>
             <input type="number" name="cate" />
           </div>
+          <div class="update-img">
+            <label for="cate">Image</label>
+            <input type="file" name="cate" id="fileInput" onchange="previewImage(event)" accept="image/*" />
+            <div class="file-img">
+              <img id="preview" src="#" alt="Preview" />
+            </div>
+          </div>
           <div class="update-content-wrapper">
             <div class="update-content">
               <label for="">Describe</label>
@@ -85,7 +92,26 @@
           <a href="#">UPDATE</a>
         </div>
       </div>
+      <script>
+        function previewImage(event) {
+  var reader = new FileReader();
+  reader.onload = function () {
+    var output = document.getElementById("preview");
+    output.src = reader.result;
+  };
 
+  var fileInput = event.target;
+  var files = fileInput.files;
+
+  if (files.length > 0) {
+    reader.readAsDataURL(files[0]);
+  } else {
+    // Nếu không có file được chọn, đặt lại ảnh về trạng thái ban đầu
+    var output = document.getElementById("preview");
+    output.src = "#";
+  }
+}
+      </script>
       <script src="/courseNav/bootstrap.min.js"></script>
       <script src="/courseNav/jquery.min.js"></script>
       <script src="/courseNav/main.js"></script>
