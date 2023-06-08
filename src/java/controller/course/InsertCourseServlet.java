@@ -59,8 +59,23 @@ public class InsertCourseServlet extends HttpServlet {
         String cimage = request.getParameter("image");
         String cprice = request.getParameter("price");
         CoursesDAO dao = new CoursesDAO();
-        dao.insertCourses(cname, cdes, cimage, cprice);
-        response.sendRedirect("courses");
+        boolean check = dao.checkCourseDuplicate(cname);
+        if (check){
+            dao.insertCourses(cname, cdes, cimage, cprice);
+            String success = "success";
+            String smessage = "Insert Success!";
+            request.setAttribute("status", success);
+            request.setAttribute("message", smessage);
+            request.getRequestDispatcher("insertCourse.jsp").forward(request, response);
+            response.sendRedirect("courses");
+        } else {
+            String danger = "danger";
+            String dmessage = "Can't Insert!";
+            request.setAttribute("status", danger);
+            request.setAttribute("mesage", dmessage);
+            request.getRequestDispatcher("insertCourse.jsp").forward(request, response);
+        }
+        
         } catch (SQLException ex) {
         }
     }

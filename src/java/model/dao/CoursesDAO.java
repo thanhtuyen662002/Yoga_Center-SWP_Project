@@ -94,14 +94,14 @@ public class CoursesDAO {
     }
 
     //Ham cap nhat lai thong tin cac khoa hoc
-    public void updateCourses(String ID, String name, String description, String image, String price) throws SQLException {
+    public void updateCourses(String name, String description, String image, String price) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "UPDATE Courses SET name='" + name + "', description= '" + description
-                        + "', image= '" + image + "', price= " + price + " WHERE courseID= " + ID;
+                String sql = "UPDATE Courses SET description= '" + description
+                        + "', image= '" + image + "', price= " + price + " WHERE name= '" + name + "'";
                 ptm = conn.prepareStatement(sql);
                 ptm.executeUpdate();
             }

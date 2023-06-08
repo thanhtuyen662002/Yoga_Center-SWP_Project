@@ -31,6 +31,14 @@ public class CoursesDTO implements Serializable{
         this.status = status;
     }
 
+    public CoursesDTO(String courseName, String description, float price, String courseImage) {
+        this.courseName = courseName;
+        this.description = description;
+        this.price = price;
+        this.courseImage = courseImage;
+    }
+    
+
 
     public int getCourseID() {
         return courseID;

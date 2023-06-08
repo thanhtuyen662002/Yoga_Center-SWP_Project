@@ -37,7 +37,30 @@ public class UpdateCourseServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try {
+            String cname = request.getParameter("name");
+            String cdescription = request.getParameter("description");
+            String cimage = request.getParameter("image");
+            String cprice = request.getParameter("price");
+            CoursesDAO dao = new CoursesDAO();
+            boolean check = dao.checkCourseDuplicate(cname);
+            if (check) {
+                dao.updateCourses(cname, cdescription, cimage, cprice);
+                String success = "success";
+                String smessage = "Update Success!";
+                request.setAttribute("status", success);
+                request.setAttribute("message", smessage);
+                request.getRequestDispatcher("updateCourse.jsp").forward(request, response);
+                response.sendRedirect("courses");
+            } else {
+                String danger = "danger";
+                String dmessage = "Can't Update!";
+                request.setAttribute("status", danger);
+                request.setAttribute("mesage", dmessage);
+                request.getRequestDispatcher("updateCourse.jsp").forward(request, response);
+            }
+
+        } catch (SQLException ex) {
         }
     }
 
@@ -61,24 +84,14 @@ public class UpdateCourseServlet extends HttpServlet {
             request.getRequestDispatcher("updateCourse.jsp").forward(request, response);
         } catch (SQLException ex) {
         }
-        
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
-            String cid = request.getParameter("ID");
-            String cname = request.getParameter("name");
-            String cdescription = request.getParameter("description");
-            String cimage = request.getParameter("image");
-            String cprice = request.getParameter("price");
-            CoursesDAO dao = new CoursesDAO();
-            dao.updateCourses(cid, cname, cdescription, cimage, cprice);
-            response.sendRedirect("courses");
-        } catch (SQLException ex) {
-        }
+
     }
 
     @Override
