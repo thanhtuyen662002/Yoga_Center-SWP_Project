@@ -18,9 +18,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author HP Pro
  */
-@WebServlet(name="mainController",urlPatterns = {"/mainController"})
+@WebServlet(name = "mainController", urlPatterns = {"/mainController"})
 public class MainController extends HttpServlet {
+
     private String url = "errorpage.html";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,27 +41,33 @@ public class MainController extends HttpServlet {
                 url = "home.jsp";
             } else if (action.equals("login")) {
                 url = "login";
-            } else if (action.equals("courses")){
+            } else if (action.equals("logout")) {
+                url = "logout";
+            } else if (action.equals("courses")) {
                 url = "courses";
-            } else if (action.equals("club")){
+            } else if (action.equals("club")) {
                 url = "club";
-            } else if (action.equals("news")){
+            } else if (action.equals("news")) {
                 url = "news";
-            } else if (action.equals("event")){
+            } else if (action.equals("updatenews")) {
+                url = "updatenews";
+            } else if (action.equals("deletenews")) {
+                url = "deletenews";
+            } else if (action.equals("event")) {
                 url = "event";
-            } else if (action.equals("schedule")){
+            } else if (action.equals("schedule")) {
                 url = "schedule";
-            } else if (action.equals("insertCourse")){
+            } else if (action.equals("insertCourse")) {
                 url = "insertCourse";
-            } else if (action.equals("updateCourse")){
+            } else if (action.equals("updateCourse")) {
                 url = "updateCourse";
-            }  else if (action.equals("listSchedule")){
+            } else if (action.equals("listSchedule")) {
                 url = "listSchedule";
-            } else if (action.equals("InsertSchedule")){
+            } else if (action.equals("InsertSchedule")) {
                 url = "insertSchedule";
-            } else if (action.equals("ViewDetails")){
+            } else if (action.equals("ViewDetails")) {
                 url = "viewSchedule";
-            } else if (action.equals("Staff")){
+            } else if (action.equals("Staff")) {
                 url = "courses";
             }
             RequestDispatcher rd = request.getRequestDispatcher(url);

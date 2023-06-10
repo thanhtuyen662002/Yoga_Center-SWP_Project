@@ -110,7 +110,7 @@ public class UserDTO {
 
     @Override
     public String toString() {
-        return "UserDTO_Nhat{" + "phone=" + phone + ", password=" + password + ", userlogin=" + userlogin + ", name=" + name + ", address=" + address + ", gender=" + gender + ", role=" + roleID + ", status=" + status + '}';
+        return "User" + "phone=" + phone + ", password=" + password + ", userlogin=" + userlogin + ", name=" + name + ", address=" + address + ", gender=" + gender + ", role=" + roleID + ", status=" + status + '}';
     }
 
 }

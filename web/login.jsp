@@ -7,8 +7,12 @@
 <%@page import="model.dto.UserDTO"%>
 <%@page import="model.dao.UserDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
+    <c:if test="${not empty sessionScope.USER}">
+        <c:redirect url=""></c:redirect>
+    </c:if>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

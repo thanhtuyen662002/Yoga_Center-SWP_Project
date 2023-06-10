@@ -19,7 +19,7 @@ import model.dao.NewsDAO;
  *
  * @author HOANG ANH
  */
-@WebServlet(name = "DeleteNewsServlet", urlPatterns = {"/delete"})
+@WebServlet(name = "DeleteNewsServlet", urlPatterns = {"/deletenews"})
 public class DeleteNewsServlet extends HttpServlet {
    
     /** 

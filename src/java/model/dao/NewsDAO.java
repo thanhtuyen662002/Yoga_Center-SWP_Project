@@ -43,8 +43,9 @@ public class NewsDAO {
                     String content = rs.getString("content");
                     String image = rs.getString("image");
                     int categoryID = rs.getInt("categoryID");
+                    boolean status = rs.getBoolean("status");
 
-                    list.add(new NewsDTO(newsID, stPhone, title, date, image, content, categoryID));
+                    list.add(new NewsDTO(newsID, stPhone, title, date, image, content, categoryID, status));
                 }
             }
         } catch (Exception e) {
@@ -74,7 +75,7 @@ public class NewsDAO {
                 ptm.setString(1, id);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
-                    return new NewsDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7));
+                    return new NewsDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getBoolean(8));
                 }
             }
         } catch (Exception e) {

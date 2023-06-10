@@ -38,7 +38,7 @@ public class UserDAO {
                     String gender = rs.getString(6);
                     String role = rs.getString(7);
                     boolean status = rs.getBoolean(8);
-                    user = new UserDTO(phoneID, userLogin, name, userPassword, address, gender, role, status);
+                    user = new UserDTO(phoneID, userPassword, userLogin, name, address, gender, role, status);
 
                 }
             }

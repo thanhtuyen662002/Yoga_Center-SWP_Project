@@ -20,6 +20,18 @@ public class NewsDTO {
     private String image;
     private String content;
     private int categoryID;
+    private boolean status ;
+
+    public NewsDTO(int newsID, String stPhone, String title, String postDate, String image, String content, int categoryID, boolean status) {
+        this.newsID = newsID;
+        this.stPhone = stPhone;
+        this.title = title;
+        this.postDate = postDate;
+        this.image = image;
+        this.content = content;
+        this.categoryID = categoryID;
+        this.status = status;
+    }
 
     public NewsDTO(int newsID, String stPhone, String title, String postDate, String image, String content, int categoryID) {
         this.newsID = newsID;
@@ -30,8 +42,8 @@ public class NewsDTO {
         this.content = content;
         this.categoryID = categoryID;
     }
+    
 
- 
     public int getNewsID() {
         return newsID;
     }
@@ -88,14 +100,20 @@ public class NewsDTO {
         this.categoryID = categoryID;
     }
 
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 
     @Override
     public String toString() {
-        return "NewsDTO{" + "newsID=" + newsID + ", stPhone=" + stPhone + ", title=" + title + ", postDate=" + postDate + ", image=" + image + ", content=" + content + ", categoryID=" + categoryID + '}';
+        return "NewsDTO{" + "newsID=" + newsID + ", stPhone=" + stPhone + ", title=" + title + ", postDate=" + postDate + ", image=" + image + ", content=" + content + ", categoryID=" + categoryID + ", status=" + status + '}';
     }
 
-   
-
+    
     
     
     
