@@ -59,7 +59,7 @@
                         </ul>
                     </div>
                     <div class="table-name border" style="height: 15%">
-                        <h4>Create Staff</h4>
+                        <h4>Update Staff</h4>
                     </div>
                 </div>
                 <div class="text-center pt-2 d-flex w-100 justify-content-end pr-4">
