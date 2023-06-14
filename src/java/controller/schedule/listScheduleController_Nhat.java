@@ -25,12 +25,13 @@ import model.dao.UserDAO_Nhat;
 import model.dto.ClassSlotDTO_Nhat;
 import model.dto.ScheduleDTO_Nhat;
 import model.dto.UserDTO;
+import utils.BaseAuthentication_Nhat;
 
 /**
  *
  * @author dell
  */
-public class listScheduleController_Nhat extends HttpServlet {
+public class listScheduleController_Nhat extends BaseAuthentication_Nhat {
 
     public ArrayList<LocalDate> getAllMonday() {
         int year = 2023; // Năm bạn muốn lấy các ngày đầu tiên và cuối cùng của tuần
@@ -91,7 +92,7 @@ public class listScheduleController_Nhat extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        UserDAO_Nhat uDao = new UserDAO_Nhat();
 //        UserDTO user = uDao.getUserByID("0987654444");
@@ -103,7 +104,7 @@ public class listScheduleController_Nhat extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String selectedDate = request.getParameter("currentDay");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

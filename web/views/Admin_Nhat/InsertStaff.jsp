@@ -13,6 +13,7 @@
             />
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="./css/updateInsertCourse.css" />
+        <link rel="stylesheet" href="./css/courseStaff.css" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
         <title>Insert Course</title>
@@ -54,8 +55,9 @@
                 <div>
                     <div class="course-link">
                         <ul>
-                            <li><a href="#">Admin</a></li>
-                            <li><a href="mainController?action=courses">Create Staff</a></li>
+                            <li><a href="listStaff">Admin</a></li>
+                            <li><a href="listStaff">List Staff</a></li>
+                            <li><a href="insertStaff">Create Staff</a></li>
                         </ul>
                     </div>
                     <div class="table-name border" style="height: 15%">
