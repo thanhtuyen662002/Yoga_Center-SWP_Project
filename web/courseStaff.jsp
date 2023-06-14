@@ -34,16 +34,16 @@
                     <li>
                         <a href="#"><span class="fa fa-gift mr-3"></span> KHUYẾN MÃI</a>
                     </li>
-                    <li>
-                        <a href="#"><span class="fa-solid fa-calendar-days mr-3"></span> LỊCH DẠY</a>
+                    <li class="active">
+                        <a href="mainController?action=listSchedule"><span class="fa-solid fa-calendar-days mr-3"></span> LỊCH DẠY</a>
                     </li>
-                    <li>
-                        <a href="#"><span class="fa-solid fa-newspaper mr-3"></span> TIN TỨC</a>
+                    <li class="active">
+                        <a href="mainController?action=news"><span class="fa-solid fa-newspaper mr-3"></span> TIN TỨC</a>
                     </li> 
                     <li>
                         <a href="#"><span class="fa-solid fa-people-group mr-3"></span> KHÁCH HÀNG</a>
                     </li> 
-                    <li>
+                    <li>    
                         <a href="#"><span class="fa fa-sign-out mr-3"></span> Đăng Xuất</a>
                     </li>
                 </ul>

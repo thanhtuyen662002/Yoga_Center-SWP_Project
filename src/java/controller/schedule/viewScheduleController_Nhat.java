@@ -70,7 +70,7 @@ public class viewScheduleController_Nhat extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserDTO user = (UserDTO) request.getSession().getAttribute("user");
+        UserDTO user = (UserDTO) request.getSession().getAttribute("USER");
         id = Integer.parseInt(request.getParameter("id"));
         ScheduleDAO_Nhat sDao = new ScheduleDAO_Nhat();
 

@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 import model.dao.ClassSlotDAO_Nhat;
 import model.dao.ScheduleDAO_Nhat;
 import model.dao.UserDAO_Nhat;
@@ -64,6 +65,7 @@ public class listScheduleController_Nhat extends HttpServlet {
         LocalDate mondayOfWeek = date.minusDays(daysToSubtract);
         return mondayOfWeek;
     }
+
     public static LocalDate getSundayOfWeek(LocalDate now) {
         // Create a LocalDate object for the specific date
         LocalDate date = now;
@@ -116,7 +118,7 @@ public class listScheduleController_Nhat extends HttpServlet {
 
     private void getScheduleByDate(LocalDate currentDate, HttpServletRequest request, HttpServletResponse response) {
         try {
-            UserDTO user = (UserDTO) request.getSession().getAttribute("user");
+            UserDTO user = (UserDTO) request.getSession().getAttribute("USER");
 
             ScheduleDAO_Nhat sDao = new ScheduleDAO_Nhat();
             ClassSlotDAO_Nhat slotDao = new ClassSlotDAO_Nhat();
@@ -148,7 +150,7 @@ public class listScheduleController_Nhat extends HttpServlet {
             }
 
             Collections.sort(listSchedule, (ScheduleDTO_Nhat o1, ScheduleDTO_Nhat o2) -> o1.getDate().compareTo(o2.getDate()));
-            
+
             request.setAttribute("slots", slots);
             request.setAttribute("mondays", mondays);
             request.setAttribute("currentMonday", mondayOfWeek);

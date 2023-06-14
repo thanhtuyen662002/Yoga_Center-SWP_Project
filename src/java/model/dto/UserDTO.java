@@ -33,6 +33,16 @@ public class UserDTO {
         this.status = status;
     }
 
+    public UserDTO(String phone, String userlogin, String name, String address, String gender, String roleID, boolean status) {
+        this.phone = phone;
+        this.userlogin = userlogin;
+        this.name = name;
+        this.address = address;
+        this.gender = gender;
+        this.roleID = roleID;
+        this.status = status;
+    }
+
     public UserDTO(String phone, String name) {
         this.phone = phone;
         this.name = name;
@@ -99,7 +109,7 @@ public class UserDTO {
     public void setRoleID(String roleID) {
         this.roleID = roleID;
     }
-
+    
     public boolean isStatus() {
         return status;
     }

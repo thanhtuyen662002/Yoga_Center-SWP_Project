@@ -102,7 +102,7 @@ public class insertScheduleController_Nhat extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserDTO user = (UserDTO) request.getSession().getAttribute("user");
+        UserDTO user = (UserDTO) request.getSession().getAttribute("USER");
         String phonePT = user.getPhone();
         ScheduleDAO_Nhat scheDao = new ScheduleDAO_Nhat();
         int classId = Integer.parseInt(request.getParameter("class"));

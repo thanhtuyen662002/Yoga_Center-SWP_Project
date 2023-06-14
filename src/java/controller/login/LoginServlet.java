@@ -35,7 +35,9 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        String phone = request.getParameter("txtPhone");
+        String password = request.getParameter("txtPassword");
+        UserDTO user = UserDAO.getUser(phone, password);
 //        try {
 //            if (user != null) {
 //                if (user.getRoleID().equals("AD")) {
@@ -53,7 +55,7 @@ public class LoginServlet extends HttpServlet {
 //                        session.setAttribute("txtSTphone", user.getPhone());
 //                        session.setAttribute("txtname", user.getName());
 //                        session.setAttribute("user", user);
-//                        request.getRequestDispatcher("homeStaff.jsp").forward(request, response);
+//                        request.getRequestDispatcher("courseStaff.jsp").forward(request, response);
 //                    }
 //                } else if (user.getRoleID().equals("US")) {
 //                    HttpSession session = request.getSession(true);
@@ -74,26 +76,21 @@ public class LoginServlet extends HttpServlet {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-                
-            try {
-            String phone = request.getParameter("txtPhone");
-        String password = request.getParameter("txtPassword");
-        UserDTO user = UserDAO.getUser(phone, password);
-        if (user != null) {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("USER", user);
-                    switch (user.getRoleID()) {
-                        case "US":
-                            request.getRequestDispatcher("home.jsp").forward(request, response);;
-                            break;
-                        case "AD":
-                            session.setAttribute("ADMIN", user);
-                            request.getRequestDispatcher("home.jsp").forward(request, response);;
-                            break;
-                        case "ST":
-                            request.getRequestDispatcher("home.jsp").forward(request, response);;
-                            break;
-                    }
+        try {
+            if (user != null) {
+                HttpSession session = request.getSession();
+                session.setAttribute("USER", user);
+                switch (user.getRoleID()) {
+                    case "US":
+                        request.getRequestDispatcher("home.jsp").forward(request, response);
+                        break;
+                    case "AD":
+                        response.sendRedirect("listStaff");
+                        break;
+                    case "ST":
+                        request.getRequestDispatcher("courseStaff.jsp").forward(request, response);
+                        break;
+                }
             }
         } catch (Exception e) {
             log("Error at LoginController: " + e.toString());

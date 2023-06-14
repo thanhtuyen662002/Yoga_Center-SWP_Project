@@ -48,6 +48,22 @@
         <servlet-name>UpdateCourseServlet</servlet-name>
         <servlet-class>controller.course.UpdateCourseServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListStaffController</servlet-name>
+        <servlet-class>controller.admin.ListStaffController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateStaffController</servlet-name>
+        <servlet-class>controller.admin.UpdateStaffController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteController</servlet-name>
+        <servlet-class>controller.admin.DeleteController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InsertStaff</servlet-name>
+        <servlet-class>controller.admin.InsertStaffContrller</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CoursesServlet</servlet-name>
         <url-pattern>/CoursesServlet</url-pattern>
@@ -91,6 +107,22 @@
     <servlet-mapping>
         <servlet-name>insertScheduleController</servlet-name>
         <url-pattern>/insertSchedule</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListStaffController</servlet-name>
+        <url-pattern>/listStaff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateStaffController</servlet-name>
+        <url-pattern>/updateStaff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteController</servlet-name>
+        <url-pattern>/deleteController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertStaff</servlet-name>
+        <url-pattern>/insertStaff</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
