@@ -56,9 +56,9 @@ public abstract class AdminAuthentication_Nhat extends HttpServlet{
         }
     }
 
-    protected abstract void processGet(HttpServletRequest request, HttpServletResponse response);
+    protected abstract void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 
-    protected abstract void processPost(HttpServletRequest request, HttpServletResponse response);
+    protected abstract void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 
     /**
      * Returns a short description of the servlet.

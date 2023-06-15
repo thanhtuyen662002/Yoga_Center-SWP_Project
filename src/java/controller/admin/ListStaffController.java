@@ -14,12 +14,13 @@ import java.util.ArrayList;
 import model.dao.UserDAO;
 import model.dao.UserDAO_Nhat;
 import model.dto.UserDTO;
+import utils.AdminAuthentication_Nhat;
 
 /**
  *
  * @author dell
  */
-public class ListStaffController extends HttpServlet {
+public class ListStaffController extends AdminAuthentication_Nhat {
 
     String gender = "All";
     String status = "All";
@@ -63,7 +64,7 @@ public class ListStaffController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         page = 1;
         UserDAO_Nhat uDao = new UserDAO_Nhat();
@@ -122,7 +123,7 @@ public class ListStaffController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UserDAO_Nhat uDao = new UserDAO_Nhat();
         String action = request.getParameter("action");
