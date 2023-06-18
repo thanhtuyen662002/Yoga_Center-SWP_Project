@@ -138,7 +138,7 @@ body {
     cursor: pointer;
   }
 
-  #toggler:checked~.nav-menu {
+  #toggler:checked ~ .nav-menu {
     height: auto;
     transition: 0.3s;
   }
@@ -181,87 +181,61 @@ body {
 /* #carouselExampleIndicators{
   margin-top: 100rem;
 } */
-.service {
-  /* height: 100vh; */
-  background-color: rgba(243, 243, 243, 0.265) !important;
-  margin-bottom: 10rem;
-  z-index: 999;
+/* .service {
+  padding-bottom: 10rem;
+  background-color: #c1c1c1;
 }
-
 .service-title {
-  padding-top: 5rem;
   text-align: center;
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 32px;
+  text-align: ;
+  padding-top: 10rem;
+  font-size: 32px;
+  font-weight: 700;
 }
-
 .service-detail {
   text-align: center;
-  font-size: 16px;
-  width: 100%;
-  max-width: 420px;
-  margin-bottom: 32px;
-  margin-left: auto !important;
-  margin-right: auto !important;
+  font-size: 24px;
+  padding-bottom: 10rem;
 }
-
 .service-choose {
   display: flex;
-  justify-content: center;
+  flex-wrap: nowrap;
 }
-
-.service-option {
-  width: 25%;
-  height: 25%;
-  position: relative;
-  padding: 0 15px;
+.service-card {
+  flex-basis: calc(25% - 10px);
+  margin: 15px;
+  flex-grow: 1;
+  border: 1px solid rgb(217, 212, 212);
+  background-color: #fff;
 }
-
-.service-img {
-  /* display: inline-block; */
-  position: relative;
+.service-card-img {
 }
-
-.service-img img {
+.service-card-img img {
   width: 100%;
   height: 100%;
 }
-
-.service-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #fff;
-  font-size: 25px;
+.service-card-content {
+  padding: 15px;
+}
+.service-card-id {
+  color: gray;
   font-weight: bold;
-  text-align: center;
-  width: 100%;
-  z-index: 1;
-  opacity: 1;
-  transition: opacity 0.3s ease-out
+  margin-bottom: 16px;
+  font-size: 16px;
 }
-
-.service-option:hover .service-content {
-  opacity: 1;
+.service-card-title {
+  font-weight: bold;
+  color: rgb(191, 8, 8);
+  font-size: 20px;
+  margin-bottom: 16px;
 }
-
-.service-overlay {
-  /* display: inline-block; */
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  opacity: 0;
-  transition: opacity 0.3s ease-out;
+.service-card-time {
+  font-size: 16px;
+  margin-bottom: 16px;
 }
-
-.service-option:hover .service-overlay {
-  opacity: 1;
-}
+.service-card-detail {
+  font-size: 16px;
+} */
 
 /* TIN TỨC */
 .news {
@@ -298,7 +272,6 @@ body {
   left: 0;
   bottom: 0;
   right: 0;
-
 }
 
 .news-title {
@@ -320,7 +293,6 @@ body {
 
 .card {
   padding: 24px;
-
 }
 
 .card-img {
@@ -381,7 +353,6 @@ body {
 .plan-content {
   display: flex;
   justify-content: center;
-
 }
 
 .plan-content-col {
@@ -427,7 +398,6 @@ body {
   border-radius: 50%;
   background: #fff;
   box-shadow: 0px 5px 6px;
-
 }
 
 .plan-content-price h3 {
@@ -482,12 +452,74 @@ body {
 .plan-content-btn a:hover {
   color: #fff;
 }
+/* Sign In */
+.sign-in {
+  position: relative;
+  height: 60vh;
+}
+.sign-in::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
 
+.sign-in-content {
+  position: relative;
+  z-index: 2;
+}
+.sign-in-content {
+  padding: 5rem 0;
+}
+.sign-in-content h1 {
+  text-align: center;
+  font-weight: 700;
+  color: #fff;
+  font-size: 3.2rem;
+  line-height: 10rem;
+}
+.sign-in-content-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 2rem;
+  padding: 0 20rem;
+  font-size: 2rem;
+}
+.sign-in-btn {
+  text-align: center;
+  margin-top: 5rem;
+  /* margin-bottom: 5rem; */
+}
+.sign-in-btn a {
+  border: 1px solid #a50000;
+  padding: 2rem 6rem;
+  background-color: #a50000;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.sign-in-btn a:hover {
+  background-color: #740000;
+  border: 1px solid #740000;
+}
+.input-name,
+.input-phone,
+.form-select-clb,
+.form-select-time {
+  padding: 2rem 1rem;
+}
+.form-select-clb {
+  grid-column: span 2;
+}
+.form-select-time {
+  grid-column: span 2;
+}
 /* Footer */
 .footer {
   background-color: rgb(191, 8, 8);
   color: #fff;
-
 }
 
 .footer-content {
@@ -497,7 +529,6 @@ body {
   margin-left: -15px;
   justify-content: space-between;
   padding: 64px 0;
-
 }
 
 .footer-block {
@@ -525,7 +556,6 @@ body {
 
 .footer-block.middle {
   display: flex;
-
 }
 
 .footer-block a {
