@@ -312,9 +312,13 @@
                 <h3>BASIC</h3>
                 <p>
                   Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Accusamus eaque quod alias, incidunt maxime blanditiis,
+                  Accusamus eaque quod alias, incidunt maxime blanditiis, Lorem
+                  ipsum dolor sit amet consectetur, adipisicing elit. Molestiae
+                  nihil reprehenderit vitae, ipsam voluptatibus dolorum
+                  laudantium voluptatem illum sunt quo quos tempora mollitia,
+                  veniam quaerat quae quibusdam deserunt nulla. Deserunt.
                 </p>
-                <a href="#">Đăng Ký</a>
+                <a href="#" id="content-btn">Xem Thêm</a>
               </div>
             </div>
           </div>
@@ -327,7 +331,7 @@
                   Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                   Accusamus eaque quod alias, incidunt maxime blanditiis,
                 </p>
-                <a href="#">Đăng Ký</a>
+                <a href="#" id="content-btn">Xem Thêm</a>
               </div>
             </div>
           </div>
@@ -340,7 +344,7 @@
                   Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                   Accusamus eaque quod alias, incidunt maxime blanditiis,
                 </p>
-                <a href="#">Đăng Ký</a>
+                <a href="#" id="content-btn">Xem Thêm</a>
               </div>
             </div>
           </div>
@@ -353,20 +357,33 @@
                   Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                   Accusamus eaque quod alias, incidunt maxime blanditiis,
                 </p>
-                <a href="#">Đăng Ký</a>
+                <a href="#" id="content-btn">Xem Thêm</a>
               </div>
             </div>
           </div>
           <div class="card-item">
             <div class="box">
               <div class="content">
-                <h2>03</h2>
-                <h3>TEACHER</h3>
+                <h2>05</h2>
+                <h3>THERAPY</h3>
                 <p>
                   Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                   Accusamus eaque quod alias, incidunt maxime blanditiis,
                 </p>
-                <a href="#">Đăng Ký</a>
+                <a href="#" id="content-btn">Xem Thêm</a>
+              </div>
+            </div>
+          </div>
+          <div class="card-item">
+            <div class="box">
+              <div class="content">
+                <h2>06</h2>
+                <h3>THERAPY</h3>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                  Accusamus eaque quod alias, incidunt maxime blanditiis,
+                </p>
+                <a href="#" id="content-btn">Xem Thêm</a>
               </div>
             </div>
           </div>
@@ -443,7 +460,36 @@
       type="text/javascript"
       src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
     ></script>
+    <script>
+      const colors = ["#2196f3", "#e91e63", "#97dc47", "#e98"];
+      const cards = Array.from(document.querySelectorAll(".box"));
 
+      cards.forEach((card, index) => {
+        const button = card.querySelector(".box a");
+        const originalColor = button.style.backgroundColor;
+        const colorIndex = index % colors.length;
+        const color = colors[colorIndex];
+
+        // Lưu trạng thái ban đầu của mỗi thẻ
+        card.dataset.hovered = "false";
+
+        card.addEventListener("mouseenter", () => {
+          // Kiểm tra trạng thái của thẻ, nếu đã hover trước đó thì không thay đổi màu sắc
+          if (card.dataset.hovered === "false") {
+            button.style.backgroundColor = color;
+            card.dataset.hovered = "true";
+          }
+        });
+
+        card.addEventListener("mouseleave", () => {
+          // Khôi phục màu sắc ban đầu khi thẻ được hover lại sau khi đã được hover trước đó
+          if (card.dataset.hovered === "true") {
+            button.style.backgroundColor = originalColor;
+            card.dataset.hovered = "false";
+          }
+        });
+      });
+    </script>
     <script src="./price.js"></script>
   </body>
 </html>
