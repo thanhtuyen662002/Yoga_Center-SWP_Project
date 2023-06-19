@@ -4,6 +4,7 @@
     Author     : HP Pro
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,14 +17,14 @@
             <div class="container">
                 <div class="nav">
                     <div class="nav-logo">
-                        <a href="#">YO<span>GA</span> </a>
+                        <a href="homeCustomer">YO<span>GA</span> </a>
                     </div>
                     <input type="checkbox" id="toggler" />
                     <label for="toggler"><i class="fas fa-bars fa-2xl"></i></label>
                     <div class="nav-menu">
                         <ul class="nav-menu-list">
                             <li class="nav-menu-item">
-                                <a class="nav-menu-link" href="clbCustomer">CLB</a>
+                                <a class="nav-menu-link" href="clubCustomer">CLB</a>
                             </li>
                             <li class="nav-menu-item">
                                 <a class="nav-menu-link" href="courseCustomer">KHÓA HỌC</a>

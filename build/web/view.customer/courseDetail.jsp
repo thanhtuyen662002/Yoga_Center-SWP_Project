@@ -109,7 +109,7 @@
               <div class="price-detail-box">
                 <div class="price-detail-head">
                   <h2>GIÁ KHÓA HỌC</h2>
-                  <h1><fmt:formatNumber type="currency" value="${c.numberOfMonths * c.price}" />VND</h1>
+                  <h1><fmt:formatNumber type="currency" currencyCode="VND" value="${c.numberOfMonths * c.price}" /></h1>
                 </div>
                 <div class="price-detail-bottom">
                   <ul>

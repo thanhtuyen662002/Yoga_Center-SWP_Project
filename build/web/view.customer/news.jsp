@@ -22,59 +22,7 @@
     </head>
     <body>
         <!-- Header -->
-        <div class="nav-background">
-            <div class="container">
-                <div class="nav">
-                    <div class="nav-logo">
-                        <a href="#">YO<span>GA</span> </a>
-                    </div>
-                    <input type="checkbox" id="toggler" />
-                    <label for="toggler"><i class="fas fa-bars fa-2xl"></i></label>
-                    <div class="nav-menu">
-                        <ul class="nav-menu-list">
-                            <li class="nav-menu-item">
-                                <a class="nav-menu-link" href="clb.jsp">CLB</a>
-                            </li>
-                            <li class="nav-menu-item">
-                                <a class="nav-menu-link" href="courses.jsp">KHÓA HỌC</a>
-                            </li>
-                            <li class="nav-menu-item">
-                                <a class="nav-menu-link" href="listSchedule">LỊCH HỌC</a>
-                            </li>
-                            <li class="nav-menu-item">
-                                <a class="nav-menu-link" href="event.jsp">SỰ KIỆN</a>
-                            </li>
-                            <li class="nav-menu-item">
-                                <a class="nav-menu-link" href="shownews">TIN TỨC</a>
-                            </li>
-                        </ul>
-                        <c:if test="${not empty sessionScope.USER}">
-                            <div id="dropDownMenu" class="d-inline-block position-relative">
-                                <i class="fas fa-user me-2"></i>${sessionScope.USER.name}
-                                <div id="dropDownContent" class="d-none bg-white text-start position-absolute shadow">
-                                    <c:if test="${not empty sessionScope.USER}"> 
-                                        <a href="account" class="nav-link mb-2 text-decoration-none p-2" id="item">Cài đặt tài khoản</a>
-                                    </c:if>
-                                    <c:if test="${sessionScope.USER.roleID eq 'ST'}">
-                                        <a href="sellerPage" class="nav-link mb-2 text-decoration-none p-2" id="item">Quản lý</a>
-                                    </c:if>
-                                    <c:if test="${sessionScope.USER.roleID eq 'AD'}">
-                                        <a href="dashboard" class="nav-link mb-2 text-decoration-none p-2" id="item">Quản lý cửa hàng</a>
-                                    </c:if>
-                                    <!--<a href="logOut" class="nav-link text-decoration-none p-2" id="item">Đăng xuất</a>-->
-                                </div>
-                                <c:if test="${sessionScope.USER.roleID eq 'ST'}">
-                                    <a href="homeStaff.jsp" class="nav-link mb-2 text-decoration-none p-2" id="item">Quản lý</a>
-                                </c:if>
-                                <a href="logout" class="nav-link text-decoration-none p-2" id="item">Đăng xuất</a>
-                            </div>
-                        </c:if>
-                        <c:if test="${empty sessionScope.USER}"><div><a href="login.jsp" class="btn_contact">Đăng nhập</a></div>
-                        </c:if>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <c:import url="customer_header.jsp"/>
         <!-- Banner -->
         <div class="banner">
             <div class="banner-bg"> <img src="./image/news.jpg" alt=""></div>\
@@ -133,7 +81,7 @@
     </div>
 
     <!-- Footer -->
-    <c:import url="cutomer_footer.jsp"/>
+    <c:import url="customer_footer.jsp"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./js/news.js"></script>
 </body>

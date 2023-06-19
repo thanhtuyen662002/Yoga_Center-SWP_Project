@@ -54,7 +54,7 @@ public class SignUpCourseServlet extends HttpServlet {
             request.setAttribute("course", course);
             request.setAttribute("time", time);
             request.setAttribute("timeToCome", timeToCome);
-            request.getRequestDispatcher("signupCourse.jsp").forward(request, response);
+            request.getRequestDispatcher("view.customer/signupCourse.jsp").forward(request, response);
         } catch (Exception e) {
         }
     }

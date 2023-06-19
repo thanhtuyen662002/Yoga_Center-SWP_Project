@@ -55,7 +55,7 @@ public class ShowNewsServlet extends HttpServlet {
      try {
             ArrayList<NewsDTO> list = NewsDAO.getAllNews();
             request.setAttribute("list_news", list);
-            request.getRequestDispatcher("./view.customer/news.jsp").forward(request, response);
+            request.getRequestDispatcher("view.customer/news.jsp").forward(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(NewsStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
