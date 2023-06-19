@@ -6,22 +6,34 @@
 package controller.course;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import model.dao.CoursesDAO;
+import org.apache.commons.io.IOUtils;
+import utils.DBUtils;
 
 /**
  *
  * @author HP Pro
  */
 @WebServlet(name = "InsertCourseServlet", urlPatterns = {"/insertCourse"})
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2,
+        maxFileSize = 1024 * 1024 * 10,
+        maxRequestSize = 1024 * 1024 * 50)
 public class InsertCourseServlet extends HttpServlet {
 
     /**
@@ -36,9 +48,8 @@ public class InsertCourseServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        request.getRequestDispatcher("insertCourse.jsp").forward(request, response);
 
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -53,44 +64,55 @@ public class InsertCourseServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                try {
-        String cname = request.getParameter("name");
-        String cdes = request.getParameter("description");
-        String cimage = request.getParameter("image");
-        String cprice = request.getParameter("price");
-        CoursesDAO dao = new CoursesDAO();
-        boolean check = dao.checkCourseDuplicate(cname);
-        if (check){
-            dao.insertCourses(cname, cdes, cimage, cprice);
-            String success = "success";
-            String smessage = "Insert Success!";
-            request.setAttribute("status", success);
-            request.setAttribute("message", smessage);
-            request.getRequestDispatcher("insertCourse.jsp").forward(request, response);
-            response.sendRedirect("courses");
-        } else {
-            String danger = "danger";
-            String dmessage = "Can't Insert!";
-            request.setAttribute("status", danger);
-            request.setAttribute("mesage", dmessage);
-            request.getRequestDispatcher("insertCourse.jsp").forward(request, response);
-        }
-        
-        } catch (SQLException ex) {
-        }
+        request.getRequestDispatcher("insertCourse.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        String name = new String(request.getParameter("name").getBytes("ISO-8859-1"),"UTF-8");
+        String price = new String(request.getParameter("price").getBytes("ISO-8859-1"),"UTF-8");
+        String des = new String(request.getParameter("description").getBytes("ISO-8859-1"),"UTF-8");
+        String numberOfMonths = request.getParameter("numberOfMonths");
+
+        boolean checkDuplicate;
+        try {
+            //Kiểm tra tên khóa học đã có trong database hay chưa
+            CoursesDAO dao = new CoursesDAO();
+            checkDuplicate = dao.checkCourseDuplicate(name);
+            if (!checkDuplicate) {
+                List<Part> fileParts = new ArrayList<>();
+                for (Part part : request.getParts()) {
+                    String partName = new String(part.getName().getBytes("iso-8859-1"), "UTF-8");
+                    if (partName.startsWith("image")) {
+                        fileParts.add(part);
+                    }
+                }
+
+                for (Part filePart : fileParts) {
+                    String fileName = filePart.getSubmittedFileName();
+                    InputStream fileContent = filePart.getInputStream();
+                    
+                    InputStream content = fileContent;
+                    byte[] imageBytes = IOUtils.toByteArray(content);
+                    String data = Base64.getEncoder().encodeToString(imageBytes);
+                    saveInforToDatabase(name, price, des, numberOfMonths, fileName, data);
+                    
+
+                }
+
+            } else {
+                //response.getWriter().println("Error: Course name already exists in Database!");
+                request.setAttribute("ErrorMessage", "Error: Course name already exists in Database!");
+                request.getRequestDispatcher("insertCourse.jsp").forward(request, response);
+            }
+        } catch (SQLException ex) {
+            response.getWriter().println("ERROR: " + ex.getMessage());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(InsertCourseServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        response.sendRedirect("courses");
 
     }
 
@@ -99,4 +121,25 @@ public class InsertCourseServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private void saveInforToDatabase(String name, String price, String description, String numberOfMonths, String image, String data) throws SQLException, ClassNotFoundException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String query = "INSERT INTO Courses (name, description, numberOfMonths, image, data, price, status) "
+                        + "VALUES (N'" + name + "', N'" + description + "',"+ numberOfMonths +",N'" + image + "','" + data + "'," + price + ", 1)";
+                ptm = conn.prepareStatement(query);
+                ptm.executeUpdate();
+            }
+        } catch (Exception e) {
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
 }

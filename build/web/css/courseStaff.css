@@ -10650,6 +10650,9 @@ a {
   transition: 0.3s all ease;
   color: #2f89fc;
 }
+.fa-trash {
+    color: #dc3545
+}
 a:hover,
 a:focus {
   text-decoration: none !important;
@@ -11028,4 +11031,15 @@ a[data-toggle="collapse"] {
 }
 #table-img img {
   height: 12rem;
+}
+.table-noidung {
+  max-width: 20rem;
+  max-height: 10rem;
+  overflow: hidden;
+  width: 100%;
+}
+#table-img img {
+  height: 12rem;
+  width: 12rem;
+  object-fit: cover;
 }

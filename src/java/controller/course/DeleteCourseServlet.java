@@ -54,15 +54,25 @@ public class DeleteCourseServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String id = request.getParameter("id");
+            String name = request.getParameter("name");
             CoursesDAO dao = new CoursesDAO();
-            dao.deleteCourses(id);
-            response.sendRedirect("courses");
+            boolean check = dao.checkDelete(name);
+            if(!check){
+                dao.deleteCourses(name);
+                System.out.println("Delete Success!");
+                request.setAttribute("ErrorMessage", "Success: Delete Successfully!");
+                response.sendRedirect("courses");
+            } else {
+                System.out.println("Delete Fail!");
+                request.setAttribute("ErrorMessage", "Error: This course still have learning student!");
+                request.getRequestDispatcher("courses").forward(request, response);
+            }
+            
         } catch (SQLException ex) {
         }
 
     }
-
+//tuyen
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -71,7 +81,7 @@ public class DeleteCourseServlet extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(DeleteCourseServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }               
 
     /**
      * Returns a short description of the servlet.
