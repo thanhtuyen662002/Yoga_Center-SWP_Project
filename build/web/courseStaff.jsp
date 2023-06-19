@@ -1,4 +1,5 @@
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,96 +13,73 @@
             />
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="./css/courseStaff.css" />
+        
         <title>Course</title>
     </head>
     <body>
+        <% String ErrorMessage = (String) request.getAttribute("ErrorMessage"); %>
         <div class="wrapper d-flex align-items-stretch">
-            <nav id="sidebar">
-                <div class="custom-menu">
-                    <button type="button" id="sidebarCollapse" class="btn btn-primary">
-                    </button>
-                </div>
-                <div class="img bg-wrap text-center py-4" style="background-image: url(images/bg_1.jpg);">
-                    <div class="user-logo">
-                        <div class="img" style="background-image: url(/image/logo-yoga.jpg);"></div>
-                        <h3>YOGA CENTER</h3>
-                    </div>
-                </div>
-                <ul class="list-unstyled components mb-5">
-                    <li class="active">
-                        <a href="#"><span class="fa-solid fa-book mr-3"></span> KHÓA HỌC</a>
-                    </li>
-                    <li>
-                        <a href="#"><span class="fa fa-gift mr-3"></span> KHUYẾN MÃI</a>
-                    </li>
-                    <li class="active">
-                        <a href="mainController?action=listSchedule"><span class="fa-solid fa-calendar-days mr-3"></span> LỊCH DẠY</a>
-                    </li>
-                    <li class="active">
-                        <a href="mainController?action=news"><span class="fa-solid fa-newspaper mr-3"></span> TIN TỨC</a>
-                    </li> 
-                    <li>
-                        <a href="#"><span class="fa-solid fa-people-group mr-3"></span> KHÁCH HÀNG</a>
-                    </li> 
-                    <li>    
-                        <a href="#"><span class="fa fa-sign-out mr-3"></span> Đăng Xuất</a>
-                    </li>
-                </ul>
-
-            </nav>
-
+            <c:import url="staff_header.jsp"/>
             <!-- Page Content  -->
             <div id="content">
+                <div style="text-align: center; color: red; font-size: 2rem;">
+                    <% if (ErrorMessage != null) {%>
+                    <p><%= ErrorMessage%></p>
+                    <% }%>
+                </div>
                 <div class="course-link">
                     <ul>
-                        <li><a href="mainController?action=Staff">Staff</a></li>
-                        <li><a href="mainController?action=courses" id="active">Khóa Học</a></li>
+                        <li><a href="courses">Staff</a></li>
+                        <li><a href="courses" id="active">Khóa Học</a></li>
                     </ul>
                 </div>
                 <div class="course-title" >
                     <div class="text">WELCOME STAFF</div>
-                    <div class="insert"><a type="submit" href="insertCourse.jsp" name="insert">Insert</a></div>
+                 
                 </div>
                 <div class="table-name">
                     <h1>BẢNG DỮ LIỆU KHÓA HỌC</h1>
                 </div>
-                <table id="course" class="display" style="width:100%">
+                <table id="course" class="display" style="width:100%" >
                     <thead>
                         <tr>
-                            <th>Course ID</th>
                             <th>Name</th>
                             <th>Description</th>
-                            <th>Price</th>
                             <th>Image</th>
-                            <th>Status</th>
+                            <th>Price</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
+
                         <c:forEach items="${list}" var="c">
+                            <c:set var="money" value="${c.price}" />
+                            <fmt:setLocale value="vi_VN"/>
+                            <c:set var="price"> 
+                                <fmt:formatNumber type="currency" value="${money}"/>
+                            </c:set>
                             <tr>
-                                <td>${c.courseID}</td>
                                 <td>${c.courseName}</td>
-                                <td>${c.description}</td>
-                                <td><a href="${c.courseImage}"></a></td>
-                                <td>${c.price}</td>
-                                <td>${c.status}</td>
+                                <td><div class="table-noidung">${c.description}</div></td>
+                                <td id="table-img"><img src="data:image;base64,${c.courseData}"/></td>
+                                <td><c:out value="${price}"/></td>
                                 <td id="tool">
-                                    <a href=""><i class="fa-solid fa-eye "></i></a>
-                                    <a href="updateCourse"><i class="fa-solid fa-pen"></i></a>
-                                    <a href="#"> <i class="fa-sharp fa-solid fa-trash"></i></a>
+                                    <!--                                    <a href=""><i class="fa-solid fa-eye "></i></a>-->
+                                    
+                                    <a href="updateCourse?name=${c.courseName}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
+                                    |
+                                    <a onclick="showMess('${c.courseName}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
+                                    
                                 </td>
                             </tr>
                         </c:forEach>
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>Course ID</th>
                             <th>Name</th>
                             <th>Description</th>
                             <th>Image</th>
                             <th>Price</th>
-                            <th>Status</th>
                             <th>Action</th>
 
                         </tr>
@@ -109,7 +87,8 @@
                 </table>
 
             </div>
-
+            
+            <script src="./js/courseStaff.js"></script>
             <script src="/courseNav/bootstrap.min.js"></script>
             <script src="/courseNav/jquery.min.js"></script>
             <script src="/courseNav/main.js"></script>
@@ -117,10 +96,10 @@
             <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
             <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
             <script>
-                $(document).ready(function () {
-                    $('#course').DataTable();
-                });
+                                        $(document).ready(function () {
+                                            $('#course').DataTable();
+                                        });
             </script>
-            
+            <script src="./js/staffDropdown.js"></script>
     </body>
 </html>

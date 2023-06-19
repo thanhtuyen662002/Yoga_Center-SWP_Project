@@ -21,10 +21,7 @@ import utils.DBUtils;
 //Ham chuc nang cua khoa hoc
 public class CoursesDAO {
 
-    private static final String SHOW = "SELECT * FROM Courses";
-    //private static final String UPDATE = "UPDATE Courses SET name='?', description='?', image='?', price=? WHERE courseID=?";
-    private static final String DELETE = "DELETE FROM Courses WHERE courseID=?";
-    //private static final String INSERT = "SET IDENTITY_INSERT Courses ON" + "INSERT INTO Courses(courseID, name, description, image, price)" + "VALUE(?,'?','?','?',?)";
+    private static final String SHOW = "SELECT * FROM Courses WHERE status = 1";
 
     //Ham hien thi toan bo cac khoa hoc
     public static ArrayList<CoursesDTO> getAllCourses() throws SQLException {
@@ -39,13 +36,15 @@ public class CoursesDAO {
                 rs = ptm.executeQuery();
 
                 while (rs.next()) {
-                    int courseID = rs.getInt("courseID");
+                    int id = rs.getInt("courseID");
                     String courseName = rs.getString("name");
                     String description = rs.getString("description");
+                    int numberOfMonths = rs.getInt("numberOfMonths");
                     String image = rs.getString("image");
+                    String data = rs.getString("data");
                     float price = rs.getFloat("price");
-                    boolean status = rs.getBoolean("status");
-                    list.add(new CoursesDTO(courseID, courseName, description, image, price, status));
+                    Boolean status = rs.getBoolean("status");
+                    list.add(new CoursesDTO(id, courseName, description, numberOfMonths, image, data, price, status));
                 }
             }
         } catch (Exception e) {
@@ -63,19 +62,53 @@ public class CoursesDAO {
         return list;
     }
 
-    public CoursesDTO getCourseByID(String id) throws SQLException {
+    public static ArrayList<CoursesDTO> getCusCourse() throws SQLException {
+        ArrayList<CoursesDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "SELECT * FROM Courses WHERE courseID = ?";
+                String sql = "SELECT courseID, name, description FROM Courses";
                 ptm = conn.prepareStatement(sql);
-                ptm.setString(1, id);
+                rs = ptm.executeQuery();
+
+                while (rs.next()) {
+                    int id = rs.getInt("courseID");
+                    String courseName = rs.getString("name");
+                    String description = rs.getString("description");
+                    list.add(new CoursesDTO(id, courseName, description));
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
+    public CoursesDTO getCourseByName(String name) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT * FROM Courses WHERE name = N'" + name + "'";
+                ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
-                    return new CoursesDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getFloat(5),rs.getBoolean(6));
+                    return new CoursesDTO(rs.getInt("courseID"), rs.getString("name"), rs.getString("description"), rs.getInt("numberOfMonths"),
+                            rs.getString("image"), rs.getString("data"), rs.getFloat("price"), rs.getBoolean("status"));
                 }
             }
         } catch (Exception e) {
@@ -88,25 +121,32 @@ public class CoursesDAO {
             }
             if (conn != null) {
                 conn.close();
-            }           
+            }
         }
         return null;
     }
 
-    //Ham cap nhat lai thong tin cac khoa hoc
-    public void updateCourses(String name, String description, String image, String price) throws SQLException {
+    public CoursesDTO getCourseDetail(String id) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
+        ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "UPDATE Courses SET description= '" + description
-                        + "', image= '" + image + "', price= " + price + " WHERE name= '" + name + "'";
+                String sql = "SELECT name, description, numberOfMonths, data, price FROM Courses WHERE courseID = "
+                        + id + " AND status = 1";
                 ptm = conn.prepareStatement(sql);
-                ptm.executeUpdate();
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    return new CoursesDTO(rs.getString("name").toUpperCase(), rs.getString("description"),
+                            rs.getFloat("price"), rs.getString("data"), rs.getInt("numberOfMonths"));
+                }
             }
         } catch (Exception e) {
         } finally {
+            if (rs != null) {
+                rs.close();
+            }
             if (ptm != null) {
                 ptm.close();
             }
@@ -114,17 +154,41 @@ public class CoursesDAO {
                 conn.close();
             }
         }
+
+        return null;
+    }
+
+    public List<CoursesDTO> getListDeleteCourse() throws SQLException {
+        List<CoursesDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT * FROM Courses WHERE status = 0";
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    list.add(new CoursesDTO(rs.getInt("courseID"), rs.getString("name"), rs.getString("description"),
+                            rs.getInt("numberOfMonths"), rs.getString("image"), rs.getString("data"), rs.getFloat("price"), rs.getBoolean("status")));
+                }
+            }
+        } catch (Exception e) {
+        }
+        return list;
     }
 
     //Ham xoa khoa hoc
-    public void deleteCourses(String courseID) throws SQLException {
+    public void deleteCourses(String name) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                ptm = conn.prepareStatement(DELETE);
-                ptm.setString(1, courseID);
+                String sql = "UPDATE Courses SET status = 0\n"
+                        + "WHERE name = N'" + name + "'";
+                ptm = conn.prepareStatement(sql);
                 ptm.executeUpdate();
 
             }
@@ -139,84 +203,26 @@ public class CoursesDAO {
         }
 
     }
-    
+
     //Ham check course con ai hoc hay khong
-    public void checkDelete (int ID) throws SQLException {
+    public boolean checkDelete(String name) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
-            if (conn != null){
-                String sql = "select co.courseID, cs.classID, sc.customerID, cu.customerName, cu.status\n" +
-                             "from Courses as co\n" +
-                             "join Class as cs on co.courseID = cs.courseID\n" +
-                             "join Schedule as sc on cs.classID = sc.classID\n" +
-                             "join Customer as cu on sc.customerID = cu.customerId\n" +
-                             "where co.courseID = ? and cu.status = 1";
+            if (conn != null) {
+                String sql = "SELECT co.name, cls.name, sch.customerID, COUNT(sch.customerID) AS TT FROM Courses AS  co\n"
+                        + "RIGHT JOIN Class AS cls ON co.courseID = cls.courseID\n"
+                        + "LEFT JOIN Schedule AS sch ON sch.classID = cls.classID\n"
+                        + "WHERE sch.deleteFlag = 1 AND co.name = N'" + name + "' AND co.status = 1\n"
+                        + "GROUP BY co.name, cls.name, sch.customerID";
                 ptm = conn.prepareStatement(sql);
-                ptm.setInt(1, ID);
                 rs = ptm.executeQuery();
-                
-                if (rs != null){
-                    //In ra cau lenh "Khoa hoc con nguoi dang theo hoc"
-                    System.out.println("Con nguoi dang theo hoc khoa hoc nay!");
-                }else {
-                    //In ra cau lenh "Khoa hoc khong con ai theo hoc"
-                    System.out.println("Khong con ai theo hoc khoa hoc nay!");
-                }
-                
-            }
-        } catch (Exception e) {
-        } finally {
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }           
-        }
-    }
-
-    //Ham them du lieu khoa hoc
-    public void insertCourses(String name, String description, String image, String price) throws SQLException {
-        Connection conn = null;
-        PreparedStatement ptm = null;
-        try {
-            conn = DBUtils.getConnection();
-            if (conn != null) {
-                String sql = "INSERT INTO Courses(name, description, image, price)"
-                        + "VALUES('" + name + "','" + description + "','" + image + "'," + price + ")";
-                ptm = conn.prepareStatement(sql);
-                ptm.executeUpdate();
-            }
-        } catch (Exception e) {
-        } finally {
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        }
-    }
-    public boolean checkCourseDuplicate (String name) throws SQLException{
-        Connection conn = null;
-        PreparedStatement ptm = null;
-        ResultSet rs = null;
-        try {
-            conn = DBUtils.getConnection();
-            if(conn != null){
-                String query = "SELECT name FROM Courses\n" +
-                               "WHERE name = '" + name + "'";
-                ptm = conn.prepareStatement(query);
-                rs = ptm.executeQuery();
-                if (rs != null){
+                if (rs.next()) {
                     return true;
                 }
+
             }
         } catch (Exception e) {
         } finally {
@@ -228,8 +234,207 @@ public class CoursesDAO {
             }
             if (conn != null) {
                 conn.close();
-            }           
-        } return false;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkCourseDuplicate(String name) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        boolean check = false;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String query = "SELECT name FROM Courses\n"
+                        + "WHERE name = N'" + name + "'";
+                ptm = conn.prepareStatement(query);
+                rs = ptm.executeQuery();
+                rs.next();
+                String value = rs.getString(1);
+                if (value != null || !value.isEmpty()) {
+                    check = true;
+                } else {
+                    check = false;
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
+    public boolean checkCourseDuplicate2(String id, String name) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        boolean check = false;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String query = "SELECT courseID FROM Courses\n"
+                        + "WHERE courseID = " + id + "AND name = N'" + name + "'";
+                ptm = conn.prepareStatement(query);
+                rs = ptm.executeQuery();
+                rs.next();
+                String value = rs.getString(1);
+                if (value != null || !value.isEmpty()) {
+                    check = true;
+                } else {
+                    check = false;
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
+    public void restoreCourses(String name) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE Courses SET status = 1\n"
+                        + "WHERE name = N'" + name + "'";
+                ptm = conn.prepareStatement(sql);
+                ptm.executeUpdate();
+
+            }
+        } catch (Exception e) {
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+    }
+
+    public static void main(String[] args) throws SQLException {
+        CoursesDAO dao = new CoursesDAO();
+    
+  
+        List<CoursesDTO> list2 = dao.getTime();
+        for (CoursesDTO courses : list2) {
+            System.out.println(courses);
+        }
+       
+    }
+
+    public List<CoursesDTO> getCourses() throws SQLException {
+        List<CoursesDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT courseID, name FROM Courses";
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    list.add(new CoursesDTO(rs.getInt("courseID"), rs.getString("name")));
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return list;
+    }
+
+    public List<CoursesDTO> getTime() throws SQLException {
+        List<CoursesDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT slotID, start_time, end_time  FROM Classslot";
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();;
+                while (rs.next()) {
+                    list.add(new CoursesDTO(rs.getInt("slotID"), rs.getTime("start_time"), rs.getTime("end_time")));
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return list;
+    }
+
+    public List<CoursesDTO> getTimeToCome() throws SQLException {
+        List<CoursesDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT timeToCome FROM TimeToCome";
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    list.add(new CoursesDTO(rs.getTime("timeToCome")));
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return list;
     }
 
     //Ham dang ky khoa hoc
@@ -238,10 +443,5 @@ public class CoursesDAO {
 
         return checkRegister;
     }
-    
-    public static void main(String[] args) throws SQLException {
-        CoursesDAO dao = new CoursesDAO();
-        boolean rs = dao.checkCourseDuplicate("Basic");
-        System.out.println(rs);
-    }
+
 }
