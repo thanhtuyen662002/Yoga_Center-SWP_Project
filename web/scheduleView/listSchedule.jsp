@@ -43,13 +43,13 @@
             <section class="table-section" style="padding: 40px">
                 <p style="text-align: center; font-size: 24px; font-style: italic;font-weight: bold" >Schedule Details</p>
                 <div style="width: 100%; display: block">
-                    <c:if test="${sessionScope.user.roleID == 'ST'}">
+                    <button class="left-button btn-back" type="button" style="margin-left: 0px;border-radius: 5px;border: none" onclick="goBack()">Back</button>
+                    <c:if test="${sessionScope.USER.roleID == 'ST'}">
                         <form action="mainController" method="get">
-                            <button class="left-button btn-back" type="button" style="margin-left: 0px;border-radius: 5px;border: none" onclick="goBack()">Back</button>
                             <input hidden name="action" value="InsertSchedule"/>
                             <button class="btn-primary mb-4 right-button" style="border-radius: 5px;border: none;margin-right: 0px">Create Schedule</button>
                         </form>
-                    </c:if>
+                    </c:if> 
                 </div>
                 <table class="table">
                     <thead>
