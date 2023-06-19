@@ -41,7 +41,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="mainController?action="><span class="fa-solid fa-calendar-days mr-3"></span> LỊCH DẠY</a>
+                        <a href="mainController?action=listSchedule"><span class="fa-solid fa-calendar-days mr-3"></span> LỊCH DẠY</a>
                     </li>
                     <li onmouseover="showDropdown('news')" onmouseout="hideDropdown('news')">
                         <a href="mainController?action=news"><span class="fa-solid fa-newspaper mr-3"></span> TIN TỨC</a>
