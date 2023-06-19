@@ -21,6 +21,8 @@ public class UserDTO {
 
     public UserDTO() {
     }
+    
+    
 
     public UserDTO(String phone, String password, String userlogin, String name, String address, String gender, String role, boolean status) {
         this.phone = phone;
@@ -33,9 +35,9 @@ public class UserDTO {
         this.status = status;
     }
 
-    public UserDTO(String phone, String userlogin, String name, String address, String gender, String roleID, boolean status) {
+    public UserDTO(String phone, String password, String name, String address, String gender, String roleID, boolean status) {
         this.phone = phone;
-        this.userlogin = userlogin;
+        this.password = password;
         this.name = name;
         this.address = address;
         this.gender = gender;
@@ -46,6 +48,15 @@ public class UserDTO {
     public UserDTO(String phone, String name) {
         this.phone = phone;
         this.name = name;
+    }
+
+    public UserDTO(String phone, String name, String address, String gender, String roleID, boolean status) {
+        this.phone = phone;
+        this.name = name;
+        this.address = address;
+        this.gender = gender;
+        this.roleID = roleID;
+        this.status = status;
     }
 
     public UserDTO(String phone, String name, String role) {

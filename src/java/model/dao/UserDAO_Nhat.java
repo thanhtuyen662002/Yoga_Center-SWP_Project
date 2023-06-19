@@ -48,7 +48,6 @@ public class UserDAO_Nhat extends DBUtils {
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 return new UserDTO(rs.getString("phone"),
-                        rs.getString("userlogin"),
                         rs.getString("name"),
                         rs.getString("address"),
                         rs.getString("gender"),
@@ -89,7 +88,6 @@ public class UserDAO_Nhat extends DBUtils {
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 list.add(new UserDTO(rs.getString("phone"),
-                        rs.getString("userlogin"),
                         rs.getString("name"),
                         rs.getString("address"),
                         rs.getString("gender"),
@@ -174,7 +172,7 @@ public class UserDAO_Nhat extends DBUtils {
             }
 
             sql += " order by phone ASC\n"
-                    + "offset ? ROW\n"
+                        + "offset ? ROW\n"
                     + "FETCH Next ? Rows only";
             setter.put(count, offset);
             count++;
@@ -189,7 +187,6 @@ public class UserDAO_Nhat extends DBUtils {
 
             while (rs.next()) {
                 list.add(new UserDTO(rs.getString("phone"),
-                        rs.getString("userlogin"),
                         rs.getString("name"),
                         rs.getString("address"),
                         rs.getString("gender"),
@@ -224,7 +221,6 @@ public class UserDAO_Nhat extends DBUtils {
             String sql = "INSERT INTO [User]\n"
                     + "           ([phone]\n"
                     + "           ,[password]\n"
-                    + "           ,[userlogin]\n"
                     + "           ,[name]\n"
                     + "           ,[address]\n"
                     + "           ,[gender]\n"
@@ -237,17 +233,15 @@ public class UserDAO_Nhat extends DBUtils {
                     + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?\n"
-                    + "           ,?\n"
                     + "           ,?)";
             PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
             stm.setString(1, staff.getPhone());
             stm.setString(2, staff.getPassword());
-            stm.setString(3, staff.getUserlogin());
-            stm.setString(4, staff.getName());
-            stm.setString(5, staff.getAddress());
-            stm.setString(6, staff.getGender());
-            stm.setString(7, staff.getRoleID());
-            stm.setBoolean(8, staff.isStatus());
+            stm.setString(3, staff.getName());
+            stm.setString(4, staff.getAddress());
+            stm.setString(5, staff.getGender());
+            stm.setString(6, staff.getRoleID());
+            stm.setBoolean(7, staff.isStatus());
             stm.executeUpdate();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(UserDAO_Nhat.class.getName()).log(Level.SEVERE, null, ex);
@@ -300,7 +294,6 @@ public class UserDAO_Nhat extends DBUtils {
         try {
             String sql = "UPDATE[User]\n"
                     + "   SET [phone] = ?\n"
-                    + "      ,[userlogin] = ?\n"
                     + "      ,[name] = ?\n"
                     + "      ,[address] = ?\n"
                     + "      ,[gender] = ?\n"
@@ -308,12 +301,11 @@ public class UserDAO_Nhat extends DBUtils {
                     + " WHERE phone = ?";
             PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
             stm.setString(1, staff.getPhone());
-            stm.setString(2, staff.getUserlogin());
-            stm.setString(3, staff.getName());
-            stm.setString(4, staff.getAddress());
-            stm.setString(5, staff.getGender());
-            stm.setBoolean(6, staff.isStatus());
-            stm.setString(7, staff.getPhone());
+            stm.setString(2, staff.getName());
+            stm.setString(3, staff.getAddress());
+            stm.setString(4, staff.getGender());
+            stm.setBoolean(5, staff.isStatus());
+            stm.setString(6, staff.getPhone());
             stm.executeUpdate();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(UserDAO_Nhat.class.getName()).log(Level.SEVERE, null, ex);

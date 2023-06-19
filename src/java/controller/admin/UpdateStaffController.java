@@ -12,12 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.dao.UserDAO_Nhat;
 import model.dto.UserDTO;
+import utils.AdminAuthentication_Nhat;
 
 /**
  *
  * @author dell
  */
-public class UpdateStaffController extends HttpServlet {
+public class UpdateStaffController extends AdminAuthentication_Nhat {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -55,7 +56,7 @@ public class UpdateStaffController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -69,7 +70,7 @@ public class UpdateStaffController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
         UserDAO_Nhat uDao = new UserDAO_Nhat();
@@ -83,13 +84,12 @@ public class UpdateStaffController extends HttpServlet {
                 break;
             case "update":
                 phone = request.getParameter("phone");
-                String uid = request.getParameter("uid");
                 String fullName = request.getParameter("fullName");
                 String address = request.getParameter("address");
                 String gender = request.getParameter("gender");
                 String status = request.getParameter("status");
 
-                staff = new UserDTO(phone, "", uid, fullName, address, gender, "ST", Boolean.valueOf(status));
+                staff = new UserDTO(phone, "", fullName, address, gender, "ST", Boolean.valueOf(status));
                 uDao.update(staff);
                 request.getSession().setAttribute("update", "update");
                 response.sendRedirect("listStaff");

@@ -103,15 +103,18 @@ public class ListStaffController extends AdminAuthentication_Nhat {
         request.setAttribute("listStaff", listStaff);
         request.getRequestDispatcher("views/Admin_Nhat/ListStaff.jsp").forward(request, response);
     }
+////
 //
-
 //    public static void main(String[] args) {
 //        UserDAO_Nhat uDao = new UserDAO_Nhat();
 //
 //        ArrayList<UserDTO> listStaff = uDao.
 //                getAllStaff(0, 2,
 //                        "Male", "All", "");
-//        System.out.println(listStaff.get(0).getPhone());
+//        
+//         int noOfRecords = uDao.getTotalRecords("All", "All", "");
+//        System.out.println(listStaff.get(1).getGender()+"1");
+//        
 //    }
 
     /**

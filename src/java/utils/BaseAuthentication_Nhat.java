@@ -31,7 +31,7 @@ public abstract class BaseAuthentication_Nhat extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserDTO user = (UserDTO) request.getSession().getAttribute("user");
+        UserDTO user = (UserDTO) request.getSession().getAttribute("USER");
         if (user != null) {
             processGet(request, response);
         } else {
@@ -50,7 +50,7 @@ public abstract class BaseAuthentication_Nhat extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserDTO user = (UserDTO) request.getSession().getAttribute("user");
+        UserDTO user = (UserDTO) request.getSession().getAttribute("USER");
         if (user != null) {
             processPost(request, response);
         } else {

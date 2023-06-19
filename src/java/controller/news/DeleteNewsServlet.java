@@ -8,6 +8,9 @@ package controller.news;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -46,11 +49,17 @@ public class DeleteNewsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-//        processRequest(request, response);
-        String id = request.getParameter("nid");
-        NewsDAO dao = new NewsDAO();
-        dao.deleteNews(id);
-        response.sendRedirect("news");
+        try {
+            //        processRequest(request, response);
+            int newsID = Integer.parseInt(request.getParameter("newsID"));
+            NewsDAO dao = new NewsDAO();
+            dao.softdeleteNews(newsID);
+            response.sendRedirect("news");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DeleteNewsServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DeleteNewsServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     } 
 
     /** 
