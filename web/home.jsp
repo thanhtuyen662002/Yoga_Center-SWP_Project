@@ -51,7 +51,7 @@
                                     <a class="nav-menu-link" href="event.jsp">SỰ KIỆN</a>
                                 </li>
                                 <li class="nav-menu-item">
-                                    <a class="nav-menu-link" href="news.jsp">TIN TỨC</a>
+                                    <a class="nav-menu-link" href="shownews">TIN TỨC</a>
                                 </li>
                             </ul>
                         <!--</form>-->
@@ -71,7 +71,7 @@
                                         <!--<a href="logOut" class="nav-link text-decoration-none p-2" id="item">Đăng xuất</a>-->
                                     </div>
                                     <c:if test="${sessionScope.USER.roleID eq 'ST'}">
-                                            <a href="homeStaff.jsp" class="nav-link mb-2 text-decoration-none p-2" id="item">Quản lý</a>
+                                            <a href="courseStaff.jsp" class="nav-link mb-2 text-decoration-none p-2" id="item">Quản lý</a>
                                         </c:if>
                                     <a href="logout" class="nav-link text-decoration-none p-2" id="item">Đăng xuất</a>
                                 </div>

@@ -43,6 +43,8 @@ public class MainController extends HttpServlet {
                 url = "login";
             } else if (action.equals("logout")) {
                 url = "logout";
+                } else if (action.equals("SignUp")) {
+                url = "register";
             } else if (action.equals("courses")) {
                 url = "courses";
             } else if (action.equals("club")) {

@@ -107,7 +107,7 @@
                 </form>
             </div>
         </div>
-        <script src="/ckeditor/ckeditor.js"></script>
+        <script src="./ckeditor/ckeditor.js"></script>
         <script src="./js/updateInsert.js"></script>
     </body>
 </html>

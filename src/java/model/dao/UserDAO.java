@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import javax.naming.NamingException;
 import model.dto.UserDTO;
 import utils.DBUtils;
@@ -32,13 +33,12 @@ public class UserDAO {
                 if (rs != null && rs.next()) {
                     String phoneID = rs.getString(1);
                     String userPassword = rs.getString(2);
-                    String userLogin = rs.getString(3);
-                    String name = rs.getString(4);
-                    String address = rs.getString(5);
-                    String gender = rs.getString(6);
-                    String role = rs.getString(7);
-                    boolean status = rs.getBoolean(8);
-                    user = new UserDTO(phoneID, userPassword, userLogin, name, address, gender, role, status);
+                    String name = rs.getString(3);
+                    String address = rs.getString(4);
+                    String gender = rs.getString(5);
+                    String role = rs.getString(6);
+                    boolean status = rs.getBoolean(7);
+                    user = new UserDTO(phoneID, userPassword, name, address, gender, role, status);
 
                 }
             }
@@ -55,20 +55,22 @@ public class UserDAO {
         }
         return user;
     }
-    private static final String CHECK_DUPLICATE_ACCOUNT = "SELECT * FROM [User] WHERE [phone] = '?'";
+        private static final String CHECK_DUPLICATE_ACCOUNT = "SELECT * FROM [Yoga Center].[dbo].[User] WHERE [phone] = '?'";
+
+
     public UserDTO getUserByPhone(String phone) throws SQLException, NamingException, ClassNotFoundException {
-        UserDTO user = null;
+       
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                ptm = conn.prepareStatement(CHECK_DUPLICATE_ACCOUNT);
-                ptm.setString(1, phone);
+                String query = "SELECT * FROM [dbo].[User] WHERE [phone] = '"+ phone +"'";
+                ptm = conn.prepareStatement(query);
                 rs = ptm.executeQuery();
-                if (rs.next()) {
-                    user = new UserDTO(rs.getString(1), rs.getString(2),rs.getString(3),rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), true);
+                while (rs.next()) {
+                    return new UserDTO(rs.getString("phone"),rs.getString("password"),rs.getString("name"), rs.getString("address"), rs.getString("gender"), rs.getString("roleID"), rs.getBoolean("status"));
                 }
             }
         } finally {
@@ -82,6 +84,31 @@ public class UserDAO {
                 conn.close();
             }
         }
-return user;
+        return null;
     }
+    private static final String INSERT = "INSERT INTO [User]([phone], [password], [name], [address], [gender], [roleID], [status] )"
+           + "VALUES('?','?','?','?','?','?','?','?')";
+    public void insert(String phone,String password,String name,String address,String gender,String roleID) throws SQLException, NamingException, ClassNotFoundException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {               
+                String sql = "INSERT INTO [User]([phone], [password], [name], [address], [gender], [roleID], [status] )"
+                        + "VALUES('" + phone + "','" + password + "','" + name  + "','" + address + "','" + gender + "','" + roleID + "', 1)";
+                ptm = conn.prepareStatement(sql);               
+                ptm.executeUpdate();
+            }
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
+
+   
 }

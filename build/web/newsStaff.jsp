@@ -31,7 +31,7 @@
                 <div class="img bg-wrap text-center py-4" style="background-image: url(images/bg_1.jpg);">
                     <div class="user-logo">
                         <div class="img" style="background-image: url(./image/logo-yoga.jpg);"></div>
-                        <h3>YOGA CENTER</h3>
+                        <h3 ><a href="home.jsp">YOGA CENTER</a></h3>
                     </div>
                 </div>
                 <ul class="list-unstyled components mb-5">
@@ -67,7 +67,7 @@
                 </div>
                 <div class="course-title" >
                     <div class="text">WELCOME STAFF</div>
-                    <div class="insert"><a type="submit" name="insert">Insert</a></div>
+                    <div class="insert"><a value="action?news" type="submit" name="insert">Insert</a></div>
                 </div>
                 <div class="table-name">
                     <h1>BẢNG DỮ LIỆU TIN TỨC</h1>
@@ -79,20 +79,20 @@
                             <th>TIÊU ĐỀ</th>
                             <th>NGÀY ĐĂNG</th>
                             <th>HÌNH ẢNH </th>
-                            <th>NỘI DUNG</th>
+                            <!--<th>NỘI DUNG</th>-->
                             <th>THỂ LOẠI</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${list}" var="x">
+                        <c:forEach items="${list_news}" var="x">
                             <tr>
                                 <th scope="row" id="id">${x.newsID}</th>
                                 <!--<td>${x.stPhone}</td>-->
                                 <td id="title">${x.title}</td>
                                 <td >${x.postDate}</td>
-                                <td id="table-img"><img src="/image/dotap.jpg" alt="">${x.image}</td>
-                                <td ><div class="table-noidung">${x.content}</div> </td>
+                                <td id="table-img"><img src="./image/${x.image}" alt=""></td>
+                                <!--<td ><div class="table-noidung">${x.content}</div> </td>-->
                                 <td>
                                     <c:if test="${x.categoryID == 1}"> Blog</c:if>
                                     <c:if test="${x.categoryID == 2}"> Product</c:if>
@@ -102,7 +102,7 @@
                                     <td>
                                         <a href="#"><i class="fa-solid fa-eye" style="color: #90401d;"></i></a>
                                         <a href="updatenews?newsID=${x.newsID}"><i class="fa-solid fa-pen"></i></a>
-                                    <a href="deletenews?nid=${x.newsID}"> <i class="fa-sharp fa-solid fa-trash"></i></a>
+                                    <a href="deletenews?newsID=${x.newsID}"> <i class="fa-sharp fa-solid fa-trash"></i></a>
 
                                 </td>
                             </tr>

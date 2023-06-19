@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -12,7 +13,6 @@ public class UserDTO {
 
     private String phone;
     private String password;
-    private String userlogin;
     private String name;
     private String address;
     private String gender;
@@ -22,27 +22,15 @@ public class UserDTO {
     public UserDTO() {
     }
 
-    public UserDTO(String phone, String password, String userlogin, String name, String address, String gender, String role, boolean status) {
+    public UserDTO(String phone, String password, String name, String address, String gender, String roleID, boolean status) {
         this.phone = phone;
         this.password = password;
-        this.userlogin = userlogin;
-        this.name = name;
-        this.address = address;
-        this.gender = gender;
-        this.roleID = role;
-        this.status = status;
-    }
-
-    public UserDTO(String phone, String userlogin, String name, String address, String gender, String roleID, boolean status) {
-        this.phone = phone;
-        this.userlogin = userlogin;
         this.name = name;
         this.address = address;
         this.gender = gender;
         this.roleID = roleID;
         this.status = status;
     }
-
     public UserDTO(String phone, String name) {
         this.phone = phone;
         this.name = name;
@@ -53,7 +41,6 @@ public class UserDTO {
         this.name = name;
         this.roleID = role;
     }
-
     public String getPhone() {
         return phone;
     }
@@ -68,14 +55,6 @@ public class UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getUserlogin() {
-        return userlogin;
-    }
-
-    public void setUserlogin(String userlogin) {
-        this.userlogin = userlogin;
     }
 
     public String getName() {
@@ -109,7 +88,7 @@ public class UserDTO {
     public void setRoleID(String roleID) {
         this.roleID = roleID;
     }
-    
+
     public boolean isStatus() {
         return status;
     }
@@ -120,7 +99,8 @@ public class UserDTO {
 
     @Override
     public String toString() {
-        return "User" + "phone=" + phone + ", password=" + password + ", userlogin=" + userlogin + ", name=" + name + ", address=" + address + ", gender=" + gender + ", role=" + roleID + ", status=" + status + '}';
+        return "UserDTO{" + "phone=" + phone + ", password=" + password + ", name=" + name + ", address=" + address + ", gender=" + gender + ", roleID=" + roleID + ", status=" + status + '}';
     }
 
+    
 }
