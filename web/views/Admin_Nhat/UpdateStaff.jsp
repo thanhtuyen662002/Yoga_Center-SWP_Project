@@ -81,13 +81,6 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="inputPassword" class="col-sm-2 col-form-label">User Name<i style="color: red">*</i></label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" oninput="validateUserName()" id="input-username" placeholder="Enter user name" name="uid" value="${st.userlogin}" required>
-                            </div>
-                            <span id="error-username" class="error-message" style="color: red;"></span>
-                        </div>
-                        <div class="mb-3 row">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Full Name<i style="color: red">*</i></label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" oninput="validateFullName()" id="input-fullname" placeholder="Enter full name" name="fullName" value="${st.name}" required>
@@ -104,11 +97,11 @@
                             <label for="inputPassword" class="col-sm-2 col-form-label">Gender</label>
                             <div class="col-sm-10">
                                 <input type="radio" name="gender" value="Male" 
-                                       <c:if test="${st.gender == 'Male'}"></c:if>
-                                           checked
+                                       <c:if test="${st.gender.trim() eq 'Male'}">checked</c:if>
+                                           
                                            /> Male
                                        <input type="radio" name="gender" value="FeMale"
-                                       <c:if test="${st.gender == 'FeMale'}">
+                                       <c:if test="${st.gender.trim() eq 'FeMale'}">
                                            checked
                                        </c:if>
                                        /> FeMale

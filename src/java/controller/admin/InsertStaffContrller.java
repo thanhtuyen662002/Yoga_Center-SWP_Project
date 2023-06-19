@@ -12,12 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.dao.UserDAO_Nhat;
 import model.dto.UserDTO;
+import utils.AdminAuthentication_Nhat;
 
 /**
  *
  * @author dell
  */
-public class InsertStaffContrller extends HttpServlet {
+public class InsertStaffContrller extends AdminAuthentication_Nhat {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -55,7 +56,7 @@ public class InsertStaffContrller extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getRequestDispatcher("views/Admin_Nhat/InsertStaff.jsp").forward(request, response);
     }
@@ -69,12 +70,11 @@ public class InsertStaffContrller extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UserDAO_Nhat uDao = new UserDAO_Nhat();
         String phone = request.getParameter("phone");
         String pwd = request.getParameter("pws");
-        String uid = request.getParameter("uid");
         String fullName = request.getParameter("fullName");
         String address = request.getParameter("address");
         String gender = request.getParameter("gender");
@@ -87,16 +87,11 @@ public class InsertStaffContrller extends HttpServlet {
             msgError += "Phone";
             count++;
         }
-        boolean existUid = uDao.isUidExist(uid);
-        if (existUid) {
-            msgError += count > 0 ? ", User name" : "User Name";
-        }
         if (msgError.length() >= 1) {
             msgError += " is Exist! Try again";
             
             request.setAttribute("phone", phone);
             request.setAttribute("pwd", pwd);
-            request.setAttribute("uid", uid);
             request.setAttribute("fullName", fullName);
             request.setAttribute("address", address);
             request.setAttribute("gender", gender);
@@ -104,7 +99,7 @@ public class InsertStaffContrller extends HttpServlet {
             request.setAttribute("msgError", msgError);
             request.getRequestDispatcher("views/Admin_Nhat/InsertStaff.jsp").forward(request, response);
         }else{
-            UserDTO staff = new UserDTO(phone, pwd, uid, fullName, address, gender, "ST", true);
+            UserDTO staff = new UserDTO(phone, pwd, fullName, address, gender, "ST", true);
             uDao.insert(staff);
             request.getSession().setAttribute("insert", "insert");
             response.sendRedirect("listStaff");
@@ -113,7 +108,7 @@ public class InsertStaffContrller extends HttpServlet {
 
 //    public static void main(String[] args) {
 //        UserDAO_Nhat uDao = new UserDAO_Nhat();
-//        uDao.insert(new UserDTO("5555555555", "1", "oke", "Long he", "hehe", "Male", "ST", true));
+//        uDao.insert(new UserDTO("4568746468", "1", "Long he", "hehe", "Male", "ST", true));
 //    }
     /**
      * Returns a short description of the servlet.

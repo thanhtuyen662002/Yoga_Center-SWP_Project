@@ -95,13 +95,6 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="inputPassword" class="col-sm-2 col-form-label">User Name<i style="color: red">*</i></label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" oninput="validateUserName()" id="input-username" placeholder="Enter user name" name="uid" value="${uid}" required>
-                            </div>
-                            <span id="error-username" class="error-message" style="color: red;"></span>
-                        </div>
-                        <div class="mb-3 row">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Full Name<i style="color: red">*</i></label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="input-fullname" placeholder="Enter full name" name="fullName" value="${fullName}" required>
@@ -225,7 +218,7 @@
 
 
                         function checkValidate() {
-                            if (checkCfPass && checkPass && checkUsername) {
+                            if (checkCfPass && checkPass) {
                                 var frm = document.getElementById("frm-submit");
                                 frm.submit();
                             } else {
