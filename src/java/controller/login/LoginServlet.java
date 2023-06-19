@@ -91,6 +91,8 @@ public class LoginServlet extends HttpServlet {
                         request.getRequestDispatcher("courseStaff.jsp").forward(request, response);
                         break;
                 }
+            } else {
+                response.sendRedirect("login.jsp");
             }
         } catch (Exception e) {
             log("Error at LoginController: " + e.toString());
