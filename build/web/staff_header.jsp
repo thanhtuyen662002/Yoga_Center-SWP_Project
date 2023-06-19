@@ -36,25 +36,25 @@
                     <li onmouseover="showDropdown('event')" onmouseout="hideDropdown('event')">
                         <a href="mainController?action=event"><span class="fa fa-gift mr-3"></span> KHUYẾN MÃI</a>
                         <ul id="event" class="dropdown">
-                            <li><a href="">Thêm khuyến mãi</a></li>
-                            <li><a href="">Khuyến mãi đã xóa</a></li>
+                            <li><a href="#">Thêm khuyến mãi</a></li>
+                            <li><a href="#">Khuyến mãi đã xóa</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="mainController?action="><span class="fa-solid fa-calendar-days mr-3"></span> LỊCH DẠY</a>
+                        <a href="mainController?action=listSchedule"><span class="fa-solid fa-calendar-days mr-3"></span> LỊCH DẠY</a>
                     </li>
                     <li onmouseover="showDropdown('news')" onmouseout="hideDropdown('news')">
                         <a href="mainController?action=news"><span class="fa-solid fa-newspaper mr-3"></span> TIN TỨC</a>
                         <ul id="news" class="dropdown">
-                            <li><a href="">Thêm tin tức</a></li>
-                            <li><a href="">Tin tức đã xóa</a></li>
+                            <li><a href="#">Thêm tin tức</a></li>
+                            <li><a href="#">Tin tức đã xóa</a></li>
                         </ul>
                     </li> 
                     <li>
                         <a href="mainController?action="><span class="fa-solid fa-people-group mr-3"></span> KHÁCH HÀNG</a>
                     </li> 
                     <li>
-                        <a href="#"><span class="fa fa-sign-out mr-3"></span> Đăng Xuất</a>
+                        <a href="logout"><span class="fa fa-sign-out mr-3"></span> Đăng Xuất</a>
                     </li>
                 </ul>
 

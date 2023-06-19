@@ -23,39 +23,7 @@
     </head>
     <body>
         <div class="wrapper d-flex align-items-stretch">
-            <nav id="sidebar">
-                <div class="custom-menu">
-                    <button type="button" id="sidebarCollapse" class="btn btn-primary">
-                    </button>
-                </div>
-                <div class="img bg-wrap text-center py-4" style="background-image: url(images/bg_1.jpg);">
-                    <div class="user-logo">
-                        <div class="img" style="background-image: url(./image/logo-yoga.jpg);"></div>
-                        <h3 ><a href="home.jsp">YOGA CENTER</a></h3>
-                    </div>
-                </div>
-                <ul class="list-unstyled components mb-5">
-                    <li class="active">
-                        <a href="#"><span class="fa-solid fa-book mr-3"></span> KHÓA HỌC</a>
-                    </li>
-                    <li>
-                        <a href="#"><span class="fa fa-gift mr-3"></span> KHUYẾN MÃI</a>
-                    </li>
-                    <li>
-                        <a href="#"><span class="fa-solid fa-calendar-days mr-3"></span> LỊCH DẠY</a>
-                    </li>
-                    <li>
-                        <a href="#"><span class="fa-solid fa-newspaper mr-3"></span> TIN TỨC</a>
-                    </li> 
-                    <li>
-                        <a href="#"><span class="fa-solid fa-people-group mr-3"></span> KHÁCH HÀNG</a>
-                    </li> 
-                    <li>
-                        <a href="#"><span class="fa fa-sign-out mr-3"></span> Đăng Xuất</a>
-                    </li>
-                </ul>
-
-            </nav>
+            <c:import url="staff_header.jsp"/>
 
             <!-- Page Content  -->
             <div id="content">

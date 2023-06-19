@@ -82,13 +82,13 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("USER", user);
                 switch (user.getRoleID()) {
                     case "US":
-                        request.getRequestDispatcher("home.jsp").forward(request, response);
+                        request.getRequestDispatcher("view.customer/home.jsp").forward(request, response);
                         break;
                     case "AD":
                         response.sendRedirect("listStaff");
                         break;
                     case "ST":
-                        request.getRequestDispatcher("courseStaff.jsp").forward(request, response);
+                        response.sendRedirect("courses");
                         break;
                 }
             } else {
