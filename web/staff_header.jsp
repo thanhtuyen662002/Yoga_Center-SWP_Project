@@ -47,7 +47,7 @@
                         <a href="mainController?action=news"><span class="fa-solid fa-newspaper mr-3"></span> TIN TỨC</a>
                         <ul id="news" class="dropdown">
                             <li><a href="#">Thêm tin tức</a></li>
-                            <li><a href="#">Tin tức đã xóa</a></li>
+                            <li><a href="pendingnews">Tin tức đã xóa</a></li>
                         </ul>
                     </li> 
                     <li>

@@ -53,7 +53,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${list_news}" var="x">
+                        <c:forEach items="${list_pendingnews}" var="x">
                             <tr>
                                 <th scope="row" id="id">${x.newsID}</th>
                                 <!--<td>${x.stPhone}</td>-->
@@ -67,7 +67,8 @@
                                     <c:if test="${x.categoryID == 3}"> Other</c:if>
 
                                     </td>
-                                    <td>                              
+                                    <td>
+                                     
                                         <a href="updatenews?newsID=${x.newsID}"><i class="fa-solid fa-pen"></i></a>
                                     <a href="deletenews?newsID=${x.newsID}"> <i class="fa-sharp fa-solid fa-trash"></i></a>
 

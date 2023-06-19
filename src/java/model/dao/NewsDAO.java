@@ -324,4 +324,42 @@ public class NewsDAO {
             }
         }
     }
+    public static ArrayList<NewsDTO> getsoftdeleteNews() throws ClassNotFoundException, SQLException {
+        ArrayList<NewsDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement("SELECT * FROM News WHERE status = 0");
+                rs = ptm.executeQuery();
+
+                while (rs.next()) {
+                    int newsID = rs.getInt("newsID");
+                    String stPhone = rs.getString("stPhone");
+                    String title = rs.getString("title");
+                    String date = rs.getString("postDate");
+                    String content = rs.getString("content");
+                    String image = rs.getString("image");
+                    int categoryID = rs.getInt("categoryID");
+                    boolean status = rs.getBoolean("status");
+
+                    list.add(new NewsDTO(newsID, stPhone, title, date, image, content, categoryID, status));
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
 }

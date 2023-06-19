@@ -67,8 +67,7 @@
                                     <c:if test="${x.categoryID == 3}"> Other</c:if>
 
                                     </td>
-                                    <td>
-                                        <a href="#"><i class="fa-solid fa-eye" style="color: #90401d;"></i></a>
+                                    <td>                              
                                         <a href="updatenews?newsID=${x.newsID}"><i class="fa-solid fa-pen"></i></a>
                                     <a href="deletenews?newsID=${x.newsID}"> <i class="fa-sharp fa-solid fa-trash"></i></a>
 
