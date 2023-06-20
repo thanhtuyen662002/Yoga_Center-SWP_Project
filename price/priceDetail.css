@@ -196,6 +196,7 @@ body {
 .aa {
   position: sticky;
   top: 100px;
+  /* display: none; */
 }
 /* này là làm ô phải */
 .price-detail-box {
@@ -286,11 +287,37 @@ body {
   animation: shake 0.5s ease-in-out infinite;
   /* animation: shakeAndScale 0.5s ease-in-out infinite; */
 }
-
+.bb {
+  position: sticky;
+  top: 100px;
+  transition: 0.5s;
+  display: none;
+}
+.price-detail-form {
+  background-color: #a50000;
+  position: relative;
+  border-radius: 10px;
+  flex-wrap: wrap;
+  height: 580px;
+}
 .price-detail-bottom-price {
   font-weight: 700;
 }
-
+.price-detail-form-head {
+  text-align: center;
+  padding-top: 5rem;
+  font-weight: bold;
+  color: #fff;
+}
+.price-detail-form-head i {
+  font-size: 2.5rem;
+  color: cadetblue;
+  font-weight: bold;
+  cursor: pointer;
+}
+.price-detail-form-head h1 {
+  font-size: 3.5rem;
+}
 /* này làm content */
 .price-detail-content {
   margin-top: 30px;
@@ -307,6 +334,101 @@ body {
   content: "–";
   position: absolute;
   margin-left: -1.1em;
+}
+.course-signup-box .course-signup-right {
+  /* background-color: #f2f2f2; */
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.course-signup-box .course-signup-right h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.course-signup-box .course-signup-right label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.course-signup-box .course-signup-right select,
+.course-signup-box .course-signup-right input[type="text"],
+.course-signup-box .course-signup-right input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+.btn-submit {
+  text-align: center;
+}
+.btn-submit button {
+  background-color: #a50000;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn-submit button:hover {
+  background-color: #45a049;
+}
+#registration-form {
+  display: flex;
+  flex-direction: column;
+}
+.price-detail-form-bottom {
+  position: absolute;
+  border-radius: 10px;
+  background-color: #fff;
+  left: 5px;
+  right: 5px;
+  top: 15rem;
+  bottom: 5px;
+}
+.price-detail-form-bottom li {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  /* gap: 1rem; */
+  margin-top: 2rem;
+}
+.price-detail-right-input {
+  padding-right: 1rem;
+}
+.price-detail-right-input input,
+.price-detail-right-input select {
+  padding: 10px;
+  width: 100%;
+}
+.price-detail-right-label {
+  font-weight: bold;
+}
+.btn-form-submit {
+  background-color: #a50000;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+.price-detail-price-button {
+  text-align: center;
+  padding-top: 3rem;
+}
+.price-detail-price-button button {
+  padding: 0.8rem 2.2rem;
+  background-color: #a50000;
+  color: #fff;
+  font-weight: bold;
+}
+.price-detail-price-button button:hover {
+  background-color: #770c0c;
 }
 /* này là làm rating */
 .price-detail-rating {
