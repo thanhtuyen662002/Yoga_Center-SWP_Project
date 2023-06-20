@@ -33,7 +33,7 @@
                                 <a class="nav-menu-link" href="listSchedule">LỊCH HỌC</a>
                             </li>
                             <li class="nav-menu-item">
-                                <a class="nav-menu-link" href="eventCustomerServlet">SỰ KIỆN</a>
+                                <a class="nav-menu-link" href="eventCustomer">SỰ KIỆN</a>
                             </li>
                             <li class="nav-menu-item">
                                 <a class="nav-menu-link" href="shownews">TIN TỨC</a>
