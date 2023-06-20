@@ -48,7 +48,7 @@
                                     <a class="nav-menu-link" href="listSchedule">LỊCH HỌC</a>
                                 </li>
                                 <li class="nav-menu-item">
-                                    <a class="nav-menu-link" href="event.jsp">SỰ KIỆN</a>
+                                    <a class="nav-menu-link" href="coupon.jsp">SỰ KIỆN</a>
                                 </li>
                                 <li class="nav-menu-item">
                                     <a class="nav-menu-link" href="shownews">TIN TỨC</a>

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.voucher;
+package controller.event;
 
 import java.io.IOException;
 import java.sql.SQLException;

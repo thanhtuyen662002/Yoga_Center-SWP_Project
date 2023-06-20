@@ -3,46 +3,45 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package controller.event;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.dao.EventDAO;
+import model.dao.NewsDAO;
 
 /**
  *
- * @author HP Pro
+ * @author nguye
  */
-@WebServlet("/deleteEvent")
+@WebServlet(name = "DeleteEventServlet", urlPatterns = {"/deleteEvent"})
 public class DeleteEventServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
+   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+    throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
 
-        }
-    }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+    /** 
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -50,31 +49,36 @@ public class DeleteEventServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         try {
-            String id = request.getParameter("id");
-            EventDAO dao = new EventDAO();
-            dao.deleteEvent(id);
+            //        processRequest(request, response);
+            int EventID = Integer.parseInt(request.getParameter("EventID"));
+            EventDAO dao = new EventDAO();           
+            dao.softdeleteEvent(EventID);
             response.sendRedirect("event");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DeleteEventServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
+            Logger.getLogger(DeleteEventServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+    } 
 
-    }
-
+    /** 
+     * Handles the HTTP <code>POST</code> method.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-
-        }
+    throws ServletException, IOException {
+        processRequest(request, response);
     }
 
-    /**
+    /** 
      * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
+* @return a String containing servlet description
      */
     @Override
     public String getServletInfo() {
