@@ -67,4 +67,10 @@ public class ClassDAO_Nhat {
         }
         return null;
     }
+    public static void main(String[] args) {
+        ClassDAO_Nhat a = new ClassDAO_Nhat();
+        ArrayList<ClassDTO_Nhat> b = a.getAll();
+        System.out.println(b);
+    }
+            
 }
