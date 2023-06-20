@@ -36,8 +36,8 @@
                     <li onmouseover="showDropdown('event')" onmouseout="hideDropdown('event')">
                         <a href="mainController?action=event"><span class="fa fa-gift mr-3"></span> KHUYẾN MÃI</a>
                         <ul id="event" class="dropdown">
-                            <li><a href="#">Thêm khuyến mãi</a></li>
-                            <li><a href="#">Khuyến mãi đã xóa</a></li>
+                            <li><a href="insertEvent">Thêm khuyến mãi</a></li>
+                            <li><a href="pendingevent">Khuyến mãi đã xóa</a></li>
                         </ul>
                     </li>
                     <li>
