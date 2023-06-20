@@ -31,7 +31,7 @@ public class EventCustomerServlet extends HttpServlet {
         try {
             ArrayList<EventDTO> list = EventDAO.getCusEvent();
             request.setAttribute("list", list);
-            request.getRequestDispatcher("coupon.jsp").forward(request, response);
+            request.getRequestDispatcher("view.customer/coupon.jsp").forward(request, response);
         } catch (SQLException ex) {
         }
     }
