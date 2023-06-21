@@ -16,6 +16,7 @@ public final class ListStaff_jsp extends org.apache.jasper.runtime.HttpJspBase
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_c_choose;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_c_forEach_var_end_begin;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_c_otherwise;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_c_import_url_nobody;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_c_when_test;
 
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
@@ -30,6 +31,7 @@ public final class ListStaff_jsp extends org.apache.jasper.runtime.HttpJspBase
     _jspx_tagPool_c_choose = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_c_forEach_var_end_begin = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_c_otherwise = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_c_import_url_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_c_when_test = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
   }
 
@@ -39,6 +41,7 @@ public final class ListStaff_jsp extends org.apache.jasper.runtime.HttpJspBase
     _jspx_tagPool_c_choose.release();
     _jspx_tagPool_c_forEach_var_end_begin.release();
     _jspx_tagPool_c_otherwise.release();
+    _jspx_tagPool_c_import_url_nobody.release();
     _jspx_tagPool_c_when_test.release();
   }
 
@@ -66,297 +69,300 @@ public final class ListStaff_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
-      out.write("\n");
-      out.write("\n");
-      out.write("<!DOCTYPE html>\n");
-      out.write("<html lang=\"en\">\n");
-      out.write("    <head>\n");
-      out.write("        <meta charset=\"UTF-8\" />\n");
-      out.write("        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\n");
-      out.write("        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n");
-      out.write("        <link\n");
-      out.write("            rel=\"stylesheet\"\n");
-      out.write("            href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css\"\n");
-      out.write("            />\n");
-      out.write("        <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css\">\n");
-      out.write("        <link rel=\"stylesheet\" href=\"./css/updateInsertCourse.css\" />\n");
-      out.write("        <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM\" crossorigin=\"anonymous\">\n");
-      out.write("        <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz\" crossorigin=\"anonymous\"></script>\n");
-      out.write("        <title>Insert Course</title>\n");
-      out.write("        <style>\n");
-      out.write("            .a-page {\n");
-      out.write("                background-color: #00FFFF;\n");
-      out.write("                color: white;\n");
-      out.write("                padding: 5px 10px;\n");
-      out.write("                text-decoration: none;\n");
-      out.write("                border-radius: 5px;\n");
-      out.write("                margin: 2px;\n");
-      out.write("            }\n");
-      out.write("            #snackbar {\n");
-      out.write("                visibility: hidden;\n");
-      out.write("                min-width: 250px;\n");
-      out.write("                margin-left: -125px;\n");
-      out.write("                background-color: #333;\n");
-      out.write("                color: #fff;\n");
-      out.write("                text-align: center;\n");
-      out.write("                border-radius: 2px;\n");
-      out.write("                padding: 16px;\n");
-      out.write("                position: fixed;\n");
-      out.write("                z-index: 1;\n");
-      out.write("                left: 50%;\n");
-      out.write("                top: 30px; /* Change bottom to top and adjust the distance from the top */\n");
-      out.write("            }\n");
-      out.write("\n");
-      out.write("            #snackbar.show {\n");
-      out.write("                visibility: visible;\n");
-      out.write("                -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;\n");
-      out.write("                animation: fadein 0.5s, fadeout 0.5s 2.5s;\n");
-      out.write("            }\n");
-      out.write("\n");
-      out.write("            @-webkit-keyframes fadein {\n");
-      out.write("                from {\n");
-      out.write("                    top: 0;\n");
-      out.write("                    opacity: 0;\n");
-      out.write("                }\n");
-      out.write("                to {\n");
-      out.write("                    top: 30px;\n");
-      out.write("                    opacity: 1;\n");
-      out.write("                } /* Change bottom to top and adjust the distance from the top */\n");
-      out.write("            }\n");
-      out.write("\n");
-      out.write("            @keyframes fadein {\n");
-      out.write("                from {\n");
-      out.write("                    top: 0;\n");
-      out.write("                    opacity: 0;\n");
-      out.write("                }\n");
-      out.write("                to {\n");
-      out.write("                    top: 30px;\n");
-      out.write("                    opacity: 1;\n");
-      out.write("                } /* Change bottom to top and adjust the distance from the top */\n");
-      out.write("            }\n");
-      out.write("\n");
-      out.write("            @-webkit-keyframes fadeout {\n");
-      out.write("                from {\n");
-      out.write("                    top: 30px;\n");
-      out.write("                    opacity: 1;\n");
-      out.write("                }\n");
-      out.write("                to {\n");
-      out.write("                    top: 0;\n");
-      out.write("                    opacity: 0;\n");
-      out.write("                } /* Change bottom to top and adjust the distance from the top */\n");
-      out.write("            }\n");
-      out.write("\n");
-      out.write("            @keyframes fadeout {\n");
-      out.write("                from {\n");
-      out.write("                    top: 30px;\n");
-      out.write("                    opacity: 1;\n");
-      out.write("                }\n");
-      out.write("                to {\n");
-      out.write("                    top: 0;\n");
-      out.write("                    opacity: 0;\n");
-      out.write("                } /* Change bottom to top and adjust the distance from the top */\n");
-      out.write("            }\n");
-      out.write("        </style>\n");
-      out.write("    </head>\n");
-      out.write("    <body>\n");
-      out.write("        <div class=\"wrapper d-flex align-items-stretch h-100\">\n");
-      out.write("            <nav id=\"sidebar\">\n");
-      out.write("                <div class=\"img bg-wrap text-center py-2\" style=\"background-image: url(images/bg_1.jpg);\">\n");
-      out.write("                    <div class=\"user-logo\">\n");
-      out.write("                        <div class=\"img\" style=\"background-image: url(../../image/logo-yoga.jpg);\"></div>\n");
-      out.write("                        <h3>YOGA CENTER</h3>\n");
-      out.write("                    </div>\n");
-      out.write("                </div>\n");
-      out.write("                <ul class=\"list-unstyled components mb-5\">\n");
-      out.write("                    <li class=\"active\">\n");
-      out.write("                        <a href=\"#\"><span class=\"fa-solid fa-book mr-3\"></span>Staff</a>\n");
-      out.write("                    </li>\n");
-      out.write("                    <li>\n");
-      out.write("                        <a href=\"#\"><span class=\"fa fa-gift mr-3\"></span> KHUYẾN MÃI</a>\n");
-      out.write("                    </li>\n");
-      out.write("                    <li>\n");
-      out.write("                        <a href=\"#\"><span class=\"fa-solid fa-calendar-days mr-3\"></span> LỊCH DẠY</a>\n");
-      out.write("                    </li>\n");
-      out.write("                    <li>\n");
-      out.write("                        <a href=\"#\"><span class=\"fa-solid fa-newspaper mr-3\"></span> TIN TỨC</a>\n");
-      out.write("                    </li> \n");
-      out.write("                    <li>\n");
-      out.write("                        <a href=\"#\"><span class=\"fa-solid fa-people-group mr-3\"></span> KHÁCH HÀNG</a>\n");
-      out.write("                    </li> \n");
-      out.write("                    <li>\n");
-      out.write("                        <a href=\"#\"><span class=\"fa fa-sign-out mr-3\"></span> Đăng Xuất</a>\n");
-      out.write("                    </li>\n");
-      out.write("                </ul>\n");
-      out.write("\n");
-      out.write("            </nav>\n");
-      out.write("\n");
-      out.write("            <!-- Page Content  -->\n");
-      out.write("            <div id=\"content\">\n");
-      out.write("                <div>\n");
-      out.write("                    <div class=\"course-link\">\n");
-      out.write("                        <ul>\n");
-      out.write("                            <li><a href=\"#\">Admin</a></li>\n");
-      out.write("                            <li><a href=\"mainController?action=courses\">List Staff</a></li>\n");
-      out.write("                        </ul>\n");
-      out.write("                    </div>\n");
-      out.write("                    <div class=\"table-name border\" style=\"height: 15%\">\n");
-      out.write("                        <h4>List Staff</h4>\n");
-      out.write("                    </div>\n");
-      out.write("                </div>\n");
-      out.write("                <div id=\"snackbar\"></div>\n");
-      out.write("\n");
-      out.write("                ");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("<!DOCTYPE html>\r\n");
+      out.write("<html lang=\"en\">\r\n");
+      out.write("    <head>\r\n");
+      out.write("        <meta charset=\"UTF-8\" />\r\n");
+      out.write("        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\r\n");
+      out.write("        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\r\n");
+      out.write("        <link\r\n");
+      out.write("            rel=\"stylesheet\"\r\n");
+      out.write("            href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css\"\r\n");
+      out.write("            />\r\n");
+      out.write("        <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css\">\r\n");
+      out.write("        <link rel=\"stylesheet\" href=\"./css/updateCourse.css\" />\r\n");
+      out.write("        <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM\" crossorigin=\"anonymous\">\r\n");
+      out.write("        <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz\" crossorigin=\"anonymous\"></script>\r\n");
+      out.write("        <title>Insert Course</title>\r\n");
+      out.write("        <style>\r\n");
+      out.write("            .a-page {\r\n");
+      out.write("                background-color: #00FFFF;\r\n");
+      out.write("                color: white;\r\n");
+      out.write("                padding: 5px 10px;\r\n");
+      out.write("                text-decoration: none;\r\n");
+      out.write("                border-radius: 5px;\r\n");
+      out.write("                margin: 2px;\r\n");
+      out.write("            }\r\n");
+      out.write("            #snackbar {\r\n");
+      out.write("                visibility: hidden;\r\n");
+      out.write("                min-width: 250px;\r\n");
+      out.write("                margin-left: -125px;\r\n");
+      out.write("                background-color: #333;\r\n");
+      out.write("                color: #fff;\r\n");
+      out.write("                text-align: center;\r\n");
+      out.write("                border-radius: 2px;\r\n");
+      out.write("                padding: 16px;\r\n");
+      out.write("                position: fixed;\r\n");
+      out.write("                z-index: 1;\r\n");
+      out.write("                left: 50%;\r\n");
+      out.write("                top: 30px; /* Change bottom to top and adjust the distance from the top */\r\n");
+      out.write("            }\r\n");
+      out.write("\r\n");
+      out.write("            #snackbar.show {\r\n");
+      out.write("                visibility: visible;\r\n");
+      out.write("                -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;\r\n");
+      out.write("                animation: fadein 0.5s, fadeout 0.5s 2.5s;\r\n");
+      out.write("            }\r\n");
+      out.write("\r\n");
+      out.write("            @-webkit-keyframes fadein {\r\n");
+      out.write("                from {\r\n");
+      out.write("                    top: 0;\r\n");
+      out.write("                    opacity: 0;\r\n");
+      out.write("                }\r\n");
+      out.write("                to {\r\n");
+      out.write("                    top: 30px;\r\n");
+      out.write("                    opacity: 1;\r\n");
+      out.write("                } /* Change bottom to top and adjust the distance from the top */\r\n");
+      out.write("            }\r\n");
+      out.write("\r\n");
+      out.write("            @keyframes fadein {\r\n");
+      out.write("                from {\r\n");
+      out.write("                    top: 0;\r\n");
+      out.write("                    opacity: 0;\r\n");
+      out.write("                }\r\n");
+      out.write("                to {\r\n");
+      out.write("                    top: 30px;\r\n");
+      out.write("                    opacity: 1;\r\n");
+      out.write("                } /* Change bottom to top and adjust the distance from the top */\r\n");
+      out.write("            }\r\n");
+      out.write("\r\n");
+      out.write("            @-webkit-keyframes fadeout {\r\n");
+      out.write("                from {\r\n");
+      out.write("                    top: 30px;\r\n");
+      out.write("                    opacity: 1;\r\n");
+      out.write("                }\r\n");
+      out.write("                to {\r\n");
+      out.write("                    top: 0;\r\n");
+      out.write("                    opacity: 0;\r\n");
+      out.write("                } /* Change bottom to top and adjust the distance from the top */\r\n");
+      out.write("            }\r\n");
+      out.write("\r\n");
+      out.write("            @keyframes fadeout {\r\n");
+      out.write("                from {\r\n");
+      out.write("                    top: 30px;\r\n");
+      out.write("                    opacity: 1;\r\n");
+      out.write("                }\r\n");
+      out.write("                to {\r\n");
+      out.write("                    top: 0;\r\n");
+      out.write("                    opacity: 0;\r\n");
+      out.write("                } /* Change bottom to top and adjust the distance from the top */\r\n");
+      out.write("            }\r\n");
+      out.write("        </style>\r\n");
+      out.write("    </head>\r\n");
+      out.write("    <body>\r\n");
+      out.write("        <!--        <div class=\"wrapper d-flex align-items-stretch h-100\">\r\n");
+      out.write("                    <nav id=\"sidebar\">\r\n");
+      out.write("                        <div class=\"img bg-wrap text-center py-2\" style=\"background-image: url(images/bg_1.jpg);\">\r\n");
+      out.write("                            <div class=\"user-logo\">\r\n");
+      out.write("                                <div class=\"img\" style=\"background-image: url(../../image/logo-yoga.jpg);\"></div>\r\n");
+      out.write("                                <h3>YOGA CENTER</h3>\r\n");
+      out.write("                            </div>\r\n");
+      out.write("                        </div>\r\n");
+      out.write("                        <ul class=\"list-unstyled components mb-5\">\r\n");
+      out.write("                            <li class=\"active\">\r\n");
+      out.write("                                <a href=\"#\"><span class=\"fa-solid fa-book mr-3\"></span>Staff</a>\r\n");
+      out.write("                            </li>\r\n");
+      out.write("                            <li>\r\n");
+      out.write("                                <a href=\"#\"><span class=\"fa fa-gift mr-3\"></span> KHUYẾN MÃI</a>\r\n");
+      out.write("                            </li>\r\n");
+      out.write("                            <li>\r\n");
+      out.write("                                <a href=\"#\"><span class=\"fa-solid fa-calendar-days mr-3\"></span> LỊCH DẠY</a>\r\n");
+      out.write("                            </li>\r\n");
+      out.write("                            <li>\r\n");
+      out.write("                                <a href=\"#\"><span class=\"fa-solid fa-newspaper mr-3\"></span> TIN TỨC</a>\r\n");
+      out.write("                            </li> \r\n");
+      out.write("                            <li>\r\n");
+      out.write("                                <a href=\"#\"><span class=\"fa-solid fa-people-group mr-3\"></span> KHÁCH HÀNG</a>\r\n");
+      out.write("                            </li> \r\n");
+      out.write("                            <li>\r\n");
+      out.write("                                <a href=\"#\"><span class=\"fa fa-sign-out mr-3\"></span> Đăng Xuất</a>\r\n");
+      out.write("                            </li>\r\n");
+      out.write("                        </ul>\r\n");
+      out.write("        \r\n");
+      out.write("                    </nav>-->\r\n");
+      out.write("        ");
+      if (_jspx_meth_c_import_0(_jspx_page_context))
+        return;
+      out.write("\r\n");
+      out.write("        <!-- Page Content  -->\r\n");
+      out.write("        <div id=\"content\">\r\n");
+      out.write("            <div>\r\n");
+      out.write("                <div class=\"course-link\">\r\n");
+      out.write("                    <ul>\r\n");
+      out.write("                        <li><a href=\"listStaff\">Admin</a></li>\r\n");
+      out.write("                        <li><a href=\"listStaff\">List Staff</a></li>\r\n");
+      out.write("                    </ul>\r\n");
+      out.write("                </div>\r\n");
+      out.write("                <div class=\"table-name border\" style=\"height: 15%\">\r\n");
+      out.write("                    <h4>List Staff</h4>\r\n");
+      out.write("                </div>\r\n");
+      out.write("            </div>\r\n");
+      out.write("            <div id=\"snackbar\"></div>\r\n");
+      out.write("\r\n");
+      out.write("            ");
       if (_jspx_meth_c_if_0(_jspx_page_context))
         return;
-      out.write("\n");
-      out.write("                ");
+      out.write("\r\n");
+      out.write("            ");
       if (_jspx_meth_c_if_1(_jspx_page_context))
         return;
-      out.write("\n");
-      out.write("                <form action=\"listStaff\" method=\"post\">\n");
-      out.write("                    <input type=\"hidden\" value=\"create\" name=\"action\"/>\n");
-      out.write("                    <div class=\"text-center pt-2 d-flex w-100 justify-content-end pr-4\">\n");
-      out.write("                        <button class=\"btn-primary rounded-2 border-0 pr-2 pl-2\" style=\"font-size: 24px\">Create Staff</button>\n");
-      out.write("                    </div>\n");
-      out.write("                </form>\n");
-      out.write("                <form action=\"listStaff\" method=\"post\">\n");
-      out.write("                    <input type=\"hidden\" value=\"search\" name=\"action\"/>\n");
-      out.write("                    <div class=\"row m-3\">\n");
-      out.write("                        <div class=\"col-6 \">\n");
-      out.write("                            <div class=\"row\">\n");
-      out.write("                                <div class=\"col-6 \">\n");
-      out.write("                                    <select name=\"gender\" class=\"form-select\" aria-label=\"Default select example\">\n");
-      out.write("                                        <option value=\"All\" \n");
-      out.write("                                                ");
+      out.write("\r\n");
+      out.write("            <form action=\"listStaff\" method=\"post\">\r\n");
+      out.write("                <input type=\"hidden\" value=\"create\" name=\"action\"/>\r\n");
+      out.write("                <div class=\"text-center pt-2 d-flex w-100 justify-content-end pr-4\">\r\n");
+      out.write("                    <button class=\"btn-primary rounded-2 border-0 pr-2 pl-2\" style=\"font-size: 24px\">Create Staff</button>\r\n");
+      out.write("                </div>\r\n");
+      out.write("            </form>\r\n");
+      out.write("            <form action=\"listStaff\" method=\"post\">\r\n");
+      out.write("                <input type=\"hidden\" value=\"search\" name=\"action\"/>\r\n");
+      out.write("                <div class=\"row m-3\">\r\n");
+      out.write("                    <div class=\"col-6 \">\r\n");
+      out.write("                        <div class=\"row\">\r\n");
+      out.write("                            <div class=\"col-6 \">\r\n");
+      out.write("                                <select name=\"gender\" class=\"form-select\" aria-label=\"Default select example\">\r\n");
+      out.write("                                    <option value=\"All\" \r\n");
+      out.write("                                            ");
       if (_jspx_meth_c_if_2(_jspx_page_context))
         return;
-      out.write("\n");
-      out.write("                                                    >---All---</option>\n");
-      out.write("                                                <option value=\"Male\"\n");
-      out.write("                                                ");
+      out.write("\r\n");
+      out.write("                                                >---All---</option>\r\n");
+      out.write("                                            <option value=\"Male\"\r\n");
+      out.write("                                            ");
       if (_jspx_meth_c_if_3(_jspx_page_context))
         return;
-      out.write("\n");
-      out.write("                                                    >Male</option>\n");
-      out.write("                                                <option value=\"FeMale\"\n");
-      out.write("                                                ");
+      out.write("\r\n");
+      out.write("                                                >Male</option>\r\n");
+      out.write("                                            <option value=\"FeMale\"\r\n");
+      out.write("                                            ");
       if (_jspx_meth_c_if_4(_jspx_page_context))
         return;
-      out.write("\n");
-      out.write("                                                    >Female</option>\n");
-      out.write("                                        </select>\n");
-      out.write("                                    </div>\n");
-      out.write("                                    <div class=\"col-6 \" >\n");
-      out.write("                                        <select name=\"status\" class=\"form-select\" aria-label=\"Default select example\">\n");
-      out.write("                                            <option value=\"All\" \n");
-      out.write("                                            ");
+      out.write("\r\n");
+      out.write("                                                >Female</option>\r\n");
+      out.write("                                    </select>\r\n");
+      out.write("                                </div>\r\n");
+      out.write("                                <div class=\"col-6 \" >\r\n");
+      out.write("                                    <select name=\"status\" class=\"form-select\" aria-label=\"Default select example\">\r\n");
+      out.write("                                        <option value=\"All\" \r\n");
+      out.write("                                        ");
       if (_jspx_meth_c_if_5(_jspx_page_context))
         return;
-      out.write("\n");
-      out.write("                                                >---All---</option>\n");
-      out.write("                                            <option value=\"true\"\n");
-      out.write("                                            ");
+      out.write("\r\n");
+      out.write("                                            >---All---</option>\r\n");
+      out.write("                                        <option value=\"true\"\r\n");
+      out.write("                                        ");
       if (_jspx_meth_c_if_6(_jspx_page_context))
         return;
-      out.write("\n");
-      out.write("                                                >Active</option>\n");
-      out.write("                                            <option value=\"false\"\n");
-      out.write("                                            ");
+      out.write("\r\n");
+      out.write("                                            >Active</option>\r\n");
+      out.write("                                        <option value=\"false\"\r\n");
+      out.write("                                        ");
       if (_jspx_meth_c_if_7(_jspx_page_context))
         return;
-      out.write("\n");
-      out.write("                                                >Deactive</option>\n");
-      out.write("                                        </select>\n");
-      out.write("                                    </div>\n");
-      out.write("                                </div>\n");
-      out.write("                            </div>\n");
-      out.write("                            <div class=\"col-6\">\n");
-      out.write("                                <div class=\"input-group\">\n");
-      out.write("                                    <input type=\"text\" name=\"textSearch\" class=\"form-control\" placeholder=\"Enter staff name or phone\" aria-label=\"Recipient's username\" aria-describedby=\"button-addon2\" value=\"");
+      out.write("\r\n");
+      out.write("                                            >Deactive</option>\r\n");
+      out.write("                                    </select>\r\n");
+      out.write("                                </div>\r\n");
+      out.write("                            </div>\r\n");
+      out.write("                        </div>\r\n");
+      out.write("                        <div class=\"col-6\">\r\n");
+      out.write("                            <div class=\"input-group\">\r\n");
+      out.write("                                <input type=\"text\" name=\"textSearch\" class=\"form-control\" placeholder=\"Enter staff name or phone\" aria-label=\"Recipient's username\" aria-describedby=\"button-addon2\" value=\"");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${textSearch}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write("\">\n");
-      out.write("                                <button class=\"btn btn-outline-secondary border-0\" type=\"submit\" id=\"button-addon2\" style=\"background-color: #00FFFF;\">Search</button>\n");
-      out.write("                            </div>\n");
-      out.write("                        </div>\n");
-      out.write("                    </div>\n");
-      out.write("                </form>\n");
-      out.write("                <div class=\"m-3 parent\" style=\"height: 50%;background-color: white;border-radius: 10px;padding-top: 2%\">\n");
-      out.write("                    <table class=\"table caption-top\">\n");
-      out.write("                        <thead>\n");
-      out.write("                            <tr>\n");
-      out.write("                                <th scope=\"col\">Phone</th>\n");
-      out.write("                                <th scope=\"col\">Name</th>\n");
-      out.write("                                <th scope=\"col\">Address</th>\n");
-      out.write("                                <th scope=\"col\">Gender</th>\n");
-      out.write("                                <th scope=\"col\">Status</th>\n");
-      out.write("                                <th scope=\"col\"></th>\n");
-      out.write("                                <th scope=\"col\"></th>\n");
-      out.write("                            </tr>\n");
-      out.write("                        </thead>\n");
-      out.write("                        <tbody>\n");
-      out.write("\n");
-      out.write("                            ");
+      out.write("\">\r\n");
+      out.write("                            <button class=\"btn btn-outline-secondary border-0\" type=\"submit\" id=\"button-addon2\" style=\"background-color: #00FFFF;\">Search</button>\r\n");
+      out.write("                        </div>\r\n");
+      out.write("                    </div>\r\n");
+      out.write("                </div>\r\n");
+      out.write("            </form>\r\n");
+      out.write("            <div class=\"m-3 parent\" style=\"height: 50%;background-color: white;border-radius: 10px;padding-top: 2%\">\r\n");
+      out.write("                <table class=\"table caption-top\">\r\n");
+      out.write("                    <thead>\r\n");
+      out.write("                        <tr>\r\n");
+      out.write("                            <th scope=\"col\">Phone</th>\r\n");
+      out.write("                            <th scope=\"col\">Name</th>\r\n");
+      out.write("                            <th scope=\"col\">Address</th>\r\n");
+      out.write("                            <th scope=\"col\">Gender</th>\r\n");
+      out.write("                            <th scope=\"col\">Status</th>\r\n");
+      out.write("                            <th scope=\"col\"></th>\r\n");
+      out.write("                            <th scope=\"col\"></th>\r\n");
+      out.write("                        </tr>\r\n");
+      out.write("                    </thead>\r\n");
+      out.write("                    <tbody>\r\n");
+      out.write("\r\n");
+      out.write("                        ");
       if (_jspx_meth_c_forEach_0(_jspx_page_context))
         return;
-      out.write("\n");
-      out.write("                        </tbody>\n");
-      out.write("                    </table>\n");
-      out.write("                </div>\n");
-      out.write("                <div class=\"d-flex justify-content-center w-100\" style=\"width: 100%\">\n");
-      out.write("                    ");
-      out.write("\n");
-      out.write("                    ");
+      out.write("\r\n");
+      out.write("                    </tbody>\r\n");
+      out.write("                </table>\r\n");
+      out.write("            </div>\r\n");
+      out.write("            <div class=\"d-flex justify-content-center w-100\" style=\"width: 100%\">\r\n");
+      out.write("                ");
+      out.write("\r\n");
+      out.write("                ");
       if (_jspx_meth_c_if_10(_jspx_page_context))
         return;
-      out.write("\n");
-      out.write("                    ");
-      out.write("\n");
-      out.write("                    ");
+      out.write("\r\n");
+      out.write("                ");
+      out.write("\r\n");
+      out.write("                ");
       if (_jspx_meth_c_forEach_1(_jspx_page_context))
         return;
-      out.write("\n");
-      out.write("\n");
-      out.write("                    ");
-      out.write("\n");
-      out.write("                    ");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("                ");
+      out.write("\r\n");
+      out.write("                ");
       if (_jspx_meth_c_if_11(_jspx_page_context))
         return;
-      out.write("\n");
-      out.write("                </div>\n");
-      out.write("                <div class=\"text-center w-100 mt-2\">\n");
-      out.write("                    <button class=\"btn-primary rounded-4 border-0 pr-2 pl-2\" style=\"font-size: 24px;background-color: grey\">Home</button>\n");
-      out.write("                </div>\n");
-      out.write("            </div>\n");
-      out.write("\n");
-      out.write("            <script src=\"/courseNav/bootstrap.min.js\"></script>\n");
-      out.write("            <script src=\"/courseNav/jquery.min.js\"></script>\n");
-      out.write("            <script src=\"/courseNav/main.js\"></script>\n");
-      out.write("            <script src=\"/courseNav/popper.js\"></script>\n");
-      out.write("            <script src=\"https://code.jquery.com/jquery-3.5.1.js\"></script>\n");
-      out.write("            <script src=\"https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js\"></script>\n");
-      out.write("            <script src=\"/ckeditor/ckeditor.js\"></script>\n");
-      out.write("            <script>\n");
-      out.write("                                                CKEDITOR.replace(\"myTextarea\");\n");
-      out.write("            </script>\n");
-      out.write("            <script src=\"./course.js\"></script>\n");
-      out.write("            <script>\n");
-      out.write("                                                function myFunction() {\n");
-      out.write("                                                    var x = document.getElementById(\"snackbar\");\n");
-      out.write("                                                    x.className = \"show\";\n");
-      out.write("                                                    setTimeout(function () {\n");
-      out.write("                                                        x.className = x.className.replace(\"show\", \"\");\n");
-      out.write("                                                    }, 3000);\n");
-      out.write("                                                }\n");
-      out.write("                                                function confirmSubmit() {\n");
-      out.write("                                                    // Display a confirmation dialog\n");
-      out.write("                                                    var confirmation = confirm(\"Are you sure you want to submit the form?\");\n");
-      out.write("\n");
-      out.write("                                                    // If the user confirms, return true to submit the form\n");
-      out.write("                                                    // If the user cancels, return false to prevent form submission\n");
-      out.write("                                                    return confirmation;\n");
-      out.write("                                                }\n");
-      out.write("            </script>\n");
-      out.write("    </body>\n");
+      out.write("\r\n");
+      out.write("            </div>\r\n");
+      out.write("            <div class=\"text-center w-100 mt-2\">\r\n");
+      out.write("                <button class=\"btn-primary rounded-4 border-0 pr-2 pl-2\" style=\"font-size: 24px;background-color: grey\">Home</button>\r\n");
+      out.write("            </div>\r\n");
+      out.write("        </div>\r\n");
+      out.write("\r\n");
+      out.write("        <script src=\"/courseNav/bootstrap.min.js\"></script>\r\n");
+      out.write("        <script src=\"/courseNav/jquery.min.js\"></script>\r\n");
+      out.write("        <script src=\"/courseNav/main.js\"></script>\r\n");
+      out.write("        <script src=\"/courseNav/popper.js\"></script>\r\n");
+      out.write("        <script src=\"https://code.jquery.com/jquery-3.5.1.js\"></script>\r\n");
+      out.write("        <script src=\"https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js\"></script>\r\n");
+      out.write("        <script src=\"/ckeditor/ckeditor.js\"></script>\r\n");
+      out.write("        <script>\r\n");
+      out.write("                                            CKEDITOR.replace(\"myTextarea\");\r\n");
+      out.write("        </script>\r\n");
+      out.write("        <script src=\"./course.js\"></script>\r\n");
+      out.write("        <script>\r\n");
+      out.write("                                            function myFunction() {\r\n");
+      out.write("                                                var x = document.getElementById(\"snackbar\");\r\n");
+      out.write("                                                x.className = \"show\";\r\n");
+      out.write("                                                setTimeout(function () {\r\n");
+      out.write("                                                    x.className = x.className.replace(\"show\", \"\");\r\n");
+      out.write("                                                }, 3000);\r\n");
+      out.write("                                            }\r\n");
+      out.write("                                            function confirmSubmit() {\r\n");
+      out.write("                                                // Display a confirmation dialog\r\n");
+      out.write("                                                var confirmation = confirm(\"Are you sure you want to submit the form?\");\r\n");
+      out.write("\r\n");
+      out.write("                                                // If the user confirms, return true to submit the form\r\n");
+      out.write("                                                // If the user cancels, return false to prevent form submission\r\n");
+      out.write("                                                return confirmation;\r\n");
+      out.write("                                            }\r\n");
+      out.write("        </script>\r\n");
+      out.write("    </body>\r\n");
       out.write("</html>");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
@@ -371,6 +377,32 @@ public final class ListStaff_jsp extends org.apache.jasper.runtime.HttpJspBase
     }
   }
 
+  private boolean _jspx_meth_c_import_0(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:import
+    org.apache.taglibs.standard.tag.rt.core.ImportTag _jspx_th_c_import_0 = (org.apache.taglibs.standard.tag.rt.core.ImportTag) _jspx_tagPool_c_import_url_nobody.get(org.apache.taglibs.standard.tag.rt.core.ImportTag.class);
+    _jspx_th_c_import_0.setPageContext(_jspx_page_context);
+    _jspx_th_c_import_0.setParent(null);
+    _jspx_th_c_import_0.setUrl("Header_Admin.jsp");
+    int[] _jspx_push_body_count_c_import_0 = new int[] { 0 };
+    try {
+      int _jspx_eval_c_import_0 = _jspx_th_c_import_0.doStartTag();
+      if (_jspx_th_c_import_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+        return true;
+      }
+    } catch (Throwable _jspx_exception) {
+      while (_jspx_push_body_count_c_import_0[0]-- > 0)
+        out = _jspx_page_context.popBody();
+      _jspx_th_c_import_0.doCatch(_jspx_exception);
+    } finally {
+      _jspx_th_c_import_0.doFinally();
+      _jspx_tagPool_c_import_url_nobody.reuse(_jspx_th_c_import_0);
+    }
+    return false;
+  }
+
   private boolean _jspx_meth_c_if_0(PageContext _jspx_page_context)
           throws Throwable {
     PageContext pageContext = _jspx_page_context;
@@ -383,16 +415,16 @@ public final class ListStaff_jsp extends org.apache.jasper.runtime.HttpJspBase
     int _jspx_eval_c_if_0 = _jspx_th_c_if_0.doStartTag();
     if (_jspx_eval_c_if_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       do {
-        out.write("\n");
-        out.write("                    <script>\n");
-        out.write("                        var x = document.getElementById(\"snackbar\");\n");
-        out.write("                        x.className = \"show\";\n");
-        out.write("                        x.textContent = 'Create successfull!';\n");
-        out.write("                        setTimeout(function () {\n");
-        out.write("                            x.className = x.className.replace(\"show\", \"\");\n");
-        out.write("                        }, 3000);\n");
-        out.write("                    </script>\n");
-        out.write("                ");
+        out.write("\r\n");
+        out.write("                <script>\r\n");
+        out.write("                    var x = document.getElementById(\"snackbar\");\r\n");
+        out.write("                    x.className = \"show\";\r\n");
+        out.write("                    x.textContent = 'Create successfull!';\r\n");
+        out.write("                    setTimeout(function () {\r\n");
+        out.write("                        x.className = x.className.replace(\"show\", \"\");\r\n");
+        out.write("                    }, 3000);\r\n");
+        out.write("                </script>\r\n");
+        out.write("            ");
         int evalDoAfterBody = _jspx_th_c_if_0.doAfterBody();
         if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
           break;
@@ -418,16 +450,16 @@ public final class ListStaff_jsp extends org.apache.jasper.runtime.HttpJspBase
     int _jspx_eval_c_if_1 = _jspx_th_c_if_1.doStartTag();
     if (_jspx_eval_c_if_1 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       do {
-        out.write("\n");
-        out.write("                    <script>\n");
-        out.write("                        var x = document.getElementById(\"snackbar\");\n");
-        out.write("                        x.className = \"show\";\n");
-        out.write("                        x.textContent = 'Update successfull!';\n");
-        out.write("                        setTimeout(function () {\n");
-        out.write("                            x.className = x.className.replace(\"show\", \"\");\n");
-        out.write("                        }, 3000);\n");
-        out.write("                    </script>\n");
-        out.write("                ");
+        out.write("\r\n");
+        out.write("                <script>\r\n");
+        out.write("                    var x = document.getElementById(\"snackbar\");\r\n");
+        out.write("                    x.className = \"show\";\r\n");
+        out.write("                    x.textContent = 'Update successfull!';\r\n");
+        out.write("                    setTimeout(function () {\r\n");
+        out.write("                        x.className = x.className.replace(\"show\", \"\");\r\n");
+        out.write("                    }, 3000);\r\n");
+        out.write("                </script>\r\n");
+        out.write("            ");
         int evalDoAfterBody = _jspx_th_c_if_1.doAfterBody();
         if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
           break;
@@ -612,50 +644,50 @@ public final class ListStaff_jsp extends org.apache.jasper.runtime.HttpJspBase
       int _jspx_eval_c_forEach_0 = _jspx_th_c_forEach_0.doStartTag();
       if (_jspx_eval_c_forEach_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
         do {
-          out.write("\n");
-          out.write("                                <tr>\n");
-          out.write("                                    <th scope=\"row\">");
+          out.write("\r\n");
+          out.write("                            <tr>\r\n");
+          out.write("                                <th scope=\"row\">");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${st.phone}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-          out.write("</th>\n");
-          out.write("                                    <td>");
+          out.write("</th>\r\n");
+          out.write("                                <td>");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${st.name}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-          out.write("</td>\n");
-          out.write("                                    <td>");
+          out.write("</td>\r\n");
+          out.write("                                <td>");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${st.address}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-          out.write("</td>\n");
-          out.write("                                    <td>");
+          out.write("</td>\r\n");
+          out.write("                                <td>");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${st.gender}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-          out.write("</td>\n");
-          out.write("                                    <td>\n");
-          out.write("                                        ");
+          out.write("</td>\r\n");
+          out.write("                                <td>\r\n");
+          out.write("                                    ");
           if (_jspx_meth_c_if_8((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_0, _jspx_page_context, _jspx_push_body_count_c_forEach_0))
             return true;
-          out.write("\n");
-          out.write("                                        ");
+          out.write("\r\n");
+          out.write("                                    ");
           if (_jspx_meth_c_if_9((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_0, _jspx_page_context, _jspx_push_body_count_c_forEach_0))
             return true;
-          out.write("\n");
-          out.write("                                    </td>\n");
-          out.write("                                    <td>\n");
-          out.write("                                        <form action=\"updateStaff\" method=\"post\">\n");
-          out.write("                                            <input type=\"hidden\" name=\"action\" value=\"view\"/>\n");
-          out.write("                                            <input type=\"hidden\" name=\"phone\" value=\"");
+          out.write("\r\n");
+          out.write("                                </td>\r\n");
+          out.write("                                <td>\r\n");
+          out.write("                                    <form action=\"updateStaff\" method=\"post\">\r\n");
+          out.write("                                        <input type=\"hidden\" name=\"action\" value=\"view\"/>\r\n");
+          out.write("                                        <input type=\"hidden\" name=\"phone\" value=\"");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${st.phone}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-          out.write("\"/>\n");
-          out.write("                                            <button class=\"btn-primary rounded-4 border-0 pr-2 pl-2\" style=\"background-color: grey\">View</button>\n");
-          out.write("                                        </form>\n");
-          out.write("                                    </td>\n");
-          out.write("                                    <td>\n");
-          out.write("                                        <form action=\"listStaff\" method=\"post\">\n");
-          out.write("                                            <input type=\"hidden\" name=\"action\" value=\"delete\"/>\n");
-          out.write("                                            <input type=\"hidden\" name=\"phone\" value=\"");
+          out.write("\"/>\r\n");
+          out.write("                                        <button class=\"btn-primary rounded-4 border-0 pr-2 pl-2\" style=\"background-color: grey\">View</button>\r\n");
+          out.write("                                    </form>\r\n");
+          out.write("                                </td>\r\n");
+          out.write("                                <td>\r\n");
+          out.write("                                    <form action=\"listStaff\" method=\"post\">\r\n");
+          out.write("                                        <input type=\"hidden\" name=\"action\" value=\"delete\"/>\r\n");
+          out.write("                                        <input type=\"hidden\" name=\"phone\" value=\"");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${st.phone}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-          out.write("\"/>\n");
-          out.write("                                            <button class=\"btn-primary rounded-4 border-0 pr-2 pl-2\" style=\"background-color: grey\" onclick=\"return confirmSubmit()\">Delete</button>\n");
-          out.write("                                        </form>\n");
-          out.write("                                    </td>\n");
-          out.write("                                </tr>\n");
-          out.write("                            ");
+          out.write("\"/>\r\n");
+          out.write("                                        <button class=\"btn-primary rounded-4 border-0 pr-2 pl-2\" style=\"background-color: grey\" onclick=\"return confirmSubmit()\">Delete</button>\r\n");
+          out.write("                                    </form>\r\n");
+          out.write("                                </td>\r\n");
+          out.write("                            </tr>\r\n");
+          out.write("                        ");
           int evalDoAfterBody = _jspx_th_c_forEach_0.doAfterBody();
           if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
             break;
@@ -687,15 +719,15 @@ public final class ListStaff_jsp extends org.apache.jasper.runtime.HttpJspBase
     int _jspx_eval_c_if_8 = _jspx_th_c_if_8.doStartTag();
     if (_jspx_eval_c_if_8 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       do {
-        out.write("\n");
-        out.write("                                            <form action=\"listStaff\" method=\"post\">\n");
-        out.write("                                                <input type=\"hidden\" name=\"action\" value=\"deactive\"/>\n");
-        out.write("                                                <input type=\"hidden\" name=\"phone\" value=\"");
+        out.write("\r\n");
+        out.write("                                        <form action=\"listStaff\" method=\"post\">\r\n");
+        out.write("                                            <input type=\"hidden\" name=\"action\" value=\"deactive\"/>\r\n");
+        out.write("                                            <input type=\"hidden\" name=\"phone\" value=\"");
         out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${st.phone}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-        out.write("\"/>\n");
-        out.write("                                                <button type=\"submit\" class=\"btn-primary rounded-4 border pr-2 pl-2\" style=\"background-color: white; border-color: greenyellow;color: black\">Active</button>\n");
-        out.write("                                            </form>\n");
-        out.write("                                        ");
+        out.write("\"/>\r\n");
+        out.write("                                            <button type=\"submit\" class=\"btn-primary rounded-4 border pr-2 pl-2\" style=\"background-color: white; border-color: greenyellow;color: black\">Active</button>\r\n");
+        out.write("                                        </form>\r\n");
+        out.write("                                    ");
         int evalDoAfterBody = _jspx_th_c_if_8.doAfterBody();
         if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
           break;
@@ -721,15 +753,15 @@ public final class ListStaff_jsp extends org.apache.jasper.runtime.HttpJspBase
     int _jspx_eval_c_if_9 = _jspx_th_c_if_9.doStartTag();
     if (_jspx_eval_c_if_9 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       do {
-        out.write("\n");
-        out.write("                                            <form action=\"listStaff\" method=\"post\">\n");
-        out.write("                                                <input type=\"hidden\" name=\"action\" value=\"active\"/>\n");
-        out.write("                                                <input type=\"hidden\" name=\"phone\" value=\"");
+        out.write("\r\n");
+        out.write("                                        <form action=\"listStaff\" method=\"post\">\r\n");
+        out.write("                                            <input type=\"hidden\" name=\"action\" value=\"active\"/>\r\n");
+        out.write("                                            <input type=\"hidden\" name=\"phone\" value=\"");
         out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${st.phone}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-        out.write("\"/>\n");
-        out.write("                                                <button type=\"submit\" class=\"btn-primary rounded-4 border pr-2 pl-2\" style=\"background-color: white; border-color: greenyellow;color: black\">Deactive</button>\n");
-        out.write("                                            </form>\n");
-        out.write("                                        ");
+        out.write("\"/>\r\n");
+        out.write("                                            <button type=\"submit\" class=\"btn-primary rounded-4 border pr-2 pl-2\" style=\"background-color: white; border-color: greenyellow;color: black\">Deactive</button>\r\n");
+        out.write("                                        </form>\r\n");
+        out.write("                                    ");
         int evalDoAfterBody = _jspx_th_c_if_9.doAfterBody();
         if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
           break;
@@ -755,11 +787,11 @@ public final class ListStaff_jsp extends org.apache.jasper.runtime.HttpJspBase
     int _jspx_eval_c_if_10 = _jspx_th_c_if_10.doStartTag();
     if (_jspx_eval_c_if_10 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       do {
-        out.write("\n");
-        out.write("                        <td><a class=\"a-page\" href=\"listStaff?page=");
+        out.write("\r\n");
+        out.write("                    <td><a class=\"a-page\" href=\"listStaff?page=");
         out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${currentPage - 1}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-        out.write("\">Previous</a></td>\n");
-        out.write("                    ");
+        out.write("\">Previous</a></td>\r\n");
+        out.write("                ");
         int evalDoAfterBody = _jspx_th_c_if_10.doAfterBody();
         if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
           break;
@@ -789,12 +821,12 @@ public final class ListStaff_jsp extends org.apache.jasper.runtime.HttpJspBase
       int _jspx_eval_c_forEach_1 = _jspx_th_c_forEach_1.doStartTag();
       if (_jspx_eval_c_forEach_1 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
         do {
-          out.write("\n");
-          out.write("                        ");
+          out.write("\r\n");
+          out.write("                    ");
           if (_jspx_meth_c_choose_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_1, _jspx_page_context, _jspx_push_body_count_c_forEach_1))
             return true;
-          out.write("\n");
-          out.write("                    ");
+          out.write("\r\n");
+          out.write("                ");
           int evalDoAfterBody = _jspx_th_c_forEach_1.doAfterBody();
           if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
             break;
@@ -825,16 +857,16 @@ public final class ListStaff_jsp extends org.apache.jasper.runtime.HttpJspBase
     int _jspx_eval_c_choose_0 = _jspx_th_c_choose_0.doStartTag();
     if (_jspx_eval_c_choose_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       do {
-        out.write("\n");
-        out.write("                            ");
+        out.write("\r\n");
+        out.write("                        ");
         if (_jspx_meth_c_when_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_choose_0, _jspx_page_context, _jspx_push_body_count_c_forEach_1))
           return true;
-        out.write("\n");
-        out.write("                            ");
+        out.write("\r\n");
+        out.write("                        ");
         if (_jspx_meth_c_otherwise_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_choose_0, _jspx_page_context, _jspx_push_body_count_c_forEach_1))
           return true;
-        out.write("\n");
-        out.write("                        ");
+        out.write("\r\n");
+        out.write("                    ");
         int evalDoAfterBody = _jspx_th_c_choose_0.doAfterBody();
         if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
           break;
@@ -860,11 +892,11 @@ public final class ListStaff_jsp extends org.apache.jasper.runtime.HttpJspBase
     int _jspx_eval_c_when_0 = _jspx_th_c_when_0.doStartTag();
     if (_jspx_eval_c_when_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       do {
-        out.write("\n");
-        out.write("                                <a class=\"a-page\" href=\"#\" style=\"background-color: white;color: black\">");
+        out.write("\r\n");
+        out.write("                            <a class=\"a-page\" href=\"#\" style=\"background-color: white;color: black\">");
         out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${i}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-        out.write("</a>\n");
-        out.write("                            ");
+        out.write("</a>\r\n");
+        out.write("                        ");
         int evalDoAfterBody = _jspx_th_c_when_0.doAfterBody();
         if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
           break;
@@ -889,14 +921,14 @@ public final class ListStaff_jsp extends org.apache.jasper.runtime.HttpJspBase
     int _jspx_eval_c_otherwise_0 = _jspx_th_c_otherwise_0.doStartTag();
     if (_jspx_eval_c_otherwise_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       do {
-        out.write("\n");
-        out.write("                                <a class=\"a-page\" href=\"listStaff?page=");
+        out.write("\r\n");
+        out.write("                            <a class=\"a-page\" href=\"listStaff?page=");
         out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${i}", java.lang.String.class, (PageContext)_jspx_page_context, null));
         out.write('"');
         out.write('>');
         out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${i}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-        out.write("</a>\n");
-        out.write("                            ");
+        out.write("</a>\r\n");
+        out.write("                        ");
         int evalDoAfterBody = _jspx_th_c_otherwise_0.doAfterBody();
         if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
           break;
@@ -922,11 +954,11 @@ public final class ListStaff_jsp extends org.apache.jasper.runtime.HttpJspBase
     int _jspx_eval_c_if_11 = _jspx_th_c_if_11.doStartTag();
     if (_jspx_eval_c_if_11 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       do {
-        out.write("\n");
-        out.write("                        <a class=\"a-page\" href=\"listStaff?page=");
+        out.write("\r\n");
+        out.write("                    <a class=\"a-page\" href=\"listStaff?page=");
         out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${currentPage + 1}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-        out.write("\">Next</a>\n");
-        out.write("                    ");
+        out.write("\">Next</a>\r\n");
+        out.write("                ");
         int evalDoAfterBody = _jspx_th_c_if_11.doAfterBody();
         if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
           break;
