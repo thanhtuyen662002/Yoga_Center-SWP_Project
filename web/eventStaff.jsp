@@ -43,7 +43,6 @@
                             <th>DayStart</th>
                             <th>DayEnd</th>
                             <th>Image</th>
-                            <th>Data</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -56,11 +55,10 @@
                                 <td>${e.discount}</td>
                                 <td>${e.daystart}</td>
                                 <td>${e.dayend}</td>
-                                <td>${e.image}</td>
                                 <td class="event-img"><img src="data:image;base64,${e.data}" /></td>
                                 <td id="tool">
                                     <a href="#"><i class="fa-solid fa-eye "></i></a>
-                                    <a href="updateEvent?id=${e.eventID}"><i class="fa-solid fa-pen"></i></a>
+                                    <a href="updateEvent?name=${e.eventName}"><i class="fa-solid fa-pen"></i></a>
                                     <a href="#" onclick="showMess(${e.eventID})"><i class="fa-sharp fa-solid fa-trash"></i></a>
 
                                 </td>
@@ -79,7 +77,6 @@
                             <th>DayStart</th>
                             <th>DayEnd</th>
                              <th>Image</th>
-                            <th>Data</th>
                             <th>Action</th>
 
                         </tr>

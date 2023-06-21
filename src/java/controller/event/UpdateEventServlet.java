@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.event;
-
+package controller.course;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,7 +27,7 @@ import utils.DBUtils;
 
 /**
  *
- * @author nguye
+ * @author HP Pro
  */
 @WebServlet(name = "UpdateEventServlet", urlPatterns = {"/updateEvent"})
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2,
@@ -46,10 +45,11 @@ public class UpdateEventServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String id = request.getParameter("id");
+            String name = request.getParameter("name");
+//            String name = new String(request.getParameter("name").getBytes("ISO-8859-1"), "UTF-8");
             EventDAO dao = new EventDAO();
-            EventDTO event = dao.getEventByID(id);          
-            request.setAttribute("e", event);
+            EventDTO event = dao.getEventByName(name);
+            request.setAttribute("e", event );
             request.getRequestDispatcher("updateEvent.jsp").forward(request, response);
         } catch (SQLException ex) {
         }
@@ -61,18 +61,19 @@ public class UpdateEventServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String id = request.getParameter("id");
-        String ename = new String(request.getParameter("EventName").getBytes("ISO-8859-1"), "UTF-8");
-        String eCourseName = new String(request.getParameter("Course").getBytes("ISO-8859-1"), "UTF-8");
-        String ediscount = new String(request.getParameter("Discount").getBytes("ISO-8859-1"), "UTF-8");
-        String edaystart = new String(request.getParameter("daystart").getBytes("ISO-8859-1"), "UTF-8");
-        String edayend = new String(request.getParameter("dayend").getBytes("ISO-8859-1"), "UTF-8");
+        
+        String eventName = new String(request.getParameter("EventName").getBytes("ISO-8859-1"), "UTF-8");
+        String discount = request.getParameter("Discount");
+        String courseID = request.getParameter("Course");
+        String daystart = request.getParameter("daystart");
+        String dayend = request.getParameter("dayend");
+        String eventID = request.getParameter("id");
 
         try {
-            
+            //Kiểm tra tên khóa học đã có trong database hay chưa
             EventDAO dao = new EventDAO();
-            boolean checkDuplicate = dao.checkEventDuplicate(ename);
-            boolean checkDuplicate2 = dao.checkEventDuplicate(ename);
+            boolean checkDuplicate = dao.checkEventDuplicate(eventName);
+            boolean checkDuplicate2 = dao.checkEventDuplicate2(eventID, eventName);
 
             if (checkDuplicate) {
                 if (checkDuplicate2) {
@@ -85,20 +86,20 @@ public class UpdateEventServlet extends HttpServlet {
                     }
 
                     for (Part filePart : fileParts) {
-                        String filename = filePart.getSubmittedFileName();                       
+                        String fileName = filePart.getSubmittedFileName();
                         InputStream fileContent = filePart.getInputStream();
 
                         InputStream content = fileContent;
                         byte[] imageBytes = IOUtils.toByteArray(content);
                         String data = Base64.getEncoder().encodeToString(imageBytes);
-                        dao.updateEvent(filename, eCourseName, ediscount, edaystart, edayend, ename, data, id);
+                        updateInforToDatabase(eventID, eventName, courseID, discount, daystart, dayend, fileName, data);
 
                     }
                 } else {
-                    response.getWriter().println("Error: Event name already exists in Database!");
-                    request.setAttribute("ErrorMessage", "Error: Event name already exists in Database!");
-                    EventDTO list = dao.getEventByID(ename);
-                    request.setAttribute("e", list);
+                    response.getWriter().println("Error: Course name already exists in Database!");
+                    request.setAttribute("ErrorMessage", "Error: Course name already exists in Database!");
+                    EventDTO list = dao.getEventByName(eventName);
+                    request.setAttribute("c", list);
                     request.getRequestDispatcher("updateEvent.jsp").forward(request, response);
                 }
 
@@ -118,8 +119,8 @@ public class UpdateEventServlet extends HttpServlet {
                     InputStream content = fileContent;
                     byte[] imageBytes = IOUtils.toByteArray(content);
                     String data = Base64.getEncoder().encodeToString(imageBytes);
-//                    updateInforToDatabase(id,ename, eCourseName, ediscount, edaystart, edayend, fileName, data);
-                    dao.updateEvent(fileName, eCourseName, ediscount, edaystart, edayend, fileName, data, id);
+                    updateInforToDatabase(eventID, eventName, courseID, discount, daystart, dayend, fileName, data);
+
                 }
 
             }
@@ -129,20 +130,14 @@ public class UpdateEventServlet extends HttpServlet {
         response.sendRedirect("event");
     }
 
-  public void updateInforToDatabase(String id, String eventName, String CourseID, String discount, String daystart, String dayend, String image, String data) throws SQLException {
+    public void updateInforToDatabase(String eventID, String eventName, String courseID, String discount, String daystart, String dayend, String image, String data) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql
-                        = "UPDATE [dbo].[Event]\n"
-                        + "   SET [eventName] = ?\n"
-                        + "      ,[courseID] = ?\n"
-                        + "      ,[discount] = ?\n"
-                        + "      ,[daystart] = ?\n"
-                        + "      ,[dayend] = ?\n"
-                        + image + "', '" + data + "WHERE eventID = "+ id;                        
+                String sql = "UPDATE Event set eventName=  N'" + eventName + "', courseID=" + courseID + " , discount= " + discount + ",daystart='" + daystart + "',dayend='" + dayend + "',"
+                        + "image='" + image + "', data='" + data + "' where eventID=" + eventID;
                 ptm = conn.prepareStatement(sql);
                 ptm.executeUpdate();
             }
@@ -155,10 +150,11 @@ public class UpdateEventServlet extends HttpServlet {
                 conn.close();
             }
         }
-    }           
+    }
 
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-}         
+
+}

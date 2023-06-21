@@ -73,9 +73,7 @@
             </div>
             <div class="card-content">
               <div class="card-content-course">${event.courseName}</div>
-              <div class="card-content-event">
-                ${event.eventName}
-              </div>
+              <div class="card-content-event">${event.eventName}</div>              
               <div class="card-content-date">
                 <span>${event.daystart}</span> 
                 <span class="arrow">&#8594;</span>
