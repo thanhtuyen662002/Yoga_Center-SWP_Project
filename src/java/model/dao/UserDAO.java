@@ -86,16 +86,16 @@ public class UserDAO {
         }
         return null;
     }
-    private static final String INSERT = "INSERT INTO [User]([phone], [password], [name], [address], [gender], [roleID], [status] )"
+    private static final String INSERT = "INSERT INTO [User]([phone], [password], [name], [address], [gender], [role], [status] )"
            + "VALUES('?','?','?','?','?','?','?','?')";
-    public void insert(String phone,String password,String name,String address,String gender,String roleID) throws SQLException, NamingException, ClassNotFoundException {
+    public void insert(String phone,String password,String name,String address,String gender,String role) throws SQLException, NamingException, ClassNotFoundException {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {               
-                String sql = "INSERT INTO [User]([phone], [password], [name], [address], [gender], [roleID], [status] )"
-                        + "VALUES('" + phone + "','" + password + "','" + name  + "','" + address + "','" + gender + "','" + roleID + "', 1)";
+                String sql = "INSERT INTO [User]([phone], [password], [name], [address], [gender], [role], [status] )"
+                        + "VALUES('" + phone + "','" + password + "',N'" + name  + "',N'" + address + "','" + gender + "','" + role + "', 1)";
                 ptm = conn.prepareStatement(sql);               
                 ptm.executeUpdate();
             }

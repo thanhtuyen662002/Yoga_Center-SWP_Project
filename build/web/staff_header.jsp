@@ -51,7 +51,11 @@
                         </ul>
                     </li> 
                     <li>
-                        <a href="mainController?action="><span class="fa-solid fa-people-group mr-3"></span> KHÁCH HÀNG</a>
+                        <a href="mainController?action=guest"><span class="fa-solid fa-people-group mr-3"></span> KHÁCH HÀNG</a>
+                        <ul id="guest" class="dropdown">
+                            <li><a href="insertGuest.jsp">Tạo tài khoản</a></li>
+                            <li><a href="#">Khách hàng đã xóa</a></li>
+                        </ul>
                     </li> 
                     <li>
                         <a href="logout"><span class="fa fa-sign-out mr-3"></span> Đăng Xuất</a>

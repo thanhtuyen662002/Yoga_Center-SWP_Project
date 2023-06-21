@@ -30,7 +30,7 @@
                 <div class="course-link">
                     <ul>
                         <li><a href="courses">Staff</a></li>
-                        <li><a href="courses" id="active">Khóa Học</a></li>
+                        <li><a href="courses" id="active">Khách hàng</a></li>
                     </ul>
                 </div>
                 <div class="course-title" >
@@ -38,51 +38,54 @@
                  
                 </div>
                 <div class="table-name">
-                    <h1>BẢNG DỮ LIỆU KHÓA HỌC</h1>
+                    <h1>BẢNG DỮ LIỆU KHÁCH HÀNG</h1>
                 </div>
                 <table id="course" class="display" style="width:100%" >
                     <thead>
                         <tr>
-                            <th>Họ và tên</th>
-                            <th>Ngày tháng </th>
-                            <th>Name</th>
-                            <th>Name</th>
-                            <th>Name</th>
+                            <th>Full Name</th>
+                            <th>Phone Number</th>
+                            <th>Address</th>
+                            <th>Gender</th>
+                            <th>Course</th>
+                            <th>Price</th>
+                            <th>Action</th>
                             
                         </tr>
                     </thead>
                     <tbody>
-
-                        <c:forEach items="${list}" var="c">
-                            <c:set var="money" value="${c.price}" />
+                        <c:forEach items="${list}" var="g">
+                            <c:set var="money" value="${g.price}" />
                             <fmt:setLocale value="vi_VN"/>
                             <c:set var="price"> 
                                 <fmt:formatNumber type="currency" value="${money}"/>
                             </c:set>
+                            
                             <tr>
-                                <td>${c.courseName}</td>
-                                <td><div class="table-noidung">${c.description}</div></td>
-                                <td id="table-img"><img src="data:image;base64,${c.courseData}"/></td>
+                                <td>${g.fullName}</td>
+                                <td>${g.phone}</td>
+                                <td><div class="table-noidung">${g.address}</div></td>
+                                <td>${g.gender}</td>
+                                <td>${g.courseName}</td>
                                 <td><c:out value="${price}"/></td>
-                                <td id="tool">
-                                    <!--                                    <a href=""><i class="fa-solid fa-eye "></i></a>-->
-                                    
-                                    <a href="updateCourse?name=${c.courseName}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
+                    
+                                <td id="tool"><a href="loadGuest?id=${g.signupID}"><i class="fa-solid fa-circle-plus fa-bounce" style="color: #14d72b;"></i></a>
                                     |
-                                    <a onclick="showMess('${c.courseName}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
-                                    
+                                    <a onclick="showMess('${g.signupID}-${g.fullName}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
                         </c:forEach>
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Image</th>
+                            <th>Full Name</th>
+                            <th>Phone Number</th>
+                            <th>Address</th>
+                            <th>Gender</th>
+                            <th>Course</th>
                             <th>Price</th>
                             <th>Action</th>
-
+                            
                         </tr>
                     </tfoot>
                 </table>

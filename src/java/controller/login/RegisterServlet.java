@@ -40,8 +40,8 @@ public class RegisterServlet extends HttpServlet {
             String phone = request.getParameter("phone").trim();
             String password = request.getParameter("password");
             String password_confirm = request.getParameter("password-confirm");
-            String name = request.getParameter("name");
-            String address = request.getParameter("address");
+            String name = new String(request.getParameter("name").getBytes("ISO-8859-1"),"UTF-8");
+            String address =new String(request.getParameter("address").getBytes("ISO-8859-1"),"UTF-8") ;
             String gender = request.getParameter("gender");
 
             String roleID = "US";
