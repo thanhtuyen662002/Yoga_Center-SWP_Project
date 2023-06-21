@@ -24,7 +24,7 @@
     <title>Header</title>
   </head>
   <body>
-    <div class="wrapper d-flex align-items-stretch">
+    <div class="wrapper d-flex align-items-stretch h-100"> 
       <nav id="sidebar">
         <div class="custom-menu">
           <button
@@ -52,25 +52,25 @@
             </a>
           </li>
 
-          <li>
+          <li class="active">
             <a href="#"
               ><span class="fa-solid fa-pen-to-square mr-3"></span> Edit
               Profile</a
             >
           </li>
 
-          <li>
+          <li class="active">
             <a href="listStaff"
               ><span class="fa-solid fa-person fa-xl mr-3"></span> Staff</a
             >
           </li>
-          <li>
+          <li class="active">
             <a href="#"
               ><span class="fa-solid fa-calendar-days mr-3"></span> Schedule</a
             >
           </li>
-          <li>
-            <a href="#"><span class="fa fa-sign-out mr-3"></span> Đăng Xuất</a>
+          <li class="active">
+            <a href="logout"><span class="fa fa-sign-out mr-3"></span> Đăng Xuất</a>
           </li>
         </ul>
       </nav>

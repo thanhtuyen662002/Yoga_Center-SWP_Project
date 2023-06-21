@@ -92,7 +92,7 @@
         </style>
     </head>
     <body>
-        <div class="wrapper d-flex align-items-stretch h-100">
+<!--        <div class="wrapper d-flex align-items-stretch h-100">
             <nav id="sidebar">
                 <div class="img bg-wrap text-center py-2" style="background-image: url(images/bg_1.jpg);">
                     <div class="user-logo">
@@ -121,8 +121,8 @@
                     </li>
                 </ul>
 
-            </nav>
-            <%--<c:import url="Header_Admin.jsp"/>--%>
+            </nav>-->
+            <c:import url="Header_Admin.jsp"/>
             <!-- Page Content  -->
             <div id="content">
                 <div>
