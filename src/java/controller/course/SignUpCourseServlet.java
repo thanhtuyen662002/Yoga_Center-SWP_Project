@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,13 +50,7 @@ public class SignUpCourseServlet extends HttpServlet {
             throws ServletException, IOException {
         CoursesDAO dao = new CoursesDAO();
         try {
-            List<CoursesDTO> course = dao.getCourses();
-            List<CoursesDTO> time = dao.getTime();
-            List<CoursesDTO> timeToCome = dao.getTimeToCome();
-            request.setAttribute("course", course);
-            request.setAttribute("time", time);
-            request.setAttribute("timeToCome", timeToCome);
-            request.getRequestDispatcher("view.customer/signupCourse.jsp").forward(request, response);
+
         } catch (Exception e) {
         }
     }
@@ -64,39 +60,78 @@ public class SignUpCourseServlet extends HttpServlet {
             throws ServletException, IOException {
         String fullName = new String(request.getParameter("name").getBytes("ISO-8859-1"), "UTF-8");
         String phone = request.getParameter("phone");
-        String course = new String(request.getParameter("course").getBytes("ISO-8859-1"), "UTF-8");
+        String address = new String(request.getParameter("address").getBytes("ISO-8859-1"), "UTF-8");
+        String gender = new String(request.getParameter("gender").getBytes("ISO-8859-1"), "UTF-8");
+        String course = new String(request.getParameter("id").getBytes("ISO-8859-1"), "UTF-8");
         String time = request.getParameter("time");
         String timeToCome = request.getParameter("timeToCome");
+        String discount = request.getParameter("discount");
+
+        String ID = request.getParameter("ID");
+        String success = "Đăng ký thành công!";
+        String error = "Đăng ký thất bại!";
         try {
-            boolean check = saveSignUpToDatabase(fullName, phone, course, time, timeToCome);
-            if (check){
-                response.sendRedirect("courseCustomer");
+            if (!ID.isEmpty() && !discount.isEmpty()) {
+                boolean check;
+                try {
+                    check = saveSignUpToDatabase(fullName, phone, address, gender, course, time, timeToCome, discount);
+                    if (check) {
+                        request.setAttribute("id", course);
+                        request.setAttribute("ID", ID);
+                        request.setAttribute("Message", success);
+                        request.getRequestDispatcher("courseCustomer").forward(request, response);
+                    } else {
+                        request.setAttribute("id", course);
+                        request.setAttribute("ID", ID);
+                        request.setAttribute("Message", error);
+                        request.getRequestDispatcher("courseCustomer").forward(request, response);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(SignUpCourseServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            } else {
+                boolean check;
+                try {
+                    check = saveSignUpToDatabase(fullName, phone, address, gender, course, time, timeToCome, discount);
+                    if (check) {
+                        request.setAttribute("id", course);
+                        request.setAttribute("Message", success);
+                        request.getRequestDispatcher("courseCustomer").forward(request, response);
+                    } else {
+                        request.setAttribute("id", course);
+                        request.setAttribute("Message", error);
+                        request.getRequestDispatcher("courseCustomer").forward(request, response);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(SignUpCourseServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         } catch (Exception e) {
         }
     }
 
-    
-    public boolean saveSignUpToDatabase(String fullName, String phone, String course, String time, String timeToCome) throws SQLException {
+    public boolean saveSignUpToDatabase(String fullName, String phone, String address, String gender, String course, String time, String timeToCome, String discount) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "INSERT INTO SignUp (fullName, phone, courseID, slotID, timeToCome)\n"
-                        + "VALUES (N'" + fullName +"','" + phone + "'," + course + "," + time + ",'" + timeToCome + "')";
+                String sql = "INSERT INTO SignUp (fullName, phone, address, gender, courseID, slotID, timeToCome, discount)\n"
+                        + "VALUES (N'" + fullName + "','" + phone + "',N'" + address + "','"
+                        + gender + "'," + course + "," + time + ",'" + timeToCome + "','" + discount + "')";
                 ptm = conn.prepareStatement(sql);
                 int row = ptm.executeUpdate();
-                if (row > 0){
+                if (row > 0) {
                     return true;
                 }
             }
         } catch (Exception e) {
         } finally {
-            if(ptm != null){
+            if (ptm != null) {
                 ptm.close();
             }
-            if(conn != null){
+            if (conn != null) {
                 conn.close();
             }
         }

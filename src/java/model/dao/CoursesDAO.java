@@ -344,19 +344,18 @@ public class CoursesDAO {
        
     }
 
-    public List<CoursesDTO> getCourses() throws SQLException {
-        List<CoursesDTO> list = new ArrayList<>();
+    public CoursesDTO getCourses(String id) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "SELECT courseID, name FROM Courses";
+                String sql = "SELECT courseID, name FROM Courses WHERE courseID=" +id;
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
-                    list.add(new CoursesDTO(rs.getInt("courseID"), rs.getString("name")));
+                    return new CoursesDTO(rs.getInt("courseID"), rs.getString("name"));
                 }
             }
         } catch (Exception e) {
@@ -372,7 +371,7 @@ public class CoursesDAO {
             }
 
         }
-        return list;
+        return null;
     }
 
     public List<CoursesDTO> getTime() throws SQLException {

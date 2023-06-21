@@ -438,10 +438,13 @@ body {
   margin: 0px 10px 40px 10px;
 }
 
-.plan-content-btn a {
+.plan-content-btn button {
   text-decoration: none;
   color: red;
   display: inline-block;
+  background-color: transparent;
+  outline: none;
+  border: none;
 }
 
 .plan-content-btn:hover {
@@ -449,7 +452,7 @@ body {
   color: #fff;
 }
 
-.plan-content-btn a:hover {
+.plan-content-btn button:hover {
   color: #fff;
 }
 /* Sign In */

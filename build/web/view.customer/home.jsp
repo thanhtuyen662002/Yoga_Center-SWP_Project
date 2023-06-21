@@ -99,6 +99,7 @@
                 <div class="plan-detail">Luyện tập Yoga sẽ giúp bạn đạt được mục tiêu sức khỏe và hình thể</div>
                 <div class="plan-content">
                     <c:forEach var="c" items="${course}">
+                        <form action="courseCustomer?id=${c.courseID}" method="POST"> 
                         <div class="plan-content-col begginer">
                             <div class="plan-content-title">${c.courseName}</div>
                             <div class="plan-content-price">
@@ -119,8 +120,11 @@
                                     <li>${c.description}</li>
                                 </ul>
                             </div>
-                            <div class="plan-content-btn"><a href="#">GET STARTED</a></div>
+                            <div class="plan-content-btn">
+                                <button type="submit">GET STARTED</button>
+                            </div>
                         </div>
+                        </form>
                     </c:forEach>
                 </div>
             </div>
