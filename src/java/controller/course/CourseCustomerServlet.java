@@ -3,6 +3,7 @@ package controller.course;
 
 import model.dao.CoursesDAO;
 import java.io.IOException;
+import static java.nio.file.Files.list;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -10,7 +11,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.dao.EventDAO;
 import model.dto.CoursesDTO;
+import model.dto.EventDTO;
 
 /**
  *
@@ -41,9 +44,13 @@ public class CourseCustomerServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             String id =request.getParameter("id");
+            String ID =request.getParameter("ID");
             CoursesDAO dao = new CoursesDAO();
+            EventDAO Edao = new EventDAO();
             CoursesDTO list = dao.getCourseDetail(id);
+            EventDTO discount = Edao.getEventByID(ID);
             request.setAttribute("c", list);
+            request.setAttribute("d", discount);
             request.getRequestDispatcher("view.customer/courseDetail.jsp").forward(request, response);
         } catch (SQLException ex) {
         }

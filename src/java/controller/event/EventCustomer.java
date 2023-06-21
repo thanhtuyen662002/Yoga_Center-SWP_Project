@@ -16,8 +16,8 @@ import model.dto.EventDTO;
  *
  * @author nguye
  */
-@WebServlet(name = "EventCustomerServlet", urlPatterns = {"/eventCustomer"})
-public class EventCustomerServlet extends HttpServlet {
+@WebServlet(name = "EventCustomer", urlPatterns = {"/eventCustomer"})
+public class EventCustomer extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -29,6 +29,9 @@ public class EventCustomerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            EventDAO dao = new EventDAO();
+            dao.checkDayStart();
+            dao.checkDayEnd();
             ArrayList<EventDTO> list = EventDAO.getCusEvent();
             request.setAttribute("list", list);
             request.getRequestDispatcher("view.customer/coupon.jsp").forward(request, response);

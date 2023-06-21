@@ -114,42 +114,42 @@
                             <tr style="background-color: white;">
                                 <th>Slot ${slot[i].id}<br>(${slot[i].startTime}-${slot[i].endTime})</th>
                                     <c:forEach var="j" begin="0" end="6" step="1">
-                            <form id="frm${i}${j}" action="mainController" method="get">
-                                <input type="hidden" name="id" id="id${i}${j}"/>
-                                <input type="hidden" name="action" value="ViewDetails"/>
-                            </form>
-                            <th id="${i}${j}">-</th>
+                                <form id="frm${i}${j}" action="mainController" method="get">
+                                    <input type="hidden" name="id" id="id${i}${j}"/>
+                                    <input type="hidden" name="action" value="ViewDetails"/>
+                                </form>
+                                <th id="${i}${j}">-</th>
+                                </c:forEach>
+                            </tr>
+                        </c:forEach>
+                        <c:forEach var="sc" items="${schedule}">
+                            <c:forEach var="i" begin="0" end="${slotsSize-1}" step="1">
+                                <c:if test="${sc.slot.id eq slot[i].id}">
+                                    <c:set var="row" value="${i}" />
+                                </c:if>
                             </c:forEach>
-                        </tr>
-                    </c:forEach>
-                    <c:forEach var="sc" items="${schedule}">
-                        <c:forEach var="i" begin="0" end="${slotsSize-1}" step="1">
-                            <c:if test="${sc.slot.id eq slot[i].id}">
-                                <c:set var="row" value="${i}" />
-                            </c:if>
-                        </c:forEach>
-                        <c:forEach var="j" begin="0" end="6" step="1">
-                            <c:if test="${sc.date eq day[j]}">
-                                <c:set var="column" value="${j}" />
-                            </c:if>
-                        </c:forEach>
-                        <script>
-                            var header = document.getElementById("${row}${column}");
-                            header.innerHTML = "<c:out value='${sc.classStudy.course.name}'/>" + "<br>" + "at" + "<br>" +
-                                    "<c:out value='${sc.room.id}'/>";
-                            var input = document.getElementById("id${row}${column}");
-                            // Set the value of the input element
-                            input.value = "<c:out value='${sc.id}'/>";
+                            <c:forEach var="j" begin="0" end="6" step="1">
+                                <c:if test="${sc.date eq day[j]}">
+                                    <c:set var="column" value="${j}" />
+                                </c:if>
+                            </c:forEach>
+                            <script>
+                                var header = document.getElementById("${row}${column}");
+                                header.innerHTML = "<c:out value='${sc.classStudy.course.name}'/>" + "<br>" + "at" + "<br>" +
+                                        "<c:out value='${sc.room.id}'/>";
+                                var input = document.getElementById("id${row}${column}");
+                                // Set the value of the input element
+                                input.value = "<c:out value='${sc.id}'/>";
 
-                            var frm = document.getElementById("frm${i}${j}");
+                                var frm = document.getElementById("frm${i}${j}");
 
-                            var thElement = document.getElementById("${row}${column}");
-                            // Add onclick event listener
-                            thElement.addEventListener("click", function () {
-                                document.getElementById("frm${row}${column}").submit();
-                            });
-                        </script>
-                    </c:forEach>
+                                var thElement = document.getElementById("${row}${column}");
+                                // Add onclick event listener
+                                thElement.addEventListener("click", function () {
+                                    document.getElementById("frm${row}${column}").submit();
+                                });
+                            </script>
+                        </c:forEach>
                     </tbody>
                 </table>
             </section>

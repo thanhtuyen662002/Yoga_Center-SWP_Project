@@ -63,12 +63,13 @@
           
         <div class="list-coupon-card">
             <c:forEach items="${list}" var="event">
+                <form action="courseCustomer?id=${event.courseID}&ID=${event.eventID}" method="POST">
           <div class="card-item">
             <div class="card-img">
               <img src="data:image;base64,${event.data}" alt="" />
             </div>
             <div class="card-coupon">
-              <span class="discount">${event.discount}}</span>
+              <span class="discount">${event.discount}%</span>
             </div>
             <div class="card-content">
               <div class="card-content-course">${event.courseName}</div>
@@ -80,11 +81,13 @@
                 <span class="arrow">&#8594;</span>
                 <span class="end-day">${event.dayend}</span>
               </div>
-              <div class="card-content-btn"><button>Đăng Ký Ngay</button></div>
+              <div class="card-content-btn"><button type="submit">Đăng Ký Ngay</button></div>
             </div>
           </div>
+              </form>
           </c:forEach>
         </div>
+          
         <ul class="listPage" style="text-align: center; padding-top: 5rem"></ul>
       </div>
     </div>

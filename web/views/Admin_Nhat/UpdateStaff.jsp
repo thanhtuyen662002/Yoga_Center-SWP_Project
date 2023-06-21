@@ -77,7 +77,7 @@
                         <div class="mb-3 row" >  
                             <label for="inputPassword" class="col-sm-2 col-form-label">Phone<i style="color: red">*</i></label>
                             <div class="col-sm-10">
-                                <input type="tel" class="form-control" oninput="validatePhone()" maxlength="10" id="input-phone" placeholder="Enter Phone" name="phone" value="${st.phone}" required>
+                                <input type="tel" class="form-control" oninput="validatePhone()" maxlength="10" id="input-phone" placeholder="Enter Phone" name="phone" value="${st.phone}" required readonly>
                             </div>
                         </div>
                         <div class="mb-3 row">
