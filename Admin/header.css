@@ -10711,7 +10711,7 @@ h5,
   color: #fff;
 }
 #sidebar.active {
-  margin-left: -300px;
+  margin-left: -20rem;
 }
 #sidebar.active .custom-menu {
   margin-right: -50px;
@@ -10785,7 +10785,7 @@ h5,
 }
 @media (max-width: 991.98px) {
   #sidebar {
-    margin-left: -300px;
+    margin-left: -20rem;
   }
   #sidebar.active {
     margin-left: 0;
