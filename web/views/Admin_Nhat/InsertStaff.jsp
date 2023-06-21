@@ -49,7 +49,7 @@
                 </ul>
 
             </nav>
-
+            <c:import url="Header_Admin.jsp"/>
             <!-- Page Content  -->
             <div id="content">
                 <div>
