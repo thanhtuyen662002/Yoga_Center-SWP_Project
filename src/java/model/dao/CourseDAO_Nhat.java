@@ -28,11 +28,11 @@ public class CourseDAO_Nhat extends DBUtils{
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
-                return new CourseDTO_Nhat(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getDouble(5));
+                return new CourseDTO_Nhat(rs.getInt("courseID"),
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getString("image"),
+                        rs.getDouble("price"));
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ClassSlotDAO_Nhat.class.getName()).log(Level.SEVERE, null, ex);

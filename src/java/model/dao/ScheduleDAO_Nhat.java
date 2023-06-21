@@ -4,6 +4,7 @@
  */
 package model.dao;
 
+import java.sql.Array;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -53,14 +54,12 @@ public class ScheduleDAO_Nhat extends DBUtils {
                 pt = uDao.getUserByID(rs.getString("ptPhone"));
                 slot = csDao.getSlotByID(rs.getInt("slotID"));
                 room = rDao.getRoomByID(rs.getString("roomID"));
-                customer = uDao.getUserByID(rs.getString("ptPhone"));
                 list.add(new ScheduleDTO_Nhat(rs.getInt("scheduleID"),
                         classStudy,
                         pt,
                         slot,
                         room,
-                        rs.getDate("day"),
-                        customer));
+                        rs.getDate("day")));
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ScheduleDAO_Nhat.class.getName()).log(Level.SEVERE, null, ex);
@@ -96,14 +95,12 @@ public class ScheduleDAO_Nhat extends DBUtils {
                 pt = uDao.getUserByID(rs.getString("ptPhone"));
                 slot = csDao.getSlotByID(rs.getInt("slotID"));
                 room = rDao.getRoomByID(rs.getString("roomID"));
-                customer = uDao.getUserByID(rs.getString("ptPhone"));
                 list.add(new ScheduleDTO_Nhat(rs.getInt("scheduleID"),
                         classStudy,
                         pt,
                         slot,
                         room,
-                        rs.getDate("day"),
-                        customer));
+                        rs.getDate("day")));
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ScheduleDAO_Nhat.class.getName()).log(Level.SEVERE, null, ex);
@@ -134,14 +131,12 @@ public class ScheduleDAO_Nhat extends DBUtils {
                 pt = uDao.getUserByID(rs.getString("ptPhone"));
                 slot = csDao.getSlotByID(rs.getInt("slotID"));
                 room = rDao.getRoomByID(rs.getString("roomID"));
-                customer = uDao.getUserByID(rs.getString("ptPhone"));
                 return new ScheduleDTO_Nhat(rs.getInt("scheduleID"),
                         classStudy,
                         pt,
                         slot,
                         room,
-                        rs.getDate("day"),
-                        customer);
+                        rs.getDate("day"));
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ScheduleDAO_Nhat.class.getName()).log(Level.SEVERE, null, ex);
@@ -180,7 +175,7 @@ public class ScheduleDAO_Nhat extends DBUtils {
         }
     }
 
-    public void insert(int classId, String phonePT, String roomId, int slotId, Date date, String customerId) throws ClassNotFoundException, SQLException {
+    public void insert(int classId, String phonePT, String roomId, int slotId, Date date) {
         try {
             String sql = "INSERT INTO [Schedule]\n"
                     + "           ([classID]\n"
@@ -188,11 +183,9 @@ public class ScheduleDAO_Nhat extends DBUtils {
                     + "           ,[slotID]\n"
                     + "           ,[roomID]\n"
                     + "           ,[day]\n"
-                    + "           ,[customerID]\n"
                     + "           ,[deleteFlag])\n"
                     + "     VALUES\n"
                     + "           (?\n"
-                    + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?\n"
@@ -204,23 +197,22 @@ public class ScheduleDAO_Nhat extends DBUtils {
             stm.setInt(3, slotId);
             stm.setString(4, roomId);
             stm.setDate(5, date);
-            stm.setString(6, customerId);
-            stm.setBoolean(7, false);
+            stm.setBoolean(6, false);
             stm.executeUpdate();
         } catch (ClassNotFoundException | SQLException e) {
-           throw e;
+            e.printStackTrace();
         }
     }
 
-    public boolean isScheduleExist(int slotId, Date date, String customerId, String roomID, int classID) {
+    public boolean isScheduleExist(int slotId, Date date, String ptPhone, String roomID, int classID) {
         try {
             String sql = "SELECT *\n"
                     + "  FROM [Schedule]\n"
-                    + "  where slotID = ? and day = ? and customerID = ? and roomID = ? and classID = ? and deleteFlag = 0";
+                    + "  where slotID = ? and day = ? and [ptPhone] = ? and roomID = ? and classID = ? and deleteFlag = 0";
             PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
             stm.setInt(1, slotId);
             stm.setDate(2, date);
-            stm.setString(3, customerId);
+            stm.setString(3, ptPhone);
             stm.setString(4, roomID);
             stm.setInt(5, classID);
             ResultSet rs = stm.executeQuery();
@@ -243,6 +235,34 @@ public class ScheduleDAO_Nhat extends DBUtils {
             stm.setInt(2, slotId);
             stm.setDate(3, date);
             stm.setInt(4, scheduleID);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("Update Schedule");
+        }
+        return false;
+    }
+
+    public boolean isScheduleExist(String phonePT, ArrayList<Date> studyDate, int slotId) {
+        StringBuilder placeholders = new StringBuilder();
+        for (int i = 0; i < studyDate.size(); i++) {
+            if (i > 0) {
+                placeholders.append(", ");
+            }
+            placeholders.append("?");
+        }
+        try {
+            String sql = "SELECT * FROM Schedule WHERE slotID = ? and ptPhone = ?\n"
+                    + " and day IN (" + placeholders + ")\n";
+            PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
+            stm.setInt(1, slotId);
+            stm.setString(2, phonePT);
+            int count = 3;
+            for (Date date : studyDate) {
+                stm.setDate(count++, date);
+            }
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 return true;

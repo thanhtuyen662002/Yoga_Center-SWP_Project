@@ -19,24 +19,17 @@ public class ScheduleDTO_Nhat {
     private ClassSlotDTO_Nhat slot;
     private RoomDTO_Nhat room;
     private Date date;
-    private UserDTO customer;
 
-    public ScheduleDTO_Nhat(int id, ClassDTO_Nhat classStudy, UserDTO pt, ClassSlotDTO_Nhat slot, RoomDTO_Nhat room, Date date, UserDTO customer) {
+    public ScheduleDTO_Nhat() {
+    }
+
+    public ScheduleDTO_Nhat(int id, ClassDTO_Nhat classStudy, UserDTO pt, ClassSlotDTO_Nhat slot, RoomDTO_Nhat room, Date date) {
         this.id = id;
         this.classStudy = classStudy;
         this.pt = pt;
         this.slot = slot;
         this.room = room;
         this.date = date;
-        this.customer = customer;
-    }
-
-    public UserDTO getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(UserDTO customer) {
-        this.customer = customer;
     }
 
     public int getId() {
@@ -47,17 +40,6 @@ public class ScheduleDTO_Nhat {
         this.id = id;
     }
 
-    public UserDTO getPt() {
-        return pt;
-    }
-
-    public void setPt(UserDTO pt) {
-        this.pt = pt;
-    }
-
-    public ScheduleDTO_Nhat() {
-    }
-
     public ClassDTO_Nhat getClassStudy() {
         return classStudy;
     }
@@ -66,12 +48,12 @@ public class ScheduleDTO_Nhat {
         this.classStudy = classStudy;
     }
 
-    public UserDTO getPtPhone() {
+    public UserDTO getPt() {
         return pt;
     }
 
-    public void setPtPhone(UserDTO ptPhone) {
-        this.pt = ptPhone;
+    public void setPt(UserDTO pt) {
+        this.pt = pt;
     }
 
     public ClassSlotDTO_Nhat getSlot() {
@@ -97,12 +79,4 @@ public class ScheduleDTO_Nhat {
     public void setDate(Date date) {
         this.date = date;
     }
-
-    
-
-    @Override
-    public String toString() {
-        return "ScheduleDTO_Nhat{" + "classStudy=" + classStudy + ", pt=" + pt + ", slot=" + slot + ", room=" + room + ", date=" + date + ", customer=" + customer + '}';
-    }
-
 }
