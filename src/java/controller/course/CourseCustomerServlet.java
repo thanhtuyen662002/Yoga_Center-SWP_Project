@@ -6,6 +6,7 @@ import java.io.IOException;
 import static java.nio.file.Files.list;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,14 +44,27 @@ public class CourseCustomerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String id =request.getParameter("id");
-            String ID =request.getParameter("ID");
             CoursesDAO dao = new CoursesDAO();
             EventDAO Edao = new EventDAO();
+            
+            String message = (String) request.getAttribute("Message");
+            String id =request.getParameter("id");
+            String ID =request.getParameter("ID");
+            
             CoursesDTO list = dao.getCourseDetail(id);
-            EventDTO discount = Edao.getEventByID(ID);
             request.setAttribute("c", list);
+            
+            EventDTO discount = Edao.getEventByID(ID);
             request.setAttribute("d", discount);
+            
+            request.setAttribute("message", message);
+            
+            CoursesDTO course = dao.getCourses(id);
+            List<CoursesDTO> time = dao.getTime();
+            List<CoursesDTO> timeToCome = dao.getTimeToCome();
+            request.setAttribute("course", course);
+            request.setAttribute("time", time);
+            request.setAttribute("timeToCome", timeToCome);
             request.getRequestDispatcher("view.customer/courseDetail.jsp").forward(request, response);
         } catch (SQLException ex) {
         }
