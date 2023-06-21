@@ -43,11 +43,12 @@
                 <table id="course" class="display" style="width:100%" >
                     <thead>
                         <tr>
+                            <th>Họ và tên</th>
+                            <th>Ngày tháng </th>
                             <th>Name</th>
-                            <th>Description</th>
-                            <th>Image</th>
-                            <th>Price</th>
-                            <th>Action</th>
+                            <th>Name</th>
+                            <th>Name</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
