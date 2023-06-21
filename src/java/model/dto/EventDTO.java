@@ -71,6 +71,7 @@ public class EventDTO {
         this.status = status;
     }
 
+
     public int getEventID() {
         return eventID;
     }

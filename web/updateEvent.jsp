@@ -70,8 +70,8 @@
                         <div class="update-img">
                             <label for="cate">Image</label>
                             <input type="file" name="image" id="fileInput" onchange="previewImage(event)" accept="image/*" />
-                            <div class="file-img">
-                                <img id="preview" src="data:image;base64,${e.data}" alt="Preview"/>
+                            <div class="file-img" >
+                                <img id="preview"  src="data:image;base64,${e.data}" alt="Preview"/>
                                 <input type="text" hidden="" name="id" value="${e.eventID}" />
                             </div>
                         </div>

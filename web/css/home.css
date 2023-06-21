@@ -313,9 +313,6 @@ body {
 .card-content {
   background-color: #fff;
   font-size: 16px;
-    height: 7rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 /* CÁC GÓI TẬP */
@@ -354,12 +351,14 @@ body {
 }
 
 .plan-content {
-
+  display: flex;
+  justify-content: center;
 }
 
 .plan-content-col {
   border: solid 2px red;
-
+  width: 210px;
+  /* max-width: 25%; */
   border-radius: 15px;
   text-align: center;
   margin: 10px;
@@ -406,17 +405,13 @@ body {
   font-weight: 700;
 }
 
-.plan-content-price li {
+.plan-content-price p {
   font-size: 16px;
-  
 }
 
 .plan-content-list {
   text-align: center;
   /* background-color: #fff; */
-    height: 17rem;
-  margin-bottom: 3rem;
-  overflow: hidden;
 }
 
 .plan-content-list ul {
@@ -429,7 +424,6 @@ body {
   font-size: 17px;
   color: #666666;
   margin-bottom: 12px;
-  padding: 20px;
 }
 
 .plan-content-btn {

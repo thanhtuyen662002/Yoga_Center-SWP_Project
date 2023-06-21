@@ -517,4 +517,68 @@ public class EventDAO {
         }
         return check;
     } 
+    public EventDTO getEventByName(String name) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT * FROM Event WHERE eventname = N'" + name + "'";
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                     return new EventDTO(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getFloat(4), 
+                             rs.getString(5), rs.getString(6), rs.getString(7), 
+                             rs.getString(8), rs.getBoolean(9));             
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
+    public boolean checkEventDuplicate2(String id, String name) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        boolean check = false;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String query = "SELECT eventID FROM Event\n"
+                        + "WHERE eventID = " + id + "AND name = N'" + name + "'";
+                ptm = conn.prepareStatement(query);
+                rs = ptm.executeQuery();
+                rs.next();
+                String value = rs.getString(1);
+                if (value != null || !value.isEmpty()) {
+                    check = true;
+                } else {
+                    check = false;
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
 }
