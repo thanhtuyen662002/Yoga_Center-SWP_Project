@@ -43,7 +43,7 @@
                 <div class="table-name">
                     <h1>TẠO TÀI KHOẢN</h1>
                 </div>
-                <form enctype="multipart/form-data" action="loadGuest" method="POST">
+                <form action="loadGuest" method="POST">
                     <div class="update-box">
                         <div class="update-title">
                             <label for="title">Full Name</label>

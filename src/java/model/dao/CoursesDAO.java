@@ -337,10 +337,11 @@ public class CoursesDAO {
         CoursesDAO dao = new CoursesDAO();
     
   
-        List<CoursesDTO> list2 = dao.getTime();
-        for (CoursesDTO courses : list2) {
-            System.out.println(courses);
-        }
+       CoursesDTO list = dao.getCourses("61");
+        
+       
+            System.out.println(list);
+        
        
     }
 

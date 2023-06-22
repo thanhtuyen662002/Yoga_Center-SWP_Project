@@ -22,13 +22,11 @@ import model.dto.GuestDTO;
 @WebServlet(name = "LoadGuestListServlet", urlPatterns = {"/loadGuest"})
 public class LoadGuestListServlet extends HttpServlet {
 
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
     }
-
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,30 +34,32 @@ public class LoadGuestListServlet extends HttpServlet {
         String id = request.getParameter("id");
         try {
             GuestDAO dao = new GuestDAO();
-        GuestDTO list = dao.getListGuestByID(id);
-        request.setAttribute("g", list);
-        request.getRequestDispatcher("insertGuest.jsp").forward(request, response);
+            GuestDTO list = dao.getListGuestByID(id);
+            request.setAttribute("g", list);
+            request.getRequestDispatcher("insertGuest.jsp").forward(request, response);
         } catch (Exception e) {
         }
     }
 
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String fullName = new String(request.getParameter("fullName").getBytes("ISO-8859-1"),"UTF-8");
+        String fullName = new String(request.getParameter("fullName").getBytes("ISO-8859-1"), "UTF-8");
         String phone = request.getParameter("phone");
         String password = request.getParameter("password");
-        String address = new String(request.getParameter("address").getBytes("ISO-8859-1"),"UTF-8");
+        String address = new String(request.getParameter("address").getBytes("ISO-8859-1"), "UTF-8");
         String gender = request.getParameter("gender");
         try {
             GuestDAO dao = new GuestDAO();
             boolean checkDuplicate = dao.checkDuplicate(phone);
             if (!checkDuplicate) {
                 boolean checkInsertUser = dao.insertGuest(fullName, phone, password, address, gender);
-                boolean checkInsertUserCourse = dao.insertUserCourse(phone);
-                if (checkInsertUser && checkInsertUserCourse) {
-                    dao.setStatus(phone);
+                if (checkInsertUser) {
+                    boolean checkInsertUserCourse = dao.insertUserCourse(phone);
+                    if (checkInsertUserCourse) {
+                        dao.setStatus(phone);
+                        response.sendRedirect("guest");
+                    }
                 } else {
                     System.out.println("Thêm khách hàng thất bại!");
                 }
@@ -69,7 +69,6 @@ public class LoadGuestListServlet extends HttpServlet {
         } catch (Exception e) {
         }
     }
-
 
     @Override
     public String getServletInfo() {

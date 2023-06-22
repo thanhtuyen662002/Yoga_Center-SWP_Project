@@ -13,7 +13,7 @@ public class GuestDAO {
 
     public static void main(String[] args) throws SQLException {
         GuestDAO dao = new GuestDAO();
-        GuestDTO check = dao.getListGuestByID("13");
+        boolean check = dao.insertUserCourse("0321456987");
         System.out.println(check);
     }
 
@@ -205,15 +205,25 @@ public class GuestDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "SELECT courseID, phone FROM SignUp WHERE phone = '" + phone + "'";
+                String sql = "SELECT courseID FROM SignUp WHERE phone = '" + phone + "'";
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
-                String sql1 = "INSERT INTO UserCourse (courseID, phone)\n"
-                        + "VALUES (" + rs.getInt("courseID") + ",'" + rs.getString("phone") + "')";
-                ptm1 = conn.prepareStatement(sql1);
-                int row = ptm.executeUpdate();
-                if (row > 0) {
-                    return check = true;
+                if (rs.next()) {
+                    int courseID = rs.getInt("courseID");
+                    String sql1 = "INSERT INTO UserCourse (courseID, phone)\n"
+                            + "VALUES (" + courseID + ",'" + phone + "')";
+                    ptm1 = conn.prepareStatement(sql1);
+                    int row = ptm1.executeUpdate();
+                    if (row > 0) {
+                        System.out.println("Insert userCourse success!");
+                        return check = true;
+                    } else {
+                        System.out.println("Can't insert userCourse success!");
+                        return check = false;
+                    }
+                } else {
+                    System.out.println("Can't find courseID by phone");
+                    return check = false;
                 }
             }
         } catch (Exception e) {

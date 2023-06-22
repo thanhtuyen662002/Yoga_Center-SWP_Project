@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import model.dao.CoursesDAO;
+import model.dto.CoursesDTO;
 import org.apache.commons.io.IOUtils;
 import utils.DBUtils;
 
@@ -70,10 +71,10 @@ public class InsertCourseServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String name = new String(request.getParameter("name").getBytes("ISO-8859-1"),"UTF-8");
-        String price = new String(request.getParameter("price").getBytes("ISO-8859-1"),"UTF-8");
-        String des = new String(request.getParameter("description").getBytes("ISO-8859-1"),"UTF-8");
+
+        String name = new String(request.getParameter("name").getBytes("ISO-8859-1"), "UTF-8");
+        String price = new String(request.getParameter("price").getBytes("ISO-8859-1"), "UTF-8");
+        String des = new String(request.getParameter("description").getBytes("ISO-8859-1"), "UTF-8");
         String numberOfMonths = request.getParameter("numberOfMonths");
 
         boolean checkDuplicate;
@@ -93,15 +94,15 @@ public class InsertCourseServlet extends HttpServlet {
                 for (Part filePart : fileParts) {
                     String fileName = filePart.getSubmittedFileName();
                     InputStream fileContent = filePart.getInputStream();
-                    
+
                     InputStream content = fileContent;
                     byte[] imageBytes = IOUtils.toByteArray(content);
                     String data = Base64.getEncoder().encodeToString(imageBytes);
-                    saveInforToDatabase(name, price, des, numberOfMonths, fileName, data);
-                    
-
+                    boolean checkInsertCourse = saveInforToDatabase(name, price, des, numberOfMonths, fileName, data);
+                    if (checkInsertCourse) {
+                        saveCourseTypeToDatabase(name);
+                    }
                 }
-
             } else {
                 //response.getWriter().println("Error: Course name already exists in Database!");
                 request.setAttribute("ErrorMessage", "Error: Course name already exists in Database!");
@@ -113,7 +114,6 @@ public class InsertCourseServlet extends HttpServlet {
             Logger.getLogger(InsertCourseServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         response.sendRedirect("courses");
-
     }
 
     @Override
@@ -121,16 +121,31 @@ public class InsertCourseServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void saveInforToDatabase(String name, String price, String description, String numberOfMonths, String image, String data) throws SQLException, ClassNotFoundException {
+    private boolean saveCourseTypeToDatabase(String name) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         PreparedStatement ptm = null;
+        CoursesDAO dao = new CoursesDAO();
+        boolean check = false;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String query = "INSERT INTO Courses (name, description, numberOfMonths, image, data, price, status) "
-                        + "VALUES (N'" + name + "', N'" + description + "',"+ numberOfMonths +",N'" + image + "','" + data + "'," + price + ", 1)";
-                ptm = conn.prepareStatement(query);
-                ptm.executeUpdate();
+                CoursesDTO list = dao.getCourseByName(name);
+                if (list != null) {
+                    int id = list.getCourseID();
+                    int numberOfMonths = list.getNumberOfMonths();
+                    int week = numberOfMonths * 4;
+
+                    String query = "INSERT INTO CourseType (courseID, name, week)\n"
+                            + "VALUES (" + id + ",N'" + name + "'," + week + ")";
+                    ptm = conn.prepareStatement(query);
+                    int row = ptm.executeUpdate();
+                    if (row > 0) {
+                        return check = true;
+                    } else {
+                        return check = false;
+                    }
+                }
+
             }
         } catch (Exception e) {
         } finally {
@@ -141,5 +156,36 @@ public class InsertCourseServlet extends HttpServlet {
                 conn.close();
             }
         }
+        return check;
     }
+
+    private boolean saveInforToDatabase(String name, String price, String description, String numberOfMonths, String image, String data) throws SQLException, ClassNotFoundException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        boolean check = false;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String query = "INSERT INTO Courses (name, description, numberOfMonths, image, data, price, status) "
+                        + "VALUES (N'" + name + "', N'" + description + "'," + numberOfMonths + ",N'" + image + "','" + data + "'," + price + ", 1)";
+                ptm = conn.prepareStatement(query);
+                int row = ptm.executeUpdate();
+                if (row > 0) {
+                    return check = true;
+                } else {
+                    return check = false;
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
 }

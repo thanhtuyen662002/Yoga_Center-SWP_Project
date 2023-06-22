@@ -20,7 +20,7 @@
             integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
             crossorigin="anonymous"
             />
-        <link rel="stylesheet" href="./css/showCourseDetails.css" />
+        <link rel="stylesheet" href="./css/showCourseDetails1.css" />
         <link rel="stylesheet" href="./css/course.css" />
         <title>Document</title>
     </head>
@@ -162,78 +162,78 @@
                                     <h1>Điền Thông Tin Tại Đây !!!</h1>
                                     <div id="back"><i class="fa-solid fa-arrow-left"></i></div>
                                 </div>
-                                        <form id="registration-form" action="signupCourse?id=${course.courseID}&ID=${ID}&discount=${discount}" method="POST">
-                                       
-                                        <div class="price-detail-form-bottom">
-                                            <ul>
-                                                <li>
-                                                    <div class="price-detail-right-label">Họ và tên:</div>
-                                                    <div class="price-detail-right-input">
-                                                        <input type="text" id="name" name="name" required />
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="price-detail-right-label">Số điện thoại:</div>
-                                                    <div class="price-detail-right-input">
-                                                        <input type="number" id="phone" name="phone" required />
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="price-detail-right-label">Khoá học:</div>
-                                                    <div class="price-detail-right-input">
-                                                        <option value="${course.courseID}">${course.courseName}</option>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="price-detail-right-label">Địa chỉ:</div>
-                                                    <div class="price-detail-right-input">
-                                                        <input type="text" id="name" name="address" required />
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="price-detail-right-label">Giới tính:</div>
-                                                    <div class="price-detail-right-input">
-                                                        <select class="timeStudy" name="gender" id="">
-                                                            <option value="Male" selected="">Male</option>
-                                                            <option value="Female">Female</option>
-                                                            <option value="Orther">Orther</option>
-                                                        </select>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="price-detail-right-label">
-                                                        Thời gian muốn học:
-                                                    </div>
-                                                    <div class="price-detail-right-input">
-                                                        <select class="timeStudy" name="time" id="">
-                                                            <option value="" selected>Chọn thời gian học</option>
-                                                            <c:forEach var="t" items="${time}">
-                                                                <option value="${t.slotID}">${t.startTime} - ${t.endTime}</option>
-                                                            </c:forEach>
-                                                        </select>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="price-detail-right-label">
-                                                        Thời gian có thể đến trung tâm Yoga:
-                                                    </div>
-                                                    <div class="price-detail-right-input">
-                                                        <select class="timeCome" name="timeToCome" id="">
-                                                            <option value="" selected>
-                                                                Chọn thời gian có thể đến trung tâm
-                                                            </option>
-                                                            <c:forEach var="T" items="${timeToCome}">
-                                                                <option value="${T.timeToCome}">${T.timeToCome}</option>
-                                                            </c:forEach>
-                                                        </select>
-                                                    </div>
-                                                </li>
-                                                <div class="price-detail-price-button">
-                                                    <button type="submit" >ĐĂNG KÝ</button>
+                                <form id="registration-form" action="signupCourse?id=${course.courseID}&ID=${ID}&discount=${discount}" method="POST">
+
+                                    <div class="price-detail-form-bottom">
+                                        <ul>
+                                            <li>
+                                                <div class="price-detail-right-label">Họ và tên:</div>
+                                                <div class="price-detail-right-input">
+                                                    <input type="text" id="name" name="name" required />
                                                 </div>
-                                            </ul>
-                                        </div>
-                                    </form>
+                                            </li>
+                                            <li>
+                                                <div class="price-detail-right-label">Số điện thoại:</div>
+                                                <div class="price-detail-right-input">
+                                                    <input type="number" id="phone" name="phone" required />
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="price-detail-right-label">Khoá học:</div>
+                                                <div class="price-detail-right-input">
+                                                    <option value="${course.courseID}">${course.courseName}</option>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="price-detail-right-label">Địa chỉ:</div>
+                                                <div class="price-detail-right-input">
+                                                    <input type="text" id="name" name="address" required />
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="price-detail-right-label">Giới tính:</div>
+                                                <div class="price-detail-right-input">
+                                                    <select class="timeStudy" name="gender" id="">
+                                                        <option value="Male" selected="">Male</option>
+                                                        <option value="Female">Female</option>
+                                                        <option value="Orther">Orther</option>
+                                                    </select>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="price-detail-right-label">
+                                                    Thời gian muốn học:
+                                                </div>
+                                                <div class="price-detail-right-input">
+                                                    <select class="timeStudy" name="time" id="">
+                                                        <option value="" selected>Chọn thời gian học</option>
+                                                        <c:forEach var="t" items="${time}">
+                                                            <option value="${t.slotID}">${t.startTime} - ${t.endTime}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="price-detail-right-label">
+                                                    Thời gian có thể đến trung tâm Yoga:
+                                                </div>
+                                                <div class="price-detail-right-input">
+                                                    <select class="timeCome" name="timeToCome" id="">
+                                                        <option value="" selected>
+                                                            Chọn thời gian có thể đến trung tâm
+                                                        </option>
+                                                        <c:forEach var="T" items="${timeToCome}">
+                                                            <option value="${T.timeToCome}">${T.timeToCome}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                            </li>
+                                            <div class="price-detail-price-button">
+                                                <button type="submit" onclick="showPopup()">ĐĂNG KÝ</button>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -242,33 +242,42 @@
 
             </div>
             <c:if test="${not empty message}">
-                <div class="alert alert-success">
-                    <c:out value="${message}" />
+
+                <div id="popup">
+                    <div class="popup-content">
+                        <div class="popup-content-img">
+                            <img src="./image/check.png" alt="" />
+                        </div>
+
+                        <h2>Đăng ký thành công!</h2>
+                        <p>Cảm ơn bạn đã đăng kí.</p>
+                        <button onclick="closePopup()">Đóng</button>
+                    </div>
                 </div>
             </c:if>
-            <c:if test="${not empty message}">
-                <script>
-                    $(document).ready(function () {
-                        $('#myModal').modal('show');
-                    });
-                </script>
-                <!-- Modal -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Thông báo</h4>
-                            </div>
-                            <div class="modal-body">
-                                <c:out value="${message}" />
-                            </div>
+            <c:if test="${empty message}">
+                <div id="popup">
+                    <div class="popup-content">
+                        <div class="popup-content-img">
+                            <img src="./image/check.png" alt="" />
                         </div>
+                        <h2>Đăng ký thất bại!</h2>
+                        <p>Vui lòng nhập lại thông tin!</p>
+                        <button onclick="closePopup()">Đóng</button>
                     </div>
                 </div>
             </c:if>
         </div>
+        <script>
+            function showPopup() {
+                console.log("OK");
+                document.getElementById("popup").style.display = "block";
 
+                setTimeout(function () {
+                    document.getElementById("popup").style.display = "none"; // Ẩn popup
+                }, 50000); // Đợi 5 giây trước khi ẩn popup
+            }
+        </script>
         <script src="./js/showCourseDetails.js"></script>
         <c:import url="customer_footer.jsp"/>
     </body>
