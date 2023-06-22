@@ -51,6 +51,13 @@
                         </ul>
                     </li> 
                     <li>
+                        <a href="mainController?action=class"><span class="fa-solid fa-people-group mr-3"></span> LỚP HỌC</a>
+                        <ul id="guest" class="dropdown">
+                            <li><a href="createClass">Tạo lớp học</a></li>
+                            <li><a href="#">Lớp học đã xóa</a></li>
+                        </ul>
+                    </li> 
+                    <li>
                         <a href="mainController?action=guest"><span class="fa-solid fa-people-group mr-3"></span> KHÁCH HÀNG</a>
                         <ul id="guest" class="dropdown">
                             <li><a href="insertGuest.jsp">Tạo tài khoản</a></li>
