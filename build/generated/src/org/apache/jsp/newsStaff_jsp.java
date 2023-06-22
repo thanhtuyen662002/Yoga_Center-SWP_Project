@@ -208,8 +208,8 @@ public final class newsStaff_jsp extends org.apache.jasper.runtime.HttpJspBase
           out.write("                                <td >");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${x.postDate}", java.lang.String.class, (PageContext)_jspx_page_context, null));
           out.write("</td>\r\n");
-          out.write("                                <td id=\"table-img\"><img src=\"./image/");
-          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${x.image}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("                                <td id=\"table-img\"><img src=\"data:image;base64,");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${x.data}", java.lang.String.class, (PageContext)_jspx_page_context, null));
           out.write("\" alt=\"\"></td>\r\n");
           out.write("                                <!--<td ><div class=\"table-noidung\">");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${x.content}", java.lang.String.class, (PageContext)_jspx_page_context, null));

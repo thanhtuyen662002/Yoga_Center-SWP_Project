@@ -11022,7 +11022,8 @@ a[data-toggle="collapse"] {
 }
 
 .update-title,
-.update-cate {
+.update-cate,
+.update-select{
   grid-column: span 1;
   grid-row: span 1;
   display: flex;
@@ -11038,8 +11039,14 @@ a[data-toggle="collapse"] {
   grid-template-columns: 1fr;
 }
 .update-title input,
-.update-cate input {
+.update-cate input{
   padding: 5px;
+  font-size: 20px;
+  border-radius: 5px;
+}
+
+.update-select select{
+     padding: 12px;
   font-size: 20px;
   border-radius: 5px;
 }
@@ -11049,7 +11056,8 @@ a[data-toggle="collapse"] {
 }
 .update-title label,
 .update-cate label,
-.update-content label {
+.update-content label,
+.update-select label{
   font-size: 16px;
 }
 .file-img {

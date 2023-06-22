@@ -18,7 +18,7 @@ public class UserDTO {
     private String gender;
     private String roleID;
     private boolean status;
-
+    
     public UserDTO() {
     }
     

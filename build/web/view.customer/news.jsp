@@ -53,7 +53,7 @@
 
                         <div class="news-card">
                             <a href="${newsLink}" class="nav-link col mb-4" id="news">
-                                <div class="news-card-img"><img src="./image/${news.image}" alt=""></div>
+                                <div class="news-card-img"><img src="data:image;base64,${news.data}" alt=""></div>
                                 <div class="news-card-content">
                                     <div class="news-card-id">
                                         <c:if test="${news.categoryID == 1}"> Blog</c:if>

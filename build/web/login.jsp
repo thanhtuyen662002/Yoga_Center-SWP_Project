@@ -43,7 +43,7 @@
                 </div>
                 <div class="right-links">
                     <a href="#">Forgot Password</a>
-                    <a href="#">Sign Up</a>
+                    <a href="register.jsp">Sign Up</a>
                 </div>
                 <input type="submit" value="login" name="action">
             </form>
