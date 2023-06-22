@@ -47,7 +47,7 @@
         </div>
         <ul class="list-unstyled components mb-5">
           <li class="active">
-            <a href="#"
+            <a href="views/Admin_Nhat/DashBoard.jsp"
               ><span class="fa-solid fa-chart-line mr-3"></span>Dashboard
             </a>
           </li>
@@ -70,24 +70,13 @@
             >
           </li>
           <li class="active">
-            <a href="logout"><span class="fa fa-sign-out mr-3"></span> Đăng Xuất</a>
+            <a href="logout"><span class="fa fa-sign-out mr-3"></span> Logout</a>
           </li>
         </ul>
       </nav>
-      <!-- Content ở đây -->
-      <div id="content"></div>
-    </div>
-      <script src="./../../courseNav/bootstrap.min.js"></script>
-    <script src="./../../courseNav/jquery.min.js"></script>
-    <script src="./../../courseNav/main.js"></script>
-    <script src="./../../courseNav/popper.js"></script>
-    <script>
-      $(document).ready(function () {
-        $("#course").DataTable();
-      });
-    </script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+  
+
   </body>
 </html>
 

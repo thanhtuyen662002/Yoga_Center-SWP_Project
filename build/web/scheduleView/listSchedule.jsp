@@ -44,14 +44,17 @@
                 <p style="text-align: center; font-size: 24px; font-style: italic;font-weight: bold" >Schedule Details</p>
                 <div style="width: 100%; display: block">
                     <button class="left-button btn-back" type="button" style="margin-left: 0px;border-radius: 5px;border: none" onclick="goBack()">Back</button>
+                    <form action="homeRedirect" method="post">
+                        <button class="left-button btn-back mb-4" type="submit" style="margin-left: 0px;border-radius: 5px;border: none;margin-left: 1%">Home</button>
+                    </form>
                     <c:if test="${sessionScope.USER.roleID == 'ST'}">
                         <form action="mainController" method="get">
                             <input hidden name="action" value="InsertSchedule"/>
-                            <button class="btn-primary mb-4 right-button" style="border-radius: 5px;border: none;margin-right: 0px">Create Schedule</button>
+                            <button class="btn-primary mb-4 right-button btn-back" style="border-radius: 5px;border: none;margin-right: 0px">Create Schedule</button>
                         </form>
                     </c:if> 
                 </div>
-                <table class="table">
+                <table class="table ">
                     <thead>
                         <tr style="background-color: #6b90d9;">
                             <th rowspan="2" class="select-year-custom" style="max-width: 100px;">
@@ -114,42 +117,42 @@
                             <tr style="background-color: white;">
                                 <th>Slot ${slot[i].id}<br>(${slot[i].startTime}-${slot[i].endTime})</th>
                                     <c:forEach var="j" begin="0" end="6" step="1">
-                                <form id="frm${i}${j}" action="mainController" method="get">
-                                    <input type="hidden" name="id" id="id${i}${j}"/>
-                                    <input type="hidden" name="action" value="ViewDetails"/>
-                                </form>
-                                <th id="${i}${j}">-</th>
-                                </c:forEach>
-                            </tr>
-                        </c:forEach>
-                        <c:forEach var="sc" items="${schedule}">
-                            <c:forEach var="i" begin="0" end="${slotsSize-1}" step="1">
-                                <c:if test="${sc.slot.id eq slot[i].id}">
-                                    <c:set var="row" value="${i}" />
-                                </c:if>
+                            <form id="frm${i}${j}" action="mainController" method="get">
+                                <input type="hidden" name="id" id="id${i}${j}"/>
+                                <input type="hidden" name="action" value="ViewDetails"/>
+                            </form>
+                            <th id="${i}${j}">-</th>
                             </c:forEach>
-                            <c:forEach var="j" begin="0" end="6" step="1">
-                                <c:if test="${sc.date eq day[j]}">
-                                    <c:set var="column" value="${j}" />
-                                </c:if>
-                            </c:forEach>
-                            <script>
-                                var header = document.getElementById("${row}${column}");
-                                header.innerHTML = "<c:out value='${sc.classStudy.course.name}'/>" + "<br>" + "at" + "<br>" +
-                                        "<c:out value='${sc.room.id}'/>";
-                                var input = document.getElementById("id${row}${column}");
-                                // Set the value of the input element
-                                input.value = "<c:out value='${sc.id}'/>";
-
-                                var frm = document.getElementById("frm${i}${j}");
-
-                                var thElement = document.getElementById("${row}${column}");
-                                // Add onclick event listener
-                                thElement.addEventListener("click", function () {
-                                    document.getElementById("frm${row}${column}").submit();
-                                });
-                            </script>
+                        </tr>
+                    </c:forEach>
+                    <c:forEach var="sc" items="${schedule}">
+                        <c:forEach var="i" begin="0" end="${slotsSize-1}" step="1">
+                            <c:if test="${sc.slot.id eq slot[i].id}">
+                                <c:set var="row" value="${i}" />
+                            </c:if>
                         </c:forEach>
+                        <c:forEach var="j" begin="0" end="6" step="1">
+                            <c:if test="${sc.date eq day[j]}">
+                                <c:set var="column" value="${j}" />
+                            </c:if>
+                        </c:forEach>
+                        <script>
+                            var header = document.getElementById("${row}${column}");
+                            header.innerHTML = "<c:out value='${sc.classStudy.course.name}'/>" + "<br>" + "at" + "<br>" +
+                                    "<c:out value='${sc.room.id}'/>";
+                            var input = document.getElementById("id${row}${column}");
+                            // Set the value of the input element
+                            input.value = "<c:out value='${sc.id}'/>";
+
+                            var frm = document.getElementById("frm${i}${j}");
+
+                            var thElement = document.getElementById("${row}${column}");
+                            // Add onclick event listener
+                            thElement.addEventListener("click", function () {
+                                document.getElementById("frm${row}${column}").submit();
+                            });
+                        </script>
+                    </c:forEach>
                     </tbody>
                 </table>
             </section>

@@ -117,9 +117,9 @@ public class SignUpCourseServlet extends HttpServlet {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "INSERT INTO SignUp (fullName, phone, address, gender, courseID, slotID, timeToCome, discount)\n"
+                String sql = "INSERT INTO SignUp (fullName, phone, address, gender, courseID, slotID, timeToCome, discount, status , flag)\n"
                         + "VALUES (N'" + fullName + "','" + phone + "',N'" + address + "','"
-                        + gender + "'," + course + "," + time + ",'" + timeToCome + "','" + discount + "')";
+                        + gender + "'," + course + "," + time + ",'" + timeToCome + "','" + discount + "',1,1)";
                 ptm = conn.prepareStatement(sql);
                 int row = ptm.executeUpdate();
                 if (row > 0) {

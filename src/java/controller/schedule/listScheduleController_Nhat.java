@@ -165,25 +165,25 @@ public class listScheduleController_Nhat extends BaseAuthentication_Nhat {
     }
 //
 //
-//    public static void main(String[] args) {
-//        
-//        LocalDate currentDate = LocalDate.now();
-//
-//        ScheduleDAO_Nhat sDao = new ScheduleDAO_Nhat();
-//        ClassSlotDAO_Nhat slotDao = new ClassSlotDAO_Nhat();
-//
-//        //Find the day on monday of the week
-//        LocalDate mondayOfWeek = getMondayOfWeek(currentDate);
-//        LocalDate sundayOfWeek = getSundayOfWeek(currentDate);
-//        Date monday = Date.valueOf(mondayOfWeek);
-//        Date sunday = Date.valueOf(sundayOfWeek);
-//
-//        ArrayList<LocalDate> week = getWeek(mondayOfWeek);
-//
-//        List<ScheduleDTO_Nhat> listSchedule = sDao.getAllPTSchedule("0987654444", monday, sunday);
-//        for (ScheduleDTO_Nhat scheduleDTO_Nhat : listSchedule) {
-//            System.out.println(scheduleDTO_Nhat.getClassStudy().toString());
-//        }
-//    }
+    public static void main(String[] args) {
+        
+        LocalDate currentDate = LocalDate.now();
+
+        ScheduleDAO_Nhat sDao = new ScheduleDAO_Nhat();
+        ClassSlotDAO_Nhat slotDao = new ClassSlotDAO_Nhat();
+
+        //Find the day on monday of the week
+        LocalDate mondayOfWeek = getMondayOfWeek(currentDate);
+        LocalDate sundayOfWeek = getSundayOfWeek(currentDate);
+        Date monday = Date.valueOf(mondayOfWeek);
+        Date sunday = Date.valueOf(sundayOfWeek);
+
+        ArrayList<LocalDate> week = getWeek(mondayOfWeek);
+
+        List<ScheduleDTO_Nhat> listSchedule = sDao.getAllPTSchedule("0987654444", monday, sunday);
+        for (ScheduleDTO_Nhat scheduleDTO_Nhat : listSchedule) {
+            System.out.println(scheduleDTO_Nhat.getClassStudy().getCourse().getName());
+        }
+    }
 
 }

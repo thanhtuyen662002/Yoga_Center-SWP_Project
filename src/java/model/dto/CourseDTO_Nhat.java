@@ -12,6 +12,7 @@ public class CourseDTO_Nhat {
     private int id;
     private String name;
     private String description;
+    private int numberOfMonths;
     private String image;
     private double price;
 

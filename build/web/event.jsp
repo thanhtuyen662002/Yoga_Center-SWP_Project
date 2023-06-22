@@ -4,6 +4,7 @@
     Author     : HP Pro
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,37 +21,7 @@
 </head>
 <body>
     <!-- Header -->
-    <div class="nav-background">
-        <div class="container">
-            <div class="nav">
-                <div class="nav-logo">
-                    <a href="home.jsp">YO<span>GA</span> </a>
-                </div>
-                <input type="checkbox" id="toggler">
-                <label for="toggler"><i class="fas fa-bars fa-2xl"></i></label>
-                <div class="nav-menu">
-                    <ul class="nav-menu-list">
-                        <li class="nav-menu-item">
-                                    <a class="nav-menu-link" href="clb.jsp">CLB</a>
-                                </li>
-                                <li class="nav-menu-item">
-                                     <a class="nav-menu-link" href="courses.jsp">KHÓA HỌC</a>
-                                </li>
-                                <li class="nav-menu-item">
-                                    <a class="nav-menu-link" href="listSchedule">LỊCH HỌC</a>
-                                </li>
-                                <li class="nav-menu-item">
-                                    <a class="nav-menu-link" href="event.jsp">SỰ KIỆN</a>
-                                </li>
-                                <li class="nav-menu-item">
-                                    <a class="nav-menu-link" href="news.jsp">TIN TỨC</a>
-                                </li>
-                    </ul>
-                    <a class="btn_contact" href="login.jsp">ĐĂNG NHẬP</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <c:import url="customer_header.jsp"/>
    
     <!-- Tiêu đề -->
     <div class="container">

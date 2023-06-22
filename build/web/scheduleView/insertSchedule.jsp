@@ -33,22 +33,7 @@
                 <div style="background-color: whitesmoke; border-radius: 5px;padding: 5%">
                     <button class="btn-back" type="button" style="margin-left: 0px;border-radius: 5px;border: none" onclick="goBack()">< Back</button>
                     <p style="text-align: center; font-size: 24px; font-style: italic;font-weight: bold" >Create Schedule</p>
-                    <form style="padding: 24px;" action="insertSchedule" method="post">
-                        <div class="row">
-                            <!-- Email input -->
-                            <div class="col-md-6">
-                                <div class="form-outline mb-4">
-                                    <div class="form-floating mb-4">
-                                        <select class="form-control" id="form6Example6" name="class">
-                                            <c:forEach var="cl" items="${className}">
-                                                <option value="${cl.id}">${cl.name}</option>
-                                            </c:forEach>    
-                                        </select>
-                                        <label for="form6Example6">Class</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <form style="padding: 24px;" action="insertSchedule" method="post" onsubmit="return validateForm()">
                         <div class="row">
                             <!-- Email input -->
                             <div class="col-md-6">
@@ -77,15 +62,16 @@
                             </div>
                         </div>
                         <div class="row">
+                            <!-- Class input -->
                             <div class="col-md-6">
                                 <div class="form-outline mb-4">
                                     <div class="form-floating mb-4">
-                                        <select class="form-control" id="form6Example6" name="cusId">
-                                            <c:forEach var="c" items="${customer}">
-                                                <option value="${c.phone}">${c.name}</option>
-                                            </c:forEach>  
+                                        <select class="form-control" id="form6Example6" name="class">
+                                            <c:forEach var="cl" items="${className}">
+                                                <option value="${cl.id}">${cl.name}</option>
+                                            </c:forEach>    
                                         </select>
-                                        <label for="form6Example6">Customer</label>
+                                        <label for="form6Example6">Class</label>
                                     </div>
                                 </div>
                             </div>
@@ -94,8 +80,41 @@
                                     <div class="form-floating mb-4">
                                         <input value="${schedule.date}"  name="day" min="${minDate}" required 
                                                type="date" id="dateInput" class="form-control" placeholder="Example" />
-                                        <label for="form12">Day</label>
+                                        <label for="form12">Start Date</label>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-md-6 border rounded-2 mb-2 bg-white">
+                                Day study:
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="weekDay" type="checkbox" id="flexSwitchCheckDefault" value="Monday">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">Monday</label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="weekDay" type="checkbox" id="flexSwitchCheckDefault" value="Tuesday">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">Tuesday</label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="weekDay" type="checkbox" id="flexSwitchCheckDefault" value="Wednesday">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">Wednesday</label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="weekDay" type="checkbox" id="flexSwitchCheckDefault" value="Thursday">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">Thursday</label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="weekDay" type="checkbox" id="flexSwitchCheckDefault" value="Friday">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">Friday</label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="weekDay" type="checkbox" id="flexSwitchCheckDefault" value="Saturday">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">Saturday</label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="weekDay" type="checkbox" id="flexSwitchCheckDefault" value="Sunday">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">Sunday</label>
                                 </div>
                             </div>
                         </div>
@@ -178,6 +197,25 @@ crossorigin="anonymous"></script>
                                 }
                                 function goBack() {
                                     window.history.back();
+                                }
+                                function validateForm() {
+                                    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                                    var checked = false;
+
+                                    for (var i = 0; i < checkboxes.length; i++) {
+                                        if (checkboxes[i].checked) {
+                                            checked = true;
+                                            break;
+                                        }
+                                    }
+
+                                    if (!checked) {
+                                        alert('Please select at least one option.');
+                                        return false; // Prevent form submission
+                                    }
+
+                                    // Form validation passed, proceed with form submission
+                                    return true;
                                 }
 </script>
 </body>
