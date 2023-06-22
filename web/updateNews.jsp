@@ -73,13 +73,23 @@
                             <label for="title">Title</label>
                             <input value="${ns.title}" type="text" name="title" />
                         </div>
+                        <div class="update-select">
+                            <label>Title</label>
+                            <select name="categoryID">
+                                <option value="" selected>Chọn Loại Tin Tức</option>
+                                <option value="1">Blog</option>
+                                <option value="2">Product</option>
+                                <option value="3">Other</option>
+                            </select>
+                        </div>
+
                         <div class="update-cate">
                             <label>Image</label>
                             <input type="file" name="image" id="fileInput" onchange="previewImage(event)" accept="image/*" />
                             <div class="file-img">
 
                                 <c:if test="${not empty ns.image}">
-                                    <img id="preview" src="${pageContext.request.contextPath}/images/${ns.image}" width="50px" height="50px" alt="Preview">
+                                    <img id="preview" src="data:image;base64,${ns.data}" width="50px" height="50px" alt="Preview">
                                 </c:if>
 
                                 <!--<img id="preview" src="#" alt="Preview" />-->
@@ -88,8 +98,8 @@
                         <div class="update-content-wrapper">
                             <div class="update-content">
                                 <label for="">Content</label>
-                                <textarea id="myTextarea">${ns.content}</textarea>
-                                
+                                <textarea id="myTextarea" name="content">${ns.content}</textarea>
+
                                 <input type="hidden" name="newsID" value="${ns.newsID}"/>
                             </div>
                         </div>

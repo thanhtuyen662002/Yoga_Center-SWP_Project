@@ -21,6 +21,7 @@ public class NewsDTO {
     private String content;
     private int categoryID;
     private boolean status ;
+    private String data;
 
     public NewsDTO(int newsID, String stPhone, String title, String postDate, String image, String content, int categoryID, boolean status) {
         this.newsID = newsID;
@@ -41,6 +42,27 @@ public class NewsDTO {
         this.image = image;
         this.content = content;
         this.categoryID = categoryID;
+    }
+
+    public NewsDTO(int newsID, String stPhone, String title, String postDate, String image,String data, String content, int categoryID, boolean status) {
+        this.newsID = newsID;
+        this.stPhone = stPhone;
+        this.title = title;
+        this.postDate = postDate;
+        this.image = image;
+        this.data = data;
+        this.content = content;
+        this.categoryID = categoryID;
+        this.status = status;
+        
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
     
 

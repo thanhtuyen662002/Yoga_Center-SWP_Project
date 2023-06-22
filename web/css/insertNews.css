@@ -10698,8 +10698,8 @@ h5,
 }
 
 #sidebar {
-  min-width: 30rem;
-  max-width: 30rem;
+  min-width: 450px;
+  max-width: 45 0px;
   background: #32373d;
   color: #fff;
   -webkit-transition: all 0.3s;
@@ -10711,7 +10711,7 @@ h5,
   color: #fff;
 }
 #sidebar.active {
-  margin-left: -20rem;
+  margin-left: -300px;
 }
 #sidebar.active .custom-menu {
   margin-right: -50px;
@@ -10749,8 +10749,7 @@ h5,
 }
 #sidebar ul li a {
   padding: 15px 30px;
-  display: flex;
-  justify-content: space-between;
+  display: block;
   color: rgba(255, 255, 255, 0.6);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -10785,7 +10784,7 @@ h5,
 }
 @media (max-width: 991.98px) {
   #sidebar {
-    margin-left: -20rem;
+    margin-left: -300px;
   }
   #sidebar.active {
     margin-left: 0;
@@ -10941,6 +10940,8 @@ a[data-toggle="collapse"] {
 .subscribe-form .form-control {
   background: #4897fc;
 }
+
+/* này là làm title link */
 /* này làm link title */
 .course-link ul {
   list-style: none;
@@ -10972,6 +10973,7 @@ a[data-toggle="collapse"] {
 .course-link li #active {
   color: #a50001;
 }
+/* này là dưới title link */
 /* Dưới title */
 .course-title {
   display: flex;
@@ -10998,17 +11000,7 @@ a[data-toggle="collapse"] {
   background-color: #a50001;
   color: #fff;
 }
-/* này là table */
-.dataTables_wrapper {
-  margin: 50px;
-  padding: 20px;
-  border-radius: 15px;
-  background-color: #fff;
-}
-#tool {
-  font-size: 22px;
-}
-
+/* này là Name  */
 .table-name {
   text-align: center;
   margin: 0 50px;
@@ -11020,9 +11012,79 @@ a[data-toggle="collapse"] {
   font-weight: 700;
   color: #808080;
 }
-.table-noidung {
-  max-width: 250px;
-  max-height: 10rem;
-  overflow: hidden;
+
+/* UPDATE */
+.update-box {
+  display: grid;
+  margin: 0 50px;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.update-title,
+.update-cate,
+.update-select{
+  grid-column: span 1;
+  grid-row: span 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.update-content-wrapper {
+  grid-column: span 2;
+}
+
+.update-content {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.update-title input,
+.update-cate input{
+  padding: 5px;
+  font-size: 20px;
+  border-radius: 5px;
+}
+
+.update-select select{
+     padding: 12px;
+  font-size: 20px;
+  border-radius: 5px;
+}
+.update-cate input {
+  border: 1px solid black;
+  background-color: #fff;
+}
+.update-title label,
+.update-cate label,
+.update-content label,
+.update-select label{
+  font-size: 16px;
+}
+.file-img {
+  width: 300px;
+  height: 200px;
+}
+.file-img img {
   width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+.table-btn {
+  margin-top: 10rem;
+  text-align: center;
+}
+.table-btn a {
+  text-align: center;
+  border: 1px solid #808080;
+  padding: 10px 40px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 24px;
+  color: #808080;
+  background-color: #fff;
+}
+.table-btn a:hover {
+  background-color: #0b2e13;
+  color: #fff;
 }

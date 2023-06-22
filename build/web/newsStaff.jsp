@@ -59,7 +59,7 @@
                                 <!--<td>${x.stPhone}</td>-->
                                 <td id="title">${x.title}</td>
                                 <td >${x.postDate}</td>
-                                <td id="table-img"><img src="./image/${x.image}" alt=""></td>
+                                <td id="table-img"><img src="data:image;base64,${x.data}" alt=""></td>
                                 <!--<td ><div class="table-noidung">${x.content}</div> </td>-->
                                 <td>
                                     <c:if test="${x.categoryID == 1}"> Blog</c:if>

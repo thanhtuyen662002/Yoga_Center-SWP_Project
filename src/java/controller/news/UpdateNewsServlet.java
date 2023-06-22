@@ -1,185 +1,128 @@
-///*
-// * To change this license header, choose License Headers in Project Properties.
-// * To change this template file, choose Tools | Templates
-// * and open the template in the editor.
-// */
-//package controller.news;
-//
-//import java.sql.Connection;
-//import java.io.File;
-//import java.io.IOException;
-//import java.io.InputStream;
-//import java.io.PrintWriter;
-//import java.nio.file.Files;
-//import java.nio.file.Path;
-//import java.nio.file.Paths;
-//import java.nio.file.StandardCopyOption;
-//import java.sql.SQLException;
-//import java.util.ArrayList;
-//import java.util.Base64;
-//import java.util.List;
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
-//import javax.servlet.ServletException;
-//import javax.servlet.annotation.WebServlet;
-//import javax.servlet.http.HttpServlet;
-//import javax.servlet.http.HttpServletRequest;
-//import javax.servlet.http.HttpServletResponse;
-//import javax.servlet.http.Part;
-//import model.dao.NewsDAO;
-//import model.dto.NewsDTO;
-//import org.apache.tomcat.util.http.fileupload.IOUtils;
-//import java.sql.PreparedStatement;
-//import utils.DBUtils;
-//
-//
-///**
-// *
-// * @author HOANG ANH
-// */
-//@WebServlet(name = "UpdateNewsServlet", urlPatterns = {"/updatenews"})
-//public class UpdateNewsServlet extends HttpServlet {
-//
-//    /**
-//     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-//     * methods.
-//     *
-//     * @param request servlet request
-//     * @param response servlet response
-//     * @throws ServletException if a servlet-specific error occurs
-//     * @throws IOException if an I/O error occurs
-//     */
-//    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        response.setContentType("text/html;charset=UTF-8");
-//        try (PrintWriter out = response.getWriter()) {
-//
-//        }
-//    }
-//
-//    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-//    /**
-//     * Handles the HTTP <code>GET</code> method.
-//     *
-//     * @param request servlet request
-//     * @param response servlet response
-//     * @throws ServletException if a servlet-specific error occurs
-//     * @throws IOException if an I/O error occurs
-//     */
-//    private NewsDAO newsDAO;
-//
-//    @Override
-//    public void init() throws ServletException {
-//        super.init();
-//        newsDAO = new NewsDAO();
-//    }
-//
-//    @Override
-//    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        try {
-//            //        processRequest(request, response);
-//            String id = request.getParameter("newsID");
-//            NewsDAO dao = new NewsDAO();
-//            NewsDTO n = dao.getNewsByID(id);
-//            request.setAttribute("ns", n);
-//            request.getRequestDispatcher("updateNews.jsp").forward(request, response);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(UpdateNewsServlet.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//    }
-//
-//    /**
-//     * Handles the HTTP <code>POST</code> method.
-//     *
-//     * @param request servlet request
-//     * @param response servlet response
-//     * @throws ServletException if a servlet-specific error occurs
-//     * @throws IOException if an I/O error occurs
-//     */
-//    @Override
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        NewsDAO dao = new NewsDAO();
-//        String rootPath = getServletContext().getRealPath("/");
-//        String imagePath = "image";
-//        String filePath = rootPath + imagePath;
-//        String title = request.getParameter("title");
-//        String content = request.getParameter("content");
-//        String categoryID = request.getParameter("categoryID");
-//        String fileName = "";
-//        String partName = "";
-//        String data = "";
-//        InputStream fileContent;
-//        boolean checkDuplicate;
-//        //Kiểm tra tên khóa học đã có trong database hay chưa
-//        checkDuplicate = dao.checkDuplicateNewsID(newsID);
-//        if (!checkDuplicate) {
-//            List<Part> fileParts = new ArrayList<>();
-//            for (Part part : request.getParts()) {
-//                partName = new String(part.getName().getBytes("iso-8859-1"), "UTF-8");
-//                if (partName.startsWith("image")) {
-//                    fileParts.add(part);
-//                }
-//            }
-//
-//            for (Part filePart : fileParts) {
-//                fileName = filePart.getSubmittedFileName();
-//                fileContent = filePart.getInputStream();
-//
-////                    File file = new File(filePath + File.separator + fileName);
-//                Path file = Paths.get(filePath + File.separator + fileName);
-//                byte[] imageBytes = IOUtils.toByteArray(fileContent);
-//                data = Base64.getEncoder().encodeToString(imageBytes);
-//                Files.copy(fileContent, file, StandardCopyOption.REPLACE_EXISTING);
-//
-//            }
-//
-//            try {
-//                saveInforToDatabase(title, content, categoryID, fileName, data);
-//            } catch (SQLException ex) {
-//                Logger.getLogger(UpdateNewsServlet.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (ClassNotFoundException ex) {
-//                Logger.getLogger(UpdateNewsServlet.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        } else {
-//            //response.getWriter().println("Error: Course name already exists in Database!");
-//            request.setAttribute("ErrorMessage", "Error: Course name already exists in Database!");
-//            request.getRequestDispatcher("updateNews.jsp").forward(request, response);
-//        }
-//        response.sendRedirect("news");
-//
-//    }
-//
-//    /**
-//     * Returns a short description of the servlet.
-//     *
-//     * @return a String containing servlet description
-//     */
-//       private void saveInforToDatabase(String newsID, String title, String content, String image, String categoryID) throws SQLException, ClassNotFoundException {
-//        Connection conn = null;
-//        PreparedStatement ptm = null;
-//        try {
-//            conn = DBUtils.getConnection();
-//            if (conn != null) {
-//                String query = "UPDATE News SET title= '" + title + "' ,image= '" + image + "', content='" + content + "' ,categoryID= " + categoryID + "WHERE newsID= " + newsID;
-//                ptm = conn.prepareStatement(query);
-//                ptm.executeUpdate();
-//            }
-//        } catch (Exception e) {
-//        } finally {
-//            if (ptm != null) {ptm.close();
-//            }
-//            if (conn != null) {
-//                conn.close();
-//            }
-//        }
-//    }
-//
-//    @Override
-//    public String getServletInfo() {
-//        return "Short description";
-//    }// </editor-fold>
-//
-//}
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */ 
+package controller.news;
+
+import java.sql.Connection;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.SQLException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import model.dao.NewsDAO;
+import model.dto.NewsDTO;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.annotation.MultipartConfig;
+import org.apache.commons.io.IOUtils;
+import utils.DBUtils;
+
+/**
+ *
+ * @author HOANG ANH
+ */
+@WebServlet(name = "UpdateNewsServlet", urlPatterns = {"/updatenews"})
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+        maxFileSize = 1024 * 1024 * 10, // 10MB
+        maxRequestSize = 1024 * 1024 * 50)   // 50MB
+public class UpdateNewsServlet extends HttpServlet {
+
+    private static final long serialVersionUID = 1L;
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String newsID = request.getParameter("newsID");
+
+        try {
+            NewsDAO dao = new NewsDAO();
+            NewsDTO news = dao.getNewsByID(newsID);
+            if (news == null) {
+                response.sendRedirect(request.getContextPath() + "/error");
+                return;
+            }
+
+            request.setAttribute("ns", news);
+            request.getRequestDispatcher("updateNews.jsp").forward(request, response);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.sendRedirect(request.getContextPath() + "/error");
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String newsID = request.getParameter("newsID");
+        String title = new String(request.getParameter("title").getBytes("ISO-8859-1"), "UTF-8");
+        String categoryID = request.getParameter("categoryID");
+        String content = new String(request.getParameter("content").getBytes("ISO-8859-1"), "UTF-8");
+
+        // Xử lý yêu cầu tải lên ảnh
+        List<Part> fileParts = new ArrayList<>();
+        for (Part part : request.getParts()) {
+            String partName = new String(part.getName().getBytes("iso-8859-1"), "UTF-8");
+            if (partName.startsWith("image")) {
+                fileParts.add(part);
+            }
+        }
+
+        for (Part filePart : fileParts) {
+            try {
+                String filename = filePart.getSubmittedFileName();
+                InputStream fileContent = filePart.getInputStream();
+
+                InputStream content1 = fileContent;
+                byte[] imageBytes = IOUtils.toByteArray(content1);
+                String data = Base64.getEncoder().encodeToString(imageBytes);
+                updateNews(newsID, title, filename, categoryID, content, data);
+
+                {
+
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UpdateNewsServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        response.sendRedirect("news");
+    }
+
+    private void updateNews(String newsID, String title, String image, String categoryID, String content, String data) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String query = "UPDATE News SET title= N'" + title + "' ,image= '" + image + "', content=N'" + content + "' ,categoryID= " + categoryID + ", data = '" + data + "' WHERE newsID= " + newsID;
+                ptm = conn.prepareStatement(query);
+                ptm.executeUpdate();
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UpdateNewsServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateNewsServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }
+
+}
