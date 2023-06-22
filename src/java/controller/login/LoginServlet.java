@@ -88,6 +88,7 @@ public class LoginServlet extends HttpServlet {
                         response.sendRedirect("listStaff");
                         break;
                     case "ST":
+                        session.setAttribute("STAFF", user);
                         response.sendRedirect("courses");
                         break;
                 }

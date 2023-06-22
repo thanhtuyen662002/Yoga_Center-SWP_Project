@@ -66,6 +66,14 @@ public class NewsDAO {
         }
         return list;
     }
+    
+//     public static void main(String[] args) throws NamingException, SQLException, ClassNotFoundException {
+//        NewsDAO dao = new NewsDAO();
+//        ArrayList<NewsDTO> List = dao.g;
+//        for (NewsDTO o : List) {
+//            System.out.println(o);
+//        }
+//    }
 
     public NewsDTO getNewsByID(String id) throws SQLException {
         Connection conn = null;
@@ -263,13 +271,7 @@ public class NewsDAO {
         return list;
     }
 
-    public static void main(String[] args) throws NamingException, SQLException, ClassNotFoundException {
-        NewsDAO dao = new NewsDAO();
-        List<NewsDTO> List = dao.getRalativeNews(1);
-        for (NewsDTO o : List) {
-            System.out.println(o);
-        }
-    }
+ 
 
     public NewsDTO getNews(int newsID) throws NamingException, SQLException, ClassNotFoundException {
         Connection conn = null;
@@ -342,14 +344,15 @@ public class NewsDAO {
                     String date = rs.getString("postDate");
                     String content = rs.getString("content");
                     String image = rs.getString("image");
+                    String data = rs.getString("data");
                     int categoryID = rs.getInt("categoryID");
                     boolean status = rs.getBoolean("status");
 
-                    list.add(new NewsDTO(newsID, stPhone, title, date, image, content, categoryID, status));
+                    list.add(new NewsDTO(newsID, stPhone, title, date, image, data, content, categoryID, status));
                 }
             }
         } catch (Exception e) {
-        } finally {
+        } finally { 
             if (rs != null) {
                 rs.close();
             }

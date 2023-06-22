@@ -55,7 +55,7 @@
                                     <!--<a href="logOut" class="nav-link text-decoration-none p-2" id="item">Đăng xuất</a>-->
                                 </div>
                                 <c:if test="${sessionScope.USER.roleID eq 'ST'}">
-                                    <a href="homeStaff.jsp" class="nav-link mb-2 text-decoration-none p-2" id="item">Quản lý</a>
+                                    <a href="courses" class="nav-link mb-2 text-decoration-none p-2" id="item">Quản lý</a>
                                 </c:if>
                                 <a href="logout" class="nav-link text-decoration-none p-2" id="item">Đăng xuất</a>
                             </div>
