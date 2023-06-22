@@ -44,7 +44,9 @@ public class NewsDTO {
         this.categoryID = categoryID;
     }
 
-    public NewsDTO(int newsID, String stPhone, String title, String postDate, String image,String data, String content, int categoryID, boolean status) {
+
+
+    public NewsDTO(int newsID, String stPhone, String title, String postDate, String image, String data, String content, int categoryID, boolean status) {
         this.newsID = newsID;
         this.stPhone = stPhone;
         this.title = title;

@@ -9,8 +9,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.NamingException;
+import model.dto.NewsDTO;
 import model.dto.UserDTO;
 import utils.DBUtils;
 
@@ -55,6 +57,47 @@ public class UserDAO {
         }
         return user;
     }
+    
+    public static ArrayList<NewsDTO> getAllCus() throws SQLException {
+        ArrayList<NewsDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement("SELECT * FROM [dbo].[User] WHERE role = 'US'");
+                rs = ptm.executeQuery();
+
+                while (rs.next()) {
+                    int newsID = rs.getInt("newsID");
+                    String stPhone = rs.getString("stPhone");
+                    String title = rs.getString("title");
+                    String date = rs.getString("postDate");
+                    String content = rs.getString("content");
+                    String image = rs.getString("image");
+                    String data = rs.getString("data");
+                    int categoryID = rs.getInt("categoryID");
+                    boolean status = rs.getBoolean("status");
+                    list.add(new NewsDTO(newsID, stPhone, title, date, image, data, content, categoryID, status));
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+    
+    
         private static final String CHECK_DUPLICATE_ACCOUNT = "SELECT * FROM [Yoga Center].[dbo].[User] WHERE [phone] = '?'";
 
 
