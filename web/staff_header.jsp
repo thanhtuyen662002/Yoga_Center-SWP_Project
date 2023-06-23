@@ -10,6 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="./css/staffDropdown.css">
+        <link rel="stylesheet" href="./css/courseStaff.css" />
         <title>JSP Page</title>
     </head>
     <body>
@@ -50,14 +51,14 @@
                             <li><a href="pendingnews">Tin tức đã xóa</a></li>
                         </ul>
                     </li> 
-                    <li>
+                    <li onmouseover="showDropdown('showclass')" onmouseout="hideDropdown('showclass')">
                         <a href="mainController?action=showclass"><span class="fa-solid fa-people-group mr-3"></span> LỚP HỌC</a>
-                        <ul id="guest" class="dropdown">
+                        <ul id="showclass" class="dropdown">
                             <li><a href="createClass">Tạo lớp học</a></li>
                             <li><a href="#">Lớp học đã xóa</a></li>
                         </ul>
                     </li> 
-                    <li>
+                    <li onmouseover="showDropdown('guest')" onmouseout="hideDropdown('guest')">
                         <a href="mainController?action=guest"><span class="fa-solid fa-people-group mr-3"></span> KHÁCH HÀNG</a>
                         <ul id="guest" class="dropdown">
                             <li><a href="insertGuest.jsp">Tạo tài khoản</a></li>
