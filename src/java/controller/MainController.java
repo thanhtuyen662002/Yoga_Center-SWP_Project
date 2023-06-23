@@ -43,7 +43,7 @@ public class MainController extends HttpServlet {
                 url = "login";
             } else if (action.equals("logout")) {
                 url = "logout";
-                } else if (action.equals("SignUp")) {
+            } else if (action.equals("SignUp")) {
                 url = "register";
             } else if (action.equals("courses")) {
                 url = "courses";
@@ -67,6 +67,8 @@ public class MainController extends HttpServlet {
                 url = "updateCourse";
             } else if (action.equals("listSchedule")) {
                 url = "listSchedule";
+            } else if (action.equals("showclass")) {
+                url = "showclass";
             } else if (action.equals("InsertSchedule")) {
                 url = "insertSchedule";
             } else if (action.equals("ViewDetails")) {

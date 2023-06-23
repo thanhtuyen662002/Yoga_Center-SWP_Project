@@ -51,7 +51,7 @@
                         </ul>
                     </li> 
                     <li>
-                        <a href="mainController?action=class"><span class="fa-solid fa-people-group mr-3"></span> LỚP HỌC</a>
+                        <a href="mainController?action=showclass"><span class="fa-solid fa-people-group mr-3"></span> LỚP HỌC</a>
                         <ul id="guest" class="dropdown">
                             <li><a href="createClass">Tạo lớp học</a></li>
                             <li><a href="#">Lớp học đã xóa</a></li>

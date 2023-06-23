@@ -6,6 +6,7 @@ public class ClassDTO {
     private int courseID;
     private int capacity;
     private String ptPhone;
+    private String ptName;
     private String className;
     private String description;
     private int totalSession;
@@ -14,20 +15,24 @@ public class ClassDTO {
     private String staffName;
     private int numberOfMonths;
 
+    
     public ClassDTO() {
     }
 
-    public ClassDTO(int classID, int courseID, int capacity, String ptPhone, String className, String description, int totalSession, boolean status) {
+    public ClassDTO(int classID, int courseID, int capacity, String ptName, String className, String description, int totalSession, boolean status) {
         this.classID = classID;
         this.courseID = courseID;
         this.capacity = capacity;
-        this.ptPhone = ptPhone;
+        this.ptName = ptName;
         this.className = className;
         this.description = description;
         this.totalSession = totalSession;
         this.status = status;
     }
 
+    
+    
+    
     public ClassDTO(int courseID, String courseName, int numberOfMonths) {
         this.courseID = courseID;
         this.courseName = courseName;
@@ -36,6 +41,14 @@ public class ClassDTO {
 
     public ClassDTO(int numberOfMonths) {
         this.numberOfMonths = numberOfMonths;
+    }
+
+    public String getPtName() {
+        return ptName;
+    }
+
+    public void setPtName(String ptName) {
+        this.ptName = ptName;
     }
 
 

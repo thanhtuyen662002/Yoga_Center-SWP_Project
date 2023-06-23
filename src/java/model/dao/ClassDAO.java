@@ -11,15 +11,14 @@ import utils.DBUtils;
 
 public class ClassDAO {
 
-    public static void main(String[] args) throws SQLException {
-        ClassDAO dao = new ClassDAO();
-        List<ClassDTO> course = dao.getCourseName();
-        List<ClassDTO> staff = dao.getStaff();
-        for (ClassDTO classDTO : course) {
-            System.out.println(classDTO);
-        }
-    }
-
+//    public static void main(String[] args) throws SQLException {
+//        ClassDAO dao = new ClassDAO();
+//        List<ClassDTO> course = dao.getCourseName();
+//        List<ClassDTO> staff = dao.getStaff();
+//        for (ClassDTO classDTO : course) {
+//            System.out.println(classDTO);
+//        }
+//    }
     public List<ClassDTO> getCourseName() throws SQLException {
         List<ClassDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -137,4 +136,54 @@ public class ClassDAO {
         }
         return null;
     }
+
+    public static List<ClassDTO> getAllClass() throws SQLException {
+        List<ClassDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement("SELECT c.classID, c.courseID, u.name AS ptName, c.name AS className, c.description, c.total_sessions, c.capacity, c.status\n"
+                        + "FROM Class c\n"
+                        + "INNER JOIN [dbo].[User] u ON c.ptPhone = u.phone\n"
+                        +  "WHERE c.status = 1");
+                rs = ptm.executeQuery();
+
+                while (rs.next()) {
+                    int classID = rs.getInt("classID");
+                    int courseID = rs.getInt("courseID");
+                    String ptName = rs.getString("ptName");
+                    String className = rs.getString("className");
+                    String description = rs.getString("description");
+                    int totalSession = rs.getInt("total_sessions");
+                    int capacity = rs.getInt("capacity");
+                    boolean status = rs.getBoolean("status");
+                    list.add(new ClassDTO(classID, courseID, capacity, ptName, className, description, totalSession, status));
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
+    public static void main(String[] args) throws SQLException {
+        ClassDAO dao = new ClassDAO();
+        List<ClassDTO> List = ClassDAO.getAllClass();
+        for (ClassDTO o : List) {
+            System.out.println(o);
+        }
+    }
+
 }
