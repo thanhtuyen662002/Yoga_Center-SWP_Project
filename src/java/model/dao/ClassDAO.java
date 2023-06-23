@@ -241,6 +241,38 @@ public class ClassDAO {
         return check;
     }
 
+    public List<ClassDTO> getListStudent(String classID) throws SQLException {
+        List<ClassDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT u.name, uc.phone FROM UserClass AS uc\n"
+                        + "JOIN [User] AS u ON uc.phone = u.phone\n"
+                        + "WHERE uc.classID = " + classID;
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    list.add(new ClassDTO(rs.getString("phone"), rs.getString("name")));
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
     public static void main(String[] args) throws SQLException {
         ClassDAO dao = new ClassDAO();
         List<ClassDTO> List = dao.getUser("2");

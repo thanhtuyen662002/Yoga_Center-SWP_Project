@@ -42,17 +42,21 @@
                         <tr>
                             <th>TÊN HỌC VIÊN </th>
                             <th>SỐ ĐIỆN THOẠI</th> 
-                            <th>ACTION</th>
+                            <th>ĐIỂM DANH</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="l" items="${List}">
-                        <tr>
-                            <td>${l.cusName}</td>
-                            <td>${l.cusPhone}</td>
-                            <td><a href="addUserToClass?cus=${l.cusPhone}&classID=${classID}&id=${id}"><i class="fa-solid fa-user-plus fa-bounce" style="color: #41ed12;"></i></a>
-                            </td>
-                        </tr>
+                        <c:forEach var="l" items="${list}">
+                            <tr>
+                                <td>${l.cusName}</td>
+                                <td>${l.cusPhone}</td>
+                                <td><input type="radio" id="co-mat" name="trang-thai" value="CoMat">
+                                    <label for="co-mat" class="custom-radio">Có mặt</label>
+
+                                    <input type="radio" id="vang-mat" name="trang-thai" value="VangMat">
+                                    <label for="vang-mat" class="custom-radio">Vắng mặt</label>
+                                </td>
+                            </tr>
                         </c:forEach>
                     </tbody>
                 </table>

@@ -50,7 +50,8 @@
                         <tr>
                             <td>${l.cusName}</td>
                             <td>${l.cusPhone}</td>
-                            <td><a href="addUserToClass?cus=${l.cusPhone}&classID=${classID}&id=${id}"><i class="fa-solid fa-user-plus fa-bounce" style="color: #41ed12;"></i></a></td>
+                            <td><a href="addUserToClass?cus=${l.cusPhone}&classID=${classID}&id=${id}"><i class="fa-solid fa-user-plus fa-bounce" style="color: #41ed12;"></i></a>
+                            </td>
                         </tr>
                         </c:forEach>
                     </tbody>
