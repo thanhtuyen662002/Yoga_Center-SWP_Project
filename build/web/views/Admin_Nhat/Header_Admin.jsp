@@ -53,7 +53,7 @@
           </li>
 
           <li class="active">
-            <a href="#"
+            <a href="views/Admin_Nhat/EditProfile.jsp"
               ><span class="fa-solid fa-pen-to-square mr-3"></span> Edit
               Profile</a
             >

@@ -136,13 +136,13 @@
             </div>
         </div>
 
-        <script src="/courseNav/bootstrap.min.js"></script>
-        <script src="/courseNav/jquery.min.js"></script>
-        <script src="/courseNav/main.js"></script>
-        <script src="/courseNav/popper.js"></script>
+        <script src="./../../courseNav/bootstrap.min.js"></script>
+        <script src="./../../courseNav/jquery.min.js"></script>
+        <script src="./../../courseNav/main.js"></script>
+        <script src="./../../courseNav/popper.js"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-        <script src="/ckeditor/ckeditor.js"></script>
+        <script src="./../../ckeditor/ckeditor.js"></script>
         <script>
                             CKEDITOR.replace("myTextarea");
         </script>
