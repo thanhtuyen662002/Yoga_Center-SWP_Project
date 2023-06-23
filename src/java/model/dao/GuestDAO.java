@@ -210,8 +210,8 @@ public class GuestDAO {
                 rs = ptm.executeQuery();
                 if (rs.next()) {
                     int courseID = rs.getInt("courseID");
-                    String sql1 = "INSERT INTO UserCourse (courseID, phone)\n"
-                            + "VALUES (" + courseID + ",'" + phone + "')";
+                    String sql1 = "INSERT INTO UserCourse (courseID, phone, status)\n"
+                            + "VALUES (" + courseID + ",'" + phone + "',1)";
                     ptm1 = conn.prepareStatement(sql1);
                     int row = ptm1.executeUpdate();
                     if (row > 0) {

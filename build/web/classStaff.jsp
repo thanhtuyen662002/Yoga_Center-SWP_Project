@@ -30,12 +30,8 @@
                 <div class="course-link">
                     <ul>
                         <li><a href="">Staff</a></li>
-                        <li><a href="" id="active">Tin Tức</a></li>
+                        <li><a href="" id="active">Lớp học</a></li>
                     </ul>
-                </div>
-                <div class="course-title" >
-                    <div class="text">WELCOME STAFF</div>
-                    <div class="insert"><a value="" type="submit" name="">Insert</a></div>
                 </div>
                 <div class="table-name">
                     <h1>BẢNG DỮ LIỆU LỚP HỌC</h1>
@@ -43,10 +39,9 @@
                 <table id="course" class="display" style="width:100%">
                     <thead>
                         <tr>
-                            <!--<th>ID</th>-->
-                            <th>KHÓA HỌC</th>
-                            <th>PT</th>
                             <th>TÊN LỚP </th>
+                            <th>PT</th>
+                            <th>KHÓA HỌC</th>
                             <th>NỘI DUNG</th>
                             <th>SỐ SLOT</th>
                             <th>SỐ HỌC VIÊN</th>
@@ -56,24 +51,13 @@
                     <tbody>
                         <c:forEach items="${list_class}" var="x">
                             <tr>
-                                <!--<th scope="row" id="id">${x.classID}</th>-->
-
-                                <td>
-                                    <c:if test="${x.courseID == 2}"> Basic</c:if>
-                                    <c:if test="${x.courseID == 60}"> Advance</c:if>
-                                    <c:if test="${x.courseID == 61}"> Teacher</c:if>
-                                    <c:if test="${x.courseID == 62}"> Therapy</c:if>
-
-                                    </td>
+                                <td>${x.className}</td>
                                 <td>${x.ptName}</td>
-                                <td id="title">${x.className}</td>
-                                <td >${x.description}</td>
-                                <td >${x.capacity}</td>
-                                <th scope="row" id="id">${x.totalSession}</th>
-                                <td>                              
-
-
-                                </td>
+                                <td>${x.courseName}</td>
+                                <td>${x.description}</td>
+                                <td>${x.totalSession}</td>
+                                <td>${x.capacity}</td>
+                                <td><a href="showLearner?id=${x.courseID}&classID=${x.classID}"><i class="fa-regular fa-square-plus fa-bounce" style="color: #07f236;"></i></a></td>
                             </tr>
                         </c:forEach>
                         </tfoot>

@@ -18,7 +18,7 @@
             integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
             crossorigin="anonymous"
             />
-        <link rel="stylesheet" href="./css/classStaff.css" />
+        <link rel="stylesheet" href="./css/addUserToClass.css" />
         <title>Lớp Học</title>
     </head>
     <body>
@@ -30,38 +30,30 @@
                 <div class="course-link">
                     <ul>
                         <li><a href="">Staff</a></li>
-                        <li><a href="" id="active">Lớp học</a></li>
+                        <li><a href="">Lớp học</a></li>
+                        <li><a href="" id="active"></a></li>
                     </ul>
                 </div>
                 <div class="table-name">
-                    <h1>BẢNG DỮ LIỆU LỚP HỌC</h1>
+                    <h1>DANH SÁCH HỌC VIÊN</h1>
                 </div>
-                <table id="course" class="display" style="width:100%">
+                <table id="class" class="display" style="width:100%">
                     <thead>
                         <tr>
-                            <th>TÊN LỚP </th>
-                            <th>PT</th>
-                            <th>KHÓA HỌC</th>
-                            <th>NỘI DUNG</th>
-                            <th>SỐ SLOT</th>
-                            <th>SỐ HỌC VIÊN</th>
-                            <th>Action</th>
+                            <th>TÊN HỌC VIÊN </th>
+                            <th>SỐ ĐIỆN THOẠI</th> 
+                            <th>ACTION</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${list_class}" var="x">
-                            <tr>
-                                <td>${x.className}</td>
-                                <td>${x.ptName}</td>
-                                <td>${x.courseName}</td>
-                                <td>${x.description}</td>
-                                <td>${x.totalSession}</td>
-                                <td>${x.capacity}</td>
-                                <td><a href="showLearner?id=${x.courseID}&classID=${x.classID}"><i class="fa-regular fa-square-plus fa-bounce" style="color: #07f236;"></i></a></td>
-                            </tr>
+                        <c:forEach var="l" items="${List}">
+                        <tr>
+                            <td>${l.cusName}</td>
+                            <td>${l.cusPhone}</td>
+                            <td><a href="addUserToClass?cus=${l.cusPhone}&classID=${classID}&id=${id}"><i class="fa-solid fa-user-plus fa-bounce" style="color: #41ed12;"></i></a></td>
+                        </tr>
                         </c:forEach>
-                        </tfoot>
-
+                    </tbody>
                 </table>
 
             </div>
@@ -75,7 +67,7 @@
             <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
             <script>
                 $(document).ready(function () {
-                    var table = $('#course').DataTable();
+                    var table = $('#class').DataTable();
                 });
             </script>
 

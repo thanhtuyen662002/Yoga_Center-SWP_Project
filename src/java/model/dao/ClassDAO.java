@@ -11,14 +11,6 @@ import utils.DBUtils;
 
 public class ClassDAO {
 
-//    public static void main(String[] args) throws SQLException {
-//        ClassDAO dao = new ClassDAO();
-//        List<ClassDTO> course = dao.getCourseName();
-//        List<ClassDTO> staff = dao.getStaff();
-//        for (ClassDTO classDTO : course) {
-//            System.out.println(classDTO);
-//        }
-//    }
     public List<ClassDTO> getCourseName() throws SQLException {
         List<ClassDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -145,22 +137,24 @@ public class ClassDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                ptm = conn.prepareStatement("SELECT c.classID, c.courseID, u.name AS ptName, c.name AS className, c.description, c.total_sessions, c.capacity, c.status\n"
-                        + "FROM Class c\n"
+                ptm = conn.prepareStatement("SELECT c.classID, c.courseID, co.name AS courseName, u.name AS ptName, c.name AS className, c.description, c.total_sessions, c.capacity, c.status\n"
+                        + "FROM Class AS c\n"
                         + "INNER JOIN [dbo].[User] u ON c.ptPhone = u.phone\n"
-                        +  "WHERE c.status = 1");
+                        + "INNER JOIN Courses AS co On co.courseID = c.courseID\n"
+                        + "WHERE c.status = 1");
                 rs = ptm.executeQuery();
 
                 while (rs.next()) {
                     int classID = rs.getInt("classID");
                     int courseID = rs.getInt("courseID");
+                    String courseName = rs.getString("courseName");
                     String ptName = rs.getString("ptName");
                     String className = rs.getString("className");
                     String description = rs.getString("description");
                     int totalSession = rs.getInt("total_sessions");
                     int capacity = rs.getInt("capacity");
                     boolean status = rs.getBoolean("status");
-                    list.add(new ClassDTO(classID, courseID, capacity, ptName, className, description, totalSession, status));
+                    list.add(new ClassDTO(classID, courseID, ptName, className, description, totalSession, status, courseName, capacity));
                 }
             }
         } catch (Exception e) {
@@ -178,9 +172,78 @@ public class ClassDAO {
         return list;
     }
 
+    public List<ClassDTO> getUser(String id) throws SQLException {
+        List<ClassDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT u.name, uc.phone FROM UserCourse AS uc\n"
+                        + "JOIN [User] AS u ON u.phone = uc.phone\n"
+                        + "WHERE uc.status = 1 AND uc.courseID = " + id;
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    list.add(new ClassDTO(rs.getString("phone"), rs.getString("name")));
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
+    public boolean insertUserToClass(String classID, String cusPhone) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        boolean check = false;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String query = "UPDATE UserCourse SET status = 0\n"
+                        + "WHERE phone = '" + cusPhone + "'";
+                ptm = conn.prepareStatement(query);
+                int row = ptm.executeUpdate();
+                if (row > 0) {
+                    String sql = "INSERT INTO UserClass (classID, phone)\n"
+                            + "VALUES (" + classID + ",'" + cusPhone + "')";
+                    ptm = conn.prepareStatement(sql);
+                    int row1 = ptm.executeUpdate();
+                    if (row1 > 0) {
+                        return check = true;
+                    } else {
+                        return check = false;
+                    }
+                } else {
+                    return check = false;
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
     public static void main(String[] args) throws SQLException {
         ClassDAO dao = new ClassDAO();
-        List<ClassDTO> List = ClassDAO.getAllClass();
+        List<ClassDTO> List = dao.getUser("2");
         for (ClassDTO o : List) {
             System.out.println(o);
         }

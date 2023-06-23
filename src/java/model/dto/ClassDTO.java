@@ -1,7 +1,7 @@
 package model.dto;
 
-
 public class ClassDTO {
+
     private int classID;
     private int courseID;
     private int capacity;
@@ -14,25 +14,30 @@ public class ClassDTO {
     private String courseName;
     private String staffName;
     private int numberOfMonths;
+    private String cusPhone;
+    private String cusName;
 
-    
     public ClassDTO() {
     }
 
-    public ClassDTO(int classID, int courseID, int capacity, String ptName, String className, String description, int totalSession, boolean status) {
+    public ClassDTO(int classID, int courseID, String ptName, String className, String description, int totalSession, boolean status, String courseName, int capacity) {
         this.classID = classID;
         this.courseID = courseID;
-        this.capacity = capacity;
         this.ptName = ptName;
         this.className = className;
         this.description = description;
         this.totalSession = totalSession;
         this.status = status;
+        this.courseName = courseName;
+        this.capacity = capacity;
     }
 
+    public ClassDTO(String cusPhone, String cusName) {
+        this.cusPhone = cusPhone;
+        this.cusName = cusName;
+    }
     
-    
-    
+
     public ClassDTO(int courseID, String courseName, int numberOfMonths) {
         this.courseID = courseID;
         this.courseName = courseName;
@@ -43,19 +48,28 @@ public class ClassDTO {
         this.numberOfMonths = numberOfMonths;
     }
 
+    public String getCusPhone() {
+        return cusPhone;
+    }
+
+    public void setCusPhone(String cusPhone) {
+        this.cusPhone = cusPhone;
+    }
+
+    public String getCusName() {
+        return cusName;
+    }
+
+    public void setCusName(String cusName) {
+        this.cusName = cusName;
+    }
+
     public String getPtName() {
         return ptName;
     }
 
     public void setPtName(String ptName) {
         this.ptName = ptName;
-    }
-
-
-
-    public ClassDTO(String ptPhone, String staffName) {
-        this.ptPhone = ptPhone;
-        this.staffName = staffName;
     }
 
     public int getNumberOfMonths() {
@@ -148,7 +162,8 @@ public class ClassDTO {
 
     @Override
     public String toString() {
-        return "ClassDTO{" + "classID=" + classID + ", courseID=" + courseID + ", capacity=" + capacity + ", ptPhone=" + ptPhone + ", className=" + className + ", description=" + description + ", totalSession=" + totalSession + ", status=" + status + ", courseName=" + courseName + ", staffName=" + staffName + ", numberOfMonths=" + numberOfMonths + '}';
+        return "ClassDTO{" + "classID=" + classID + ", courseID=" + courseID + ", capacity=" + capacity + ", ptPhone=" + ptPhone + ", ptName=" + ptName + ", className=" + className + ", description=" + description + ", totalSession=" + totalSession + ", status=" + status + ", courseName=" + courseName + ", staffName=" + staffName + ", numberOfMonths=" + numberOfMonths + ", cusPhone=" + cusPhone + ", cusName=" + cusName + '}';
     }
+
   
 }

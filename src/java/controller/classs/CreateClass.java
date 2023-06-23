@@ -53,7 +53,7 @@ public class CreateClass extends HttpServlet {
             boolean check = dao.saveClassToDatabase(courseID, ptPhone, className, description, totalSession, capacity);
             if (check) {
                 System.out.println("Insert class success!");
-                response.sendRedirect("courses");
+                response.sendRedirect("showclass");
             } else {
                 System.out.println("Can't insert class!");
             }
