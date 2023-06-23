@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="../css/staffDropdown.css">
+        <link rel="stylesheet" href="./css/staffDropdown.css">
         <title>JSP Page</title>
     </head>
     <body>
@@ -72,5 +72,5 @@
             </nav>
         
     </body>
-    <script src="../js/staffDropdown.js"></script>
+    <script src="./js/staffDropdown.js"></script>
 </html>
