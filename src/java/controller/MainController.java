@@ -55,6 +55,8 @@ public class MainController extends HttpServlet {
                 url = "updatenews";
             } else if (action.equals("deletenews")) {
                 url = "deletenews";
+            } else if (action.equals("insertnews")) {
+                url = "insertnews";
             } else if (action.equals("event")) {
                 url = "event";
             } else if (action.equals("guest")) {
