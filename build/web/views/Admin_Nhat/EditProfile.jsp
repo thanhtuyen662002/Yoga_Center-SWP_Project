@@ -82,7 +82,7 @@
                                            >Old Password :
                                     </label>
                                     <div class="col-lg-9">
-                                        <input id="oldPwd" class="form-control" type="password" name="oldPwd" style="background-color: #e8f0fe">
+                                        <input id="oldPwd" class="form-control" type="password" name="oldPwd">
                                     </div>
                                 </div>
                                 <div class="form-group-item">
