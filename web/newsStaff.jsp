@@ -71,7 +71,8 @@
 
                                     </td>
                                     <td>                              
-                                        <a href="updatenews?newsID=${x.newsID}"><i class="fa-solid fa-pen"></i></a>
+                                        <a href="updatenews?newsID=${x.newsID}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
+                                    |
                                     <a href="deletenews?newsID=${x.newsID}"> <i class="fa-sharp fa-solid fa-trash"></i></a>
 
                                 </td>
