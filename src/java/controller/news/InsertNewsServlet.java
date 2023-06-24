@@ -11,18 +11,24 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import model.dao.NewsDAO;
+import model.dao.UserDAO;
+import model.dto.UserDTO;
 import org.apache.commons.io.IOUtils;
 import utils.DBUtils;
 
@@ -30,7 +36,10 @@ import utils.DBUtils;
  *
  * @author HOANG ANH
  */
-@WebServlet(name = "InsertNewsServlet", urlPatterns = {"/insertNews"})
+@WebServlet(name = "InsertNewsServlet", urlPatterns = {"/insertnews"})
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+        maxFileSize = 1024 * 1024 * 10, // 10MB
+        maxRequestSize = 1024 * 1024 * 50)   // 50MB
 public class InsertNewsServlet extends HttpServlet {
 
     /**
@@ -75,16 +84,25 @@ public class InsertNewsServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    //        processRequest(request, response);
+//        UserDAO dao = new UserDAO();
+//            UserDTO stphone = dao.getUserByPhone(stphone);
+//        String stphone = (String) session.getAttribute("stphone");
+//        String stphone = request.getParameter("stphone");
+//        HttpSession session = request.getSession();
+//        UserDTO user = (UserDTO) session.getAttribute("STAFF");
+//        String stphone = user.getPhone();
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-//        processRequest(request, response);
-        String newsID = request.getParameter("newsID");
-        String stPhone = "0123456789";
+            throws ServletException, IOException {      
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String postDate = dateFormat.format(currentDate);
         String title = new String(request.getParameter("title").getBytes("ISO-8859-1"), "UTF-8");
-        String categoryID = request.getParameter("categoryID");
         String content = new String(request.getParameter("content").getBytes("ISO-8859-1"), "UTF-8");
+        String categoryID = request.getParameter("categoryID");
 
+        String stPhone = "0123456788";
         // Xử lý yêu cầu tải lên ảnh
         List<Part> fileParts = new ArrayList<>();
         for (Part part : request.getParts()) {
@@ -102,7 +120,7 @@ public class InsertNewsServlet extends HttpServlet {
                 InputStream content1 = fileContent;
                 byte[] imageBytes = IOUtils.toByteArray(content1);
                 String data = Base64.getEncoder().encodeToString(imageBytes);
-                insertNews(newsID, title, filename, categoryID, content, data);
+                insertNews(stPhone, title, postDate, filename, data, content, categoryID);
 
                 {
 
@@ -114,15 +132,15 @@ public class InsertNewsServlet extends HttpServlet {
         response.sendRedirect("news");
     }
 
-    private void insertNews(String newsID, String title, String image, String categoryID, String content, String data) throws SQLException {
+    private void insertNews(String stPhone, String title, String postDate, String image, String data, String content, String categoryID) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
 
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "INSERT INTO Event (eventName, courseID, discount, daystart , dayend, image, data, status)\n"
-                        + "VALUES  (N'" + eventName + "'," + CourseID + "," + discount + ",'" + daystart + "','" + dayend + "','" + image + "', '" + data + "', 0" + " )";
+                String sql = "INSERT INTO News (stPhone, title, postDate, image , data, content, categoryID, status)\n"
+                        + "VALUES  ('" + stPhone + "',N'" + title + "','" + postDate + "','" + image + "','" + data + "',N'" + content + "', '" + categoryID + "', 1 " + " )";
                 ptm = conn.prepareStatement(sql);
                 int row = ptm.executeUpdate();
                 if (row > 0) {

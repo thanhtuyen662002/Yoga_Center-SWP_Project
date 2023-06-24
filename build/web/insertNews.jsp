@@ -1,3 +1,4 @@
+<%@page import="model.dto.UserDTO"%>
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,41 +17,13 @@
     </head>
     <body>
         <div class="wrapper d-flex align-items-stretch">
-            <nav id="sidebar">
-                <div class="custom-menu">
-                    <button type="button" id="sidebarCollapse" class="btn btn-primary">
-                    </button>
-                </div>
-                <div class="img bg-wrap text-center py-4" style="background-image: url(images/bg_1.jpg);">
-                    <div class="user-logo">
-                        <div class="img" style="background-image: url(./image/logo-yoga.jpg);"></div>
-                        <h3>YOGA CENTER</h3>
-                    </div>
-                </div>
-                <ul class="list-unstyled components mb-5">
-                    <li class="active">
-                        <a href="#"><span class="fa-solid fa-book mr-3"></span> KHÓA HỌC</a>
-                    </li>
-                    <li>
-                        <a href="#"><span class="fa fa-gift mr-3"></span> KHUYẾN MÃI</a>
-                    </li>
-                    <li>
-                        <a href="#"><span class="fa-solid fa-calendar-days mr-3"></span> LỊCH DẠY</a>
-                    </li>
-                    <li>
-                        <a href="#"><span class="fa-solid fa-newspaper mr-3"></span> TIN TỨC</a>
-                    </li> 
-                    <li>
-                        <a href="#"><span class="fa-solid fa-people-group mr-3"></span> KHÁCH HÀNG</a>
-                    </li> 
-                    <li>
-                        <a href="#"><span class="fa fa-sign-out mr-3"></span> Đăng Xuất</a>
-                    </li>
-                </ul>
-
-            </nav>
-
+            <c:import url="staff_header.jsp"/>
+            <c:if test="${empty sessionScope.STAFF}">
+            <c:redirect url="login.jsp"></c:redirect>
+        </c:if>
             <!-- Page Content  -->
+            <c:if test="${not empty sessionScope.STAFF}">
+            <c:set var="USER" value="${sessionScope.STAFF}" scope="session"/>
             <div id="content">
                 <div class="course-link">
                     <ul>
@@ -67,14 +40,14 @@
                 <div class="table-name">
                     <h1>THÊM TIN TỨC</h1>
                 </div>
-                <form action="updatenews" method="Post" enctype="multipart/form-data">
+                <form action="insertnews" method="Post" enctype="multipart/form-data">
                     <div class="update-box">
                         <div class="update-title">
                             <label for="title">Title</label>
-                            <input value="${ns.title}" type="text" name="title" />
+                            <input type="text" name="title" />
                         </div>
                         <div class="update-select">
-                            <label>Title</label>
+                            <label>Category</label>
                             <select name="categoryID">
                                 <option value="" selected>Chọn Loại Tin Tức</option>
                                 <option value="1">Blog</option>
@@ -82,25 +55,19 @@
                                 <option value="3">Other</option>
                             </select>
                         </div>
-
                         <div class="update-cate">
                             <label>Image</label>
                             <input type="file" name="image" id="fileInput" onchange="previewImage(event)" accept="image/*" />
-                            <div class="file-img">
-
-                                <c:if test="${not empty ns.image}">
-                                    <img id="preview" src="data:image;base64,${ns.data}" width="50px" height="50px" alt="Preview">
-                                </c:if>
-
-                                <!--<img id="preview" src="#" alt="Preview" />-->
+                            <div class="file-img">                                
+                                    <img id="preview" src="" width="50px" height="50px" alt="Preview">
                             </div>
                         </div>
                         <div class="update-content-wrapper">
                             <div class="update-content">
                                 <label for="">Content</label>
-                                <textarea id="myTextarea" name="content">${ns.content}</textarea>
+                                <textarea id="myTextarea" name="content"></textarea>
 
-                                <input type="hidden" name="newsID" value="${ns.newsID}"/>
+                                <input type="hidden" name="newsID" value=""/>
                             </div>
                         </div>
                     </div>
@@ -141,5 +108,7 @@
             <script>
                 CKEDITOR.replace("myTextarea");
             </script>
+            </c:if>
+            
     </body>
 </html>
