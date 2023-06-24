@@ -199,7 +199,6 @@ public class GuestDAO {
     public boolean insertUserCourse(String phone) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
-        PreparedStatement ptm1 = null;
         ResultSet rs = null;
         boolean check = false;
         try {
@@ -212,8 +211,8 @@ public class GuestDAO {
                     int courseID = rs.getInt("courseID");
                     String sql1 = "INSERT INTO UserCourse (courseID, phone, status)\n"
                             + "VALUES (" + courseID + ",'" + phone + "',1)";
-                    ptm1 = conn.prepareStatement(sql1);
-                    int row = ptm1.executeUpdate();
+                    ptm = conn.prepareStatement(sql1);
+                    int row = ptm.executeUpdate();
                     if (row > 0) {
                         System.out.println("Insert userCourse success!");
                         return check = true;
@@ -234,14 +233,12 @@ public class GuestDAO {
             if (ptm != null) {
                 ptm.close();
             }
-            if (ptm1 != null) {
-                ptm1.close();
-            }
             if (conn != null) {
                 conn.close();
             }
         }
         return check;
     }
+    
 
 }

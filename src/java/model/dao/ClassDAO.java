@@ -272,6 +272,99 @@ public class ClassDAO {
         }
         return list;
     }
+    public List<ClassDTO> getListDeleteClass() throws SQLException {
+        List<ClassDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement("SELECT c.classID, c.courseID, co.name AS courseName, u.name AS ptName, c.name AS className, c.description, c.total_sessions, c.capacity, c.status\n"
+                        + "FROM Class AS c\n"
+                        + "INNER JOIN [dbo].[User] u ON c.ptPhone = u.phone\n"
+                        + "INNER JOIN Courses AS co On co.courseID = c.courseID\n"
+                        + "WHERE c.status = 0");
+                rs = ptm.executeQuery();
+
+                while (rs.next()) {
+                    int classID = rs.getInt("classID");
+                    int courseID = rs.getInt("courseID");
+                    String courseName = rs.getString("courseName");
+                    String ptName = rs.getString("ptName");
+                    String className = rs.getString("className");
+                    String description = rs.getString("description");
+                    int totalSession = rs.getInt("total_sessions");
+                    int capacity = rs.getInt("capacity");
+                    boolean status = rs.getBoolean("status");
+                    list.add(new ClassDTO(classID, courseID, ptName, className, description, totalSession, status, courseName, capacity));
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
+    public boolean deleteClass(String name) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE Class SET status = 0\n"
+                        + "WHERE name = N'" + name + "'";
+                ptm = conn.prepareStatement(sql);
+                int row = ptm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
+    }
+    public boolean restoreClass(String name) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE Class SET status = 1\n"
+                        + "WHERE name = N'" + name + "'";
+                ptm = conn.prepareStatement(sql);
+                int row = ptm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
+    }
 
     public static void main(String[] args) throws SQLException {
         ClassDAO dao = new ClassDAO();

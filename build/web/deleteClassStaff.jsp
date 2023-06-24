@@ -49,7 +49,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${list_class}" var="x">
+                        <c:forEach items="${list}" var="x">
                             <tr>
                                 <td>${x.className}</td>
                                 <td>${x.ptName}</td>
@@ -57,11 +57,8 @@
                                 <td>${x.description}</td>
                                 <td>${x.totalSession}</td>
                                 <td>${x.capacity}</td>
-                                <td><a href="showLearner?id=${x.courseID}&classID=${x.classID}"><i class="fa-regular fa-square-plus fa-bounce" style="color: #07f236;"></i></a>
-                                    |
-                                    <a href="showStudent?classID=${x.classID}"><i class="fa-solid fa-eye fa-bounce" style="color: #2a10ea;"></i></a>
-                                    |
-                                    <a onclick="showMess('${x.className}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
+                                <td>
+                                    <a href="restoreClass?name=${x.className}"><i class="fa-solid fa-trash-arrow-up fa-bounce" style="color: #1dd33b;"></i></a>
                                 </td>
                             </tr>
                         </c:forEach>

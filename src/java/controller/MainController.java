@@ -75,6 +75,8 @@ public class MainController extends HttpServlet {
                 url = "viewSchedule";
             } else if (action.equals("Staff")) {
                 url = "courses";
+            } else if (action.equals("bill")) {
+                url = "showBill";
             }
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

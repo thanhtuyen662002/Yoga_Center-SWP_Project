@@ -55,7 +55,14 @@
                         <a href="mainController?action=showclass"><span class="fa-solid fa-people-group mr-3"></span> LỚP HỌC</a>
                         <ul id="showclass" class="dropdown">
                             <li><a href="createClass">Tạo lớp học</a></li>
-                            <li><a href="#">Lớp học đã xóa</a></li>
+                            <li><a href="showDeleteClass">Lớp học đã xóa</a></li>
+                        </ul>
+                    </li> 
+                    <li onmouseover="showDropdown('learner')" onmouseout="hideDropdown('learner')">
+                        <a href="mainController?action=learner"><span class="fa-solid fa-people-group mr-3"></span> HỌC VIÊN</a>
+                        <ul id="learner" class="dropdown">
+                            <li><a href="insertGuest.jsp">Tạo tài khoản</a></li>
+                            <li><a href="#">Học viên đã xóa</a></li>
                         </ul>
                     </li> 
                     <li onmouseover="showDropdown('guest')" onmouseout="hideDropdown('guest')">
@@ -64,6 +71,13 @@
                             <li><a href="insertGuest.jsp">Tạo tài khoản</a></li>
                             <li><a href="#">Khách hàng đã xóa</a></li>
                         </ul>
+                    </li> 
+                    <li onmouseover="showDropdown('bill')" onmouseout="hideDropdown('bill')">
+                        <a href="mainController?action=bill"><span class="fa-solid fa-people-group mr-3"></span> HÓA ĐƠN</a>
+<!--                        <ul id="bill" class="dropdown">
+                            <li><a href="#">Tạo tài khoản</a></li>
+                            <li><a href="#">Khách hàng đã xóa</a></li>
+                        </ul>-->
                     </li> 
                     <li>
                         <a href="logout"><span class="fa fa-sign-out mr-3"></span> Đăng Xuất</a>

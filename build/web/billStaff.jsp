@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -18,8 +19,8 @@
             integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
             crossorigin="anonymous"
             />
-        <link rel="stylesheet" href="./css/classStaff.css" />
-        <title>Lớp Học</title>
+        <link rel="stylesheet" href="./css/billStaff.css" />
+        <title>Hóa đơn</title>
     </head>
     <body>
         <div class="wrapper d-flex align-items-stretch">
@@ -30,47 +31,36 @@
                 <div class="course-link">
                     <ul>
                         <li><a href="">Staff</a></li>
-                        <li><a href="" id="active">Lớp học</a></li>
+                        <li><a href="" id="active">Hóa đơn</a></li>
                     </ul>
                 </div>
                 <div class="table-name">
-                    <h1>BẢNG DỮ LIỆU LỚP HỌC</h1>
+                    <h1>BẢNG DỮ LIỆU HÓA ĐƠN</h1>
                 </div>
-                <table id="class1" class="display" style="width:100%">
+                <table id="bill1" class="display" style="width:100%">
                     <thead>
                         <tr>
-                            <th>TÊN LỚP </th>
-                            <th>PT</th>
-                            <th>KHÓA HỌC</th>
-                            <th>NỘI DUNG</th>
-                            <th>SỐ SLOT</th>
-                            <th>SỐ HỌC VIÊN</th>
-                            <th>Action</th>
+                            <th>TÊN KHÁCH HÀNG</th>
+                            <th>SỐ ĐIỆN THOẠI</th>
+                            <th>TÊN KHÓA HỌC</th>
+                            <th>GIÁ KHÓA HỌC</th>
+                            <th>NGÀY THANH TOÁN</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${list_class}" var="x">
+                        <c:forEach items="${list}" var="x">
                             <tr>
-                                <td>${x.className}</td>
-                                <td>${x.ptName}</td>
+                                <td>${x.name}</td>
+                                <td>${x.phone}</td>
                                 <td>${x.courseName}</td>
-                                <td>${x.description}</td>
-                                <td>${x.totalSession}</td>
-                                <td>${x.capacity}</td>
-                                <td><a href="showLearner?id=${x.courseID}&classID=${x.classID}"><i class="fa-regular fa-square-plus fa-bounce" style="color: #07f236;"></i></a>
-                                    |
-                                    <a href="showStudent?classID=${x.classID}"><i class="fa-solid fa-eye fa-bounce" style="color: #2a10ea;"></i></a>
-                                    |
-                                    <a onclick="showMess('${x.className}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
-                                </td>
+                                <td><fmt:formatNumber type="currency" currencyCode="VND" value="${x.price}" /></td>
+                                <td>${x.time}</td>
                             </tr>
                         </c:forEach>
-                        </tfoot>
-
                 </table>
 
             </div>
-            <script src="./js/classStaff.js"></script>
+
             <script src="/courseNav/bootstrap.min.js"></script>
             <script src="/courseNav/main.js"></script>
             <script src="/courseNav/popper.js"></script>
@@ -80,7 +70,7 @@
             <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
             <script>
                 $(document).ready(function () {
-                    var table = $('#class1').DataTable();
+                    var table = $('#bill1').DataTable();
                 });
             </script>
 

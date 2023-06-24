@@ -36,7 +36,7 @@
                 <div class="table-name">
                     <h1>BẢNG DỮ LIỆU LỚP HỌC</h1>
                 </div>
-                <table id="course" class="display" style="width:100%">
+                <table id="class1" class="display" style="width:100%">
                     <thead>
                         <tr>
                             <th>TÊN LỚP </th>
@@ -60,6 +60,8 @@
                                 <td><a href="showLearner?id=${x.courseID}&classID=${x.classID}"><i class="fa-regular fa-square-plus fa-bounce" style="color: #07f236;"></i></a>
                                     |
                                     <a href="showStudent?classID=${x.classID}"><i class="fa-solid fa-eye fa-bounce" style="color: #2a10ea;"></i></a>
+                                    |
+                                    <a onclick="showMess('${x.className}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -68,7 +70,7 @@
                 </table>
 
             </div>
-
+            <script src="./js/classStaff.js"></script>
             <script src="/courseNav/bootstrap.min.js"></script>
             <script src="/courseNav/main.js"></script>
             <script src="/courseNav/popper.js"></script>
@@ -78,7 +80,7 @@
             <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
             <script>
                 $(document).ready(function () {
-                    var table = $('#course').DataTable();
+                    var table = $('#class1').DataTable();
                 });
             </script>
 

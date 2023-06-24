@@ -6,12 +6,12 @@
 package controller.guest;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.dao.BillDAO;
 import model.dao.GuestDAO;
 import model.dto.GuestDTO;
 
@@ -51,14 +51,25 @@ public class LoadGuestListServlet extends HttpServlet {
         String gender = request.getParameter("gender");
         try {
             GuestDAO dao = new GuestDAO();
+            BillDAO bdao = new BillDAO();
             boolean checkDuplicate = dao.checkDuplicate(phone);
             if (!checkDuplicate) {
                 boolean checkInsertUser = dao.insertGuest(fullName, phone, password, address, gender);
                 if (checkInsertUser) {
                     boolean checkInsertUserCourse = dao.insertUserCourse(phone);
                     if (checkInsertUserCourse) {
-                        dao.setStatus(phone);
-                        response.sendRedirect("guest");
+                        boolean checkSetStatus = dao.setStatus(phone);
+                        if (checkSetStatus) {
+                            boolean checkInsertInToBill = bdao.insertUserToBill(phone);
+                            if (checkInsertInToBill) {
+                                response.sendRedirect("guest");
+                            } else {
+                                System.out.println("Không thể thêm vào hóa đơn!");
+                                response.sendRedirect("guest");
+                            }
+                        } else {
+                            System.out.println("Không thể cập nhật status trong bảng UserCourse!");
+                        }
                     }
                 } else {
                     System.out.println("Thêm khách hàng thất bại!");
