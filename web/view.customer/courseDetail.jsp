@@ -229,7 +229,7 @@
                                                 </div>
                                             </li>
                                             <div class="price-detail-price-button">
-                                                <button type="submit" onclick="showPopup()">ĐĂNG KÝ</button>
+                                                <button type="submit" >ĐĂNG KÝ</button>
                                             </div>
                                         </ul>
                                     </div>
