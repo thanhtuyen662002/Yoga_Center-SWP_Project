@@ -172,7 +172,7 @@ public class UserDAO_Nhat extends DBUtils {
             }
 
             sql += " order by phone ASC\n"
-                        + "offset ? ROW\n"
+                    + "offset ? ROW\n"
                     + "FETCH Next ? Rows only";
             setter.put(count, offset);
             count++;
@@ -198,6 +198,114 @@ public class UserDAO_Nhat extends DBUtils {
             Logger.getLogger(UserDAO_Nhat.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+
+    public ArrayList<UserDTO> getAllCustomer(int offset, int recordsPerPage, int classID,
+            String gender, String status, String textSearch) {
+        ArrayList<UserDTO> list = new ArrayList<>();
+        try {
+
+            HashMap<Integer, Object> setter = new HashMap<>();
+            String sql = "SELECT u.*\n"
+                    + "  FROM [UserClass] uc left join [User] u\n"
+                    + "  on uc.phone = u.phone";
+            int count = 1;
+
+            textSearch = "%" + textSearch + "%";
+            sql += "\n Where (u.phone like ? or [name] like ?) and role = 'US' and classID = ?\n";
+            setter.put(count, textSearch);
+            count++;
+            setter.put(count, textSearch);
+            count++;
+            setter.put(count, classID);
+            count++;
+
+            if (!gender.equalsIgnoreCase("All")) {
+                sql += " and gender = ?\n";
+                setter.put(count, gender);
+                count++;
+            }
+
+            if (!status.equalsIgnoreCase("All")) {
+                sql += " and status = ?\n";
+                setter.put(count, Boolean.valueOf(status));
+                count++;
+            }
+
+            sql += " order by phone ASC\n"
+                    + "offset ? ROW\n"
+                    + "FETCH Next ? Rows only";
+            setter.put(count, offset);
+            count++;
+            setter.put(count, recordsPerPage);
+
+            PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
+            for (Map.Entry<Integer, Object> entry : setter.entrySet()) {
+                stm.setObject(entry.getKey(), entry.getValue());
+            }
+
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                list.add(new UserDTO(rs.getString("phone"),
+                        rs.getString("name"),
+                        rs.getString("address"),
+                        rs.getString("gender"),
+                        rs.getString("role"),
+                        rs.getBoolean("status")));
+            }
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(UserDAO_Nhat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    public int getTotalRecords(int classID, String gender, String status, String textSearch) {
+        try {
+
+            HashMap<Integer, Object> setter = new HashMap<>();
+            String sql = "SELECT count(*) as 'total'\n"
+                    + "  FROM [UserClass] uc left join [User] u\n"
+                    + "  on uc.phone = u.phone";
+            int count = 1;
+
+            textSearch = "%" + textSearch + "%";
+            sql += "\n Where (u.phone like ? or [name] like ?) and role = 'US' and classID = ?\n";
+            setter.put(count, textSearch);
+            count++;
+            setter.put(count, textSearch);
+            count++;
+            setter.put(count, classID);
+            count++;
+
+            if (!gender.equalsIgnoreCase("All")) {
+                sql += " and gender = ?\n";
+                setter.put(count, gender);
+                count++;
+            }
+
+            if (!status.equalsIgnoreCase("All")) {
+                sql += " and status = ?\n";
+                setter.put(count, Boolean.valueOf(status));
+                count++;
+            }
+
+            PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
+            for (Map.Entry<Integer, Object> entry : setter.entrySet()) {
+                stm.setObject(entry.getKey(), entry.getValue());
+            }
+
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("total");
+            }
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(UserDAO_Nhat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
     }
 
     public boolean isPhoneExist(String phone) {
@@ -290,7 +398,7 @@ public class UserDAO_Nhat extends DBUtils {
         }
     }
 
-    public void update(UserDTO staff) {
+    public void update(UserDTO user) {
         try {
             String sql = "UPDATE[User]\n"
                     + "   SET [phone] = ?\n"
@@ -300,12 +408,36 @@ public class UserDAO_Nhat extends DBUtils {
                     + "      ,[status] = ?\n"
                     + " WHERE phone = ?";
             PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
-            stm.setString(1, staff.getPhone());
-            stm.setString(2, staff.getName());
-            stm.setString(3, staff.getAddress());
-            stm.setString(4, staff.getGender());
-            stm.setBoolean(5, staff.isStatus());
-            stm.setString(6, staff.getPhone());
+            stm.setString(1, user.getPhone());
+            stm.setString(2, user.getName());
+            stm.setString(3, user.getAddress());
+            stm.setString(4, user.getGender());
+            stm.setBoolean(5, user.isStatus());
+            stm.setString(6, user.getPhone());
+            stm.executeUpdate();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(UserDAO_Nhat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void update(UserDTO user, String oldPhone) {
+        try {
+            String sql = "UPDATE[User]\n"
+                    + "   SET [phone] = ?\n"
+                    + "      ,[password] = ?\n"
+                    + "      ,[name] = ?\n"
+                    + "      ,[address] = ?\n"
+                    + "      ,[gender] = ?\n"
+                    + "      ,[status] = ?\n"
+                    + " WHERE phone = ?";
+            PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
+            stm.setString(1, user.getPhone());
+            stm.setString(2, user.getPassword());
+            stm.setString(3, user.getName());
+            stm.setString(4, user.getAddress());
+            stm.setString(5, user.getGender());
+            stm.setBoolean(6, user.isStatus());
+            stm.setString(7, oldPhone);
             stm.executeUpdate();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(UserDAO_Nhat.class.getName()).log(Level.SEVERE, null, ex);
