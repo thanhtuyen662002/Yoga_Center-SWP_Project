@@ -58,8 +58,8 @@ public class UserDAO {
         return user;
     }
     
-    public static ArrayList<NewsDTO> getAllCus() throws SQLException {
-        ArrayList<NewsDTO> list = new ArrayList<>();
+    public static ArrayList<UserDTO> getAllCus() throws SQLException {
+        ArrayList<UserDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -70,16 +70,14 @@ public class UserDAO {
                 rs = ptm.executeQuery();
 
                 while (rs.next()) {
-                    int newsID = rs.getInt("newsID");
-                    String stPhone = rs.getString("stPhone");
-                    String title = rs.getString("title");
-                    String date = rs.getString("postDate");
-                    String content = rs.getString("content");
-                    String image = rs.getString("image");
-                    String data = rs.getString("data");
-                    int categoryID = rs.getInt("categoryID");
+                    String phone = rs.getString("phone");
+                    String password = rs.getString("password");
+                    String name = rs.getString("name");
+                    String address = rs.getString("address");
+                    String gender = rs.getString("gender");
+                    String role = rs.getString("role");
                     boolean status = rs.getBoolean("status");
-                    list.add(new NewsDTO(newsID, stPhone, title, date, image, data, content, categoryID, status));
+                    list.add(new UserDTO(phone, password, name, address, gender, role, status));
                 }
             }
         } catch (Exception e) {

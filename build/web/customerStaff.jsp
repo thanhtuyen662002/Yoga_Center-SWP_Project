@@ -18,7 +18,7 @@
             integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
             crossorigin="anonymous"
             />
-        <link rel="stylesheet" href="./css/newsStaff.css" />
+        <link rel="stylesheet" href="./css/customerStaff.css" />
         <title>Tin Tức</title>
     </head>
     <body>
@@ -33,12 +33,12 @@
                 <div class="course-link">
                     <ul>
                         <li><a href="">Staff</a></li>
-                        <li><a href="" id="active">Tin Tức</a></li>
+                        <li><a href="" id="active">Học Viên</a></li>
                     </ul>
                 </div>
                 <div class="course-title" >
                     <div class="text">WELCOME STAFF</div>
-                    <div class="insert"><a value="action?news" type="submit" name="insert">Insert</a></div>
+                    <div class="insert"><a value="" type="submit" name="insert">Insert</a></div>
                 </div>
                 <div class="table-name">
                     <h1>BẢNG DỮ LIỆU TIN TỨC</h1>
@@ -46,34 +46,26 @@
                 <table id="course" class="display" style="width:100%">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>TIÊU ĐỀ</th>
-                            <th>NGÀY ĐĂNG</th>
-                            <th>HÌNH ẢNH </th>
+                            <th>SỐ ĐIỆN THOẠI</th>
+                            <th>TÊN HỌC VIÊN</th>
+                            <th>ĐỊA CHỈ</th>
+                            <th>GIỚI TÍNH</th>
                             <!--<th>NỘI DUNG</th>-->
-                            <th>THỂ LOẠI</th>
+                            <!--<th>THỂ LOẠI</th>-->
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${list_news}" var="x">
+                        <c:forEach items="${list_customer}" var="x">
                             <tr>
-                                <th scope="row" id="id">${x.newsID}</th>
-                                <!--<td>${x.stPhone}</td>-->
-                                <td id="title">${x.title}</td>
-                                <td >${x.postDate}</td>
-                                <td id="table-img"><img src="data:image;base64,${x.data}" alt=""></td>
-                                <!--<td ><div class="table-noidung">${x.content}</div> </td>-->
-                                <td>
-                                    <c:if test="${x.categoryID == 1}"> Blog</c:if>
-                                    <c:if test="${x.categoryID == 2}"> Product</c:if>
-                                    <c:if test="${x.categoryID == 3}"> Other</c:if>
-
-                                    </td>
-                                    <td>                             
-                                    <a href="updatenews?newsID=${x.newsID}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
-                                    |
-                                    <a onclick="showMess('${x.newsID}-${x.title}')" href="#"> <i class="fa-sharp fa-solid fa-trash"></i></a>
+                                <!--<th scope="row" id="id"></th>-->
+                                <td>${x.phone}</td>
+                                <td id="title">${x.name}</td>
+                                <td ><div class="table-noidung">${x.address}</div> </td>
+                                <td >${x.gender}</td>
+                                <td>                              
+                                    <a href=""><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
+                                    <a href=""> <i class="fa-sharp fa-solid fa-trash"></i></a>
 
                                 </td>
                             </tr>
@@ -83,7 +75,7 @@
                 </table>
 
             </div>
-            <script src="./js/newsStaff.js"></script>
+
             <script src="/courseNav/bootstrap.min.js"></script>
             <script src="/courseNav/main.js"></script>
             <script src="/courseNav/popper.js"></script>

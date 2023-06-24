@@ -18,7 +18,7 @@
             integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
             crossorigin="anonymous"
             />
-        <link rel="stylesheet" href="./css/newsStaff1.css" />
+        <link rel="stylesheet" href="./css/newsStaff.css" />
         <title>Tin Tức</title>
     </head>
     <body>
@@ -69,8 +69,8 @@
                                     </td>
                                     <td>
                                      
-                                        <a href="updatenews?newsID=${x.newsID}"><i class="fa-solid fa-pen"></i></a>
-                                    <a href="deletenews?newsID=${x.newsID}"> <i class="fa-sharp fa-solid fa-trash"></i></a>
+                                        <a href="restorenews?newsID=${x.newsID}"><i class="fa-solid fa-trash-arrow-up fa-bounce" style="color: #1dd33b;"></i></a>
+                                    <!--<a href="deletenews?newsID=${x.newsID}"> <i class="fa-sharp fa-solid fa-trash"></i></a>-->
 
                                 </td>
                             </tr>
