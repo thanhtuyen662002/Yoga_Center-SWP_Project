@@ -64,6 +64,26 @@
         <servlet-name>InsertStaff</servlet-name>
         <servlet-class>controller.admin.InsertStaffContrller</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListScheduleController</servlet-name>
+        <servlet-class>controller.admin_nhat.ListScheduleController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditProfileAdminController</servlet-name>
+        <servlet-class>controller.admin_nhat.EditProfileAdminController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListScheduleClassController</servlet-name>
+        <servlet-class>controller.admin_nhat.ListScheduleClassController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ScheduleDetailsAdminContrller</servlet-name>
+        <servlet-class>controller.admin_nhat.ScheduleDetailsAdminContrller</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DashboardController</servlet-name>
+        <servlet-class>controller.admin_nhat.DashboardController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CoursesServlet</servlet-name>
         <url-pattern>/CoursesServlet</url-pattern>
@@ -123,6 +143,26 @@
     <servlet-mapping>
         <servlet-name>InsertStaff</servlet-name>
         <url-pattern>/insertStaff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListScheduleController</servlet-name>
+        <url-pattern>/listScheduleAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditProfileAdminController</servlet-name>
+        <url-pattern>/editProfileAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListScheduleClassController</servlet-name>
+        <url-pattern>/listScheduleClass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ScheduleDetailsAdminContrller</servlet-name>
+        <url-pattern>/scheduleDetailsAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DashboardController</servlet-name>
+        <url-pattern>/dashBoard</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -10,7 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.dto.ClassDTO_Nhat;
@@ -271,6 +273,115 @@ public class ScheduleDAO_Nhat extends DBUtils {
             System.out.println("Update Schedule");
         }
         return false;
+    }
+
+    public ArrayList<ScheduleDTO_Nhat> getScheduleBySlotAndDate(int offset, int recordsPerPage, int slotID, Date date, String textSearch) {
+        ArrayList<ScheduleDTO_Nhat> list = new ArrayList<>();
+        try {
+
+            HashMap<Integer, Object> setter = new HashMap<>();
+            String sql = "SELECT s.*\n"
+                    + "  FROM [Schedule] s left join Class c\n"
+                    + "  on s.classID = c.classID\n"
+                    + "  left join Courses co\n"
+                    + "  on co.courseID = c.courseID\n"
+                    + "  left join Room r\n"
+                    + "  on r.roomID = s.roomID\n"
+                    + "  Where slotID = ? and day = ?";
+            int count = 1;
+            setter.put(count, slotID);
+            setter.put(++count, date);
+
+            if (!textSearch.isEmpty() || !textSearch.equalsIgnoreCase("")) {
+                textSearch = "%" + textSearch + "%";
+                sql += "  and  (s.roomID like ? or c.name like ? or s.ptPhone like ?)";
+                setter.put(++count, textSearch);
+                setter.put(++count, textSearch);
+                setter.put(++count, textSearch);
+            }
+
+            sql += " Order by scheduleID\n"
+                    + "offset ? ROW\n"
+                    + "FETCH Next ? Rows only";
+            setter.put(++count, offset);
+            setter.put(++count, recordsPerPage);
+
+            PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
+            for (Map.Entry<Integer, Object> entry : setter.entrySet()) {
+                stm.setObject(entry.getKey(), entry.getValue());
+            }
+
+            ResultSet rs = stm.executeQuery();
+
+            ClassDTO_Nhat classStudy;
+            UserDTO pt;
+            ClassSlotDTO_Nhat slot;
+            RoomDTO_Nhat room;
+            UserDTO customer;
+
+            ClassDAO_Nhat cDao = new ClassDAO_Nhat();
+            UserDAO_Nhat uDao = new UserDAO_Nhat();
+            ClassSlotDAO_Nhat csDao = new ClassSlotDAO_Nhat();
+            RoomDAO_Nhat rDao = new RoomDAO_Nhat();
+
+            while (rs.next()) {
+                classStudy = cDao.getClassByID(rs.getInt("classID"));
+                pt = uDao.getUserByID(rs.getString("ptPhone"));
+                slot = csDao.getSlotByID(rs.getInt("slotID"));
+                room = rDao.getRoomByID(rs.getString("roomID"));
+                list.add(new ScheduleDTO_Nhat(rs.getInt("scheduleID"),
+                        classStudy,
+                        pt,
+                        slot,
+                        room,
+                        rs.getDate("day")));
+            }
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(UserDAO_Nhat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    public int getTotalScheduleBySlotAndDate(int slotID, Date date, String textSearch) {
+        try {
+
+            HashMap<Integer, Object> setter = new HashMap<>();
+            String sql = "SELECT count(*) as 'total'\n"
+                    + "  FROM [Schedule] s left join Class c\n"
+                    + "  on s.classID = c.classID\n"
+                    + "  left join Courses co\n"
+                    + "  on co.courseID = c.courseID\n"
+                    + "  left join Room r\n"
+                    + "  on r.roomID = s.roomID\n"
+                    + "  Where slotID = ? and day = ?";
+            int count = 1;
+            setter.put(count, slotID);
+            setter.put(++count, date);
+
+            if (!textSearch.isEmpty() || !textSearch.equalsIgnoreCase("")) {
+                textSearch = "%" + textSearch + "%";
+                sql += "  and  (s.roomID like ? or c.name like ? or s.ptPhone like ?)";
+                setter.put(++count, textSearch);
+                setter.put(++count, textSearch);
+                setter.put(++count, textSearch);
+            }
+
+            PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
+            for (Map.Entry<Integer, Object> entry : setter.entrySet()) {
+                stm.setObject(entry.getKey(), entry.getValue());
+            }
+
+            ResultSet rs = stm.executeQuery();
+            
+            if (rs.next()) {
+                return rs.getInt("total");
+            }
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(UserDAO_Nhat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
     }
 
 }
