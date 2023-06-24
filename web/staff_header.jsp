@@ -41,16 +41,13 @@
                             <li><a href="pendingevent">Khuyến mãi đã xóa</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="mainController?action=listSchedule"><span class="fa-solid fa-calendar-days mr-3"></span> LỊCH DẠY</a>
-                    </li>
                     <li onmouseover="showDropdown('news')" onmouseout="hideDropdown('news')">
                         <a href="mainController?action=news"><span class="fa-solid fa-newspaper mr-3"></span> TIN TỨC</a>
                         <ul id="news" class="dropdown">
                             <li><a href="insertnews">Thêm tin tức</a></li>
                             <li><a href="pendingnews">Tin tức đã xóa</a></li>
                         </ul>
-                    </li> 
+                    </li>
                     <li onmouseover="showDropdown('showclass')" onmouseout="hideDropdown('showclass')">
                         <a href="mainController?action=showclass"><span class="fa-solid fa-people-group mr-3"></span> LỚP HỌC</a>
                         <ul id="showclass" class="dropdown">
@@ -58,6 +55,9 @@
                             <li><a href="showDeleteClass">Lớp học đã xóa</a></li>
                         </ul>
                     </li> 
+                    <li>
+                        <a href="mainController?action=listSchedule"><span class="fa-solid fa-calendar-days mr-3"></span> LỊCH DẠY</a>
+                    </li>
                     <li onmouseover="showDropdown('learner')" onmouseout="hideDropdown('learner')">
                         <a href="mainController?action=learner"><span class="fa-solid fa-user-graduate mr-3"></span> HỌC VIÊN</a>
                         <ul id="learner" class="dropdown">
@@ -69,15 +69,10 @@
                         <a href="mainController?action=guest"><span class="fa-solid fa-user-group mr-3"></span> KHÁCH HÀNG</a>
                         <ul id="guest" class="dropdown">
                             <li><a href="insertGuest.jsp">Tạo tài khoản</a></li>
-                            <li><a href="#">Khách hàng đã xóa</a></li>
                         </ul>
                     </li> 
                     <li onmouseover="showDropdown('bill')" onmouseout="hideDropdown('bill')">
                         <a href="mainController?action=bill"><span class="fa-solid fa-money-bill-1-wave mr-3"></span> HÓA ĐƠN</a>
-<!--                        <ul id="bill" class="dropdown">
-                            <li><a href="#">Tạo tài khoản</a></li>
-                            <li><a href="#">Khách hàng đã xóa</a></li>
-                        </ul>-->
                     </li> 
                     <li>
                         <a href="logout"><span class="fa fa-sign-out mr-3"></span> Đăng Xuất</a>

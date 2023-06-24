@@ -57,8 +57,8 @@
                                 <td>${e.dayend}</td>
                                 <td class="event-img"><img src="data:image;base64,${e.data}" /></td>
                                 <td id="tool">
-                                    <a href="#"><i class="fa-solid fa-eye "></i></a>
-                                    <a href="updateEvent?name=${e.eventName}"><i class="fa-solid fa-pen"></i></a>
+                                    <a href="updateEvent?name=${e.eventName}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
+                                    |
                                     <a href="#" onclick="showMess(${e.eventID})"><i class="fa-sharp fa-solid fa-trash"></i></a>
 
                                 </td>

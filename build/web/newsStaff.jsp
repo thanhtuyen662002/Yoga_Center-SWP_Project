@@ -75,6 +75,7 @@
                                     |
                                     <a onclick="showMess('${x.newsID}-${x.title}')" href="#"> <i class="fa-sharp fa-solid fa-trash"></i></a>
 
+
                                 </td>
                             </tr>
                         </c:forEach>
