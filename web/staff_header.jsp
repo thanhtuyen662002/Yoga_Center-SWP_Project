@@ -69,7 +69,6 @@
                         <a href="mainController?action=guest"><span class="fa-solid fa-user-group mr-3"></span> KHÁCH HÀNG</a>
                         <ul id="guest" class="dropdown">
                             <li><a href="insertGuest.jsp">Tạo tài khoản</a></li>
-                            <li><a href="#">Khách hàng đã xóa</a></li>
                         </ul>
                     </li> 
                     <li onmouseover="showDropdown('bill')" onmouseout="hideDropdown('bill')">
