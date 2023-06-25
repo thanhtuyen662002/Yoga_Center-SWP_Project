@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.dto.CourseDTO_Nhat;
-import model.dto.UserDTO;
 import utils.DBUtils;
 
 /**
@@ -31,6 +30,7 @@ public class CourseDAO_Nhat extends DBUtils{
                 return new CourseDTO_Nhat(rs.getInt("courseID"),
                         rs.getString("name"),
                         rs.getString("description"),
+                        rs.getInt("numberOfMonths"),
                         rs.getString("image"),
                         rs.getDouble("price"));
             }

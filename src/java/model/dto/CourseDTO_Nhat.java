@@ -24,6 +24,15 @@ public class CourseDTO_Nhat {
         this.price = price;
     }
 
+    public CourseDTO_Nhat(int id, String name, String description, int numberOfMonths, String image, double price) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.numberOfMonths = numberOfMonths;
+        this.image = image;
+        this.price = price;
+    }
+
     public CourseDTO_Nhat() {
     }
 
@@ -66,6 +75,16 @@ public class CourseDTO_Nhat {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    public int getNumberOfMonths() {
+        return numberOfMonths;
+    }
+
+    public void setNumberOfMonths(int numberOfMonths) {
+        this.numberOfMonths = numberOfMonths;
+    }
+    
+    
 
     @Override
     public String toString() {

@@ -84,6 +84,10 @@
         <servlet-name>DashboardController</servlet-name>
         <servlet-class>controller.admin_nhat.DashboardController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HomeRedirect</servlet-name>
+        <servlet-class>controller.schedule.HomeRedirect</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CoursesServlet</servlet-name>
         <url-pattern>/CoursesServlet</url-pattern>
@@ -163,6 +167,10 @@
     <servlet-mapping>
         <servlet-name>DashboardController</servlet-name>
         <url-pattern>/dashBoard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeRedirect</servlet-name>
+        <url-pattern>/homeRedirect</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
