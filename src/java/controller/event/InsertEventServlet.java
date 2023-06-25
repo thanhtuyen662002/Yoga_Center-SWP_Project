@@ -136,8 +136,8 @@ public class InsertEventServlet extends HttpServlet {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "INSERT INTO Event (eventName, courseID, discount, daystart , dayend, image, data, status)\n"
-                        + "VALUES  (N'" + eventName + "'," + CourseID + "," + discount + ",'" + daystart + "','" + dayend + "','" + image + "', '" + data + "', 0" + " )";
+                String sql = "INSERT INTO Event (eventName, courseID, discount, daystart , dayend, image, data, status, flag)\n"
+                        + "VALUES  (N'" + eventName + "'," + CourseID + "," + discount + ",'" + daystart + "','" + dayend + "','" + image + "', '" + data + "', 0, 1)";
                 ptm = conn.prepareStatement(sql);
                 int row = ptm.executeUpdate();
                 if (row > 0) {

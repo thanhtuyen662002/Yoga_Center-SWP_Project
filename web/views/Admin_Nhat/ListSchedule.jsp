@@ -198,38 +198,57 @@
                             <input type="hidden" name="action" value="ViewDetails"/>
                         </form>
                         <th id="${i}${j}">
-                            <form id="frm-details-${i}${j}" action="listScheduleClass" method="post">
-                                <input type="hidden" name="slotID" value="${slot[i].id}"/>
-                                <input type="hidden" name="day" value="${day[j]}"/>
-                                <button type="submit" class="badge-pill badge-light btn-outline-info border-0">
-                                    View Slot Schedule
-                                </button>
-
-                            </form>
+                            <div id='div-${i}${j}' style="display: none">
+                                <form id="frm-details-${i}${j}" action="listScheduleClass" method="post">
+                                    <input type="hidden" name="slotID" value="${slot[i].id}"/>
+                                    <input type="hidden" name="day" value="${day[j]}"/>
+                                    <button type="submit" class="badge-pill badge-light btn-outline-info border-0">
+                                        View Slot Schedule
+                                    </button>
+                                </form>
+                            </div>
                         </th>
                     </c:forEach>
                     </tr>
                 </c:forEach>
+                <c:forEach var="sc" items="${schedule}">
+                    <c:forEach var="i" begin="0" end="${slotsSize-1}" step="1">
+                        <c:if test="${sc.slot.id eq slot[i].id}">
+                            <c:set var="row" value="${i}" />
+                        </c:if>
+                    </c:forEach>
+                    <c:forEach var="j" begin="0" end="6" step="1">
+                        <c:if test="${sc.date eq day[j]}">
+                            <c:set var="column" value="${j}" />
+                        </c:if>
+                    </c:forEach>
+                    <script>
+                        var header = document.getElementById('div-${row}${column}');
+                        header.style.display = "block";
+                    </script>
+                </c:forEach>
                 </tbody>
             </table>
         </section>
+
+
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/8d39de38b8.js" crossorigin="anonymous"></script>
         <script>
-            // Get the select element
-            var selectElement = document.getElementById("mySelect");
+                        // Get the select element
+                        var selectElement = document.getElementById("mySelect");
 
-            // Add an event listener for the change event
-            selectElement.addEventListener("change", function () {
-                // Submit the form when the option changes
-                document.getElementById("myForm").submit();
-            });
-            function goBack() {
-                window.history.back();
-            }
+                        // Add an event listener for the change event
+                        selectElement.addEventListener("change", function () {
+                            // Submit the form when the option changes
+                            document.getElementById("myForm").submit();
+                        });
+                        function goBack() {
+                            window.history.back();
+                        }
         </script>
     </body>
 </html>
