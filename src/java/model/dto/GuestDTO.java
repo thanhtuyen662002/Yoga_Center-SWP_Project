@@ -39,6 +39,18 @@ public class GuestDTO {
         this.status = status;
         this.flag = flag;
     }
+
+    public GuestDTO(int signupID, String fullName, String phone, String address, String gender, int courseID, float price, boolean status, boolean flag) {
+        this.signupID = signupID;
+        this.fullName = fullName;
+        this.phone = phone;
+        this.address = address;
+        this.gender = gender;
+        this.courseID = courseID;
+        this.price = price;
+        this.status = status;
+        this.flag = flag;
+    }
     
     
 

@@ -68,8 +68,13 @@
                                 <td>${g.gender}</td>
                                 <td>${g.courseName}</td>
                                 <td><c:out value="${price}"/></td>
-                    
-                                <td id="tool"><a href="loadGuest?id=${g.signupID}"><i class="fa-solid fa-circle-plus fa-bounce" style="color: #14d72b;"></i></a>
+                                
+                                
+                                
+                                <td id="tool">
+                                    <a href="updateguest?signupID=${g.signupID}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
+                                    |
+                                    <a href="loadGuest?id=${g.signupID}"><i class="fa-solid fa-circle-plus fa-bounce" style="color: #14d72b;"></i></a>                                
                                     |
                                     <a onclick="showMess('${g.signupID}-${g.fullName}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
                                 </td>

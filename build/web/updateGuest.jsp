@@ -11,7 +11,7 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
             />
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-        <link rel="stylesheet" href="./css/updateNews1.css" />
+        <link rel="stylesheet" href="./css/updateGuest1.css" />
         <title>Update News</title>
     </head>
     <body>
@@ -20,6 +20,7 @@
         </c:if>
         <div class="wrapper d-flex align-items-stretch">
             <c:import url="staff_header.jsp"/>
+
 
             <!-- Page Content  -->
             <div id="content">
@@ -33,46 +34,47 @@
                 </div>
                 <div class="course-title" >
                     <div class="text">WELCOME STAFF</div>
-                    <div class="insert"><a type="submit" name="insert">BACK</a></div>
+                    <div class="insert"><a type="submit" name="guest">BACK</a></div>
                 </div>
                 <div class="table-name">
-                    <h1>CHỈNH SỬA TIN TỨC</h1>
+                    <h1>CHỈNH SỬA THÔNG TIN KHÓA HỌC ĐĂNG KÝ</h1>
                 </div>
-                <form action="updatenews" method="Post" enctype="multipart/form-data">
+                <%@ page import="model.dto.CoursesDTO" %>
+                <%@ page import="java.util.List" %>
+                <%@ page import="model.dao.GuestDAO" %>
+                <% GuestDAO dao = new GuestDAO(); %>
+                <% List<CoursesDTO> courses = dao.getCourseName(); %>
+                <form action="updateguest?id=${list_guest.signupID}" method="Post" >
                     <div class="update-box">
                         <div class="update-title">
-                            <label for="title">Title</label>
-                            <input value="${ns.title}" type="text" name="title" />
+                            <label for="title">Tên Khách Hàng</label>
+                            <input value="${list_guest.fullName}" type="text" name="fullName" />
                         </div>
-                        <div class="update-select">
-                            <label>Category</label>
-                            <select name="categoryID">
-                                <option value="" selected>Chọn Loại Tin Tức</option>
-                                <option value="1">Blog</option>
-                                <option value="2">Product</option>
-                                <option value="3">Other</option>
+                        <div class="update-title">
+                            <label for="title">Số Điện Thoại</label>
+                            <input value="${list_guest.phone}" type="text" name="phone" />
+                        </div>
+                        <div class="update-title">
+                            <label for="title">Địa Chỉ</label>
+                            <input value="${list_guest.address}" type="text" name="address" />
+                        </div>
+<!--                        <div class="update-title">
+                            <label for="title">Giới Tinh</label>
+                            <select>
+                                <option name="gender" value="Male">Male</option>
+                                <option name="gender" value="FeMale">FeMale</option>
+                                <option name="gender" value="Other">Other</option>
+                            </select>
+                        </div>-->
+                        <div class="update-title">
+                            <label for="cate">Course Name</label>
+                             <select name="courseID">
+                                <% for (CoursesDTO course : courses) {%>
+                                <option value="<%= course.getCourseID()%>"><%= course.getCourseName()%></option>
+                                <% }%>
                             </select>
                         </div>
-
-                        <div class="update-cate">
-                            <label>Image</label>
-                            <input type="file" name="image" id="fileInput" onchange="previewImage(event)" accept="image/*" />
-                            <div class="file-img">
-
-                                <c:if test="${not empty ns.image}">
-                                    <img id="preview" src="data:image;base64,${ns.data}" width="50px" height="50px" alt="Preview">
-                                </c:if>
-                            </div>
-                        </div>
-                        <div class="update-content-wrapper">
-                            <div class="update-content">
-                                <label for="">Content</label>
-                                <textarea id="myTextarea" name="content">${ns.content}</textarea>
-
-                                <input type="hidden" name="newsID" value="${ns.newsID}"/>
-                            </div>
-                        </div>
-                    </div>
+            </div>
                     <div class="table-btn">
                         <button type="submit">Update</button>
                     </div>
