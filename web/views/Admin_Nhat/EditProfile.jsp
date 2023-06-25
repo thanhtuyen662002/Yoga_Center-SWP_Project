@@ -64,7 +64,7 @@
                                            >Phone :</label
                                     >
                                     <div class="col-lg-9">
-                                        <input type="tel" class="form-control" oninput="validatePhone()" maxlength="10" id="input-phone" placeholder="Enter Phone" name="phone" value="${account.phone}" required />
+                                        <input type="tel" class="form-control" oninput="validatePhone()" maxlength="10" id="input-phone" placeholder="Enter Phone" name="phone" value="${account.phone}" required/>
                                     </div>
                                 </div>
                                 <div class="form-group-item">

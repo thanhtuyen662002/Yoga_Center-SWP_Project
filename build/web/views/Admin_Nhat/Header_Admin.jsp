@@ -40,7 +40,7 @@
         </div>
         <ul class="list-unstyled components mb-5">
           <li class="active">
-            <a href="dashBoard"
+            <a href="views/Admin_Nhat/DashBoard.jsp"
               ><span class="fa-solid fa-chart-line mr-3"></span>Dashboard
             </a>
           </li>
