@@ -86,8 +86,9 @@ public class insertScheduleController_Nhat extends BaseAuthentication_Nhat {
         ClassSlotDAO_Nhat slotDao = new ClassSlotDAO_Nhat();
         RoomDAO_Nhat rDao = new RoomDAO_Nhat();
 
+        UserDTO user = (UserDTO) request.getSession().getAttribute("USER");
         //select all class available
-        ArrayList<ClassDTO_Nhat> listClass = cDao.getAllAvailable();
+        ArrayList<ClassDTO_Nhat> listClass = cDao.getAllAvailable(user.getPhone());
 
         ArrayList<UserDTO> listCustomer = uDao.getAllCustomer();
         ArrayList<ClassSlotDTO_Nhat> listSlot = slotDao.getAll();
@@ -119,7 +120,7 @@ public class insertScheduleController_Nhat extends BaseAuthentication_Nhat {
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //set validate to false
-        
+
         UserDTO user = (UserDTO) request.getSession().getAttribute("USER");
 
         String phonePT = user.getPhone();
@@ -134,7 +135,7 @@ public class insertScheduleController_Nhat extends BaseAuthentication_Nhat {
 
         ClassDTO_Nhat classStudy = ClDao.getClassByID(classId);
         CourseDTO_Nhat course = cDao.getCourseByID(classStudy.getCourse().getId());
-        totalWeek = course.getNumberOfMonths();
+        totalWeek = course.getNumberOfMonths() * 4;
 
         //get the start date
         LocalDate startDay = startDate.toLocalDate();
@@ -207,7 +208,7 @@ public class insertScheduleController_Nhat extends BaseAuthentication_Nhat {
                 doGet(request, response);
             }
         } else {
-             error = true;
+            error = true;
             doGet(request, response);
         }
     }
@@ -229,68 +230,14 @@ public class insertScheduleController_Nhat extends BaseAuthentication_Nhat {
         }
     }
 
-//    public static void main(String[] args) {
-//        ScheduleDAO_Nhat scheDao = new ScheduleDAO_Nhat();
-//
-//        //get the start date
-//        LocalDate startDay = LocalDate.now();
-//
-//        //determind the start of next week
-//        LocalDate nextMonday = startDay;
-//        if (startDay.getDayOfWeek() != DayOfWeek.MONDAY) {
-//            //find the next monday
-//            while (nextMonday.getDayOfWeek() != DayOfWeek.MONDAY) {
-//                nextMonday = nextMonday.plusDays(1);
-//            }
-//        } else {
-//            nextMonday = nextMonday.plusDays(7);
-//        }
-//
-//        //get all the day study in week
-//        String[] weekDays = new String[]{"Monday", "Tuesday"};
-//        ArrayList<Date> studyDate = new ArrayList<>();
-//
-//        //add alll date study to list
-//        for (String weekDay : weekDays) {
-//            LocalDate firstDay = nextMonday;
-//            switch (weekDay) {
-//                case "Monday":
-//                    addStudyDate(studyDate, firstDay);
-//                    break;
-//                case "Tuesday":
-//                    firstDay = firstDay.plusDays(1);
-//                    addStudyDate(studyDate, firstDay);
-//                    break;
-//                case "Wednesday":
-//                    firstDay = firstDay.plusDays(2);
-//                    addStudyDate(studyDate, firstDay);
-//                    break;
-//                case "Thursday":
-//                    firstDay = firstDay.plusDays(3);
-//                    addStudyDate(studyDate, firstDay);
-//                    break;
-//                case "Friday":
-//                    firstDay = firstDay.plusDays(4);
-//                    addStudyDate(studyDate, firstDay);
-//                    break;
-//                case "Saturday":
-//                    firstDay = firstDay.plusDays(5);
-//                    addStudyDate(studyDate, firstDay);
-//                    break;
-//                case "Sunday":
-//                    firstDay = firstDay.plusDays(6);
-//                    addStudyDate(studyDate, firstDay);
-//                    break;
-//            }
-//        }
-//
-//        //check if the schedule exist or not
-//        boolean isExist = scheDao.isScheduleExist("0987654444", studyDate, 3);
-//        if (!isExist) {
-//            System.out.println("oke");
-//        } else {
-//            System.out.println("not oke");
-//        }
-//
-//    }
+    public static void main(String[] args) {
+
+        CourseDAO_Nhat cDao = new CourseDAO_Nhat();
+        ClassDAO_Nhat ClDao = new ClassDAO_Nhat();
+
+        ClassDTO_Nhat classStudy = ClDao.getClassByID(2);
+        //CourseDTO_Nhat course = cDao.getCourseByID(classStudy.getCourse().getId());
+        
+        System.out.println(classStudy.getCourse().getId());
+    }
 }
