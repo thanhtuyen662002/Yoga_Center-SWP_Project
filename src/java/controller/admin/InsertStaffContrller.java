@@ -75,9 +75,9 @@ public class InsertStaffContrller extends AdminAuthentication_Nhat {
         UserDAO_Nhat uDao = new UserDAO_Nhat();
         String phone = request.getParameter("phone");
         String pwd = request.getParameter("pws");
-        String fullName = request.getParameter("fullName");
-        String address = request.getParameter("address");
-        String gender = request.getParameter("gender");
+        String fullName = new String(request.getParameter("fullName").getBytes("ISO-8859-1"), "UTF-8");
+        String address = new String(request.getParameter("address").getBytes("ISO-8859-1"), "UTF-8");
+        String gender = new String(request.getParameter("gender").getBytes("ISO-8859-1"), "UTF-8");
 
         String msgError = "";
 
