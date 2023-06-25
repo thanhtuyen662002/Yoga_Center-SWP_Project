@@ -19,21 +19,27 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.dao.ClassDAO_Nhat;
 import model.dao.ClassSlotDAO_Nhat;
+import model.dao.CourseDAO_Nhat;
 import model.dao.RoomDAO_Nhat;
 import model.dao.ScheduleDAO_Nhat;
 import model.dao.UserDAO_Nhat;
+import model.dto.ClassDTO;
 import model.dto.ClassDTO_Nhat;
 import model.dto.ClassSlotDTO_Nhat;
+import model.dto.CourseDTO_Nhat;
 import model.dto.RoomDTO_Nhat;
 import model.dto.UserDTO;
+import utils.BaseAuthentication_Nhat;
 
 /**
  *
  * @author dell
  */
-public class insertScheduleController_Nhat extends HttpServlet {
+public class insertScheduleController_Nhat extends BaseAuthentication_Nhat {
 
-    static int totalWeek = 10;
+    boolean error = false;
+    boolean errorRoom = false;
+    static int totalWeek;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -71,7 +77,7 @@ public class insertScheduleController_Nhat extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ScheduleDAO_Nhat sDao = new ScheduleDAO_Nhat();
 
@@ -80,7 +86,9 @@ public class insertScheduleController_Nhat extends HttpServlet {
         ClassSlotDAO_Nhat slotDao = new ClassSlotDAO_Nhat();
         RoomDAO_Nhat rDao = new RoomDAO_Nhat();
 
-        ArrayList<ClassDTO_Nhat> listClass = cDao.getAll();
+        //select all class available
+        ArrayList<ClassDTO_Nhat> listClass = cDao.getAllAvailable();
+
         ArrayList<UserDTO> listCustomer = uDao.getAllCustomer();
         ArrayList<ClassSlotDTO_Nhat> listSlot = slotDao.getAll();
         ArrayList<RoomDTO_Nhat> listRoom = rDao.getAll();
@@ -90,6 +98,8 @@ public class insertScheduleController_Nhat extends HttpServlet {
         LocalDate nextDate = now.plusDays(1);
         request.setAttribute("minDate", nextDate);
 
+        request.setAttribute("error", error);
+        request.setAttribute("errorRoom", errorRoom);
         request.setAttribute("className", listClass);
         request.setAttribute("customer", listCustomer);
         request.setAttribute("room", listRoom);
@@ -106,15 +116,25 @@ public class insertScheduleController_Nhat extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //set validate to false
+        
         UserDTO user = (UserDTO) request.getSession().getAttribute("USER");
+
         String phonePT = user.getPhone();
         ScheduleDAO_Nhat scheDao = new ScheduleDAO_Nhat();
         int classId = Integer.parseInt(request.getParameter("class"));
         String roomId = request.getParameter("room");
         int slotId = Integer.parseInt(request.getParameter("slot"));
         Date startDate = Date.valueOf(request.getParameter("day"));
+
+        CourseDAO_Nhat cDao = new CourseDAO_Nhat();
+        ClassDAO_Nhat ClDao = new ClassDAO_Nhat();
+
+        ClassDTO_Nhat classStudy = ClDao.getClassByID(classId);
+        CourseDTO_Nhat course = cDao.getCourseByID(classStudy.getCourse().getId());
+        totalWeek = course.getNumberOfMonths();
 
         //get the start date
         LocalDate startDay = startDate.toLocalDate();
@@ -172,15 +192,22 @@ public class insertScheduleController_Nhat extends HttpServlet {
         }
 
         //check if the schedule exist or not
-        boolean isExist = scheDao.isScheduleExist(phonePT, studyDate, slotId);
-        if (!isExist) {
-            for (Date date : studyDate) {
-                scheDao.insert(classId, phonePT, roomId, slotId, date);
+        boolean isScheduelExist = scheDao.isScheduleExist(phonePT, studyDate, slotId);
+        boolean isRoomExist = scheDao.isRoomExist(roomId, studyDate, slotId);
+        if (!isScheduelExist) {
+            if (!isRoomExist) {
+                for (Date date : studyDate) {
+                    scheDao.insert(classId, phonePT, roomId, slotId, date);
+                }
+                error = false;
+                errorRoom = false;
+                response.sendRedirect("listSchedule");
+            } else {
+                errorRoom = true;
+                doGet(request, response);
             }
-            request.getSession().setAttribute("error", false);
-            response.sendRedirect("listSchedule");
         } else {
-            request.getSession().setAttribute("error", true);
+             error = true;
             doGet(request, response);
         }
     }

@@ -42,10 +42,12 @@ public class ScheduleDAO_Nhat extends DBUtils {
         RoomDAO_Nhat rDao = new RoomDAO_Nhat();
 
         try {
-            String sql = "SELECT *\n"
-                    + "  FROM [Schedule]\n"
+            String sql = "  SELECT s.*\n"
+                    + "  FROM [Schedule] s\n"
+                    + "  left join UserClass uc\n"
+                    + "  on s.classID = uc.classID\n"
                     + "  Where (day >= ? and day <= ?)\n"
-                    + "  and customerID = ? and deleteFlag = 0";
+                    + "  and uc.phone = ? and deleteFlag = 0";
             PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
             stm.setDate(1, monday);
             stm.setDate(2, sunday);
@@ -373,7 +375,7 @@ public class ScheduleDAO_Nhat extends DBUtils {
             }
 
             ResultSet rs = stm.executeQuery();
-            
+
             if (rs.next()) {
                 return rs.getInt("total");
             }
@@ -382,6 +384,74 @@ public class ScheduleDAO_Nhat extends DBUtils {
             Logger.getLogger(UserDAO_Nhat.class.getName()).log(Level.SEVERE, null, ex);
         }
         return -1;
+    }
+
+    public boolean isRoomExist(String roomId, ArrayList<Date> studyDate, int slotId) {
+        StringBuilder placeholders = new StringBuilder();
+        for (int i = 0; i < studyDate.size(); i++) {
+            if (i > 0) {
+                placeholders.append(", ");
+            }
+            placeholders.append("?");
+        }
+        try {
+            String sql = "SELECT * FROM Schedule WHERE slotID = ? and roomID = ?\n"
+                    + " and day IN (" + placeholders + ")\n";
+            PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
+            stm.setInt(1, slotId);
+            stm.setString(2, roomId);
+            int count = 3;
+            for (Date date : studyDate) {
+                stm.setDate(count++, date);
+            }
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("Update Schedule");
+        }
+        return false;
+    }
+
+    public List<ScheduleDTO_Nhat> getAllScheduleAdmin(Date monday, Date sunday) {
+        List<ScheduleDTO_Nhat> list = new ArrayList<>();
+        ClassDTO_Nhat classStudy;
+        UserDTO pt;
+        ClassSlotDTO_Nhat slot;
+        RoomDTO_Nhat room;
+        UserDTO customer;
+
+        ClassDAO_Nhat cDao = new ClassDAO_Nhat();
+        UserDAO_Nhat uDao = new UserDAO_Nhat();
+        ClassSlotDAO_Nhat csDao = new ClassSlotDAO_Nhat();
+        RoomDAO_Nhat rDao = new RoomDAO_Nhat();
+
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM [Schedule]\n"
+                    + "  Where (day >= ? and day <= ?)\n"
+                    + "  and deleteFlag = 0";
+            PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
+            stm.setDate(1, monday);
+            stm.setDate(2, sunday);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                classStudy = cDao.getClassByID(rs.getInt("classID"));
+                pt = uDao.getUserByID(rs.getString("ptPhone"));
+                slot = csDao.getSlotByID(rs.getInt("slotID"));
+                room = rDao.getRoomByID(rs.getString("roomID"));
+                list.add(new ScheduleDTO_Nhat(rs.getInt("scheduleID"),
+                        classStudy,
+                        pt,
+                        slot,
+                        room,
+                        rs.getDate("day")));
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ScheduleDAO_Nhat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
     }
 
 }

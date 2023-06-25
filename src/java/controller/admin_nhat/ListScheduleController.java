@@ -135,12 +135,7 @@ public class ListScheduleController extends HttpServlet {
             ArrayList<LocalDate> week = getWeek(mondayOfWeek);
 
             List<ScheduleDTO_Nhat> listSchedule
-                    = new ArrayList<>();
-//            if (user.getRoleID().equals("US")) {
-//                listSchedule = sDao.getAllCustomerSchedule(user.getPhone(), monday, sunday);
-//            } else if (user.getRoleID().equals("ST")) {
-//                listSchedule = sDao.getAllPTSchedule(user.getPhone(), monday, sunday);
-//            }
+                    = sDao.getAllScheduleAdmin(monday, sunday);
             ArrayList<ClassSlotDTO_Nhat> slots = slotDao.getAll();
 
             ArrayList<Date> sqlDates = new ArrayList<>();
@@ -163,9 +158,10 @@ public class ListScheduleController extends HttpServlet {
     }
 //
 //
+
 //    public static void main(String[] args) {
-//        
-//        LocalDate currentDate = LocalDate.now();
+//
+//        LocalDate currentDate = LocalDate.of(2023, 7, 3);
 //
 //        ScheduleDAO_Nhat sDao = new ScheduleDAO_Nhat();
 //        ClassSlotDAO_Nhat slotDao = new ClassSlotDAO_Nhat();
@@ -178,10 +174,9 @@ public class ListScheduleController extends HttpServlet {
 //
 //        ArrayList<LocalDate> week = getWeek(mondayOfWeek);
 //
-//        List<ScheduleDTO_Nhat> listSchedule = sDao.getAllPTSchedule("0987654444", monday, sunday);
-//        for (ScheduleDTO_Nhat scheduleDTO_Nhat : listSchedule) {
-//            System.out.println(scheduleDTO_Nhat.getClassStudy().getCourse().getName());
-//        }
+//        List<ScheduleDTO_Nhat> listSchedule
+//                = sDao.getAllScheduleAdmin(monday, sunday);
+//        System.out.println(listSchedule.get(0).getId());
 //    }
 
 }
