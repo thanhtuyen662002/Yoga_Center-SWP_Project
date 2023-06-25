@@ -36,6 +36,27 @@ body {
   align-items: center;
 }
 
+.dropDownMenu {
+  position: relative;
+}
+
+.dropDownContent {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  padding: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.dropDownMenu:hover .dropDownContent {
+  display: block;
+}
+
+
 .nav-menu-list {
   display: flex;
   list-style: none;
