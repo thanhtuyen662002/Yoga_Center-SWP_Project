@@ -52,7 +52,7 @@ public class DeleteEventServlet extends HttpServlet {
     throws ServletException, IOException {
         try {
             //        processRequest(request, response);
-            int EventID = Integer.parseInt(request.getParameter("EventID"));
+            int EventID = Integer.parseInt(request.getParameter("sid"));
             EventDAO dao = new EventDAO();           
             dao.softdeleteEvent(EventID);
             response.sendRedirect("event");

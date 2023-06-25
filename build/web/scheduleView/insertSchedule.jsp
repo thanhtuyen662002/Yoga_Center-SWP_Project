@@ -89,31 +89,31 @@
                             <div class="col-md-6 border rounded-2 mb-2 bg-white">
                                 Day study:
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" name="weekDay" type="checkbox" id="flexSwitchCheckDefault" value="Monday">
+                                    <input class="form-check-input" name="weekDay" type="checkbox" id="flexSwitchCheckDefault" value="Monday" onchange="limitCheckboxes()">
                                     <label class="form-check-label" for="flexSwitchCheckDefault">Monday</label>
                                 </div>
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" name="weekDay" type="checkbox" id="flexSwitchCheckDefault" value="Tuesday">
+                                    <input class="form-check-input" name="weekDay" type="checkbox" id="flexSwitchCheckDefault" value="Tuesday" onchange="limitCheckboxes()">
                                     <label class="form-check-label" for="flexSwitchCheckDefault">Tuesday</label>
                                 </div>
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" name="weekDay" type="checkbox" id="flexSwitchCheckDefault" value="Wednesday">
+                                    <input class="form-check-input" name="weekDay" type="checkbox" id="flexSwitchCheckDefault" value="Wednesday" onchange="limitCheckboxes()">
                                     <label class="form-check-label" for="flexSwitchCheckDefault">Wednesday</label>
                                 </div>
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" name="weekDay" type="checkbox" id="flexSwitchCheckDefault" value="Thursday">
+                                    <input class="form-check-input" name="weekDay" type="checkbox" id="flexSwitchCheckDefault" value="Thursday" onchange="limitCheckboxes()">
                                     <label class="form-check-label" for="flexSwitchCheckDefault">Thursday</label>
                                 </div>
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" name="weekDay" type="checkbox" id="flexSwitchCheckDefault" value="Friday">
+                                    <input class="form-check-input" name="weekDay" type="checkbox" id="flexSwitchCheckDefault" value="Friday" onchange="limitCheckboxes()">
                                     <label class="form-check-label" for="flexSwitchCheckDefault">Friday</label>
                                 </div>
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" name="weekDay" type="checkbox" id="flexSwitchCheckDefault" value="Saturday">
+                                    <input class="form-check-input" name="weekDay" type="checkbox" id="flexSwitchCheckDefault" value="Saturday" onchange="limitCheckboxes()">
                                     <label class="form-check-label" for="flexSwitchCheckDefault">Saturday</label>
                                 </div>
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" name="weekDay" type="checkbox" id="flexSwitchCheckDefault" value="Sunday">
+                                    <input class="form-check-input" name="weekDay" type="checkbox" id="flexSwitchCheckDefault" value="Sunday" onchange="limitCheckboxes()">
                                     <label class="form-check-label" for="flexSwitchCheckDefault">Sunday</label>
                                 </div>
                             </div>
@@ -156,12 +156,21 @@
                                                     <br>
                         
                                                 </div>-->
-                        <div id="error" class="justify-content-center" style="color: red;display: none">
-                            Schedule is exist! Try again!
+                        <div id="error" class="text-center w-100" style="color: red;display: none">
+                            <p>Schedule is exist! Try again!</p>
+                        </div>
+                        <div id="errorRoom" class="text-center w-100" style="color: red;display: none">
+                            <p>Can't create schedule because this room have schedule, please choose other room ( or Day or Slot )!</p>
                         </div>
                         <c:if test="${error == true}">
                             <script>
                                 var msg = document.getElementById("error");
+                                msg.style.display = 'block';
+                            </script>
+                        </c:if>
+                        <c:if test="${errorRoom == true}">
+                            <script>
+                                var msg = document.getElementById("errorRoom");
                                 msg.style.display = 'block';
                             </script>
                         </c:if>
@@ -216,6 +225,29 @@ crossorigin="anonymous"></script>
 
                                     // Form validation passed, proceed with form submission
                                     return true;
+                                }
+
+                                function limitCheckboxes() {
+                                    var checkboxes = document.getElementsByName('weekDay');
+                                    var checkedCount = 0;
+
+                                    for (var i = 0; i < checkboxes.length; i++) {
+                                        if (checkboxes[i].checked) {
+                                            checkedCount++;
+                                        }
+                                    }
+
+                                    if (checkedCount >= 2) {
+                                        for (var i = 0; i < checkboxes.length; i++) {
+                                            if (!checkboxes[i].checked) {
+                                                checkboxes[i].disabled = true;
+                                            }
+                                        }
+                                    } else {
+                                        for (var i = 0; i < checkboxes.length; i++) {
+                                            checkboxes[i].disabled = false;
+                                        }
+                                    }
                                 }
 </script>
 </body>

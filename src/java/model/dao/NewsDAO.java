@@ -365,4 +365,29 @@ public class NewsDAO {
         }
         return list;
     }
+    
+    public void restoreNews(int newsID) throws ClassNotFoundException, SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            String sql = "UPDATE News SET status = 1 WHERE newsID = ?";
+            ptm = conn.prepareStatement(sql);
+            ptm.setInt(1, newsID);
+            ptm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
 }

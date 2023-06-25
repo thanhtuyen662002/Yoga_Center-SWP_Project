@@ -18,7 +18,7 @@
             integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
             crossorigin="anonymous"
             />
-        <link rel="stylesheet" href="./css/newsStaff1.css" />
+        <link rel="stylesheet" href="./css/newsStaff.css" />
         <title>Tin Tức</title>
     </head>
     <body>
@@ -70,10 +70,11 @@
                                     <c:if test="${x.categoryID == 3}"> Other</c:if>
 
                                     </td>
-                                    <td>                              
-                                        <a href="updatenews?newsID=${x.newsID}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
+                                    <td>                             
+                                    <a href="updatenews?newsID=${x.newsID}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
                                     |
-                                    <a href="deletenews?newsID=${x.newsID}"> <i class="fa-sharp fa-solid fa-trash"></i></a>
+                                    <a onclick="showMess('${x.newsID}-${x.title}')" href="#"> <i class="fa-sharp fa-solid fa-trash"></i></a>
+
 
                                 </td>
                             </tr>
@@ -83,7 +84,7 @@
                 </table>
 
             </div>
-
+            <script src="./js/newsStaff.js"></script>
             <script src="/courseNav/bootstrap.min.js"></script>
             <script src="/courseNav/main.js"></script>
             <script src="/courseNav/popper.js"></script>

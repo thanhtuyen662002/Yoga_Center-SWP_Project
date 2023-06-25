@@ -26,7 +26,7 @@ public class ListStaffController extends AdminAuthentication_Nhat {
     String status = "All";
     String textSearch = "";
     int page;
-    final int recordsPerPage = 2;
+    final int recordsPerPage = 5;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
