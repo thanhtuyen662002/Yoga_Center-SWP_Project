@@ -177,79 +177,72 @@
 }
 
 /* News */
-.news{
-    display: flex;
-    justify-content: center;
-
+.news {
+  display: flex;
+  justify-content: center;
 }
-.news-title{
-    font-size: 28px;
-    padding: 30px;
-   font-weight: bold;
+.news-title {
+  font-size: 28px;
+  padding: 30px;
+  font-weight: bold;
 }
-.news-title a{
-    text-decoration: none;
-    color: black;
+.news-title a {
+  text-decoration: none;
+  color: black;
 }
-.news-title a:active{
-    color: red;
-    border-bottom: solid 2px red;
+.news-title a.active {
+  color: red;
+  border-bottom: solid 2px red;
 }
-.news-title a:hover{
-    color: red;
-    border-bottom: solid 2px red;
+.news-title a:hover {
+  color: red;
+  border-bottom: solid 2px red;
 }
 /* New-content */
-.news-content{
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 10rem;
+.news-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
 }
-.news-card{
-    flex-basis: calc(30% - 10px); 
-    margin: 15px;
-    flex-grow: 1;
-    border: 1px solid rgb(217, 212, 212);
+.news-card {
+  margin: 15px;
+  border: 1px solid rgb(217, 212, 212);
 }
-.news-card-img{
-height: 30rem;
+.news-card-img {
+    height: 260px;
 }
-.news-card-img img{
-width: 100%;
-height: 100%;
-object-fit: cover;
+.news-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-.news-card-content{
-    padding: 15px;
+.news-card-content {
+  padding: 15px;
 }
-.news-card-id{
-    color: gray;
-    font-weight: bold;
-    margin-bottom: 16px;
-    font-size: 16px;
-
+.news-card-id {
+  color: gray;
+  font-weight: bold;
+  margin-bottom: 16px;
+  font-size: 16px;
 }
-.news-card-title{
-    font-weight: bold;
-    color: rgb(191, 8, 8);
-    font-size: 20px;
-    margin-bottom: 16px;
-
+.news-card-title {
+  font-weight: bold;
+  color: rgb(191, 8, 8);
+  font-size: 20px;
+  margin-bottom: 16px;
 }
-.news-card-time{
-    font-size: 16px;
-    margin-bottom: 16px;
-
+.news-card-time {
+  font-size: 16px;
+  margin-bottom: 16px;
 }
-.news-card-detail{
-    font-size: 16px;
-
+.news-card-detail {
+  font-size: 16px;
 }
 .listPage li {
-  background-color: #a50000;
+  background-color: #a50000bd;
   color: white;
   display: inline-block;
-  padding: 1.5rem 2rem;
+  padding: 2rem;
   cursor: pointer;
   margin: 0 1rem;
 }

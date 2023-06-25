@@ -11,44 +11,15 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
             />
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-        <link rel="stylesheet" href="./css/updateNews.css" />
+        <link rel="stylesheet" href="./css/updateNews1.css" />
         <title>Update News</title>
     </head>
     <body>
+        <c:if test="${empty sessionScope.STAFF}">
+            <c:redirect url="login.jsp"></c:redirect>
+        </c:if>
         <div class="wrapper d-flex align-items-stretch">
-            <nav id="sidebar">
-                <div class="custom-menu">
-                    <button type="button" id="sidebarCollapse" class="btn btn-primary">
-                    </button>
-                </div>
-                <div class="img bg-wrap text-center py-4" style="background-image: url(images/bg_1.jpg);">
-                    <div class="user-logo">
-                        <div class="img" style="background-image: url(./image/logo-yoga.jpg);"></div>
-                        <h3>YOGA CENTER</h3>
-                    </div>
-                </div>
-                <ul class="list-unstyled components mb-5">
-                    <li class="active">
-                        <a href="#"><span class="fa-solid fa-book mr-3"></span> KHÓA HỌC</a>
-                    </li>
-                    <li>
-                        <a href="#"><span class="fa fa-gift mr-3"></span> KHUYẾN MÃI</a>
-                    </li>
-                    <li>
-                        <a href="#"><span class="fa-solid fa-calendar-days mr-3"></span> LỊCH DẠY</a>
-                    </li>
-                    <li>
-                        <a href="#"><span class="fa-solid fa-newspaper mr-3"></span> TIN TỨC</a>
-                    </li> 
-                    <li>
-                        <a href="#"><span class="fa-solid fa-people-group mr-3"></span> KHÁCH HÀNG</a>
-                    </li> 
-                    <li>
-                        <a href="#"><span class="fa fa-sign-out mr-3"></span> Đăng Xuất</a>
-                    </li>
-                </ul>
-
-            </nav>
+            <c:import url="staff_header.jsp"/>
 
             <!-- Page Content  -->
             <div id="content">
@@ -74,7 +45,7 @@
                             <input value="${ns.title}" type="text" name="title" />
                         </div>
                         <div class="update-select">
-                            <label>Title</label>
+                            <label>Category</label>
                             <select name="categoryID">
                                 <option value="" selected>Chọn Loại Tin Tức</option>
                                 <option value="1">Blog</option>
@@ -91,8 +62,6 @@
                                 <c:if test="${not empty ns.image}">
                                     <img id="preview" src="data:image;base64,${ns.data}" width="50px" height="50px" alt="Preview">
                                 </c:if>
-
-                                <!--<img id="preview" src="#" alt="Preview" />-->
                             </div>
                         </div>
                         <div class="update-content-wrapper">
@@ -105,8 +74,6 @@
                         </div>
                     </div>
                     <div class="table-btn">
-                        <!--<a href="#">UPDATE</a>-->
-                        <!--<input class="btn btn-danger btn-lg" type="submit" name="action" value="UPDATE" />--> 
                         <button type="submit">Update</button>
                     </div>
                 </form>

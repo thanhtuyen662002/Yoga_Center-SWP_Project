@@ -12,7 +12,7 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
             />
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-        <link rel="stylesheet" href="./css/insertNews.css" />
+        <link rel="stylesheet" href="./css/insertNews1.css" />
         <title>Insert News</title>
     </head>
     <body>
@@ -74,7 +74,7 @@
                     <div class="table-btn">
                         <!--<a href="#">UPDATE</a>-->
                         <!--<input class="btn btn-danger btn-lg" type="submit" name="action" value="UPDATE" />--> 
-                        <button type="submit">Update</button>
+                        <button type="submit">Insert</button>
                     </div>
                 </form>
             </div>

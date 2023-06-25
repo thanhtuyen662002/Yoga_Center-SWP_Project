@@ -18,7 +18,7 @@
             integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
             crossorigin="anonymous"
             />
-        <link rel="stylesheet" href="./css/news1.css" />
+        <link rel="stylesheet" href="./css/news2.css" />
     </head>
     <body>
         <!-- Header -->
@@ -34,10 +34,10 @@
         <!-- Tiêu đề -->
         <div class="container">
             <div class="news">
-                <div class="news-title"><a href="">TẤT CẢ</a></div>
+                <div class="news-title"><a href="" class="active">ALL</a></div>
                 <div class="news-title"> <a href="">BLOG</a></div>
-                <div class="news-title"><a href="">DINH DƯỠNG</a></div>
-                <div class="news-title"><a href="">KHÁC</a></div>
+                <div class="news-title"><a href="">PRODUCT</a></div>
+                <div class="news-title"><a href="">OTHER</a></div>
                 <!--<div class="news-title"><a href="">SỰ KIỆN</a></div>-->
 
             </div>
@@ -83,6 +83,6 @@
     <!-- Footer -->
     <c:import url="customer_footer.jsp"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="./js/news.js"></script>
+    <script src="./js/news1.js"></script>
 </body>
 </html>

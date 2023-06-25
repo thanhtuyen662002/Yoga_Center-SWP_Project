@@ -67,7 +67,7 @@ public class RestoreNewsServlet extends HttpServlet {
             int newsID = Integer.parseInt(request.getParameter("newsID"));
             NewsDAO dao = new NewsDAO();
             dao.restoreNews(newsID);
-            response.sendRedirect("news");
+            response.sendRedirect("pendingnews");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RestoreNewsServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
