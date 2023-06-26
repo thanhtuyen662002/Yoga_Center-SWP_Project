@@ -60,10 +60,7 @@
                     </li>
                     <li onmouseover="showDropdown('learner')" onmouseout="hideDropdown('learner')">
                         <a href="mainController?action=learner"><span class="fa-solid fa-user-graduate mr-3"></span> HỌC VIÊN</a>
-                        <ul id="learner" class="dropdown">
-                            <li><a href="insertGuest.jsp">Tạo tài khoản</a></li>
-                            <li><a href="#">Học viên đã xóa</a></li>
-                        </ul>
+                        
                     </li> 
                     <li onmouseover="showDropdown('guest')" onmouseout="hideDropdown('guest')">
                         <a href="mainController?action=guest"><span class="fa-solid fa-user-group mr-3"></span> KHÁCH HÀNG</a>

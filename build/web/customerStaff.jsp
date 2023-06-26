@@ -50,9 +50,6 @@
                             <th>TÊN HỌC VIÊN</th>
                             <th>ĐỊA CHỈ</th>
                             <th>GIỚI TÍNH</th>
-                            <!--<th>NỘI DUNG</th>-->
-                            <!--<th>THỂ LOẠI</th>-->
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,15 +60,8 @@
                                 <td id="title">${x.name}</td>
                                 <td ><div class="table-noidung">${x.address}</div> </td>
                                 <td >${x.gender}</td>
-                                <td>                              
-                                    <a href=""><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
-                                    <a href=""> <i class="fa-sharp fa-solid fa-trash"></i></a>
-
-                                </td>
                             </tr>
                         </c:forEach>
-                        </tfoot>
-
                 </table>
 
             </div>
