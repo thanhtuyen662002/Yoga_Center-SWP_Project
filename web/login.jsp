@@ -42,10 +42,10 @@
                     <i></i>
                 </div>
                 <div class="right-links">
-                    <a href="#">Forgot Password</a>
-                    <a href="register.jsp">Sign Up</a>
+                    <a href="homeCustomer">Back</a>
+            
                 </div>
-                <input type="submit" value="login" name="action">
+                <input type="submit" value="LOGIN" name="action">
             </form>
         </span>
         </div>

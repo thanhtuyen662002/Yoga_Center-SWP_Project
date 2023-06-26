@@ -39,7 +39,7 @@ public class MainController extends HttpServlet {
             String action = request.getParameter("action");
             if (action == null || action.equals("") || action.equals("search")) {
                 url = "home.jsp";
-            } else if (action.equals("login")) {
+            } else if (action.equals("LOGIN")) {
                 url = "login";
             } else if (action.equals("logout")) {
                 url = "logout";
