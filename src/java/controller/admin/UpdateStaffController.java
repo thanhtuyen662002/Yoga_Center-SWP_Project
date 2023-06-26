@@ -32,7 +32,7 @@ public class UpdateStaffController extends AdminAuthentication_Nhat {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -84,8 +84,8 @@ public class UpdateStaffController extends AdminAuthentication_Nhat {
                 break;
             case "update":
                 phone = request.getParameter("phone");
-                String fullName = request.getParameter("fullName");
-                String address = request.getParameter("address");
+                String fullName = new String(request.getParameter("fullName").getBytes("ISO-8859-1"), "UTF-8");
+                String address = new String(request.getParameter("address").getBytes("ISO-8859-1"), "UTF-8");
                 String gender = request.getParameter("gender");
                 String status = request.getParameter("status");
 
@@ -102,7 +102,6 @@ public class UpdateStaffController extends AdminAuthentication_Nhat {
 //        UserDTO staff = new UserDTO("2342345221", "", "nono", "nono", "nono", "Male", "ST", Boolean.valueOf("true"));
 //        uDao.update(staff);
 //    }
-
     /**
      * Returns a short description of the servlet.
      *

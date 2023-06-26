@@ -49,6 +49,10 @@
                                         <td>${schedule.classStudy.name}</td>
                                     </tr>
                                     <tr>
+                                        <td class="text-success"><i class="glyphicon glyphicon-phone"></i>Total Sessions:</td>
+                                        <td>${schedule.classStudy.total_sessions}</td>
+                                    </tr>
+                                    <tr>
                                         <td class="text-success"><i class="fa fa-flag"></i>Study at:</td>
                                         <td>${schedule.room.locate} - ${schedule.room.roomNumber}</td>
                                     </tr>

@@ -54,8 +54,8 @@
                                     </c:if>
                                     <!--<a href="logOut" class="nav-link text-decoration-none p-2" id="item">Đăng xuất</a>-->
                                 </div>
-                                <c:if test="${sessionScope.USER.roleID eq 'ST'}">
-                                    <a href="courses" class="nav-link mb-2 text-decoration-none p-2" id="item">Quản lý</a>
+                                <c:if test="${sessionScope.USER.roleID eq 'US'}">
+                                    <a href="editprofilecus" class="nav-link mb-2 text-decoration-none p-2" id="item">Thay đổi thông tin</a>
                                 </c:if>
                                 <a href="logout" class="nav-link text-decoration-none p-2" id="item">Đăng xuất</a>
                             </div>

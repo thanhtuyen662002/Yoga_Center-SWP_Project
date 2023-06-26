@@ -74,17 +74,22 @@ public class ClassDAO_Nhat {
         System.out.println(b);
     }
 
-    public ArrayList<ClassDTO_Nhat> getAllAvailable() {
+    public ArrayList<ClassDTO_Nhat> getAllAvailable(String ptPhone) {
         ArrayList<ClassDTO_Nhat> list = new ArrayList<>();
         try {
-            String sql = "SELECT *\n"
-                    + "  FROM Class c\n"
-                    + "  left join Schedule s\n"
-                    + "  on c.classID = s.classID\n"
-                    + "  left join UserClass uc\n"
-                    + "  on uc.classID = c.classID\n"
-                    + "  Where scheduleID is NULL and uc.phone is not NULL";
+            String sql = "Select * from Class c\n"
+                    + "join \n"
+                    + "(SELECT DISTINCT c.classID\n"
+                    + "FROM Class c\n"
+                    + "left join Schedule s\n"
+                    + "on c.classID = s.classID\n"
+                    + "join UserClass uc\n"
+                    + "on uc.classID = c.classID\n"
+                    + "Where scheduleID is NULL and uc.phone is not NULL\n"
+                    + "and c.ptPhone = ?) as ca\n"
+                    + "on ca.classID = c.classID";
             PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
+            stm.setString(1, ptPhone);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 list.add(new ClassDTO_Nhat(rs.getInt("classID"),

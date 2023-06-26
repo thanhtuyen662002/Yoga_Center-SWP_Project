@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.naming.NamingException;
 import model.dto.NewsDTO;
@@ -150,6 +152,29 @@ public class UserDAO {
         }
     }
 
+    public void update(UserDTO user, String oldPhone) {
+        try {
+            String sql = "UPDATE[User]\n"
+                    + "   SET ([phone], [password], [name], [address], [gender], [role], [status] ) "
+                    + "      ,[password] = ?\n"
+                    + "      ,[name] = ?\n"
+                    + "      ,[address] = ?\n"
+                    + "      ,[gender] = ?\n"
+                    + "      ,[status] = ?\n"
+                    + " WHERE phone = ?";
+            PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
+            stm.setString(1, user.getPhone());
+            stm.setString(2, user.getPassword());
+            stm.setString(3, user.getName());
+            stm.setString(4, user.getAddress());
+            stm.setString(5, user.getGender());
+            stm.setBoolean(6, user.isStatus());
+            stm.setString(7, oldPhone);
+            stm.executeUpdate();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(UserDAO_Nhat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
    
 }
