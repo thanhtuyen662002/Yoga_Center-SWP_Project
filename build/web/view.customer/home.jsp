@@ -113,7 +113,7 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </h3>
-                                <p>PER MONTH</p>
+                                <p>1 Tháng</p>
                             </div>
                             <div class="plan-content-list">
                                 <ul>
@@ -121,7 +121,7 @@
                                 </ul>
                             </div>
                             <div class="plan-content-btn">
-                                <button type="submit">GET STARTED</button>
+                                <button type="submit">Đăng ký ngay</button>
                             </div>
                         </div>
                         </form>
