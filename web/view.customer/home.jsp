@@ -113,7 +113,7 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </h3>
-                                <p>PER MONTH</p>
+                                <p>1 Tháng</p>
                             </div>
                             <div class="plan-content-list">
                                 <ul>
@@ -121,7 +121,7 @@
                                 </ul>
                             </div>
                             <div class="plan-content-btn">
-                                <button type="submit">GET STARTED</button>
+                                <button type="submit">Đăng ký ngay</button>
                             </div>
                         </div>
                         </form>
@@ -131,37 +131,7 @@
         </div>
         </section>
         
-        <section>
-             <!-- Đăng ký -->
-        <div class="sign-in" style="background-image: url('./image/sign-in.jpg');">
 
-            <div class="container">
-                <div class="sign-in-content">
-                    <form action="" method="POST">
-                        <h1>ĐĂNG KÝ THAM QUAN CÂU LẠC BỘ</h1>
-                        <div class="sign-in-content-form">
-                            <input type="text" class="input-name" name="fullName" placeholder="Họ và Tên">
-                            <input type="text" class="input-phone" name="phone" placeholder="Số điện thoại">
-                            <select class="form-select-clb" name="club">
-                                <option selected>Câu lạc bộ bạn muốn tham gia</option>
-                                <c:forEach var="c" items="${club}">
-                                    <option value="${c.clubID}">${c.nameClub}</option>
-                                </c:forEach>
-                            </select>
-                            <select class="form-select-time" name="timeToCome">
-                                <option selected>Thời gian có thể đến trung tâm</option>
-                                <c:forEach var="t" items="${time}">
-                                    <option value="${t.timeToCome}">${t.timeToCome}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                        <div class="sign-in-btn"><a href="">Đăng Ký Ngay</a></div>  
-                    </form>
-                </div>
-            </div>
-
-        </div>
-        </section>
         
         <section>
             <c:import url="customer_footer.jsp"/>
