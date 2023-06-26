@@ -1,2 +1,1 @@
-controller.course.UpdateCourseServlet
 controller.course.UpdateEventServlet

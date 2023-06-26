@@ -62,6 +62,7 @@
                                 <h2>Viết Bình Luận ...<i class="fa-solid fa-pen fa-sm"></i></h2>
                                 <form action="">
                                     <input
+                                        name="comment"
                                         id="inputContent"
                                         type="text"
                                         placeholder="Mời bạn bình luận và đánh giá khóa học"
