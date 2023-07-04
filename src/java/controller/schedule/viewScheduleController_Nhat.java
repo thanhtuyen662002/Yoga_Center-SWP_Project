@@ -90,7 +90,7 @@ public class viewScheduleController_Nhat extends HttpServlet {
         request.setAttribute("className", listClass);
         request.setAttribute("room", listRoom);
         request.setAttribute("slot", listSlot);
-        if (user.getRoleID().equalsIgnoreCase("ST")) {
+        if (user.getRoleID().equalsIgnoreCase("TC")) {
            
             //-----------------------------------------------
             LocalDate now = LocalDate.now();

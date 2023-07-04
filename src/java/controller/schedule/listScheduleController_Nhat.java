@@ -139,7 +139,7 @@ public class listScheduleController_Nhat extends BaseAuthentication_Nhat {
                     = new ArrayList<>();
             if (user.getRoleID().equals("US")) {
                 listSchedule = sDao.getAllCustomerSchedule(user.getPhone(), monday, sunday);
-            } else if (user.getRoleID().equals("ST")) {
+            } else if (user.getRoleID().equals("TC")) {
                 listSchedule = sDao.getAllPTSchedule(user.getPhone(), monday, sunday);
             }
             ArrayList<ClassSlotDTO_Nhat> slots = slotDao.getAll();
@@ -180,7 +180,7 @@ public class listScheduleController_Nhat extends BaseAuthentication_Nhat {
 
         ArrayList<LocalDate> week = getWeek(mondayOfWeek);
 
-        List<ScheduleDTO_Nhat> listSchedule = sDao.getAllPTSchedule("0987654444", monday, sunday);
+        List<ScheduleDTO_Nhat> listSchedule = sDao.getAllPTSchedule("0111111111", monday, sunday);
         for (ScheduleDTO_Nhat scheduleDTO_Nhat : listSchedule) {
             System.out.println(scheduleDTO_Nhat.getClassStudy().getCourse().getName());
         }

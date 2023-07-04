@@ -155,7 +155,7 @@ public class UserDAO {
     public void update(UserDTO user, String oldPhone) {
         try {
             String sql = "UPDATE[User]\n"
-                    + "   SET ([phone], [password], [name], [address], [gender], [role], [status] ) "
+                    + "   SET [phone] = ?\n"
                     + "      ,[password] = ?\n"
                     + "      ,[name] = ?\n"
                     + "      ,[address] = ?\n"
