@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="vi">
   <head>
@@ -28,7 +29,7 @@
   </head>
   <body>
       <c:import url="Header_Admin.jsp"/>
-      <!-- Content ? ?ây -->
+      <!-- Content ? ?Ã¢y -->
       <div id="content">
        <!-- Topbar -->
        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -193,7 +194,7 @@
        <!-- Content Row -->
 
        <div class="row">
-         <!-- Này là chart bên trái -->
+         <!-- NÃ y lÃ  chart bÃªn trÃ¡i -->
          <div class="col-xl-8 col-lg-7">
            <div class="card shadow mb-4">
              <!-- Card Header - Dropdown -->
@@ -240,7 +241,7 @@
            </div>
          </div>
 
-         <!-- Này là  Pie Chart bên ph?i -->
+         <!-- NÃ y lÃ   Pie Chart bÃªn ph?i -->
          <div class="col-xl-4 col-lg-5">
            <div class="card shadow mb-4">
              <!-- Card Header - Dropdown -->

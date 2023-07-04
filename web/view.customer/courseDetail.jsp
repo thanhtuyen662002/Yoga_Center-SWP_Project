@@ -163,7 +163,8 @@
                                     <h1>Điền Thông Tin Tại Đây !!!</h1>
                                     <div id="back"><i class="fa-solid fa-arrow-left"></i></div>
                                 </div>
-                                <form id="registration-form" action="signupCourse?id=${course.courseID}&ID=${ID}&discount=${discount}" method="POST">
+                                <form id="registration-form" action="signupCourse?id=${course.courseID}&ID=${ID}&discount=${discount}" method="POST"
+                                      onload="handleServletError(${ERROR})">
 
                                     <div class="price-detail-form-bottom">
                                         <ul>
@@ -242,33 +243,15 @@
                 </div>
 
             </div>
-            <c:if test="${not empty message}">
-
-                <div id="popup">
-                    <div class="popup-content">
-                        <div class="popup-content-img">
-                            <img src="./image/check.png" alt="" />
-                        </div>
-
-                        <h2>Đăng ký thành công!</h2>
-                        <p>Cảm ơn bạn đã đăng kí.</p>
-                        <button onclick="closePopup()">Đóng</button>
-                    </div>
-                </div>
-            </c:if>
-            <c:if test="${empty message}">
-                <div id="popup">
-                    <div class="popup-content">
-                        <div class="popup-content-img">
-                            <img src="./image/check.png" alt="" />
-                        </div>
-                        <h2>Đăng ký thất bại!</h2>
-                        <p>Vui lòng nhập lại thông tin!</p>
-                        <button onclick="closePopup()">Đóng</button>
-                    </div>
-                </div>
-            </c:if>
-        </div>
+        <script>
+            function handleServletError(errorMessage) {
+                if (errorMessage === "ERROR") {
+                    alert("Số điện thoại bạn vừa nhập đã có tài khoản!");
+                } else {
+                // Xử lý các trường hợp khác nếu cần thiết
+                }
+            }
+        </script>
         <script>
             function showPopup() {
                 console.log("OK");

@@ -22,14 +22,30 @@
         <title>Lớp Học</title>
     </head>
     <body>
+        <c:if test="${empty sessionScope.STAFF}">
+            <c:redirect url="login.jsp"></c:redirect>
+        </c:if>
         <div class="wrapper d-flex align-items-stretch">
-            <c:import url="staff_header.jsp"/>
+            <c:if test="${sessionScope.ROLE == 'ST'}">
+                <c:import url="cashier_header.jsp"/>
+            </c:if>
+            <c:if test="${sessionScope.ROLE == 'TC'}">
+                <c:import url="teacher_header.jsp"/>
+            </c:if>
+            <c:if test="${sessionScope.ROLE == 'AD'}">
+                <c:import url="./views/Admin_Nhat/Header_Admin.jsp"/>
+            </c:if>
 
             <!-- Page Content  -->
             <div id="content">
                 <div class="course-link">
                     <ul>
-                        <li><a href="">Staff</a></li>
+                        <c:if test="${sessionScope.ROLE == 'ST'}">
+                            <li><a href="">Staff</a></li>
+                            </c:if>
+                            <c:if test="${sessionScope.ROLE == 'TC'}">
+                            <li><a href="">Teacher</a></li>
+                            </c:if>
                         <li><a href="" id="active">Lớp học</a></li>
                     </ul>
                 </div>
@@ -57,11 +73,14 @@
                                 <td>${x.description}</td>
                                 <td>${x.totalSession}</td>
                                 <td>${x.capacity}</td>
-                                <td><a href="showLearner?id=${x.courseID}&classID=${x.classID}"><i class="fa-regular fa-square-plus fa-bounce" style="color: #07f236;"></i></a>
-                                    |
+                                <td>
                                     <a href="showStudent?classID=${x.classID}"><i class="fa-solid fa-eye fa-bounce" style="color: #2a10ea;"></i></a>
-                                    |
-                                    <a onclick="showMess('${x.className}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
+                                        <c:if test="${sessionScope.ROLE == 'AD'}">
+                                        |
+                                        <a href="showLearner?id=${x.courseID}&classID=${x.classID}"><i class="fa-regular fa-square-plus fa-bounce" style="color: #07f236;"></i></a>
+                                        |
+                                        <a onclick="showMess('${x.className}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
+                                        </c:if>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -79,9 +98,9 @@
 
             <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
             <script>
-                $(document).ready(function () {
-                    var table = $('#class1').DataTable();
-                });
+                                            $(document).ready(function () {
+                                                var table = $('#class1').DataTable();
+                                            });
             </script>
 
     </body>

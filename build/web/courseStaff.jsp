@@ -13,13 +13,22 @@
             />
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="./css/courseStaff.css" />
-        
+
         <title>Course</title>
+        
     </head>
     <body>
         <% String ErrorMessage = (String) request.getAttribute("ErrorMessage"); %>
+        <c:if test="${empty sessionScope.STAFF}">
+            <c:redirect url="login.jsp"></c:redirect>
+        </c:if>
         <div class="wrapper d-flex align-items-stretch">
-            <c:import url="staff_header.jsp"/>
+            <c:if test="${sessionScope.ROLE == 'ST'}">
+                <c:import url="cashier_header.jsp"/>
+            </c:if>
+            <c:if test="${sessionScope.ROLE == 'AD'}">
+                <c:import url="./views/Admin_Nhat/Header_Admin.jsp"/>
+            </c:if>
             <!-- Page Content  -->
             <div id="content">
                 <div style="text-align: center; color: red; font-size: 2rem;">
@@ -35,7 +44,7 @@
                 </div>
                 <div class="course-title" >
                     <div class="text">WELCOME STAFF</div>
-                 
+
                 </div>
                 <div class="table-name">
                     <h1>BẢNG DỮ LIỆU KHÓA HỌC</h1>
@@ -47,7 +56,9 @@
                             <th>Description</th>
                             <th>Image</th>
                             <th>Price</th>
-                            <th>Action</th>
+                                <c:if test="${sessionScope.ROLE == 'AD'}">
+                                <th>Action</th>
+                                </c:if>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,14 +74,16 @@
                                 <td><div class="table-noidung">${c.description}</div></td>
                                 <td id="table-img"><img src="data:image;base64,${c.courseData}"/></td>
                                 <td><c:out value="${price}"/></td>
-                                <td id="tool">
-                                    <!--                                    <a href=""><i class="fa-solid fa-eye "></i></a>-->
-                                    
-                                    <a href="updateCourse?name=${c.courseName}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
-                                    |
-                                    <a onclick="showMess('${c.courseName}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
-                                    
-                                </td>
+                                <c:if test="${sessionScope.ROLE == 'AD'}">
+                                    <td id="tool">
+                                        <!--                                    <a href=""><i class="fa-solid fa-eye "></i></a>-->
+
+                                        <a href="updateCourse?name=${c.courseName}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
+                                        |
+                                        <a onclick="showMess('${c.courseName}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
+
+                                    </td>
+                                </c:if>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -80,14 +93,15 @@
                             <th>Description</th>
                             <th>Image</th>
                             <th>Price</th>
-                            <th>Action</th>
-
+                                <c:if test="${sessionScope.ROLE == 'AD'}">
+                                <th>Action</th>
+                                </c:if>
                         </tr>
                     </tfoot>
                 </table>
 
             </div>
-            
+
             <script src="./js/courseStaff.js"></script>
             <script src="/courseNav/bootstrap.min.js"></script>
             <script src="/courseNav/jquery.min.js"></script>
@@ -96,10 +110,10 @@
             <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
             <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
             <script>
-                                        $(document).ready(function () {
-                                            $('#course').DataTable();
-                                        });
+                $(document).ready(function () {
+                    $('#course').DataTable();
+                });
             </script>
-            <script src="./js/staffDropdown.js"></script>
+            
     </body>
 </html>

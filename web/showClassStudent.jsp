@@ -22,14 +22,30 @@
         <title>Lớp Học</title>
     </head>
     <body>
+        <c:if test="${empty sessionScope.STAFF}">
+            <c:redirect url="login.jsp"></c:redirect>
+        </c:if>
         <div class="wrapper d-flex align-items-stretch">
-            <c:import url="staff_header.jsp"/>
+            <c:if test="${sessionScope.ROLE == 'ST'}">
+                <c:import url="cashier_header.jsp"/>
+            </c:if>
+            <c:if test="${sessionScope.ROLE == 'TC'}">
+                <c:import url="teacher_header.jsp"/>
+            </c:if>
+            <c:if test="${sessionScope.ROLE == 'AD'}">
+                <c:import url="./views/Admin_Nhat/Header_Admin.jsp"/>
+            </c:if>
 
             <!-- Page Content  -->
             <div id="content">
                 <div class="course-link">
                     <ul>
-                        <li><a href="">Staff</a></li>
+                        <c:if test="${sessionScope.ROLE == 'ST'}">
+                            <li><a href="">Staff</a></li>
+                            </c:if>
+                            <c:if test="${sessionScope.ROLE == 'TC'}">
+                            <li><a href="">Teacher</a></li>
+                            </c:if>
                         <li><a href="">Lớp học</a></li>
                         <li><a href="" id="active"></a></li>
                     </ul>
@@ -41,23 +57,14 @@
                     <thead>
                         <tr>
                             <th>TÊN HỌC VIÊN </th>
-                            <th>SỐ ĐIỆN THOẠI</th> 
-                            <th>ĐIỂM DANH</th>
-                        </tr>
+                            <th>SỐ ĐIỆN THOẠI</th>
                     </thead>
                     <tbody>
                         <c:forEach var="l" items="${list}">
                             <tr>
                                 <td>${l.cusName}</td>
                                 <td>${l.cusPhone}</td>
-                                <td><input type="radio" id="co-mat" name="trang-thai" value="CoMat">
-                                    <label for="co-mat" class="custom-radio">Có mặt</label>
-
-                                    <input type="radio" id="vang-mat" name="trang-thai" value="VangMat">
-                                    <label for="vang-mat" class="custom-radio">Vắng mặt</label>
-                                </td>
-                            </tr>
-                        </c:forEach>
+                            </c:forEach>
                     </tbody>
                 </table>
 

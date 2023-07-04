@@ -7,6 +7,9 @@ function hideDropdown(id) {
   var dropdown = document.getElementById(id);
   dropdown.classList.remove("active");
 }
+
+
+
 //  $(document).ready(function() {
 //    $('.submenu').hide();
 //    var submenuOpen = 0;

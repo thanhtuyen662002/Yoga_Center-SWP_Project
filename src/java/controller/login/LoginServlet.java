@@ -85,11 +85,19 @@ public class LoginServlet extends HttpServlet {
                         request.getRequestDispatcher("view.customer/home.jsp").forward(request, response);
                         break;
                     case "AD":
+                        session.setAttribute("ROLE", "AD");
+                        session.setAttribute("STAFF", user);
                         response.sendRedirect("listStaff");
                         break;
                     case "ST":
+                        session.setAttribute("ROLE", "ST");
                         session.setAttribute("STAFF", user);
                         response.sendRedirect("courses");
+                        break;
+                    case "TC":
+                        session.setAttribute("ROLE", "TC");
+                        session.setAttribute("STAFF", user);
+                        response.sendRedirect("showclass");
                         break;
                 }
             } else {

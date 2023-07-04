@@ -15,8 +15,11 @@
         <title>UpdateEvent</title>
     </head>
     <body>
+        <c:if test="${empty sessionScope.STAFF}">
+            <c:redirect url="login.jsp"></c:redirect>
+        </c:if>
         <div class="wrapper d-flex align-items-stretch">
-            <c:import url="staff_header.jsp"/>
+            <c:import url="./views/Admin_Nhat/Header_Admin.jsp"/>
 
             <!-- Page Content  -->
             <div id="content">

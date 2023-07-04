@@ -75,7 +75,9 @@ public class LoadGuestListServlet extends HttpServlet {
                     System.out.println("Thêm khách hàng thất bại!");
                 }
             } else {
-                System.out.println("Số điện thoại đã tồn tại!");
+                String error = "Số điện thoại đã tồn tại!";
+                request.setAttribute("ERROR", error);
+                request.getRequestDispatcher("courseDetail.jsp").forward(request, response);
             }
         } catch (Exception e) {
         }

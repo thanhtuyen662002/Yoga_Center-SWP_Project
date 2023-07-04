@@ -3,7 +3,6 @@ package controller.course;
 
 import model.dao.CoursesDAO;
 import java.io.IOException;
-import static java.nio.file.Files.list;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,20 +43,23 @@ public class CourseCustomerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            CoursesDAO dao = new CoursesDAO();
-            EventDAO Edao = new EventDAO();
+            String error = (String) request.getAttribute("ERROR");
+            request.setAttribute("ERROR", error);
             
             String message = (String) request.getAttribute("Message");
-            String id =request.getParameter("id");
-            String ID =request.getParameter("ID");
+            request.setAttribute("message", message);
+            
+            CoursesDAO dao = new CoursesDAO();
+            EventDAO Edao = new EventDAO();
+              
+            String id = request.getParameter("id");
+            String ID = request.getParameter("ID");
             
             CoursesDTO list = dao.getCourseDetail(id);
             request.setAttribute("c", list);
             
             EventDTO discount = Edao.getEventByID(ID);
             request.setAttribute("d", discount);
-            
-            request.setAttribute("message", message);
             
             CoursesDTO course = dao.getCourses(id);
             List<CoursesDTO> time = dao.getTime();

@@ -26,7 +26,12 @@
             <c:redirect url="login.jsp"></c:redirect>
         </c:if>
         <div class="wrapper d-flex align-items-stretch">
-            <c:import url="staff_header.jsp"/>
+            <c:if test="${sessionScope.ROLE == 'ST'}">
+                <c:import url="cashier_header.jsp"/>
+            </c:if>
+            <c:if test="${sessionScope.ROLE == 'AD'}">
+                <c:import url="./views/Admin_Nhat/Header_Admin.jsp"/>
+            </c:if>
 
             <!-- Page Content  -->
             <div id="content">

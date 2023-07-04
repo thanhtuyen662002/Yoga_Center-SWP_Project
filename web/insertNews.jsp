@@ -16,11 +16,12 @@
         <title>Insert News</title>
     </head>
     <body>
-        <div class="wrapper d-flex align-items-stretch">
-            <c:import url="staff_header.jsp"/>
-            <c:if test="${empty sessionScope.STAFF}">
+        <c:if test="${empty sessionScope.STAFF}">
             <c:redirect url="login.jsp"></c:redirect>
         </c:if>
+        <div class="wrapper d-flex align-items-stretch">
+            <c:import url="./views/Admin_Nhat/Header_Admin.jsp"/>
+            
             <!-- Page Content  -->
             <c:if test="${not empty sessionScope.STAFF}">
             <c:set var="USER" value="${sessionScope.STAFF}" scope="session"/>

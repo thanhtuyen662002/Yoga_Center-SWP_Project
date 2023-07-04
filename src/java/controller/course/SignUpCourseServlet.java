@@ -9,9 +9,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Time;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -20,7 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.dao.CoursesDAO;
-import model.dto.CoursesDTO;
+import model.dao.GuestDAO;
 import utils.DBUtils;
 
 /**
@@ -70,20 +67,31 @@ public class SignUpCourseServlet extends HttpServlet {
         String ID = request.getParameter("ID");
         String success = "Đăng ký thành công!";
         String error = "Đăng ký thất bại!";
+        String phoneError = "ERROR";
+        boolean check;
+        boolean checkPhoneDuplicate;
+        GuestDAO dao = new GuestDAO();
         try {
             if (!ID.isEmpty() && !discount.isEmpty()) {
-                boolean check;
                 try {
-                    check = saveSignUpToDatabase(fullName, phone, address, gender, course, time, timeToCome, discount);
-                    if (check) {
-                        request.setAttribute("id", course);
-                        request.setAttribute("ID", ID);
-                        request.setAttribute("Message", success);
-                        request.getRequestDispatcher("courseCustomer").forward(request, response);
+                    checkPhoneDuplicate = dao.checkDuplicate(phone);
+                    if (!checkPhoneDuplicate) {
+                        check = saveSignUpToDatabase(fullName, phone, address, gender, course, time, timeToCome, discount);
+                        if (check) {
+                            request.setAttribute("id", course);
+                            request.setAttribute("ID", ID);
+                            request.setAttribute("Message", success);
+                            request.getRequestDispatcher("courseCustomer").forward(request, response);
+                        } else {
+                            request.setAttribute("id", course);
+                            request.setAttribute("ID", ID);
+                            request.setAttribute("Message", error);
+                            request.getRequestDispatcher("courseCustomer").forward(request, response);
+                        }
                     } else {
                         request.setAttribute("id", course);
                         request.setAttribute("ID", ID);
-                        request.setAttribute("Message", error);
+                        request.setAttribute("ERROR", phoneError);
                         request.getRequestDispatcher("courseCustomer").forward(request, response);
                     }
                 } catch (SQLException ex) {
@@ -91,16 +99,22 @@ public class SignUpCourseServlet extends HttpServlet {
                 }
 
             } else {
-                boolean check;
                 try {
-                    check = saveSignUpToDatabase(fullName, phone, address, gender, course, time, timeToCome, discount);
-                    if (check) {
-                        request.setAttribute("id", course);
-                        request.setAttribute("Message", success);
-                        request.getRequestDispatcher("courseCustomer").forward(request, response);
+                    checkPhoneDuplicate = dao.checkDuplicate(phone);
+                    if (!checkPhoneDuplicate) {
+                        check = saveSignUpToDatabase(fullName, phone, address, gender, course, time, timeToCome, discount);
+                        if (check) {
+                            request.setAttribute("id", course);
+                            request.setAttribute("Message", success);
+                            request.getRequestDispatcher("courseCustomer").forward(request, response);
+                        } else {
+                            request.setAttribute("id", course);
+                            request.setAttribute("Message", error);
+                            request.getRequestDispatcher("courseCustomer").forward(request, response);
+                        }
                     } else {
                         request.setAttribute("id", course);
-                        request.setAttribute("Message", error);
+                        request.setAttribute("ERROR", phoneError);
                         request.getRequestDispatcher("courseCustomer").forward(request, response);
                     }
                 } catch (SQLException ex) {

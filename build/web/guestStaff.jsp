@@ -13,13 +13,21 @@
             />
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="./css/guestStaff.css" />
-        
+
         <title>Guest Manager</title>
     </head>
     <body>
         <% String ErrorMessage = (String) request.getAttribute("ErrorMessage"); %>
+        <c:if test="${empty sessionScope.STAFF}">
+            <c:redirect url="login.jsp"></c:redirect>
+        </c:if>
         <div class="wrapper d-flex align-items-stretch">
-            <c:import url="staff_header.jsp"/>
+            <c:if test="${sessionScope.ROLE == 'ST'}">
+                <c:import url="cashier_header.jsp"/>
+            </c:if>
+            <c:if test="${sessionScope.ROLE == 'AD'}">
+                <c:import url="./views/Admin_Nhat/Header_Admin.jsp"/>
+            </c:if>
             <!-- Page Content  -->
             <div id="content">
                 <div style="text-align: center; color: red; font-size: 2rem;">
@@ -35,7 +43,7 @@
                 </div>
                 <div class="course-title" >
                     <div class="text">WELCOME STAFF</div>
-                 
+
                 </div>
                 <div class="table-name">
                     <h1>BẢNG DỮ LIỆU KHÁCH HÀNG</h1>
@@ -50,7 +58,7 @@
                             <th>Course</th>
                             <th>Price</th>
                             <th>Action</th>
-                            
+
                         </tr>
                     </thead>
                     <tbody>
@@ -60,7 +68,7 @@
                             <c:set var="price"> 
                                 <fmt:formatNumber type="currency" value="${money}"/>
                             </c:set>
-                            
+
                             <tr>
                                 <td>${g.fullName}</td>
                                 <td>${g.phone}</td>
@@ -68,15 +76,17 @@
                                 <td>${g.gender}</td>
                                 <td>${g.courseName}</td>
                                 <td><c:out value="${price}"/></td>
-                                
-                                
-                                
+
+
+
                                 <td id="tool">
                                     <a href="loadGuest?id=${g.signupID}"><i class="fa-solid fa-circle-plus fa-bounce" style="color: #14d72b;"></i></a>                                
                                     |
                                     <a href="updateguest?signupID=${g.signupID}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
-                                    |
-                                    <a onclick="showMess('${g.signupID}-${g.fullName}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
+                                        <c:if test="${sessionScope.ROLE == 'AD'}">
+                                        |
+                                        <a onclick="showMess('${g.signupID}-${g.fullName}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
+                                        </c:if>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -90,13 +100,13 @@
                             <th>Course</th>
                             <th>Price</th>
                             <th>Action</th>
-                            
+
                         </tr>
                     </tfoot>
                 </table>
 
             </div>
-            
+
             <script src="./js/guestStaff.js"></script>
             <script src="/courseNav/bootstrap.min.js"></script>
             <script src="/courseNav/jquery.min.js"></script>
@@ -105,9 +115,9 @@
             <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
             <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
             <script>
-                                        $(document).ready(function () {
-                                            $('#course').DataTable();
-                                        });
+                                            $(document).ready(function () {
+                                                $('#course').DataTable();
+                                            });
             </script>
             <script src="./js/staffDropdown.js"></script>
     </body>

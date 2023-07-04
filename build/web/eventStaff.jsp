@@ -15,8 +15,16 @@
         <title>Event</title>
     </head>
     <body>
+        <c:if test="${empty sessionScope.STAFF}">
+            <c:redirect url="login.jsp"></c:redirect>
+        </c:if>
         <div class="wrapper d-flex align-items-stretch">
-            <c:import url="staff_header.jsp"/>
+            <c:if test="${sessionScope.ROLE == 'ST'}">
+                <c:import url="cashier_header.jsp"/>
+            </c:if>
+            <c:if test="${sessionScope.ROLE == 'AD'}">
+                <c:import url="./views/Admin_Nhat/Header_Admin.jsp"/>
+            </c:if>
 
             <!-- Page Content  -->
             <div id="content">
@@ -43,7 +51,9 @@
                             <th>DayStart</th>
                             <th>DayEnd</th>
                             <th>Image</th>
+                            <c:if test="${sessionScope.ROLE == 'AD'}">
                             <th>Action</th>
+                            </c:if>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,12 +66,14 @@
                                 <td>${e.daystart}</td>
                                 <td>${e.dayend}</td>
                                 <td class="event-img"><img src="data:image;base64,${e.data}" /></td>
+                                <c:if test="${sessionScope.ROLE == 'AD'}">
                                 <td id="tool">
                                     <a href="updateEvent?name=${e.eventName}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
                                     |
                                     <a href="#" onclick="showMess(${e.eventID})"><i class="fa-sharp fa-solid fa-trash"></i></a>
 
                                 </td>
+                                </c:if>
                             </tr>
                         </c:forEach>
 
@@ -77,8 +89,9 @@
                             <th>DayStart</th>
                             <th>DayEnd</th>
                              <th>Image</th>
+                             <c:if test="${sessionScope.ROLE == 'AD'}">
                             <th>Action</th>
-
+                             </c:if>
                         </tr>
                     </tfoot>
                 </table>
