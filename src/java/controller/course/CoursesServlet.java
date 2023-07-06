@@ -53,9 +53,15 @@ public class CoursesServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try {
+            String message = (String) request.getAttribute("message");
+            request.setAttribute("ErrorMessage", message);
+            ArrayList<CoursesDTO> list = CoursesDAO.getAllCourses();
+            request.setAttribute("list", list);
+            request.getRequestDispatcher("courseStaff.jsp").forward(request, response);
+        } catch (SQLException ex) {
         }
-        
-    
+    }
 
     /**
      * Returns a short description of the servlet.

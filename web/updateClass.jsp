@@ -17,7 +17,7 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
             />
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-        <link rel="stylesheet" href="./css/updateCourse.css" />
+        <link rel="stylesheet" href="./css/updateClass.css" />
         <title>Update Class</title>
     </head>
     <body>
@@ -50,35 +50,42 @@
                     <h1>CHỈNH SỬA LỚP HỌC</h1>
                 </div>
 
-                <form enctype="multipart/form-data" action="updateClass" method="POST">
-                    <input type="text" name="id" value="${c.courseID}" hidden=""/>
+                <form  action="updateClass?classID=${cls.classID}" method="POST">
+
                     <div class="update-box">
                         <div class="update-title">
-                            <label for="title">Name</label>
-                            <input type="text" name="name" value="${c.courseName}"/>
+                            <label for="title">Tên lớp</label>
+                            <input type="text" name="className" value="${cls.className}"/>
                         </div>
                         <div class="update-cate">
-                            <label for="cate">Price</label>
-                            <input type="number" name="price" value="${c.price}"/>
+                            <label for="cate">PT</label>
+                            <select name="PT">
+                                <c:forEach var="tc" items="${listTC}">
+                                    <option value="${tc.ptPhone}">${tc.ptName}</option>
+                                </c:forEach>
+                            </select>
                         </div>
                         <div class="update-cate">
-                            <label for="cate">Number of months</label>
-                            <input type="number" name="numberOfMonths" value="${c.numberOfMonths}"/>
+                            <label for="cate">Khóa học</label>
+                            <select name="courseID">
+                                <c:forEach var="c" items="${listCourse}">
+                                    <option value="${c.courseID}">${c.courseName}</option>
+                                </c:forEach>
+                            </select>
                         </div>
-                        <div class="update-img">
-                            <label for="cate">Image</label>
-                            <input type="file" name="image" id="fileInput"
-                                   onchange="previewImage(event)" accept="image/*" />
-                            <div class="file-img">
-                                <img id="preview" src="data:image;base64,${c.courseData}" alt="Preview"/>
-                            </div>
+                        <div class="update-cate">
+                            <label for="cate">Nội dung</label>
+                            <input type="text" name="description" value="${cls.description}"/>
                         </div>
-                        <div class="update-content-wrapper">
-                            <div class="update-content">
-                                <label for="">Describe</label>
-                                <textarea id="myTextarea" name="description">${c.description}</textarea>
-                            </div>
+                        <div class="update-cate">
+                            <label for="cate">Số slot</label>
+                            <input type="number" name="totalSession" value="${cls.totalSession}" readonly=""/>
                         </div>
+                        <div class="update-cate">
+                            <label for="cate">Số học viên</label>
+                            <input type="number" name="capacity" value="${cls.capacity}"/>
+                        </div>
+
                     </div>
                     <div class="table-button">
                         <button type="submit">UPDATE</button>

@@ -405,12 +405,25 @@ public class ClassDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "SELECT * FROM Class WHERE classID = " + ClassID;
-                ptm = conn.prepareStatement(sql);
+                ptm = conn.prepareStatement("SELECT c.classID, c.courseID, co.name AS courseName, u.name AS ptName, c.ptPhone, c.name AS className, c.description, c.total_sessions, c.capacity, c.status\n"
+                        + "FROM Class AS c\n"
+                        + "INNER JOIN [dbo].[User] u ON c.ptPhone = u.phone\n"
+                        + "INNER JOIN Courses AS co On co.courseID = c.courseID\n"
+                        + "WHERE c.status = 1 AND c.classID = " + ClassID);
                 rs = ptm.executeQuery();
+
                 while (rs.next()) {
-                    return new ClassDTO(rs.getInt("classID"), rs.getInt("courseID"), rs.getInt("capacity"), rs.getString("ptPhone"),
-                            rs.getString("name"), rs.getString("description"), rs.getInt("total_sessions"), rs.getBoolean("status"));
+                    int classID = rs.getInt("classID");
+                    int courseID = rs.getInt("courseID");
+                    String courseName = rs.getString("courseName");
+                    String ptName = rs.getString("ptName");
+                    String ptPhone = rs.getString("ptPhone");
+                    String className = rs.getString("className");
+                    String description = rs.getString("description");
+                    int totalSession = rs.getInt("total_sessions");
+                    int capacity = rs.getInt("capacity");
+                    boolean status = rs.getBoolean("status");
+                    return new ClassDTO(classID, courseID, ptName, ptPhone, className, description, totalSession, status, courseName, capacity);
                 }
             }
         } catch (Exception e) {
@@ -430,7 +443,9 @@ public class ClassDAO {
 
     public static void main(String[] args) throws SQLException {
         ClassDAO dao = new ClassDAO();
-        ClassDTO list = dao.getClassByClassID("2");
-        System.out.println(list);
+        List<ClassDTO> list = dao.getStaff();
+        for (ClassDTO classDTO : list) {
+            System.out.println(classDTO);
+        }
     }
 }
