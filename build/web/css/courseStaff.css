@@ -277,6 +277,8 @@ select {
 
 select {
   word-wrap: normal;
+  height: 100%;
+  border-radius: 5px;
 }
 
 button,

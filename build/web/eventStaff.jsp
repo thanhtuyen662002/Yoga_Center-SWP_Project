@@ -51,9 +51,9 @@
                             <th>DayStart</th>
                             <th>DayEnd</th>
                             <th>Image</th>
-                            <c:if test="${sessionScope.ROLE == 'AD'}">
-                            <th>Action</th>
-                            </c:if>
+                                <c:if test="${sessionScope.ROLE == 'AD'}">
+                                <th>Action</th>
+                                </c:if>
                         </tr>
                     </thead>
                     <tbody>
@@ -66,13 +66,13 @@
                                 <td>${e.daystart}</td>
                                 <td>${e.dayend}</td>
                                 <td class="event-img"><img src="data:image;base64,${e.data}" /></td>
-                                <c:if test="${sessionScope.ROLE == 'AD'}">
-                                <td id="tool">
-                                    <a href="updateEvent?name=${e.eventName}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
-                                    |
-                                    <a href="#" onclick="showMess(${e.eventID})"><i class="fa-sharp fa-solid fa-trash"></i></a>
+                                    <c:if test="${sessionScope.ROLE == 'AD'}">
+                                    <td id="tool">
+                                        <a href="updateEvent?name=${e.eventName}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
+                                        |
+                                        <a href="#" onclick="showMess('${e.eventID} - ${e.eventName}')"><i class="fa-sharp fa-solid fa-trash"></i></a>
 
-                                </td>
+                                    </td>
                                 </c:if>
                             </tr>
                         </c:forEach>
@@ -88,14 +88,14 @@
                             <th>Discount</th>
                             <th>DayStart</th>
                             <th>DayEnd</th>
-                             <th>Image</th>
-                             <c:if test="${sessionScope.ROLE == 'AD'}">
-                            <th>Action</th>
-                             </c:if>
+                            <th>Image</th>
+                                <c:if test="${sessionScope.ROLE == 'AD'}">
+                                <th>Action</th>
+                                </c:if>
                         </tr>
                     </tfoot>
                 </table>
-                
+
 
             </div>
 
@@ -111,14 +111,17 @@
                         });
             </script>
             <script>
-                function showMess(id) {
-                    var option = confirm('are you sure to delete');
+                function showMess(param) {
+                    var arr = param.split('-');
+                    var id = arr[0];
+                    var name = arr[1];
+                    var option = confirm("Bạn có chắc chắn muốn xóa sự kiện " + name + " hay không?");
                     if (option === true) {
                         window.location.href = 'deleteEvent?sid=' + id;
                     }
                 }
             </script>
-           
-           
+
+
     </body>
 </html>

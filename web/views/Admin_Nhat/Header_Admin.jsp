@@ -27,7 +27,7 @@
     </head>
     <body>
         <div class="wrapper d-flex align-items-stretch"> 
-            <nav id="sidebar" class="vh-100">
+            <nav id="sidebar">
                 <div
                     class="img bg-wrap text-center py-4"
                     style="background-image: url(${pageContext.request.contextPath}/images/bg_1.jpg)"
@@ -95,7 +95,7 @@
                     <li onmouseover="showDropdown('showclub')" onmouseout="hideDropdown('showclub')">
                         <a href="mainController?action=club"><span class="fa-solid fa-house-chimney mr-3"></span> CÂU LẠC BỘ</a>
                         <ul id="showclub" class="dropdown">
-                            <li><a href="createClub">Tạo câu lạc bộ</a></li>
+                            <li><a href="insertClub">Tạo câu lạc bộ</a></li>
                             <li><a href="showDeleteClub">Câu lạc bộ đã xóa</a></li>
                         </ul>
                     </li>
