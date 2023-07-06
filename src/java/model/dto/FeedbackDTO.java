@@ -11,24 +11,38 @@ package model.dto;
  */
 public class FeedbackDTO {
     private int courseID;
-    private String cusphone;
+    private String cusPhone;
     private String comment;
     private String dayup;
     private boolean status;
+    private String cusName;
 
-    public FeedbackDTO(int courseID, String cusphone, String comment, boolean status) {
+    public FeedbackDTO() {
+    }
+
+    
+    public FeedbackDTO(int courseID, String cusPhone, String comment, boolean status) {
         this.courseID = courseID;
-        this.cusphone = cusphone;
+        this.cusPhone = cusPhone;
         this.comment = comment;
         this.status = status;
     }
 
-    public FeedbackDTO(int courseID, String cusphone, String comment, String dayup, boolean status) {
+    public FeedbackDTO(int courseID, String cusPhone, String comment, String dayup, boolean status) {
         this.courseID = courseID;
-        this.cusphone = cusphone;
+        this.cusPhone = cusPhone;
         this.comment = comment;
         this.dayup = dayup;
         this.status = status;
+    }
+
+    public FeedbackDTO(int courseID, String cusPhone, String comment, String dayup, boolean status, String cusName) {
+        this.courseID = courseID;
+        this.cusPhone = cusPhone;
+        this.comment = comment;
+        this.dayup = dayup;
+        this.status = status;
+        this.cusName = cusName;
     }
 
     public String getDayup() {
@@ -37,6 +51,14 @@ public class FeedbackDTO {
 
     public void setDayup(String dayup) {
         this.dayup = dayup;
+    }
+
+    public String getCusName() {
+        return cusName;
+    }
+
+    public void setCusName(String cusName) {
+        this.cusName = cusName;
     }
     
     
@@ -52,11 +74,11 @@ public class FeedbackDTO {
     }
 
     public String getCusphone() {
-        return cusphone;
+        return cusPhone;
     }
 
-    public void setCusphone(String cusphone) {
-        this.cusphone = cusphone;
+    public void setCusphone(String cusPhone) {
+        this.cusPhone = cusPhone;
     }
 
     public String getComment() {
@@ -77,7 +99,7 @@ public class FeedbackDTO {
 
     @Override
     public String toString() {
-        return "FeedbackDTO{" + "courseID=" + courseID + ", cusphone=" + cusphone + ", comment=" + comment + ", status=" + status + '}';
+        return "FeedbackDTO{" + "courseID=" + courseID + ", cusPhone=" + cusPhone + ", comment=" + comment + ", status=" + status + '}';
     }
     
     

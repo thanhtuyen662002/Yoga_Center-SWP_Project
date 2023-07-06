@@ -72,36 +72,15 @@
                                 </form>
                             </div>
                             <div class="rating-box-question">
+                                <c:forEach var="feedback" items="${feedbackList}">
                                 <div class="question-card">
                                     <div class="question-title">
-                                        <div class="nameUser">Phú</div>
-                                        <div class="timeQuestion">2016-06-16 14:25:59</div>
+                                        <div class="nameUser">${feedback.cusName}</div>
+                                        <div class="timeQuestion">${feedback.dayup}</div>
                                     </div>
-                                    <div class="question-content">Khóa học này ok</div>
+                                    <div class="question-content">${feedback.comment}</div>
                                 </div>
-                                <div class="question-card">
-                                    <div class="question-title">
-                                        <div class="nameUser">Phú</div>
-                                        <div class="timeQuestion">2016-06-16 14:25:59</div>
-                                    </div>
-                                    <div class="question-content">Khóa học này ok</div>
-                                </div>
-                                <div class="question-card">
-                                    <div class="question-title">
-                                        <div class="nameUser">Phú</div>
-                                        <div class="timeQuestion">2016-06-16 14:25:59</div>
-                                    </div>
-                                    <div class="question-content">Khóa học này ok</div>
-                                </div>
-                                <div class="question-card">
-                                    <div class="question-title">
-                                        <div class="nameUser">Phú</div>
-                                        <div class="timeQuestion">2016-06-16 14:25:59</div>
-                                    </div>
-                                    <div class="question-content">
-                                        Khóa học này oksssssssssssssssssssssssssssssssssss
-                                    </div>
-                                </div>
+                                </c:forEach>
                             </div>
                         </div>
                     </div>

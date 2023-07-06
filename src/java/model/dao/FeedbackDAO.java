@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.dto.FeedbackDTO;
@@ -19,8 +20,7 @@ import utils.DBUtils;
  * @author HOANG ANH
  */
 public class FeedbackDAO {
-    
-    
+
     public static ArrayList<FeedbackDTO> getAllFeedback() throws SQLException {
         ArrayList<FeedbackDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -29,16 +29,27 @@ public class FeedbackDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                ptm = conn.prepareStatement("SELECT * FROM Feedback WHERE status = 1");
-                rs = ptm.executeQuery();
+                Statement stmt = conn.createStatement();
+//                stmt = conn.prepareStatement("SELECT * FROM Feedback WHERE status = 1");
+                rs = stmt.executeQuery("SELECT * FROM Feedback");
 
                 while (rs.next()) {
-                    int courseID = rs.getInt("courseID");
-                    String cusPhone = rs.getString("cusPhone");
-                    String comment = rs.getString("comment");
-                    String dayup = rs.getString("dayup");
-                    boolean status = rs.getBoolean("status");
-                    list.add(new FeedbackDTO(courseID, cusPhone, comment, dayup, status));
+                    FeedbackDTO feedback = new FeedbackDTO();
+                    feedback.setCourseID(rs.getInt("courseID"));
+                     feedback.setCusphone(rs.getString("cusPhone"));
+                   feedback.setComment(rs.getString("comment"));
+                     feedback.setDayup(rs.getString("dayup"));
+                    feedback.setStatus(rs.getBoolean("status"));
+                    String phone = feedback.getCusphone();
+                    ptm = conn.prepareStatement("SELECT name FROM [dbo].[User] WHERE phone = ?");
+                    ptm.setString(1, phone);
+                    try (ResultSet rsUser = ptm.executeQuery()) {
+                        if (rsUser.next()) {
+                            feedback.setCusName(rsUser.getString("name"));
+                        }
+                    }
+                    ptm.close();
+                    list.add(feedback);
                 }
             }
         } catch (Exception e) {
@@ -55,15 +66,18 @@ public class FeedbackDAO {
         }
         return list;
     }
-        public static void main(String[] args) throws SQLException {
-        
+
+    public static void main(String[] args) throws SQLException {
+
         List<FeedbackDTO> List = FeedbackDAO.getAllFeedback();
-        for (FeedbackDTO o : List){
-            System.out.println(o);
+        for (FeedbackDTO feedback : List) {
+            System.out.println(feedback);
+            System.out.println("Customer Name: " + feedback.getCusName());
+            System.out.println("Day Up: " + feedback.getDayup());
         }
     }
-    
-    public boolean checkUserCourse(String phone, int courseID) throws ClassNotFoundException{
+
+    public boolean checkUserCourse(String phone, int courseID) throws ClassNotFoundException {
         boolean result = false;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -108,7 +122,7 @@ public class FeedbackDAO {
 
         return result;
     }
-    
+
 //    public static void main(String[] args) {
 //    try {
 //        boolean enrolled = checkUserCourse("0258976431", 60);
@@ -121,16 +135,15 @@ public class FeedbackDAO {
 //        e.printStackTrace();
 //    }
 //}
-    
-    public void insertFeedback(String cusPhone, String courseID, String comment, String dayup) throws SQLException{
+    public void insertFeedback(String cusPhone, String courseID, String comment, String dayup) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
 
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "INSERT INTO Feedback (cusPhone, courseID, comment, dayup, status) \n" +
-                                    "VALUES ('" + cusPhone + "'," + courseID +" , N'"+ comment +"', '"+ dayup +"' ,1 " + ")";
+                String sql = "INSERT INTO Feedback (cusPhone, courseID, comment, dayup, status) \n"
+                        + "VALUES ('" + cusPhone + "'," + courseID + " , N'" + comment + "', '" + dayup + "' ,1 " + ")";
                 ptm = conn.prepareStatement(sql);
                 int row = ptm.executeUpdate();
                 if (row > 0) {
@@ -148,8 +161,7 @@ public class FeedbackDAO {
                 conn.close();
             }
         }
-        
+
     }
-    
-    
+
 }

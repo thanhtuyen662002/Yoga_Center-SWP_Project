@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.dao.EventDAO;
+import model.dao.FeedbackDAO;
 import model.dto.CoursesDTO;
 import model.dto.EventDTO;
+import model.dto.FeedbackDTO;
 
 /**
  *
@@ -67,6 +69,14 @@ public class CourseCustomerServlet extends HttpServlet {
             request.setAttribute("course", course);
             request.setAttribute("time", time);
             request.setAttribute("timeToCome", timeToCome);
+            ArrayList<FeedbackDTO> feedbackList = FeedbackDAO.getAllFeedback();
+            ArrayList<FeedbackDTO> filteredFeedbackList = new ArrayList<>();
+            for (FeedbackDTO feedback : feedbackList) {
+                if (feedback.isStatus()) {
+                    filteredFeedbackList.add(feedback);
+                }
+            }
+            request.setAttribute("feedbackList", filteredFeedbackList);
             request.getRequestDispatcher("view.customer/courseDetail.jsp").forward(request, response);
         } catch (SQLException ex) {
         }
