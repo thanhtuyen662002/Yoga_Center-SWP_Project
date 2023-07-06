@@ -49,7 +49,7 @@ public class ClassDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "SELECT phone, name FROM [User] WHERE role = 'ST'";
+                String sql = "SELECT phone, name FROM [User] WHERE role = 'TC'";
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
@@ -272,6 +272,7 @@ public class ClassDAO {
         }
         return list;
     }
+
     public List<ClassDTO> getListDeleteClass() throws SQLException {
         List<ClassDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -340,6 +341,7 @@ public class ClassDAO {
         }
         return false;
     }
+
     public boolean restoreClass(String name) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -366,12 +368,69 @@ public class ClassDAO {
         return false;
     }
 
-    public static void main(String[] args) throws SQLException {
-        ClassDAO dao = new ClassDAO();
-        List<ClassDTO> List = dao.getUser("2");
-        for (ClassDTO o : List) {
-            System.out.println(o);
+    public List<ClassDTO> getListCourse() throws SQLException {
+        List<ClassDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT courseID, name FROM Courses";
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    list.add(new ClassDTO(rs.getInt("courseID"), rs.getString("name")));
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
+        return list;
     }
 
+    public ClassDTO getClassByClassID(String ClassID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT * FROM Class WHERE classID = " + ClassID;
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    return new ClassDTO(rs.getInt("classID"), rs.getInt("courseID"), rs.getInt("capacity"), rs.getString("ptPhone"),
+                            rs.getString("name"), rs.getString("description"), rs.getInt("total_sessions"), rs.getBoolean("status"));
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
+
+    public static void main(String[] args) throws SQLException {
+        ClassDAO dao = new ClassDAO();
+        ClassDTO list = dao.getClassByClassID("2");
+        System.out.println(list);
+    }
 }

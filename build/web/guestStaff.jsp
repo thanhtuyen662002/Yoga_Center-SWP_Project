@@ -83,10 +83,8 @@
                                     <a href="loadGuest?id=${g.signupID}"><i class="fa-solid fa-circle-plus fa-bounce" style="color: #14d72b;"></i></a>                                
                                     |
                                     <a href="updateguest?signupID=${g.signupID}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
-                                        <c:if test="${sessionScope.ROLE == 'AD'}">
-                                        |
-                                        <a onclick="showMess('${g.signupID}-${g.fullName}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
-                                        </c:if>
+                                    |
+                                    <a onclick="showMess('${g.signupID}-${g.fullName}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -115,9 +113,9 @@
             <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
             <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
             <script>
-                                            $(document).ready(function () {
-                                                $('#course').DataTable();
-                                            });
+                                        $(document).ready(function () {
+                                            $('#course').DataTable();
+                                        });
             </script>
             <script src="./js/staffDropdown.js"></script>
     </body>

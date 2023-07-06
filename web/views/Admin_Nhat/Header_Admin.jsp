@@ -99,12 +99,6 @@
                         <a href="mainController?action=learner"><span class="fa-solid fa-user-graduate mr-3"></span> HỌC VIÊN</a>
 
                     </li> 
-                    <li onmouseover="showDropdown('guest')" onmouseout="hideDropdown('guest')">
-                        <a href="mainController?action=guest"><span class="fa-solid fa-user-group mr-3"></span> KHÁCH HÀNG</a>
-                        <ul id="guest" class="dropdown">
-                            <li><a href="insertGuest.jsp">Tạo tài khoản</a></li>
-                        </ul>
-                    </li> 
                     <li onmouseover="showDropdown('bill')" onmouseout="hideDropdown('bill')">
                         <a href="mainController?action=bill"><span class="fa-solid fa-money-bill-1-wave mr-3"></span> HÓA ĐƠN</a>
                     </li> 

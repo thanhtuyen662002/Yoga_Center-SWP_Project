@@ -32,6 +32,17 @@ public class ClassDTO {
         this.capacity = capacity;
     }
 
+    public ClassDTO(int classID, int courseID, int capacity, String ptPhone, String className, String description, int totalSession, boolean status) {
+        this.classID = classID;
+        this.courseID = courseID;
+        this.capacity = capacity;
+        this.ptPhone = ptPhone;
+        this.className = className;
+        this.description = description;
+        this.totalSession = totalSession;
+        this.status = status;
+    }
+
     public ClassDTO(String cusPhone, String cusName) {
         this.cusPhone = cusPhone;
         this.cusName = cusName;
@@ -44,6 +55,12 @@ public class ClassDTO {
         this.numberOfMonths = numberOfMonths;
     }
 
+    public ClassDTO(int courseID, String courseName) {
+        this.courseID = courseID;
+        this.courseName = courseName;
+    }
+
+    
     public ClassDTO(int numberOfMonths) {
         this.numberOfMonths = numberOfMonths;
     }
