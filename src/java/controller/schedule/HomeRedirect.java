@@ -39,8 +39,8 @@ public class HomeRedirect extends HttpServlet {
             case "AD":
                 response.sendRedirect("listStaff");
                 break;
-            case "ST":
-                response.sendRedirect("courses");
+            case "TC":
+                response.sendRedirect("showclass");
                 break;
         }
     }

@@ -42,7 +42,7 @@ public class DeleteGuestServlet extends HttpServlet {
             } else {
                 message = "Không thể xóa khách hàng";
             }
-            request.setAttribute("message", message);
+            request.setAttribute("ErrorMessage", message);
             request.getRequestDispatcher("guest").forward(request, response);
         } catch (Exception e) {
         }

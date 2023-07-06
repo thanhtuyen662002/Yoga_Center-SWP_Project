@@ -83,7 +83,7 @@ public class UserDAO_Nhat extends DBUtils {
         try {
             String sql = "SELECT *\n"
                     + "  FROM [User]\n"
-                    + "  where role = 'ST'";
+                    + "  where role = 'TC'";
             PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -108,7 +108,7 @@ public class UserDAO_Nhat extends DBUtils {
             int count = 1;
 
             textSearch = "%" + textSearch + "%";
-            sql += "\n Where (phone like ? or [name] like ?)  and role = 'ST'\n";
+            sql += "\n Where (phone like ? or [name] like ?)  and role = 'TC'\n";
             setter.put(count, textSearch);
             count++;
             setter.put(count, textSearch);
@@ -153,7 +153,7 @@ public class UserDAO_Nhat extends DBUtils {
             int count = 1;
 
             textSearch = "%" + textSearch + "%";
-            sql += "\n Where (phone like ? or [name] like ?) and role = 'ST'\n";
+            sql += "\n Where (phone like ? or [name] like ?) and role = 'TC'\n";
             setter.put(count, textSearch);
             count++;
             setter.put(count, textSearch);

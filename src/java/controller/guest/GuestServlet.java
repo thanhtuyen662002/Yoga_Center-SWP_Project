@@ -35,7 +35,7 @@ public class GuestServlet extends HttpServlet {
             GuestDAO dao = new GuestDAO();
             List<GuestDTO> list = dao.getListGuest();
             request.setAttribute("list", list);
-            
+
             request.getRequestDispatcher("guestStaff.jsp").forward(request, response);
         } catch (Exception e) {
         }
@@ -45,7 +45,16 @@ public class GuestServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            String error = (String) request.getAttribute("ErrorMessage");
+            request.setAttribute("ErrorMessage", error);
+            GuestDAO dao = new GuestDAO();
+            List<GuestDTO> list = dao.getListGuest();
+            request.setAttribute("list", list);
+
+            request.getRequestDispatcher("guestStaff.jsp").forward(request, response);
+        } catch (Exception e) {
+        }
     }
 
     @Override

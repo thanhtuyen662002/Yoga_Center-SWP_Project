@@ -218,16 +218,16 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
+        </div>
+        <c:import url="customer_footer.jsp"/>
         <script>
             function handleServletError(errorMessage) {
                 if (errorMessage === "ERROR") {
                     alert("Số điện thoại bạn vừa nhập đã có tài khoản!");
                 } else {
-                // Xử lý các trường hợp khác nếu cần thiết
+                    // Xử lý các trường hợp khác nếu cần thiết
                 }
             }
         </script>
@@ -242,6 +242,6 @@
             }
         </script>
         <script src="./js/showCourseDetails.js"></script>
-        <c:import url="customer_footer.jsp"/>
+
     </body>
 </html>

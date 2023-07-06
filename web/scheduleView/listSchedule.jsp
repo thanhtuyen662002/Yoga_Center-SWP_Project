@@ -47,7 +47,7 @@
                     <form action="homeRedirect" method="post">
                         <button class="left-button btn-back mb-4" type="submit" style="margin-left: 0px;border-radius: 5px;border: none;margin-left: 1%">Home</button>
                     </form>
-                    <c:if test="${sessionScope.USER.roleID == 'ST'}">
+                    <c:if test="${sessionScope.USER.roleID == 'TC'}">
                         <form action="mainController" method="get">
                             <input hidden name="action" value="InsertSchedule"/>
                             <button class="btn-primary mb-4 right-button btn-back" style="border-radius: 5px;border: none;margin-right: 0px">Create Schedule</button>

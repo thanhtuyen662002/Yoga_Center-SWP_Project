@@ -79,24 +79,28 @@
                 </form>
             </div>
 
-            <script>
-                function validateForm() {
-                    var inputs = document.getElementsByTagName("input");
-                    for (var i = 0; i < inputs.length; i++) {
-                        if (inputs[i].value == "") {
-                            alert("Vui lòng nhập đầy đủ thông tin vào các trường!");
-                            return false;
-                        }
-                    }
-                    return true;
-                }
-            </script>
-            <script src="/courseNav/bootstrap.min.js"></script>
-            <script src="/courseNav/jquery.min.js"></script>
-            <script src="/courseNav/main.js"></script>
-            <script src="/courseNav/popper.js"></script>
+
+            <script src="./courseNav/bootstrap.min.js"></script>
+            <script src="./courseNav/jquery.min.js"></script>
+            <script src="./courseNav/main.js"></script>
+            <script src="./courseNav/popper.js"></script>
             <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
             <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-
+            <script src="./ckeditor/ckeditor.js"></script>
+            <script>
+                CKEDITOR.replace("myTextarea");
+            </script>
+            <script>
+                    function validateForm() {
+                        var inputs = document.getElementsByTagName("input");
+                        for (var i = 0; i < inputs.length; i++) {
+                            if (inputs[i].value == "") {
+                                alert("Vui lòng nhập đầy đủ thông tin vào các trường!");
+                                return false;
+                            }
+                        }
+                        return true;
+                    }
+            </script>
     </body>
 </html>
