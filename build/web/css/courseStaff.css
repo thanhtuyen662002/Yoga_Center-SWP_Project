@@ -261,7 +261,7 @@ optgroup,
 textarea {
   margin: 0;
   font-family: inherit;
-  font-size: inherit;
+  font-size: 20px;
   line-height: inherit;
 }
 

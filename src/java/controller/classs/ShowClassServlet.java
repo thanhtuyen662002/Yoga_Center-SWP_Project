@@ -42,7 +42,15 @@ public class ShowClassServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            String message = (String) request.getAttribute("message");
+            request.setAttribute("ErrorMessage", message);
+            List<ClassDTO> list = ClassDAO.getAllClass();
+            request.setAttribute("list_class", list);
+            request.getRequestDispatcher("classStaff.jsp").forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ShowClassServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

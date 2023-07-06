@@ -66,12 +66,16 @@ public class UpdateCourseServlet extends HttpServlet {
         String price = new String(request.getParameter("price").getBytes("ISO-8859-1"), "UTF-8");
         String des = new String(request.getParameter("description").getBytes("ISO-8859-1"), "UTF-8");
         String numberOfMonths = request.getParameter("numberOfMonths");
+        String message = "";
+        boolean checkUpdate;
 
         try {
             //Kiểm tra tên khóa học đã có trong database hay chưa
             CoursesDAO dao = new CoursesDAO();
             boolean checkDuplicate = dao.checkCourseDuplicate(name);
             boolean checkDuplicate2 = dao.checkCourseDuplicate2(id, name);
+            CoursesDTO course = dao.getCourses(id);
+            String rootCourseName = course.getCourseName();
 
             if (checkDuplicate) {
                 if (checkDuplicate2) {
@@ -90,15 +94,15 @@ public class UpdateCourseServlet extends HttpServlet {
                         InputStream content = fileContent;
                         byte[] imageBytes = IOUtils.toByteArray(content);
                         String data = Base64.getEncoder().encodeToString(imageBytes);
-                        updateInforToDatabase(name, price, des, numberOfMonths, fileName, data, id);
-
+                        checkUpdate = updateInforToDatabase(name, price, des, numberOfMonths, fileName, data, id);
+                        if (checkUpdate) {
+                            message = "Cập nhật khóa học thành công!";
+                        } else {
+                            message = "Cập nhật khóa học thất bại!";
+                        }
                     }
                 } else {
-                    response.getWriter().println("Error: Course name already exists in Database!");
-                    request.setAttribute("ErrorMessage", "Error: Course name already exists in Database!");
-                    CoursesDTO list = dao.getCourseByName(name);
-                    request.setAttribute("c", list);
-                    request.getRequestDispatcher("updateCourse.jsp").forward(request, response);
+                    message = "Tên khóa học đã tồn tại! Vui lòng cập nhật khóa học " + rootCourseName + " bằng tên khác!";
                 }
 
             } else {
@@ -117,27 +121,47 @@ public class UpdateCourseServlet extends HttpServlet {
                     InputStream content = fileContent;
                     byte[] imageBytes = IOUtils.toByteArray(content);
                     String data = Base64.getEncoder().encodeToString(imageBytes);
-                    updateInforToDatabase(name, price, des, numberOfMonths, fileName, data, id);
-
+                    checkUpdate = updateInforToDatabase(name, price, des, numberOfMonths, fileName, data, id);
+                    if (checkUpdate) {
+                        message = "Cập nhật khóa học thành công!";
+                    } else {
+                        message = "Cập nhật khóa học thất bại!";
+                    }
                 }
-
             }
         } catch (SQLException ex) {
             response.getWriter().println("ERROR: " + ex.getMessage());
         }
-        response.sendRedirect("courses");
+        request.setAttribute("message", message);
+        request.getRequestDispatcher("courses").forward(request, response);
     }
 
-    public void updateInforToDatabase(String name, String price, String des, String numberOfMonths, String fileName, String data, String id) throws SQLException {
+    public boolean updateInforToDatabase(String name, String price, String des, String numberOfMonths, String fileName, String data, String id) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
+        int row;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String query = "UPDATE Courses SET name = N'" + name + "', description= N'" + des + "', numberOfMonths= " + numberOfMonths + ", image= N'"
                         + fileName + "', data= '" + data + "', price= " + price + " WHERE courseID= " + id;
                 ptm = conn.prepareStatement(query);
-                ptm.executeUpdate();
+                row = ptm.executeUpdate();
+                if (row > 0) {
+                    int months = Integer.parseInt(numberOfMonths);
+                    int total_sessions = months * 8;
+                    String sql = "UPDATE Class SET total_sessions = " + total_sessions + " WHERE courseID = " + id;
+                    ptm = conn.prepareStatement(sql);
+                    row = ptm.executeUpdate();
+                    if (row > 0) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+
             }
         } catch (Exception e) {
         } finally {
@@ -148,6 +172,7 @@ public class UpdateCourseServlet extends HttpServlet {
                 conn.close();
             }
         }
+        return false;
     }
 
     @Override

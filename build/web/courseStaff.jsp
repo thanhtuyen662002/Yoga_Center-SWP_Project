@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="./css/courseStaff.css" />
 
         <title>Course</title>
-        
+
     </head>
     <body>
         <% String ErrorMessage = (String) request.getAttribute("ErrorMessage"); %>
@@ -76,28 +76,14 @@
                                 <td><c:out value="${price}"/></td>
                                 <c:if test="${sessionScope.ROLE == 'AD'}">
                                     <td id="tool">
-                                        <!--                                    <a href=""><i class="fa-solid fa-eye "></i></a>-->
-
                                         <a href="updateCourse?name=${c.courseName}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
                                         |
                                         <a onclick="showMess('${c.courseName}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
-
                                     </td>
                                 </c:if>
                             </tr>
                         </c:forEach>
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Image</th>
-                            <th>Price</th>
-                                <c:if test="${sessionScope.ROLE == 'AD'}">
-                                <th>Action</th>
-                                </c:if>
-                        </tr>
-                    </tfoot>
                 </table>
 
             </div>
@@ -110,10 +96,10 @@
             <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
             <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
             <script>
-                $(document).ready(function () {
-                    $('#course').DataTable();
-                });
+                                            $(document).ready(function () {
+                                                $('#course').DataTable();
+                                            });
             </script>
-            
+
     </body>
 </html>

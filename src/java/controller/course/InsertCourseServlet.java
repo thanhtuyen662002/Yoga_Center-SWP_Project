@@ -78,6 +78,7 @@ public class InsertCourseServlet extends HttpServlet {
         String numberOfMonths = request.getParameter("numberOfMonths");
 
         boolean checkDuplicate;
+        String message = "";
         try {
             //Kiểm tra tên khóa học đã có trong database hay chưa
             CoursesDAO dao = new CoursesDAO();
@@ -101,19 +102,19 @@ public class InsertCourseServlet extends HttpServlet {
                     boolean checkInsertCourse = saveInforToDatabase(name, price, des, numberOfMonths, fileName, data);
                     if (checkInsertCourse) {
                         saveCourseTypeToDatabase(name);
+                        message = "Thêm khóa học thành công!";
                     }
                 }
             } else {
-                //response.getWriter().println("Error: Course name already exists in Database!");
-                request.setAttribute("ErrorMessage", "Error: Course name already exists in Database!");
-                request.getRequestDispatcher("insertCourse.jsp").forward(request, response);
+                message = "Tên khóa học đã tồn tại!";
             }
         } catch (SQLException ex) {
             response.getWriter().println("ERROR: " + ex.getMessage());
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(InsertCourseServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        response.sendRedirect("courses");
+        request.setAttribute("message", message);
+        request.getRequestDispatcher("courses").forward(request, response);
     }
 
     @Override
