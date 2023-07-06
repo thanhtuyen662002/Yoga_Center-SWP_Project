@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -69,16 +71,13 @@ public class CourseCustomerServlet extends HttpServlet {
             request.setAttribute("course", course);
             request.setAttribute("time", time);
             request.setAttribute("timeToCome", timeToCome);
-            ArrayList<FeedbackDTO> feedbackList = FeedbackDAO.getAllFeedback();
-            ArrayList<FeedbackDTO> filteredFeedbackList = new ArrayList<>();
-            for (FeedbackDTO feedback : feedbackList) {
-                if (feedback.isStatus()) {
-                    filteredFeedbackList.add(feedback);
-                }
-            }
-            request.setAttribute("feedbackList", filteredFeedbackList);
+            List<FeedbackDTO> feedbackList = FeedbackDAO.getFeedbackByCourseID(id);
+            request.setAttribute("feedbackList", feedbackList);
+            
             request.getRequestDispatcher("view.customer/courseDetail.jsp").forward(request, response);
         } catch (SQLException ex) {
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CourseCustomerServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

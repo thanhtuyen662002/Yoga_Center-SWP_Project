@@ -20,9 +20,10 @@
             integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
             crossorigin="anonymous"
             />
+        <link rel="icon" type="image/x-icon" href="../image/logo-yoga.jpg">
         <link rel="stylesheet" href="./css/showCourseDetails1.css" />
         <link rel="stylesheet" href="./css/course.css" />
-        <title>Document</title>
+        <title>Khóa Học</title>
     </head>
     <body>
         <!-- Header -->

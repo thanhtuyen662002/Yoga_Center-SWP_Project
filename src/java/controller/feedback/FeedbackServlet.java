@@ -65,20 +65,13 @@ public class FeedbackServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        try {
-//            ArrayList<FeedbackDTO> feedbackList = FeedbackDAO.getAllFeedback();
-//            ArrayList<FeedbackDTO> filteredFeedbackList = new ArrayList<>();
-//            for (FeedbackDTO feedback : feedbackList) {
-//                if (feedback.isStatus()) {
-//                    filteredFeedbackList.add(feedback);
-//                }
-//            }
-//            request.setAttribute("feedbackList", filteredFeedbackList);
-//            RequestDispatcher dispatcher = request.getRequestDispatcher("view.customer/courseDetail.jsp");
-//            dispatcher.forward(request, response);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(FeedbackServlet.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        try {
+            ArrayList<FeedbackDTO> feedbackList = FeedbackDAO.getAllFeedback();
+            request.setAttribute("feedbackList", feedbackList);
+            request.getRequestDispatcher("feedbackStaff.jsp").forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(FeedbackServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 

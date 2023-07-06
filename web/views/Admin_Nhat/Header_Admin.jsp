@@ -91,7 +91,19 @@
                             <li><a href="createClass">Tạo lớp học</a></li>
                             <li><a href="showDeleteClass">Lớp học đã xóa</a></li>
                         </ul>
-                    </li> 
+                    </li>
+                    <li onmouseover="showDropdown('feedback')" onmouseout="hideDropdown('feedback')">
+                        <a href="mainController?action=feedback"><span class="fa-solid fa-people-group mr-3"></span> ĐÁNH GIÁ KHÓA HỌC</a>
+                        <ul id="feedback" class="dropdown">
+                            <li><a href="createClass">Đánh giá đang chờ</a></li>
+                        </ul>
+                    </li>
+                    <li onmouseover="showDropdown('feedbackTC')" onmouseout="hideDropdown('feedbackTC')">
+                        <a href="mainController?action=feedbackTC"><span class="fa-solid fa-people-group mr-3"></span> ĐÁNH GIÁ GIÁO VIÊN </a>
+                        <ul id="feedbackTC" class="dropdown">
+                            <li><a href="createClass">Đánh giá đang chờ</a></li>
+                        </ul>
+                    </li>
                     <li>
                         <a href="mainController?action=listSchedule"><span class="fa-solid fa-calendar-days mr-3"></span> LỊCH DẠY</a>
                     </li>

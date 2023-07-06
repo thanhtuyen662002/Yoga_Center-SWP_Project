@@ -16,8 +16,19 @@ public class FeedbackDTO {
     private String dayup;
     private boolean status;
     private String cusName;
-
+    private String courseName;
+    
     public FeedbackDTO() {
+    }
+
+    public FeedbackDTO(int courseID, String cusPhone, String comment, String dayup, boolean status, String cusName, String courseName) {
+        this.courseID = courseID;
+        this.cusPhone = cusPhone;
+        this.comment = comment;
+        this.dayup = dayup;
+        this.status = status;
+        this.cusName = cusName;
+        this.courseName = courseName;
     }
 
     
@@ -60,6 +71,22 @@ public class FeedbackDTO {
     public void setCusName(String cusName) {
         this.cusName = cusName;
     }
+
+    public String getCusPhone() {
+        return cusPhone;
+    }
+
+    public void setCusPhone(String cusPhone) {
+        this.cusPhone = cusPhone;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
     
     
     
@@ -73,13 +100,7 @@ public class FeedbackDTO {
         this.courseID = courseID;
     }
 
-    public String getCusphone() {
-        return cusPhone;
-    }
 
-    public void setCusphone(String cusPhone) {
-        this.cusPhone = cusPhone;
-    }
 
     public String getComment() {
         return comment;

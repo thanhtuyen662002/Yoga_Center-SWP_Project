@@ -29,27 +29,20 @@ public class FeedbackDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                Statement stmt = conn.createStatement();
-//                stmt = conn.prepareStatement("SELECT * FROM Feedback WHERE status = 1");
-                rs = stmt.executeQuery("SELECT * FROM Feedback");
-
+                String query ="SELECT  u.name AS cusName, f.cusPhone, f.courseID, c.name AS courseName, f.comment, f.dayup, f.status FROM Feedback f \n"
+                        + "JOIN [dbo].[User] u ON f.cusPhone = u.phone \n"
+                        + "JOIN Courses c ON f.courseID = c.courseID";
+             ptm = conn.prepareStatement(query);   
+             rs = ptm.executeQuery();   
                 while (rs.next()) {
-                    FeedbackDTO feedback = new FeedbackDTO();
-                    feedback.setCourseID(rs.getInt("courseID"));
-                     feedback.setCusphone(rs.getString("cusPhone"));
-                   feedback.setComment(rs.getString("comment"));
-                     feedback.setDayup(rs.getString("dayup"));
-                    feedback.setStatus(rs.getBoolean("status"));
-                    String phone = feedback.getCusphone();
-                    ptm = conn.prepareStatement("SELECT name FROM [dbo].[User] WHERE phone = ?");
-                    ptm.setString(1, phone);
-                    try (ResultSet rsUser = ptm.executeQuery()) {
-                        if (rsUser.next()) {
-                            feedback.setCusName(rsUser.getString("name"));
-                        }
-                    }
-                    ptm.close();
-                    list.add(feedback);
+                    int courseID = rs.getInt("courseID");
+                    String courseName = rs.getString("courseName");
+                    String cusName = rs.getString("cusName");
+                    String cusPhone = rs.getString("cusPhone");
+                    String comment = rs.getString("comment");
+                    String dayup = rs.getString("dayup");
+                    boolean status = rs.getBoolean("status");
+                    list.add(new FeedbackDTO(courseID, cusPhone, comment, dayup, status, cusName, courseName));
                 }
             }
         } catch (Exception e) {
@@ -59,7 +52,7 @@ public class FeedbackDAO {
             }
             if (ptm != null) {
                 ptm.close();
-            }
+            }          
             if (conn != null) {
                 conn.close();
             }
@@ -67,7 +60,7 @@ public class FeedbackDAO {
         return list;
     }
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
         List<FeedbackDTO> List = FeedbackDAO.getAllFeedback();
         for (FeedbackDTO feedback : List) {
@@ -76,6 +69,35 @@ public class FeedbackDAO {
             System.out.println("Day Up: " + feedback.getDayup());
         }
     }
+    
+    public static List<FeedbackDTO> getFeedbackByCourseID(String courseID) throws ClassNotFoundException {
+        List<FeedbackDTO> feedbackList = new ArrayList<>();
+        try {
+            try (Connection conn = DBUtils.getConnection()) {
+                PreparedStatement stmt = conn.prepareStatement("SELECT u.name, f.cusPhone, f.courseID, f.comment, f.dayup, f.status from Feedback f \n"
+                        + "JOIN [dbo].[User] u ON f.cusPhone = u.phone WHERE f.courseID = ?");
+                stmt.setString(1, courseID);
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    FeedbackDTO feedback = new FeedbackDTO();
+                    feedback.setCusName(rs.getString("name"));
+                    feedback.setCusPhone(rs.getString("cusPhone"));
+                    feedback.setCourseID(rs.getInt("courseID"));
+                    feedback.setComment(rs.getString("comment"));
+                    feedback.setDayup(rs.getString("dayup"));
+                    feedback.setStatus(rs.getBoolean("status"));
+                    feedbackList.add(feedback);
+                }
+                rs.close();
+                stmt.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return feedbackList;
+    }
+
+    
 
     public boolean checkUserCourse(String phone, int courseID) throws ClassNotFoundException {
         boolean result = false;

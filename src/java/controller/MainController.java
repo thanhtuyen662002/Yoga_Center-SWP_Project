@@ -73,6 +73,10 @@ public class MainController extends HttpServlet {
                 url = "updateCourse";
             } else if (action.equals("listSchedule")) {
                 url = "listSchedule";
+            } else if (action.equals("feedback")) {
+                url = "feedback";
+            } else if (action.equals("feedbackTC")) {
+                url = "feedbackTC";
             } else if (action.equals("showclass")) {
                 url = "showclass";
             } else if (action.equals("InsertSchedule")) {

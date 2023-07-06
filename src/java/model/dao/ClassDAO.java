@@ -171,6 +171,15 @@ public class ClassDAO {
         }
         return list;
     }
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+
+        List<ClassDTO> List = ClassDAO.getAllClass();
+        for (ClassDTO o : List) {
+            System.out.println(o);
+            System.out.println("Customer Name: " + o.getPtName());
+        }
+    }
+
 
     public List<ClassDTO> getUser(String id) throws SQLException {
         List<ClassDTO> list = new ArrayList<>();
@@ -428,9 +437,4 @@ public class ClassDAO {
         return null;
     }
 
-    public static void main(String[] args) throws SQLException {
-        ClassDAO dao = new ClassDAO();
-        ClassDTO list = dao.getClassByClassID("2");
-        System.out.println(list);
-    }
 }
