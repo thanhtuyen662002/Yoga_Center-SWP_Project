@@ -36,8 +36,8 @@
                 </div>
                 <div class="course-link">
                     <ul>
-                        <li><a href="">Staff</a></li>
-                        <li><a href="">Khóa Học</a></li>
+                        <li><a href="courses">Staff</a></li>
+                        <li><a href="courses">Khóa Học</a></li>
                         <li><a href="" id="active">Cập nhật</a></li>
 
                     </ul>

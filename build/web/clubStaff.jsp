@@ -50,8 +50,9 @@
                         <tr>
                             <th>Club Name</th>
                             <th>Address</th>
-                            <th>Hotline</th>
                             <th>Image</th>
+                            <th>District</th>
+                            <th>Hotline</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -60,13 +61,14 @@
                             <tr>
                                 <td>${c.clubName}</td>
                                 <td>${c.address}</td>
-                                <td>${c.hotline}</td>
                                 <td id="table-img"><img src="data:image;base64,${c.dataImage}"/></td>
-                                    <td id="tool">
-                                        <a href="updateClub?clubID=${c.clubID}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
-                                        |
-                                        <a onclick="showMess('${c.clubName}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
-                                    </td>
+                                <td>${c.district}</td>
+                                <td>${c.hotline}</td>
+                                <td id="tool">
+                                    <a href="updateClub?clubID=${c.clubID}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
+                                    |
+                                    <a onclick="showMess('${c.clubName}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
+                                </td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -82,9 +84,9 @@
             <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
             <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
             <script>
-                                            $(document).ready(function () {
-                                                $('#course').DataTable();
-                                            });
+                $(document).ready(function () {
+                    $('#course').DataTable();
+                });
             </script>
 
     </body>

@@ -10,15 +10,14 @@ import model.dto.ClubDTO;
 import utils.DBUtils;
 
 public class ClubDAO {
-
+    
     public static void main(String[] args) throws SQLException {
         ClubDAO dao = new ClubDAO();
-        List<ClubDTO> rs = dao.getAllClub();
-        for (ClubDTO r : rs) {
-            System.out.println(r);
-        }
+        ClubDTO rs = dao.getClubByID("2");
+        System.out.println(rs);
+        
     }
-
+    
     public List<ClubDTO> getAllClub() throws SQLException {
         List<ClubDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -46,6 +45,37 @@ public class ClubDAO {
             if (conn != null) {
                 conn.close();
             }
-        } return list;
+        }
+        return list;
+    }
+    
+    public ClubDTO getClubByID(String clubID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT * FROM Club WHERE clubID = " + clubID;
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    return new ClubDTO(rs.getInt("clubID"), rs.getString("name"), rs.getString("district"),
+                            rs.getString("address"), rs.getString("hotline"), rs.getString("dataImage"));
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
     }
 }

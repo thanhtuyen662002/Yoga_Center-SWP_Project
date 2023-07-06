@@ -17,7 +17,7 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
             />
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-        <link rel="stylesheet" href="./css/updateCourse.css" />
+        <link rel="stylesheet" href="./css/updateClub.css" />
         <title>Update Course</title>
     </head>
     <body>
@@ -37,46 +37,44 @@
                 <div class="course-link">
                     <ul>
                         <li><a href="courses">Staff</a></li>
-                        <li><a href="courses">Khóa Học</a></li>
+                        <li><a href="club">Câu lạc bộ</a></li>
                         <li><a href="" id="active">Cập nhật</a></li>
 
                     </ul>
                 </div>
                 <div class="course-title" >
                     <div class="text">WELCOME STAFF</div>
-                    <div class="insert"><a type="submit" name="insert" href="courses">BACK</a></div>
+                    <div class="insert"><a type="submit" name="insert" href="club">BACK</a></div>
                 </div>
                 <div class="table-name">
-                    <h1>CHỈNH SỬA KHÓA HỌC</h1>
+                    <h1>CHỈNH SỬA CÂU LẠC BỘ</h1>
                 </div>
 
-                <form enctype="multipart/form-data" action="updateCourse" method="POST">
-                    <input type="text" name="id" value="${c.courseID}" hidden=""/>
+                <form enctype="multipart/form-data" action="updateClub?clubID=${c.clubID}" method="POST">
                     <div class="update-box">
                         <div class="update-title">
-                            <label for="title">Name</label>
-                            <input type="text" name="name" value="${c.courseName}"/>
+                            <label for="title">Club Name</label>
+                            <input type="text" name="clubName" value="${c.clubName}"/>
                         </div>
-                        <div class="update-cate">
-                            <label for="cate">Price</label>
-                            <input type="number" name="price" value="${c.price}"/>
+                        <div class="update-title">
+                            <label for="title">Address</label>
+                            <input type="text" name="address" value="${c.address}"/>
                         </div>
-                        <div class="update-cate">
-                            <label for="cate">Number of months</label>
-                            <input type="number" name="numberOfMonths" value="${c.numberOfMonths}"/>
+                        <div class="update-title">
+                            <label for="title">District</label>
+                            <input type="text" name="district" value="${c.district}"/>
                         </div>
+                        <div class="update-title">
+                            <label for="title">Hotline</label>
+                            <input type="text" name="hotline" value="${c.hotline}"/>
+                        </div>
+                        <div></div>
                         <div class="update-img">
                             <label for="cate">Image</label>
                             <input type="file" name="image" id="fileInput"
                                    onchange="previewImage(event)" accept="image/*" />
                             <div class="file-img">
-                                <img id="preview" src="data:image;base64,${c.courseData}" alt="Preview"/>
-                            </div>
-                        </div>
-                        <div class="update-content-wrapper">
-                            <div class="update-content">
-                                <label for="">Describe</label>
-                                <textarea id="myTextarea" name="description">${c.description}</textarea>
+                                <img id="preview" src="data:image;base64,${c.dataImage}" alt="Preview"/>
                             </div>
                         </div>
                     </div>

@@ -10637,7 +10637,7 @@ a.text-dark:focus {
 
 body {
   font-family: "Poppins", Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 14px;
   line-height: 1.8;
   font-weight: normal;
   background: #fff;
@@ -10649,9 +10649,6 @@ a {
   -o-transition: 0.3s all ease;
   transition: 0.3s all ease;
   color: #2f89fc;
-}
-.fa-trash {
-    color: #dc3545
 }
 a:hover,
 a:focus {
@@ -10944,6 +10941,7 @@ a[data-toggle="collapse"] {
   background: #4897fc;
 }
 
+/* này là làm title link */
 /* này làm link title */
 .course-link ul {
   list-style: none;
@@ -10975,6 +10973,7 @@ a[data-toggle="collapse"] {
 .course-link li #active {
   color: #a50001;
 }
+/* này là dưới title link */
 /* Dưới title */
 .course-title {
   display: flex;
@@ -11001,17 +11000,7 @@ a[data-toggle="collapse"] {
   background-color: #a50001;
   color: #fff;
 }
-/* này là table */
-.dataTables_wrapper {
-  margin: 50px;
-  padding: 20px;
-  border-radius: 15px;
-  background-color: #fff;
-}
-#tool {
-  font-size: 22px;
-  color: #808080;
-}
+/* này là Name  */
 .table-name {
   text-align: center;
   margin: 0 50px;
@@ -11023,23 +11012,76 @@ a[data-toggle="collapse"] {
   font-weight: 700;
   color: #808080;
 }
-.table-noidung {
-  max-width: 250px;
-  max-height: 10rem;
-  overflow: hidden;
+
+/* UPDATE */
+.update-box {
+  display: grid;
+  margin: 0 50px;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.update-title,
+.update-cate,
+.update-img {
+  grid-column: span 1;
+  grid-row: span 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.update-content-wrapper {
+  grid-column: span 2;
+}
+
+.update-content {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.update-title input,
+.update-cate input {
+  padding: 5px;
+  font-size: 20px;
+  border-radius: 5px;
+}
+.update-title label,
+.update-cate label,
+.update-content label,
+.update-img {
+  font-size: 16px;
+}
+.update-img input {
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 20px;
+}
+.file-img {
+  width: 300px;
+  height: 200px;
+}
+.file-img img {
   width: 100%;
+  height: 100%;
+  object-fit: fill;
 }
-#table-img img {
-  height: 12rem;
+.table-button {
+  margin-top: 10rem;
+  text-align: center;
+  margin-bottom: 3rem;
 }
-.table-noidung {
-  max-width: 20rem;
-  max-height: 10rem;
-  overflow: hidden;
-  width: 100%;
+.table-button button {
+  text-align: center;
+  border: 1px solid #808080;
+  padding: 10px 40px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 24px;
+  color: #808080;
+  background-color: #fff;
 }
-#table-img img {
-  height: 12rem;
-  width: 12rem;
-  object-fit: cover;
+.table-button button:hover {
+  background-color: #0b2e13;
+  color: #fff;
 }
