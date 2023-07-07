@@ -17,7 +17,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.dao.EventDAO;
 import model.dao.NewsDAO;
+import model.dto.EventDTO;
 import model.dto.NewsDTO;
 
 /**
@@ -53,11 +55,12 @@ public class ShowNewsServlet extends HttpServlet {
     throws ServletException, IOException {
 //        processRequest(request, response);
      try {
+            String message = (String) request.getAttribute("message");
+            request.setAttribute("ErrorMessage", message);
             ArrayList<NewsDTO> list = NewsDAO.getAllNews();
             request.setAttribute("list_news", list);
             request.getRequestDispatcher("view.customer/news.jsp").forward(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(NewsStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {           
         }
     } 
 
@@ -70,9 +73,16 @@ public class ShowNewsServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
-    }
+            throws ServletException, IOException {
+        try {
+            String message = (String) request.getAttribute("message");
+            request.setAttribute("ErrorMessage", message);
+            ArrayList<NewsDTO> list = NewsDAO.getAllNews();
+            request.setAttribute("list", list);
+            request.getRequestDispatcher("view.customer/news.jsp").forward(request, response);
+        } catch (SQLException ex) {
+        }
+        }
 
     /** 
      * Returns a short description of the servlet.
