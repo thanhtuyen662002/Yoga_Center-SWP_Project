@@ -36,6 +36,8 @@ public class ClubServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            String message = (String) request.getAttribute("message");
+            request.setAttribute("ErrorMessage", message);
             ClubDAO dao = new ClubDAO();
             List<ClubDTO> list = dao.getAllClub();
             request.setAttribute("list", list);

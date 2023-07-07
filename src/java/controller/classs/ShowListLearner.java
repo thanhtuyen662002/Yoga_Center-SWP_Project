@@ -34,17 +34,7 @@ public class ShowListLearner extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
-        String classID = request.getParameter("classID");
-        try {
-            ClassDAO dao = new ClassDAO();
-            List<ClassDTO> list = dao.getUser(id);
-            request.setAttribute("List", list);
-            request.setAttribute("id", id);
-            request.setAttribute("classID", classID);
-            request.getRequestDispatcher("showClassUser.jsp").forward(request, response);
-        } catch (Exception e) {
-        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -59,7 +49,17 @@ public class ShowListLearner extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String id = request.getParameter("id");
+        String classID = request.getParameter("classID");
+        try {
+            ClassDAO dao = new ClassDAO();
+            List<ClassDTO> list = dao.getUser(id);
+            request.setAttribute("List", list);
+            request.setAttribute("id", id);
+            request.setAttribute("classID", classID);
+            request.getRequestDispatcher("showClassUser.jsp").forward(request, response);
+        } catch (Exception e) {
+        }
     }
 
     /**

@@ -50,17 +50,21 @@ public class DeleteEventServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        String message = "";
         try {
-            //        processRequest(request, response);
             int EventID = Integer.parseInt(request.getParameter("sid"));
             EventDAO dao = new EventDAO();           
-            dao.softdeleteEvent(EventID);
-            response.sendRedirect("event");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DeleteEventServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+            boolean checkDelete = dao.softDeleteEvent(EventID);
+            if (checkDelete) {
+                message = "Xóa sự kiện thành công!";
+            } else {
+                message = "Xóa sự kiện thất bại!";
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DeleteEventServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        request.setAttribute("message", message);
+        request.getRequestDispatcher("event").forward(request, response);
     } 
 
     /** 

@@ -12,7 +12,7 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
             />
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-        <link rel="stylesheet" href="./css/courseStaff.css" />
+        <link rel="stylesheet" href="./css/clubStaff.css" />
 
         <title>Course</title>
 
@@ -23,13 +23,9 @@
             <c:redirect url="login.jsp"></c:redirect>
         </c:if>
         <div class="wrapper d-flex align-items-stretch">
-            <c:if test="${sessionScope.ROLE == 'ST'}">
-                <c:import url="cashier_header.jsp"/>
-            </c:if>
             <c:if test="${sessionScope.ROLE == 'AD'}">
                 <c:import url="./views/Admin_Nhat/Header_Admin.jsp"/>
             </c:if>
-            <!-- Page Content  -->
             <div id="content">
                 <div style="text-align: center; color: red; font-size: 2rem;">
                     <% if (ErrorMessage != null) {%>
@@ -39,7 +35,7 @@
                 <div class="course-link">
                     <ul>
                         <li><a href="courses">Staff</a></li>
-                        <li><a href="courses" id="active">Khóa Học</a></li>
+                        <li><a href="club" id="active">Câu lạc bộ</a></li>
                     </ul>
                 </div>
                 <div class="course-title" >
@@ -47,48 +43,36 @@
 
                 </div>
                 <div class="table-name">
-                    <h1>BẢNG DỮ LIỆU KHÓA HỌC</h1>
+                    <h1>BẢNG DỮ LIỆU CÂU LẠC BỘ</h1>
                 </div>
                 <table id="course" class="display" style="width:100%" >
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Description</th>
+                            <th>Club Name</th>
+                            <th>Address</th>
                             <th>Image</th>
-                            <th>Price</th>
-                                <c:if test="${sessionScope.ROLE == 'AD'}">
-                                <th>Action</th>
-                                </c:if>
+                            <th>District</th>
+                            <th>Hotline</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-
                         <c:forEach items="${list}" var="c">
-                            <c:set var="money" value="${c.price}" />
-                            <fmt:setLocale value="vi_VN"/>
-                            <c:set var="price"> 
-                                <fmt:formatNumber type="currency" value="${money}"/>
-                            </c:set>
                             <tr>
-                                <td>${c.courseName}</td>
-                                <td><div class="table-noidung">${c.description}</div></td>
-                                <td id="table-img"><img src="data:image;base64,${c.courseData}"/></td>
-                                <td><c:out value="${price}"/></td>
-                                <c:if test="${sessionScope.ROLE == 'AD'}">
-                                    <td id="tool">
-                                        <a href="updateCourse?name=${c.courseName}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
-                                        |
-                                        <a onclick="showMess('${c.courseName}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
-                                    </td>
-                                </c:if>
+                                <td>${c.clubName}</td>
+                                <td>${c.address}</td>
+                                <td id="table-img"><img src="data:image;base64,${c.dataImage}"/></td>
+                                <td>${c.district}</td>
+                                <td>${c.hotline}</td>
+                                <td id="tool">
+                                    <a href="restoreClub?clubID=${c.clubID}"><i class="fa-solid fa-trash-arrow-up fa-bounce" style="color: #1dd33b;"></i></a>
+                                </td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 </table>
 
             </div>
-
-            <script src="./js/courseStaff.js"></script>
             <script src="/courseNav/bootstrap.min.js"></script>
             <script src="/courseNav/jquery.min.js"></script>
             <script src="/courseNav/main.js"></script>
@@ -100,6 +84,5 @@
                     $('#course').DataTable();
                 });
             </script>
-
     </body>
 </html>

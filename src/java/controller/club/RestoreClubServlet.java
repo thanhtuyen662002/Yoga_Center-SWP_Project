@@ -1,6 +1,7 @@
 package controller.club;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.dao.ClubDAO;
 
-@WebServlet(name = "DeleteClubServlet", urlPatterns = {"/deleteClub"})
-public class DeleteClubServlet extends HttpServlet {
+@WebServlet(name = "RestoreClubServlet", urlPatterns = {"/restoreClub"})
+public class RestoreClubServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -27,17 +28,17 @@ public class DeleteClubServlet extends HttpServlet {
         String message = "";
         try {
             ClubDAO dao = new ClubDAO();
-            boolean checkDelete = dao.deleteClub(clubID);
+            boolean checkDelete = dao.restoreClub(clubID);
             if (checkDelete) {
-                message = "Xóa câu lạc bộ thành công!";
+                message = "Khôi phục câu lạc bộ thành công!";
             } else {
-                message = "Xóa câu lạc bộ thất bại!";
+                message = "Khôi phục câu lạc bộ thất bại!";
             }
         } catch (SQLException ex) {
             Logger.getLogger(DeleteClubServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         request.setAttribute("message", message);
-        request.getRequestDispatcher("club").forward(request, response);
+        request.getRequestDispatcher("showDeleteClub").forward(request, response);
     }
 
     @Override

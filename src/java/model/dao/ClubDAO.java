@@ -13,9 +13,10 @@ public class ClubDAO {
 
     public static void main(String[] args) throws SQLException {
         ClubDAO dao = new ClubDAO();
-        ClubDTO rs = dao.getClubByID("2");
-        System.out.println(rs);
-
+        List<ClubDTO> rs = dao.getAllDelete();
+        for (ClubDTO r : rs) {
+            System.out.println(r);
+        }
     }
 
     public List<ClubDTO> getAllClub() throws SQLException {
@@ -26,7 +27,7 @@ public class ClubDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "SELECT * FROM Club";
+                String sql = "SELECT * FROM Club WHERE status = 1";
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
@@ -108,17 +109,21 @@ public class ClubDAO {
         }
         return list;
     }
-
-    public boolean deleteClub(String clubID) throws SQLException {
+    public List<ClubDTO> getAllDelete() throws SQLException {
+        List<ClubDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "UPDATE Club SET status = 0 WHERE clubID = " + clubID;
+                String sql = "SELECT * FROM Club WHERE status = 0";
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
+                while (rs.next()) {
+                    list.add(new ClubDTO(rs.getInt("clubID"), rs.getString("name"), rs.getString("district"), rs.getString("address"),
+                            rs.getString("hotline"), rs.getString("dataImage")));
+                }
             }
         } catch (Exception e) {
         } finally {
@@ -131,6 +136,58 @@ public class ClubDAO {
             if (conn != null) {
                 conn.close();
             }
+        }
+        return list;
+    }
+
+    public boolean deleteClub(String clubID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE Club SET status = 0 WHERE clubID = " + clubID;
+                ptm = conn.prepareStatement(sql);
+                int row = ptm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+                
+            }
+        } catch (Exception e) {
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         } return false;
     }
+    
+    public boolean restoreClub(String clubID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE Club SET status = 1 WHERE clubID = " + clubID;
+                ptm = conn.prepareStatement(sql);
+                int row = ptm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+                
+            }
+        } catch (Exception e) {
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } return false;
+    }
+    
 }

@@ -15,6 +15,7 @@
         <title>Event</title>
     </head>
     <body>
+        <% String ErrorMessage = (String) request.getAttribute("ErrorMessage"); %>
         <c:if test="${empty sessionScope.STAFF}">
             <c:redirect url="login.jsp"></c:redirect>
         </c:if>
@@ -28,6 +29,11 @@
 
             <!-- Page Content  -->
             <div id="content">
+                <div style="text-align: center; color: red; font-size: 2rem;">
+                    <% if (ErrorMessage != null) {%>
+                    <p><%= ErrorMessage%></p>
+                    <% }%>
+                </div>
                 <div class="course-link">
                     <ul>
                         <li><a href="#">Staff</a></li>

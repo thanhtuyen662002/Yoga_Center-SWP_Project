@@ -32,14 +32,21 @@ public class RestoreCourseServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String name = new String(request.getParameter("name").getBytes("ISO-8859-1"), "UTF-8");
+        String name = request.getParameter("name");
         CoursesDAO dao = new CoursesDAO();
+        String message = "";
         try {
-            dao.restoreCourses(name);
-            response.sendRedirect("getDelete");
+            boolean checkRestore = dao.restoreCourses(name);
+            if (checkRestore) {
+                message = "Khôi phục khóa học thành công!";
+            } else {
+                message = "Khôi phục khóa học thất bại!";
+            }
         } catch (SQLException ex) {
             Logger.getLogger(RestoreCourseServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        request.setAttribute("message", message);
+        request.getRequestDispatcher("getDelete").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -171,15 +171,14 @@ public class ClassDAO {
         }
         return list;
     }
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
-        List<ClassDTO> List = ClassDAO.getAllClass();
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+        ClassDAO dao = new ClassDAO();
+        List<ClassDTO> List = dao.getUser("2");
         for (ClassDTO o : List) {
             System.out.println(o);
-            System.out.println("Customer Name: " + o.getPtName());
         }
     }
-
 
     public List<ClassDTO> getUser(String id) throws SQLException {
         List<ClassDTO> list = new ArrayList<>();
@@ -323,6 +322,34 @@ public class ClassDAO {
             }
         }
         return list;
+    }
+
+    public boolean checkDeleteClass(String className) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT uc.phone FROM Class AS cls\n"
+                        + "  JOIN UserClass AS uc ON uc.classID = cls.classID\n"
+                        + "  WHERE cls.name = '" + className + "'";
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
     }
 
     public boolean deleteClass(String name) throws SQLException {

@@ -5,8 +5,6 @@ public class ClassDTO {
     private int classID;
     private int courseID;
     private int capacity;
-    private String ptPhone;
-    private String ptName;
     private String className;
     private String description;
     private int totalSession;
@@ -14,16 +12,16 @@ public class ClassDTO {
     private String courseName;
     private String staffName;
     private int numberOfMonths;
-    private String cusPhone;
-    private String cusName;
+    private String phone;
+    private String name;
 
     public ClassDTO() {
     }
 
-    public ClassDTO(int classID, int courseID, String ptName, String className, String description, int totalSession, boolean status, String courseName, int capacity) {
+    public ClassDTO(int classID, int courseID, String name, String className, String description, int totalSession, boolean status, String courseName, int capacity) {
         this.classID = classID;
         this.courseID = courseID;
-        this.ptName = ptName;
+        this.name = name;
         this.className = className;
         this.description = description;
         this.totalSession = totalSession;
@@ -31,11 +29,11 @@ public class ClassDTO {
         this.courseName = courseName;
         this.capacity = capacity;
     }
-    public ClassDTO(int classID, int courseID, String ptName, String ptPhone, String className, String description, int totalSession, boolean status, String courseName, int capacity) {
+    public ClassDTO(int classID, int courseID, String name, String phone, String className, String description, int totalSession, boolean status, String courseName, int capacity) {
         this.classID = classID;
         this.courseID = courseID;
-        this.ptName = ptName;
-        this.ptPhone = ptPhone;
+        this.name = name;
+        this.phone = phone;
         this.className = className;
         this.description = description;
         this.totalSession = totalSession;
@@ -44,20 +42,20 @@ public class ClassDTO {
         this.capacity = capacity;
     }
 
-    public ClassDTO(int classID, int courseID, int capacity, String ptPhone, String className, String description, int totalSession, boolean status) {
+    public ClassDTO(int classID, int courseID, int capacity, String phone, String className, String description, int totalSession, boolean status) {
         this.classID = classID;
         this.courseID = courseID;
         this.capacity = capacity;
-        this.ptPhone = ptPhone;
+        this.phone = phone;
         this.className = className;
         this.description = description;
         this.totalSession = totalSession;
         this.status = status;
     }
 
-    public ClassDTO(String ptPhone, String ptName) {
-        this.ptPhone = ptPhone;
-        this.ptName = ptName;
+    public ClassDTO(String phone, String name) {
+        this.phone = phone;
+        this.name = name;
     }
     
 
@@ -77,29 +75,22 @@ public class ClassDTO {
         this.numberOfMonths = numberOfMonths;
     }
 
-    public String getCusPhone() {
-        return cusPhone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setCusPhone(String cusPhone) {
-        this.cusPhone = cusPhone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getCusName() {
-        return cusName;
+    public String getName() {
+        return name;
     }
 
-    public void setCusName(String cusName) {
-        this.cusName = cusName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPtName() {
-        return ptName;
-    }
-
-    public void setPtName(String ptName) {
-        this.ptName = ptName;
-    }
 
     public int getNumberOfMonths() {
         return numberOfMonths;
@@ -149,14 +140,6 @@ public class ClassDTO {
         this.capacity = capacity;
     }
 
-    public String getPtPhone() {
-        return ptPhone;
-    }
-
-    public void setPtPhone(String ptPhone) {
-        this.ptPhone = ptPhone;
-    }
-
     public String getClassName() {
         return className;
     }
@@ -191,8 +174,9 @@ public class ClassDTO {
 
     @Override
     public String toString() {
-        return "ClassDTO{" + "classID=" + classID + ", courseID=" + courseID + ", capacity=" + capacity + ", ptPhone=" + ptPhone + ", ptName=" + ptName + ", className=" + className + ", description=" + description + ", totalSession=" + totalSession + ", status=" + status + ", courseName=" + courseName + ", staffName=" + staffName + ", numberOfMonths=" + numberOfMonths + ", cusPhone=" + cusPhone + ", cusName=" + cusName + '}';
+        return "ClassDTO{" + "classID=" + classID + ", courseID=" + courseID + ", capacity=" + capacity + ", className=" + className + ", description=" + description + ", totalSession=" + totalSession + ", status=" + status + ", courseName=" + courseName + ", staffName=" + staffName + ", numberOfMonths=" + numberOfMonths + ", phone=" + phone + ", name=" + name + '}';
     }
+
 
   
 }

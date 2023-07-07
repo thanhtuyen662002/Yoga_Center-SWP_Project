@@ -67,7 +67,7 @@
                                 <td id="tool">
                                     <a href="updateClub?clubID=${c.clubID}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
                                     |
-                                    <a onclick="showMess('${c.clubName}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
+                                    <a onclick="showMess('${c.clubID} - ${c.clubName}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -75,8 +75,6 @@
                 </table>
 
             </div>
-
-            <script src="./js/courseStaff.js"></script>
             <script src="/courseNav/bootstrap.min.js"></script>
             <script src="/courseNav/jquery.min.js"></script>
             <script src="/courseNav/main.js"></script>
@@ -87,6 +85,17 @@
                 $(document).ready(function () {
                     $('#course').DataTable();
                 });
+            </script>
+            <script>
+                function showMess(param) {
+                    var arr = param.split('-');
+                    var id = arr[0];
+                    var name = arr[1];
+                    var option = confirm("Bạn có chắc chắn muốn xóa sự kiện " + name + " hay không?");
+                    if (option === true) {
+                        window.location.href = 'deleteClub?clubID=' + id;
+                    }
+                }
             </script>
 
     </body>
