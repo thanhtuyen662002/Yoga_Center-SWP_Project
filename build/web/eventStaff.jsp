@@ -42,7 +42,6 @@
                 </div>
                 <div class="course-title" >
                     <div class="text">WELCOME STAFF</div>
-                    <div class="insert"><a type="submit" href="insertEvent.jsp" name="insert">Insert</a></div>
                 </div>
                 <div class="table-name">
                     <h1>BẢNG DỮ LIỆU KHUYẾN MÃI</h1>

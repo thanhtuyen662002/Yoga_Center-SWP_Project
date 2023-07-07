@@ -99,6 +99,9 @@
                             <li><a href="showDeleteClub">Câu lạc bộ đã xóa</a></li>
                         </ul>
                     </li>
+                    <li onmouseover="showDropdown('learner')" onmouseout="hideDropdown('learner')">
+                        <a href="mainController?action=learner"><span class="fa-solid fa-user-graduate mr-3"></span> HỌC VIÊN</a>
+                    </li> 
                     <li onmouseover="showDropdown('feedback')" onmouseout="hideDropdown('feedback')">
                         <a href="mainController?action=feedback"><span class="fa-solid fa-comments mr-3"></span> ĐÁNH GIÁ KHÓA HỌC</a>
                         <ul id="feedback" class="dropdown">
@@ -111,12 +114,6 @@
                             <li><a href="createClass">Đánh giá đang chờ</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="mainController?action=listSchedule"><span class="fa-solid fa-calendar-days mr-3"></span> LỊCH DẠY</a>
-                    </li>
-                    <li onmouseover="showDropdown('learner')" onmouseout="hideDropdown('learner')">
-                        <a href="mainController?action=learner"><span class="fa-solid fa-user-graduate mr-3"></span> HỌC VIÊN</a>
-                    </li> 
                     <li onmouseover="showDropdown('bill')" onmouseout="hideDropdown('bill')">
                         <a href="mainController?action=bill"><span class="fa-solid fa-money-bill-1-wave mr-3"></span> HÓA ĐƠN</a>
                     </li> 
