@@ -36,6 +36,8 @@ public class ClubServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            String message = (String) request.getAttribute("message");
+            request.setAttribute("ErrorMessage", message);
             ClubDAO dao = new ClubDAO();
             List<ClubDTO> list = dao.getAllClub();
             request.setAttribute("list", list);
@@ -47,7 +49,15 @@ public class ClubServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            String message = (String) request.getAttribute("message");
+            request.setAttribute("ErrorMessage", message);
+            ClubDAO dao = new ClubDAO();
+            List<ClubDTO> list = dao.getAllClub();
+            request.setAttribute("list", list);
+            request.getRequestDispatcher("clubStaff.jsp").forward(request, response);
+        } catch (Exception e) {
+        }
     }
 
 

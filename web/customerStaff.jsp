@@ -43,10 +43,9 @@
                 </div>
                 <div class="course-title" >
                     <div class="text">WELCOME STAFF</div>
-                    <div class="insert"><a value="" type="submit" name="insert">Insert</a></div>
                 </div>
                 <div class="table-name">
-                    <h1>BẢNG DỮ LIỆU TIN TỨC</h1>
+                    <h1>BẢNG DỮ LIỆU HỌC VIÊN</h1>
                 </div>
                 <table id="course" class="display" style="width:100%">
                     <thead>
@@ -63,7 +62,7 @@
                                 <!--<th scope="row" id="id"></th>-->
                                 <td>${x.phone}</td>
                                 <td id="title">${x.name}</td>
-                                <td ><div class="table-noidung">${x.address}</div> </td>
+                                <td >${x.address}</td>
                                 <td >${x.gender}</td>
                             </tr>
                         </c:forEach>

@@ -22,9 +22,14 @@
         <title>Lớp Học</title>
     </head>
     <body>
+        <c:if test="${empty sessionScope.STAFF}">
+            <c:redirect url="login.jsp"></c:redirect>
+        </c:if>
         <div class="wrapper d-flex align-items-stretch">
-            <c:import url="staff_header.jsp"/>
-
+            <c:if test="${sessionScope.ROLE == 'ST'}">
+                <c:import url="cashier_header.jsp"/>
+            </c:if>
+           
             <!-- Page Content  -->
             <div id="content">
                 <div class="course-link">
@@ -48,9 +53,9 @@
                     <tbody>
                         <c:forEach var="l" items="${List}">
                         <tr>
-                            <td>${l.cusName}</td>
-                            <td>${l.cusPhone}</td>
-                            <td><a href="addUserToClass?cus=${l.cusPhone}&classID=${classID}&id=${id}"><i class="fa-solid fa-user-plus fa-bounce" style="color: #41ed12;"></i></a>
+                            <td>${l.name}</td>
+                            <td>${l.phone}</td>
+                            <td><a href="addUserToClass?cus=${l.phone}&classID=${classID}&id=${id}"><i class="fa-solid fa-user-plus fa-bounce" style="color: #41ed12;"></i></a>
                             </td>
                         </tr>
                         </c:forEach>

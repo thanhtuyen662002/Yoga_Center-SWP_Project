@@ -27,7 +27,7 @@
     </head>
     <body>
         <div class="wrapper d-flex align-items-stretch"> 
-            <nav id="sidebar" class="vh-100">
+            <nav id="sidebar">
                 <div
                     class="img bg-wrap text-center py-4"
                     style="background-image: url(${pageContext.request.contextPath}/images/bg_1.jpg)"
@@ -72,7 +72,7 @@
                         </ul>
                     </li>
                     <li onmouseover="showDropdown('event')" onmouseout="hideDropdown('event')">
-                        <a href="mainController?action=event"><span class="fa fa-gift mr-3"></span> KHUYẾN MÃI</a>
+                        <a href="mainController?action=event"><span class="fa-solid fa-tag mr-3"></span> KHUYẾN MÃI</a>
                         <ul id="event" class="dropdown">
                             <li><a href="insertEvent">Thêm khuyến mãi</a></li>
                             <li><a href="pendingevent">Khuyến mãi đã xóa</a></li>
@@ -92,25 +92,28 @@
                             <li><a href="showDeleteClass">Lớp học đã xóa</a></li>
                         </ul>
                     </li>
+                    <li onmouseover="showDropdown('showclub')" onmouseout="hideDropdown('showclub')">
+                        <a href="mainController?action=club"><span class="fa-solid fa-house-chimney mr-3"></span> CÂU LẠC BỘ</a>
+                        <ul id="showclub" class="dropdown">
+                            <li><a href="insertClub">Tạo câu lạc bộ</a></li>
+                            <li><a href="showDeleteClub">Câu lạc bộ đã xóa</a></li>
+                        </ul>
+                    </li>
+                    <li onmouseover="showDropdown('learner')" onmouseout="hideDropdown('learner')">
+                        <a href="mainController?action=learner"><span class="fa-solid fa-user-graduate mr-3"></span> HỌC VIÊN</a>
+                    </li> 
                     <li onmouseover="showDropdown('feedback')" onmouseout="hideDropdown('feedback')">
-                        <a href="mainController?action=feedback"><span class="fa-solid fa-people-group mr-3"></span> ĐÁNH GIÁ KHÓA HỌC</a>
+                        <a href="mainController?action=feedback"><span class="fa-solid fa-comments mr-3"></span> ĐÁNH GIÁ KHÓA HỌC</a>
                         <ul id="feedback" class="dropdown">
                             <li><a href="createClass">Đánh giá đang chờ</a></li>
                         </ul>
                     </li>
                     <li onmouseover="showDropdown('feedbackTC')" onmouseout="hideDropdown('feedbackTC')">
-                        <a href="mainController?action=feedbackTC"><span class="fa-solid fa-people-group mr-3"></span> ĐÁNH GIÁ GIÁO VIÊN </a>
+                        <a href="mainController?action=feedbackTC"><span class="fa-solid fa-comment-dots mr-3"></span> ĐÁNH GIÁ GIÁO VIÊN </a>
                         <ul id="feedbackTC" class="dropdown">
                             <li><a href="createClass">Đánh giá đang chờ</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="mainController?action=listSchedule"><span class="fa-solid fa-calendar-days mr-3"></span> LỊCH DẠY</a>
-                    </li>
-                    <li onmouseover="showDropdown('learner')" onmouseout="hideDropdown('learner')">
-                        <a href="mainController?action=learner"><span class="fa-solid fa-user-graduate mr-3"></span> HỌC VIÊN</a>
-
-                    </li> 
                     <li onmouseover="showDropdown('bill')" onmouseout="hideDropdown('bill')">
                         <a href="mainController?action=bill"><span class="fa-solid fa-money-bill-1-wave mr-3"></span> HÓA ĐƠN</a>
                     </li> 

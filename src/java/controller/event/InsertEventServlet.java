@@ -87,6 +87,7 @@ public class InsertEventServlet extends HttpServlet {
         String edayend = new String(request.getParameter("dayend").getBytes("ISO-8859-1"), "UTF-8");
 
         boolean checkDuplicate;
+        String message = "";
         try { 
             EventDAO dao = new EventDAO();
             checkDuplicate = dao.checkEventDuplicate(ename);
@@ -108,20 +109,23 @@ public class InsertEventServlet extends HttpServlet {
                     InputStream content = fileContent;
                     byte[] imageBytes = IOUtils.toByteArray(content);
                     String data = Base64.getEncoder().encodeToString(imageBytes);
-                    saveInforToDatabase(ename, eCourseName, ediscount, edaystart, edayend, fileName, data);
-
+                    boolean checkInsert = saveInforToDatabase(ename, eCourseName, ediscount, edaystart, edayend, fileName, data);
+                    if (checkInsert) {
+                        message = "Thêm sự kiện thành công!";
+                    } else {
+                        message = "Thêm sự kiện thất bại!";
+                    }
                 }
 
             } else {
-                request.setAttribute("ERRORMessage", "Error: Event name already exist in Database!");
-                request.getRequestDispatcher("insertEvent.jsp").forward(request, response);
+                message = "Tên sự kiện đã tồn tại!";
             }
 
-//            response.sendRedirect(  "event");
-            response.sendRedirect("event");
         } catch (SQLException ex) {
             response.getWriter().println("ERROR: " + ex.getMessage());
         }
+        request.setAttribute("message", message);
+        request.getRequestDispatcher("event").forward(request, response);
     }
 
     @Override
@@ -129,7 +133,7 @@ public class InsertEventServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void saveInforToDatabase(String eventName, String CourseID, String discount, String daystart, String dayend, String image, String data) throws SQLException {
+    private boolean saveInforToDatabase(String eventName, String CourseID, String discount, String daystart, String dayend, String image, String data) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
 
@@ -141,9 +145,7 @@ public class InsertEventServlet extends HttpServlet {
                 ptm = conn.prepareStatement(sql);
                 int row = ptm.executeUpdate();
                 if (row > 0) {
-                    System.out.println("Success");
-                } else {
-                    System.out.println("Fail");
+                    return true;
                 }
             }
         } catch (Exception e) {
@@ -154,6 +156,6 @@ public class InsertEventServlet extends HttpServlet {
             if (conn != null) {
                 conn.close();
             }
-        }
+        } return false;
     }
 }

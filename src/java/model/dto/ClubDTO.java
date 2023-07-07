@@ -21,6 +21,11 @@ public class ClubDTO {
         this.dataImage = dataImage;
     }
 
+    public ClubDTO(String district) {
+        this.district = district;
+    }
+
+    
     public String getDistrict() {
         return district;
     }

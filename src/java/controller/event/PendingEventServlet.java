@@ -62,6 +62,8 @@ public class PendingEventServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            String message = (String) request.getAttribute("message");
+            request.setAttribute("ErrorMessage", message);
             ArrayList<EventDTO> list = EventDAO.getALlPendingEvent();
             request.setAttribute("list", list);
             request.getRequestDispatcher("pendingEvent.jsp").forward(request, response);
@@ -80,7 +82,14 @@ public class PendingEventServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            String message = (String) request.getAttribute("message");
+            request.setAttribute("ErrorMessage", message);
+            ArrayList<EventDTO> list = EventDAO.getALlPendingEvent();
+            request.setAttribute("list", list);
+            request.getRequestDispatcher("pendingEvent.jsp").forward(request, response);
+        } catch (SQLException ex) {
+        }
     }
 
     /**

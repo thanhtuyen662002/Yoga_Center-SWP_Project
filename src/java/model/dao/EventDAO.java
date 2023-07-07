@@ -294,8 +294,8 @@ public class EventDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String query = "SELECT name FROM Event\n"
-                        + "WHERE name = '" + eventName + "'";
+                String query = "SELECT eventName FROM Event\n"
+                        + "WHERE eventName = N'" + eventName + "'";
                 ptm = conn.prepareStatement(query);
                 rs = ptm.executeQuery();
                 rs.next();
@@ -394,7 +394,7 @@ public class EventDAO {
         return list;
     }
 
-    public void softdeleteEvent(int EventID) throws ClassNotFoundException, SQLException {
+    public boolean softDeleteEvent(int EventID) throws ClassNotFoundException, SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -403,9 +403,11 @@ public class EventDAO {
             String sql = "UPDATE Event SET flag = 0 , status = 0 WHERE EventID = ?";
             ptm = conn.prepareStatement(sql);
             ptm.setInt(1, EventID);
-            ptm.executeUpdate();
+            int row = ptm.executeUpdate();
+            if (row > 0) {
+                return true;
+            }
         } catch (SQLException e) {
-            e.printStackTrace();
         } finally {
             if (rs != null) {
                 rs.close();
@@ -416,10 +418,8 @@ public class EventDAO {
             if (conn != null) {
                 conn.close();
             }
-        }
+        } return false;
     }
-
-    
 
     public boolean checkDayStart() throws SQLException {
         Connection conn = null;
@@ -433,24 +433,25 @@ public class EventDAO {
             if (conn != null) {
 
                 String sql = "UPDATE Event SET status = 1\n"
-                        + "WHERE daystart = '" + formattedDate +"'";
+                        + "WHERE daystart = '" + formattedDate + "'";
                 ptm = conn.prepareStatement(sql);
                 int row = ptm.executeUpdate();
-                if (row > 0){
+                if (row > 0) {
                     check = true;
                 }
             }
         } catch (Exception e) {
         } finally {
-            if (ptm != null){
+            if (ptm != null) {
                 ptm.close();
             }
-            if (conn != null){
+            if (conn != null) {
                 conn.close();
             }
         }
         return check;
-    } 
+    }
+
     public boolean checkDayEnd() throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -463,24 +464,25 @@ public class EventDAO {
             if (conn != null) {
 
                 String sql = "UPDATE Event SET status = 0\n"
-                        + "WHERE dayend = '" + formattedDate +"'";
+                        + "WHERE dayend = '" + formattedDate + "'";
                 ptm = conn.prepareStatement(sql);
                 int row = ptm.executeUpdate();
-                if (row > 0){
+                if (row > 0) {
                     check = true;
                 }
             }
         } catch (Exception e) {
         } finally {
-            if (ptm != null){
+            if (ptm != null) {
                 ptm.close();
             }
-            if (conn != null){
+            if (conn != null) {
                 conn.close();
             }
         }
         return check;
-    } 
+    }
+
     public EventDTO getEventByName(String name) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -492,9 +494,9 @@ public class EventDAO {
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
-                     return new EventDTO(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getFloat(4), 
-                             rs.getString(5), rs.getString(6), rs.getString(7), 
-                             rs.getString(8), rs.getBoolean(9));             
+                    return new EventDTO(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getFloat(4),
+                            rs.getString(5), rs.getString(6), rs.getString(7),
+                            rs.getString(8), rs.getBoolean(9));
                 }
             }
         } catch (Exception e) {
@@ -511,6 +513,7 @@ public class EventDAO {
         }
         return null;
     }
+
     public boolean checkEventDuplicate2(String id, String name) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -520,7 +523,7 @@ public class EventDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String query = "SELECT eventID FROM Event\n"
-                        + "WHERE eventID = " + id + "AND name = N'" + name + "'";
+                        + "WHERE eventID = " + id + "AND eventName = N'" + name + "'";
                 ptm = conn.prepareStatement(query);
                 rs = ptm.executeQuery();
                 rs.next();
@@ -545,7 +548,8 @@ public class EventDAO {
         }
         return check;
     }
-    public void restoreEvent(String id) throws SQLException {
+
+    public boolean restoreEvent(String id) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
@@ -554,8 +558,10 @@ public class EventDAO {
                 String sql = "UPDATE Event SET status = 1, flag = 1\n"
                         + "WHERE eventID = " + id + "";
                 ptm = conn.prepareStatement(sql);
-                ptm.executeUpdate();
-
+                int row = ptm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
             }
         } catch (Exception e) {
         } finally {
@@ -566,6 +572,6 @@ public class EventDAO {
                 conn.close();
             }
         }
-
+        return false;
     }
 }

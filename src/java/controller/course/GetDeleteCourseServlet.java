@@ -51,7 +51,9 @@ public class GetDeleteCourseServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                try {
+        try {
+            String message = (String) request.getAttribute("message");
+            request.setAttribute("ErrorMessage", message);
             CoursesDAO dao = new CoursesDAO();
             List<CoursesDTO> list = dao.getListDeleteCourse();
             request.setAttribute("list", list);

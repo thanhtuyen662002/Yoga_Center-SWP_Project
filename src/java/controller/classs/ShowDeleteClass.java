@@ -25,6 +25,8 @@ public class ShowDeleteClass extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            String message = (String) request.getAttribute("message");
+            request.setAttribute("ErrorMessage", message);
             ClassDAO dao = new ClassDAO();
             List<ClassDTO> list = dao.getListDeleteClass();
             request.setAttribute("list", list);
@@ -37,7 +39,15 @@ public class ShowDeleteClass extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+         try {
+            String message = (String) request.getAttribute("message");
+            request.setAttribute("ErrorMessage", message);
+            ClassDAO dao = new ClassDAO();
+            List<ClassDTO> list = dao.getListDeleteClass();
+            request.setAttribute("list", list);
+            request.getRequestDispatcher("deleteClassStaff.jsp").forward(request, response);
+        } catch (Exception e) {
+        }
     }
 
     @Override
