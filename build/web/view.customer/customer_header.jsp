@@ -13,7 +13,7 @@
         <title>Customer Header</title>
     </head>
     <body>
-            <div class="nav-background">
+        <div class="nav-background">
             <div class="container">
                 <div class="nav">
                     <div class="nav-logo">
@@ -23,6 +23,9 @@
                     <label for="toggler"><i class="fas fa-bars fa-2xl"></i></label>
                     <div class="nav-menu">
                         <ul class="nav-menu-list">
+                            <li class="nav-menu-item">
+                                <a class="nav-menu-link" href="aboutUs.jsp">ĐÁNH GIÁ</a>
+                            </li>
                             <li class="nav-menu-item">
                                 <a class="nav-menu-link" href="clubCustomer">CLB</a>
                             </li>

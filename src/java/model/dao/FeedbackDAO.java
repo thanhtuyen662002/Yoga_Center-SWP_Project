@@ -60,6 +60,32 @@ public class FeedbackDAO {
         return list;
     }
 
+    public void deleteFeedback(String phone) throws SQLException, ClassNotFoundException{
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            String sql = "UPDATE Feedback SET status = 0 WHERE cusPhone = ?";
+            ptm = conn.prepareStatement(sql);
+            ptm.setString(1, phone);
+            ptm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+    
+    
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
         List<FeedbackDTO> List = FeedbackDAO.getAllFeedback();
@@ -157,21 +183,21 @@ public class FeedbackDAO {
 //        e.printStackTrace();
 //    }
 //}
-    public void insertFeedback(String cusPhone, String courseID, String comment, String dayup) throws SQLException {
+    public boolean insertFeedback(String cusPhone, String courseID, String comment, String dayup) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
-
+        boolean result = false;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "INSERT INTO Feedback (cusPhone, courseID, comment, dayup, status) \n"
-                        + "VALUES ('" + cusPhone + "'," + courseID + " , N'" + comment + "', '" + dayup + "' ,1 " + ")";
+                        + "VALUES ('" + cusPhone + "'," + courseID + " , N'" + comment + "', '" + dayup + "' ,0 " + ")";
                 ptm = conn.prepareStatement(sql);
                 int row = ptm.executeUpdate();
                 if (row > 0) {
-                    System.out.println("Success");
+                    result = true;
                 } else {
-                    System.out.println("Fail");
+                    result = false;
                 }
             }
         } catch (Exception e) {
@@ -183,7 +209,8 @@ public class FeedbackDAO {
                 conn.close();
             }
         }
-
+        return result;
     }
 
+    
 }
