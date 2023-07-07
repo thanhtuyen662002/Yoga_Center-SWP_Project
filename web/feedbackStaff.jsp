@@ -55,7 +55,7 @@
                             <th>TÊN KHÓA HỌC</th>
                             <th>NGÀY ĐĂNG</th>
                             <th>ĐÁNH GIÁ</th>
-                            <!--<th>Action</th>-->
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -66,7 +66,9 @@
                                 <td >${x.courseName}</td>                               
                                 <td >${x.dayup}</td>
                                 <td ><div class="table-noidung">${x.comment}</div> </td>
-                                
+                                <td>                             
+                                    <a onclick="" href="#"> <i class="fa-sharp fa-solid fa-trash"></i></a>
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>

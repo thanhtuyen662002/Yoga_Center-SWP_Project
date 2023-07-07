@@ -46,7 +46,7 @@ public class GuestServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String error = (String) request.getAttribute("ErrorMessage");
+            String error = (String) request.getAttribute("message");
             request.setAttribute("ErrorMessage", error);
             GuestDAO dao = new GuestDAO();
             List<GuestDTO> list = dao.getListGuest();

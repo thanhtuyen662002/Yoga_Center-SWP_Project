@@ -59,9 +59,10 @@
                         <div class="price-detail-rating">
                             <h1>Đánh Giá Khóa Học</h1>
                             <div class="rating-box">
+                                  <form method="Post" action="insertfb">
                                 <h3 id="notice">Viết bình luận thành công!!!</h3>
                                 <h2>Viết Bình Luận ...<i class="fa-solid fa-pen fa-sm"></i></h2>
-                                <form action="">
+                              
                                     <input
                                         name="comment"
                                         id="inputContent"
@@ -69,18 +70,20 @@
                                         placeholder="Mời bạn bình luận và đánh giá khóa học"
                                         required
                                         />
-                                    <button id="mess">Gửi</button>
+                                    <input name="cusPhone" type="hidden" value="${sessionScope.USER.phone}"/>
+                                    <input name="courseID" type="hidden" value="<%= request.getParameter("id") %>">
+                                    <button id="mess" type="submit">Gửi</button>
                                 </form>
                             </div>
                             <div class="rating-box-question">
                                 <c:forEach var="feedback" items="${feedbackList}">
-                                <div class="question-card">
-                                    <div class="question-title">
-                                        <div class="nameUser">${feedback.cusName}</div>
-                                        <div class="timeQuestion">${feedback.dayup}</div>
+                                    <div class="question-card">
+                                        <div class="question-title">
+                                            <div class="nameUser">${feedback.cusName}</div>
+                                            <div class="timeQuestion">${feedback.dayup}</div>
+                                        </div>
+                                        <div class="question-content">${feedback.comment}</div>
                                     </div>
-                                    <div class="question-content">${feedback.comment}</div>
-                                </div>
                                 </c:forEach>
                             </div>
                         </div>

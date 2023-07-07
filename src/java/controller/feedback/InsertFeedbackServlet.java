@@ -7,13 +7,18 @@ package controller.feedback;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.dao.FeedbackDAO;
+import model.dto.FeedbackDTO;
 
 /**
  *
@@ -74,14 +79,30 @@ public class InsertFeedbackServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
-        String phone = request.getParameter("phone");
-        int courseID = Integer.parseInt(request.getParameter("courseID"));
-        String comment = request.getParameter("comment");
-        Date currentDate = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String dayup = dateFormat.format(currentDate);
-        
+        try {
+            //        processRequest(request, response);
+            String cusPhone = request.getParameter("cusPhone");
+            int courseID = Integer.parseInt(request.getParameter("courseID"));
+            String comment = new String(request.getParameter("comment").getBytes("ISO-8859-1"), "UTF-8");
+            Date currentDate = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String dayup = dateFormat.format(currentDate);
+            FeedbackDAO dao = new FeedbackDAO();
+            boolean insertFeedback = false;
+            boolean checkusercourse = dao.checkUserCourse(cusPhone, courseID);
+            if (checkusercourse) {
+                insertFeedback = dao.insertFeedback(cusPhone, comment, comment, dayup);
+            }else {
+                // Nếu người dùng chưa học khóa học này, trả về thông báo lỗi
+                response.getWriter().write("Bạn chưa học khóa học này!");
+            }
+        }
+        catch (ClassNotFoundException ex) {
+            Logger.getLogger(InsertFeedbackServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(InsertFeedbackServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        response.sendRedirect("view.customer/courseDetail.jsp");
         
         
         

@@ -43,7 +43,6 @@
                 </div>
                 <div class="course-title" >
                     <div class="text">WELCOME STAFF</div>
-                    <div class="insert"><a value="action?news" type="submit" name="insert">Insert</a></div>
                 </div>
                 <div class="table-name">
                     <h1>BẢNG DỮ LIỆU TIN TỨC</h1>
