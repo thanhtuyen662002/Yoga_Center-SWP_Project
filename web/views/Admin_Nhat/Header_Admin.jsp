@@ -101,19 +101,7 @@
                     </li>
                     <li onmouseover="showDropdown('learner')" onmouseout="hideDropdown('learner')">
                         <a href="mainController?action=learner"><span class="fa-solid fa-user-graduate mr-3"></span> HỌC VIÊN</a>
-                    </li> 
-                    <li onmouseover="showDropdown('feedback')" onmouseout="hideDropdown('feedback')">
-                        <a href="mainController?action=feedback"><span class="fa-solid fa-comments mr-3"></span> ĐÁNH GIÁ KHÓA HỌC</a>
-                        <ul id="feedback" class="dropdown">
-                            <li><a href="createClass">Đánh giá đang chờ</a></li>
-                        </ul>
-                    </li>
-                    <li onmouseover="showDropdown('feedbackTC')" onmouseout="hideDropdown('feedbackTC')">
-                        <a href="mainController?action=feedbackTC"><span class="fa-solid fa-comment-dots mr-3"></span> ĐÁNH GIÁ GIÁO VIÊN </a>
-                        <ul id="feedbackTC" class="dropdown">
-                            <li><a href="createClass">Đánh giá đang chờ</a></li>
-                        </ul>
-                    </li>
+                    </li>                 
                     <li onmouseover="showDropdown('bill')" onmouseout="hideDropdown('bill')">
                         <a href="mainController?action=bill"><span class="fa-solid fa-money-bill-1-wave mr-3"></span> HÓA ĐƠN</a>
                     </li> 

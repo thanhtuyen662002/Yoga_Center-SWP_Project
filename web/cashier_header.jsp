@@ -47,7 +47,13 @@
                     <ul id="guest" class="dropdown">
                         <li><a href="insertGuest.jsp" class="">Tạo tài khoản</a></li>
                     </ul>
-                </li> 
+                </li>
+                 <li onmouseover="showDropdown('feedback')" onmouseout="hideDropdown('feedback')">
+                        <a href="mainController?action=feedback"><span class="fa-solid fa-comments mr-3"></span> ĐÁNH GIÁ KHÓA HỌC</a>
+                        <ul id="feedback" class="dropdown">
+                            <li><a href="createClass">Đánh giá đang chờ</a></li>
+                        </ul>
+                    </li>
                 <li>
                     <a href="logout"><span class="fa fa-sign-out mr-3"></span> Đăng Xuất</a>
                 </li>
