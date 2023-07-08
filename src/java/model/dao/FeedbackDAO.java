@@ -59,6 +59,45 @@ public class FeedbackDAO {
         }
         return list;
     }
+    
+    public static ArrayList<FeedbackDTO> getPendingFeedback() throws SQLException {
+        ArrayList<FeedbackDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String query = "SELECT  u.name AS cusName, f.cusPhone, f.courseID, c.name AS courseName, f.comment, f.dayup, f.status FROM Feedback f \n"
+                        + "JOIN [dbo].[User] u ON f.cusPhone = u.phone \n"
+                        + "JOIN Courses c ON f.courseID = c.courseID WHERE status = 0";
+                ptm = conn.prepareStatement(query);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int courseID = rs.getInt("courseID");
+                    String courseName = rs.getString("courseName");
+                    String cusName = rs.getString("cusName");
+                    String cusPhone = rs.getString("cusPhone");
+                    String comment = rs.getString("comment");
+                    String dayup = rs.getString("dayup");
+                    boolean status = rs.getBoolean("status");
+                    list.add(new FeedbackDTO(courseID, cusPhone, comment, dayup, status, cusName, courseName));
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
 
     public void deleteFeedback(String phone) throws SQLException, ClassNotFoundException {
         Connection conn = null;
@@ -111,7 +150,11 @@ public class FeedbackDAO {
         }
         return feedbackList;
     }
+    
 
+    
+    
+    
     public boolean checkUserCourse(String phone, String courseID) throws ClassNotFoundException, SQLException {
         PreparedStatement ptm = null;
         ResultSet rs = null;
