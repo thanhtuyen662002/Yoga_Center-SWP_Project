@@ -127,12 +127,13 @@
             <div>
                 <div class="course-link">
                     <ul>
-                        <li><a href="listStaff">Admin</a></li>
-                        <li><a href="listStaff">List Staff</a></li>
+                        <li><a href="listScheduleAdmin">Schedule Admin</a></li>
+                        <li><a href="#">Schedule List Class</a></li>
+                        <li><a href="#">List Customer Class</a></li>
                     </ul>
                 </div>
                 <div class="table-name border" style="height: 15%">
-                    <h4>List Staff</h4>
+                    <h4>List Customer Class</h4>
                 </div>
             </div>
             <div id="snackbar"></div>

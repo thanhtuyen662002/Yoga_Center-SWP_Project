@@ -97,8 +97,8 @@
             <div>
                 <div class="course-link">
                     <ul>
-                        <li><a href="#">Admin</a></li>
-                        <li><a href="#">Schedule List Class</a></li>
+                        <li><a href="listScheduleAdmin">Schedule Admin</a></li>
+                        <li><a href="listScheduleClass">Schedule List Class</a></li>
                     </ul>
                 </div>
                 <div class="table-name border" style="height: 15%">
