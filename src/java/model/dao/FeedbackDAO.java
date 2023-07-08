@@ -90,7 +90,7 @@ public class FeedbackDAO {
         try {
             try (Connection conn = DBUtils.getConnection()) {
                 PreparedStatement stmt = conn.prepareStatement("SELECT u.name, f.cusPhone, f.courseID, f.comment, f.dayup, f.status from Feedback f \n"
-                        + "JOIN [dbo].[User] u ON f.cusPhone = u.phone WHERE f.courseID = ?");
+                        + "JOIN [dbo].[User] u ON f.cusPhone = u.phone WHERE f.courseID = ? AND f.status = 1");
                 stmt.setString(1, courseID);
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {

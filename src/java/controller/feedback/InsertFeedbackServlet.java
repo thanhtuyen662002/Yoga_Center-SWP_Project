@@ -62,8 +62,6 @@ public class InsertFeedbackServlet extends HttpServlet {
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(InsertFeedbackServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        request.setAttribute("id", courseID);
-        request.setAttribute("Message", message);
-        request.getRequestDispatcher("showFeedback").forward(request, response);
+        response.sendRedirect("showFeedback?id="+courseID+"&Message="+message);
     }
 }

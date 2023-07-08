@@ -107,7 +107,7 @@
                                         </c:if>
                                         <c:if test="${sessionScope.ROLE == 'ST' && x.countTT < x.capacity}">
                                             |
-                                            <a href="showLearner?id=${x.courseID}&classID=${x.classID}"><i class="fa-solid fa-users-line fa-fade" style="color: #300edd;"></i></i></a>
+                                            <a href="showLearner?id=${x.courseID}&classID=${x.classID}&countTT=${x.countTT}&total=${x.capacity}&message="><i class="fa-solid fa-users-line fa-fade" style="color: #300edd;"></i></i></a>
                                         </c:if>
                                         <c:if test="${sessionScope.ROLE == 'AD'}">
                                             |

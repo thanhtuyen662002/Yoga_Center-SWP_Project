@@ -22,6 +22,7 @@
         <title>Lớp Học</title>
     </head>
     <body>
+        <% String ErrorMessage = (String) request.getAttribute("ErrorMessage"); %>
         <c:if test="${empty sessionScope.STAFF}">
             <c:redirect url="login.jsp"></c:redirect>
         </c:if>
@@ -32,6 +33,11 @@
            
             <!-- Page Content  -->
             <div id="content">
+                <div style="text-align: center; color: red; font-size: 2rem;">
+                    <% if (ErrorMessage != null) {%>
+                    <p><%= ErrorMessage%></p>
+                    <% }%>
+                </div>
                 <div class="course-link">
                     <ul>
                         <li><a href="">Staff</a></li>
@@ -55,8 +61,13 @@
                         <tr>
                             <td>${l.name}</td>
                             <td>${l.phone}</td>
+                            <c:if test="${countTT < total}">
                             <td><a href="addUserToClass?cus=${l.phone}&classID=${classID}&id=${id}"><i class="fa-solid fa-user-plus fa-bounce" style="color: #41ed12;"></i></a>
                             </td>
+                            </c:if>
+                            <c:if test="${countTT == total}">
+                                <td style="color: red">FULL</td>
+                            </c:if>
                         </tr>
                         </c:forEach>
                     </tbody>

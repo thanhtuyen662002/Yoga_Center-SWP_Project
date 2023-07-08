@@ -6,7 +6,7 @@
 package controller.classs;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.net.URLDecoder;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -49,14 +49,21 @@ public class ShowListLearner extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         String id = request.getParameter("id");
         String classID = request.getParameter("classID");
+        int countTT = Integer.parseInt(request.getParameter("countTT"));
+        int total = Integer.parseInt(request.getParameter("total"));
+        String message = new String(request.getParameter("message").getBytes("ISO-8859-1"), "UTF-8");
         try {
             ClassDAO dao = new ClassDAO();
             List<ClassDTO> list = dao.getUser(id);
             request.setAttribute("List", list);
             request.setAttribute("id", id);
             request.setAttribute("classID", classID);
+            request.setAttribute("countTT", countTT);
+            request.setAttribute("total", total);
+            request.setAttribute("ErrorMessage", message);
             request.getRequestDispatcher("showClassUser.jsp").forward(request, response);
         } catch (Exception e) {
         }
@@ -73,7 +80,25 @@ public class ShowListLearner extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        String id = request.getParameter("id");
+        String classID = request.getParameter("classID");
+        String countTT = (String) request.getAttribute("countTT");
+        String total = (String) request.getAttribute("total");
+        String encodedMessage = request.getParameter("message");
+        String message = URLDecoder.decode(encodedMessage, "UTF-8");
+        try {
+            ClassDAO dao = new ClassDAO();
+            List<ClassDTO> list = dao.getUser(id);
+            request.setAttribute("List", list);
+            request.setAttribute("id", id);
+            request.setAttribute("classID", classID);
+            request.setAttribute("countTT", countTT);
+            request.setAttribute("total", total);
+            request.setAttribute("ErrorMessage", message);
+            request.getRequestDispatcher("showClassUser.jsp").forward(request, response);
+        } catch (Exception e) {
+        }
     }
 
     /**

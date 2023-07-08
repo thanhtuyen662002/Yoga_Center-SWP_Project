@@ -19,6 +19,11 @@ public class ClassDTO {
     public ClassDTO() {
     }
 
+    public ClassDTO(int capacity, int countTT) {
+        this.capacity = capacity;
+        this.countTT = countTT;
+    }
+
     public ClassDTO(int classID, int courseID, String name, String className, String description, int totalSession, boolean status, String courseName, int capacity) {
         this.classID = classID;
         this.courseID = courseID;
