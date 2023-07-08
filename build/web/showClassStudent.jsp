@@ -62,8 +62,8 @@
                     <tbody>
                         <c:forEach var="l" items="${list}">
                             <tr>
-                                <td>${l.cusName}</td>
-                                <td>${l.cusPhone}</td>
+                                <td>${l.name}</td>
+                                <td>${l.phone}</td>
                             </c:forEach>
                     </tbody>
                 </table>

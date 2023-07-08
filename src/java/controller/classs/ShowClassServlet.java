@@ -31,6 +31,8 @@ public class ShowClassServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            String message = (String) request.getAttribute("message");
+            request.setAttribute("ErrorMessage", message);
             List<ClassDTO> list = ClassDAO.getAllClass();
             request.setAttribute("list_class", list);
             request.getRequestDispatcher("classStaff.jsp").forward(request, response);

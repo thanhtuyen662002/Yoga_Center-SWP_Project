@@ -27,14 +27,25 @@ public class DeleteClass extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String name =  request.getParameter("name");
+        boolean check;
+        String message = "";
         try {
             ClassDAO dao = new ClassDAO();
-            boolean check = dao.deleteClass(name);
+            check = dao.checkDeleteClass(name);
             if (check) {
-                response.sendRedirect("showclass");
+                message = "Không thể xóa! Lớp học còn học viên đang theo học!";
+            } else {
+                check = dao.deleteClass(name);
+                if (check) {
+                    message = "Xóa lớp học thành công!";
+                } else {
+                    message = "Xóa lớp học thất bại!";
+                }
             }
         } catch (Exception e) {
         }
+        request.setAttribute("message", message);
+        request.getRequestDispatcher("showclass").forward(request, response);
     }
 
 

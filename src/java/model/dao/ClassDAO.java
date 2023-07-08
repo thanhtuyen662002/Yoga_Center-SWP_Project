@@ -137,11 +137,15 @@ public class ClassDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                ptm = conn.prepareStatement("SELECT c.classID, c.courseID, co.name AS courseName, u.name AS ptName, c.name AS className, c.description, c.total_sessions, c.capacity, c.status\n"
+                ptm = conn.prepareStatement("SELECT c.classID, c.courseID, co.name AS courseName, u.name AS ptName, c.name AS className, \n"
+                        + "c.description, c.total_sessions, c.capacity, c.status, COUNT(uc.phone) AS TT\n"
                         + "FROM Class AS c\n"
                         + "INNER JOIN [dbo].[User] u ON c.ptPhone = u.phone\n"
                         + "INNER JOIN Courses AS co On co.courseID = c.courseID\n"
-                        + "WHERE c.status = 1");
+                        + "LEFT JOIN UserClass AS uc ON uc.classID = c.classID\n"
+                        + "WHERE c.status = 1\n"
+                        + "GROUP BY c.classID, c.courseID, co.name, u.name, c.name, \n"
+                        + "c.description, c.total_sessions, c.capacity, c.status");
                 rs = ptm.executeQuery();
 
                 while (rs.next()) {
@@ -154,7 +158,8 @@ public class ClassDAO {
                     int totalSession = rs.getInt("total_sessions");
                     int capacity = rs.getInt("capacity");
                     boolean status = rs.getBoolean("status");
-                    list.add(new ClassDTO(classID, courseID, ptName, className, description, totalSession, status, courseName, capacity));
+                    int countTT = rs.getInt("TT");
+                    list.add(new ClassDTO(classID, courseID, ptName, className, description, totalSession, status, courseName, capacity, countTT));
                 }
             }
         } catch (Exception e) {
@@ -171,15 +176,14 @@ public class ClassDAO {
         }
         return list;
     }
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
-        List<ClassDTO> List = ClassDAO.getAllClass();
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+        ClassDAO dao = new ClassDAO();
+        List<ClassDTO> List = dao.getUser("2");
         for (ClassDTO o : List) {
             System.out.println(o);
-            System.out.println("Customer Name: " + o.getPtName());
         }
     }
-
 
     public List<ClassDTO> getUser(String id) throws SQLException {
         List<ClassDTO> list = new ArrayList<>();
@@ -323,6 +327,34 @@ public class ClassDAO {
             }
         }
         return list;
+    }
+
+    public boolean checkDeleteClass(String className) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT uc.phone FROM Class AS cls\n"
+                        + "  JOIN UserClass AS uc ON uc.classID = cls.classID\n"
+                        + "  WHERE cls.name = '" + className + "'";
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
     }
 
     public boolean deleteClass(String name) throws SQLException {

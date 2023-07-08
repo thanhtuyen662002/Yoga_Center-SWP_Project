@@ -4,7 +4,9 @@ package controller.course;
 import model.dao.CoursesDAO;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -72,12 +74,9 @@ public class CourseCustomerServlet extends HttpServlet {
             request.setAttribute("time", time);
             request.setAttribute("timeToCome", timeToCome);
             List<FeedbackDTO> feedbackList = FeedbackDAO.getFeedbackByCourseID(id);
-            request.setAttribute("feedbackList", feedbackList);
-            
+            request.setAttribute("feedbackList", feedbackList);                   
             request.getRequestDispatcher("view.customer/courseDetail.jsp").forward(request, response);
-        } catch (SQLException ex) {
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CourseCustomerServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | ClassNotFoundException ex) {
         }
     }
 

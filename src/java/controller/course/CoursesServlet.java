@@ -43,6 +43,8 @@ public class CoursesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            String message = (String) request.getAttribute("message");
+            request.setAttribute("ErrorMessage", message);
             ArrayList<CoursesDTO> list = CoursesDAO.getAllCourses();
             request.setAttribute("list", list);
             request.getRequestDispatcher("courseStaff.jsp").forward(request, response);

@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import model.dao.EventDAO;
 import model.dao.NewsDAO;
 import model.dao.UserDAO;
 import model.dto.UserDTO;
@@ -103,7 +104,13 @@ public class InsertNewsServlet extends HttpServlet {
         String categoryID = request.getParameter("categoryID");
 
         String stPhone = "0123456788";
+        boolean checkDuplicate;
+        String message = "";
         // Xử lý yêu cầu tải lên ảnh
+         try { 
+             NewsDAO dao = new NewsDAO();
+            checkDuplicate = dao.checkDuplicateNewsID(0);
+            if (!checkDuplicate) {
         List<Part> fileParts = new ArrayList<>();
         for (Part part : request.getParts()) {
             String partName = new String(part.getName().getBytes("iso-8859-1"), "UTF-8");
@@ -113,26 +120,32 @@ public class InsertNewsServlet extends HttpServlet {
         }
 
         for (Part filePart : fileParts) {
-            try {
                 String filename = filePart.getSubmittedFileName();
                 InputStream fileContent = filePart.getInputStream();
 
                 InputStream content1 = fileContent;
                 byte[] imageBytes = IOUtils.toByteArray(content1);
                 String data = Base64.getEncoder().encodeToString(imageBytes);
-                insertNews(stPhone, title, postDate, filename, data, content, categoryID);
-
-                {
-
+                boolean checkinsert = insertNews(stPhone, title, postDate, filename, data, content, categoryID);
+                if (checkinsert) {
+                        message = "Thêm tin tức thành công!";
+                    } else {
+                        message = "Thêm tin tức thất bại!";
+                    }
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(UpdateNewsServlet.class.getName()).log(Level.SEVERE, null, ex);
+
+            } else {
+                message = "Tên sự kiện đã tồn tại!";
             }
+        
+            } catch (SQLException ex) {
+            response.getWriter().println("ERROR: " + ex.getMessage());
         }
-        response.sendRedirect("news");
+        request.setAttribute("message", message);
+        request.getRequestDispatcher("news").forward(request, response);
     }
 
-    private void insertNews(String stPhone, String title, String postDate, String image, String data, String content, String categoryID) throws SQLException {
+    private boolean insertNews(String stPhone, String title, String postDate, String image, String data, String content, String categoryID) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
 
@@ -144,11 +157,10 @@ public class InsertNewsServlet extends HttpServlet {
                 ptm = conn.prepareStatement(sql);
                 int row = ptm.executeUpdate();
                 if (row > 0) {
-                    System.out.println("Success");
-                } else {
-                    System.out.println("Fail");
+                    return true;
                 }
             }
+                    
         } catch (Exception e) {
         } finally {
             if (ptm != null) {
@@ -158,6 +170,7 @@ public class InsertNewsServlet extends HttpServlet {
                 conn.close();
             }
         }
+        return false;
     }
 
     /**

@@ -29,11 +29,11 @@ public class FeedbackDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String query ="SELECT  u.name AS cusName, f.cusPhone, f.courseID, c.name AS courseName, f.comment, f.dayup, f.status FROM Feedback f \n"
+                String query = "SELECT  u.name AS cusName, f.cusPhone, f.courseID, c.name AS courseName, f.comment, f.dayup, f.status FROM Feedback f \n"
                         + "JOIN [dbo].[User] u ON f.cusPhone = u.phone \n"
                         + "JOIN Courses c ON f.courseID = c.courseID";
-             ptm = conn.prepareStatement(query);   
-             rs = ptm.executeQuery();   
+                ptm = conn.prepareStatement(query);
+                rs = ptm.executeQuery();
                 while (rs.next()) {
                     int courseID = rs.getInt("courseID");
                     String courseName = rs.getString("courseName");
@@ -52,7 +52,7 @@ public class FeedbackDAO {
             }
             if (ptm != null) {
                 ptm.close();
-            }          
+            }
             if (conn != null) {
                 conn.close();
             }
@@ -60,16 +60,31 @@ public class FeedbackDAO {
         return list;
     }
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-
-        List<FeedbackDTO> List = FeedbackDAO.getAllFeedback();
-        for (FeedbackDTO feedback : List) {
-            System.out.println(feedback);
-            System.out.println("Customer Name: " + feedback.getCusName());
-            System.out.println("Day Up: " + feedback.getDayup());
+    public void deleteFeedback(String phone) throws SQLException, ClassNotFoundException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            String sql = "UPDATE Feedback SET status = 0 WHERE cusPhone = ?";
+            ptm = conn.prepareStatement(sql);
+            ptm.setString(1, phone);
+            ptm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
     }
-    
+
     public static List<FeedbackDTO> getFeedbackByCourseID(String courseID) throws ClassNotFoundException {
         List<FeedbackDTO> feedbackList = new ArrayList<>();
         try {
@@ -97,81 +112,56 @@ public class FeedbackDAO {
         return feedbackList;
     }
 
-    
-
-    public boolean checkUserCourse(String phone, int courseID) throws ClassNotFoundException {
-        boolean result = false;
+    public boolean checkUserCourse(String phone, String courseID) throws ClassNotFoundException, SQLException {
         PreparedStatement ptm = null;
         ResultSet rs = null;
         Connection conn = null;
         try {
             conn = DBUtils.getConnection();
-            // Tạo câu truy vấn
-            String query = "SELECT COUNT(*) AS count FROM UserCourse uc JOIN Courses c ON uc.courseID = c.courseID WHERE uc.phone = ? AND uc.courseID = ?";
-            ptm = conn.prepareStatement(query);
-
-            // Thiết lập tham số
-            ptm.setString(1, phone);
-            ptm.setInt(2, courseID);
-
-            // Thực thi câu truy vấn và lấy kết quả
-            rs = ptm.executeQuery();
-            if (rs.next()) {
-                int count = rs.getInt("count");
-                if (count > 0) {
-                    result = true;
+            if (conn != null) {
+                String query = "SELECT uc.*, c.* FROM UserCourse uc JOIN Courses c ON uc.courseID = c.courseID WHERE uc.phone = " + phone
+                        + " AND uc.courseID = " + courseID;
+                ptm = conn.prepareStatement(query);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    return true;
                 }
             }
         } catch (SQLException e) {
-            // Xử lý lỗi
-            e.printStackTrace();
         } finally {
-            // Đóng ResultSet, PreparedStatement và Connection
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ptm != null) {
-                    ptm.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+            if (rs != null) {
+                rs.close();
             }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
         }
 
-        return result;
+        return false;
     }
 
-//    public static void main(String[] args) {
-//    try {
-//        boolean enrolled = checkUserCourse("0258976431", 60);
-//        if (enrolled) {
-//            System.out.println("Người dùng đã đăng ký khóa học.");
-//        } else {
-//            System.out.println("Người dùng chưa đăng ký khóa học.");
-//        }
-//    } catch (ClassNotFoundException e) {
-//        e.printStackTrace();
-//    }
-//}
-    public void insertFeedback(String cusPhone, String courseID, String comment, String dayup) throws SQLException {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+        FeedbackDAO dao = new FeedbackDAO();
+        boolean check = dao.insertFeedback("0369852147", "61", "dahgjdsav", "2023-07-07");
+        System.out.println(check);
+    }
+
+    public boolean insertFeedback(String cusPhone, String courseID, String comment, String dayup) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
-
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "INSERT INTO Feedback (cusPhone, courseID, comment, dayup, status) \n"
-                        + "VALUES ('" + cusPhone + "'," + courseID + " , N'" + comment + "', '" + dayup + "' ,1 " + ")";
+                        + "VALUES ('" + cusPhone + "'," + courseID + " , N'" + comment + "', '" + dayup + "' ,0)";
                 ptm = conn.prepareStatement(sql);
                 int row = ptm.executeUpdate();
                 if (row > 0) {
-                    System.out.println("Success");
-                } else {
-                    System.out.println("Fail");
+                    return true;
                 }
             }
         } catch (Exception e) {
@@ -183,7 +173,7 @@ public class FeedbackDAO {
                 conn.close();
             }
         }
-
+        return false;
     }
 
 }

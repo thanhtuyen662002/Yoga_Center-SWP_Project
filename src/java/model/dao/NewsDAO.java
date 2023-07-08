@@ -302,18 +302,19 @@ public class NewsDAO {
         return null;
     }
 
-    public void softdeleteNews(int newsID) throws ClassNotFoundException, SQLException {
+    public boolean softDeleteNews(String newsID) throws ClassNotFoundException, SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
-            String sql = "UPDATE News SET status = 0 WHERE newsID = ?";
+            String sql = "UPDATE News SET status = 0 WHERE newsID = " + newsID;
             ptm = conn.prepareStatement(sql);
-            ptm.setInt(1, newsID);
-            ptm.executeUpdate();
+            int row = ptm.executeUpdate();
+            if (row > 0) {
+                return true;
+            }
         } catch (SQLException e) {
-            e.printStackTrace();
         } finally {
             if (rs != null) {
                 rs.close();
@@ -324,7 +325,7 @@ public class NewsDAO {
             if (conn != null) {
                 conn.close();
             }
-        }
+        } return false;
     }
     public static ArrayList<NewsDTO> getsoftdeleteNews() throws ClassNotFoundException, SQLException {
         ArrayList<NewsDTO> list = new ArrayList<>();
@@ -366,18 +367,19 @@ public class NewsDAO {
         return list;
     }
     
-    public void restoreNews(int newsID) throws ClassNotFoundException, SQLException {
+    public boolean restoreNews(String newsID) throws ClassNotFoundException, SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
-            String sql = "UPDATE News SET status = 1 WHERE newsID = ?";
+            String sql = "UPDATE News SET status = 1 WHERE newsID = " + newsID;
             ptm = conn.prepareStatement(sql);
-            ptm.setInt(1, newsID);
-            ptm.executeUpdate();
+            int row = ptm.executeUpdate();
+            if (row > 0) {
+                return true;
+            }
         } catch (SQLException e) {
-            e.printStackTrace();
         } finally {
             if (rs != null) {
                 rs.close();
@@ -389,5 +391,6 @@ public class NewsDAO {
                 conn.close();
             }
         }
+        return false;
     }
 }

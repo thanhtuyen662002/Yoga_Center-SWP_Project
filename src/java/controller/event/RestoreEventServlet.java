@@ -41,7 +41,7 @@ public class RestoreEventServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RestoreEventServlet</title>");            
+            out.println("<title>Servlet RestoreEventServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet RestoreEventServlet at " + request.getContextPath() + "</h1>");
@@ -64,12 +64,19 @@ public class RestoreEventServlet extends HttpServlet {
             throws ServletException, IOException {
         EventDAO dao = new EventDAO();
         String id = request.getParameter("sid");
-       try {
-            dao.restoreEvent(id);
-            response.sendRedirect("pendingevent");
+        String message = "";
+        try {
+            boolean checkRestore = dao.restoreEvent(id);
+            if (checkRestore) {
+                message = "Khôi phục sự kiện thành công!";
+            } else {
+                message = "Khôi phục sự kiện thất bại!";
+            }
         } catch (SQLException ex) {
             Logger.getLogger(RestoreEventServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        request.setAttribute("message", message);
+        request.getRequestDispatcher("pendingevent").forward(request, response);
     }
 
     /**

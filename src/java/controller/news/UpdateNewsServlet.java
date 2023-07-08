@@ -66,6 +66,7 @@ public class UpdateNewsServlet extends HttpServlet {
         String title = new String(request.getParameter("title").getBytes("ISO-8859-1"), "UTF-8");
         String categoryID = request.getParameter("categoryID");
         String content = new String(request.getParameter("content").getBytes("ISO-8859-1"), "UTF-8");
+        String message = "";
 
         // Xử lý yêu cầu tải lên ảnh
         List<Part> fileParts = new ArrayList<>();
@@ -84,19 +85,21 @@ public class UpdateNewsServlet extends HttpServlet {
                 InputStream content1 = fileContent;
                 byte[] imageBytes = IOUtils.toByteArray(content1);
                 String data = Base64.getEncoder().encodeToString(imageBytes);
-                updateNews(newsID, title, filename, categoryID, content, data);
-
-                {
-
+                boolean checkUpdate = updateNews(newsID, title, filename, categoryID, content, data);
+                if (checkUpdate) {
+                    message = "Cập nhật tin tức thành công!";
+                } else {
+                    message = "Cập nhật tin tức thất bại!";
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(UpdateNewsServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        response.sendRedirect("news");
+        request.setAttribute("message", message);
+        request.getRequestDispatcher("news").forward(request, response);
     }
 
-    private void updateNews(String newsID, String title, String image, String categoryID, String content, String data) throws SQLException {
+    private boolean updateNews(String newsID, String title, String image, String categoryID, String content, String data) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
@@ -104,11 +107,12 @@ public class UpdateNewsServlet extends HttpServlet {
             if (conn != null) {
                 String query = "UPDATE News SET title= N'" + title + "' ,image= '" + image + "', content=N'" + content + "' ,categoryID= " + categoryID + ", data = '" + data + "' WHERE newsID= " + newsID;
                 ptm = conn.prepareStatement(query);
-                ptm.executeUpdate();
+                int row = ptm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UpdateNewsServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(UpdateNewsServlet.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (ptm != null) {
@@ -117,7 +121,7 @@ public class UpdateNewsServlet extends HttpServlet {
             if (conn != null) {
                 conn.close();
             }
-        }
+        } return false;
     }
 
     @Override

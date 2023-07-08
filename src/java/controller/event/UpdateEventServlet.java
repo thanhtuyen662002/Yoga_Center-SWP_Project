@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.course;
+package controller.event;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -49,7 +49,7 @@ public class UpdateEventServlet extends HttpServlet {
 //            String name = new String(request.getParameter("name").getBytes("ISO-8859-1"), "UTF-8");
             EventDAO dao = new EventDAO();
             EventDTO event = dao.getEventByName(name);
-            request.setAttribute("e", event );
+            request.setAttribute("e", event);
             request.getRequestDispatcher("updateEvent.jsp").forward(request, response);
         } catch (SQLException ex) {
         }
@@ -61,20 +61,22 @@ public class UpdateEventServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        
         String eventName = new String(request.getParameter("EventName").getBytes("ISO-8859-1"), "UTF-8");
         String discount = request.getParameter("Discount");
         String courseID = request.getParameter("Course");
         String daystart = request.getParameter("daystart");
         String dayend = request.getParameter("dayend");
         String eventID = request.getParameter("id");
+        String message = "";
+        boolean checkUpdate;
 
         try {
             //Kiểm tra tên khóa học đã có trong database hay chưa
             EventDAO dao = new EventDAO();
             boolean checkDuplicate = dao.checkEventDuplicate(eventName);
             boolean checkDuplicate2 = dao.checkEventDuplicate2(eventID, eventName);
-
+            EventDTO event = dao.getEventByID(eventID);
+            String rootEventName = event.getEventName();
             if (checkDuplicate) {
                 if (checkDuplicate2) {
                     List<Part> fileParts = new ArrayList<>();
@@ -92,15 +94,15 @@ public class UpdateEventServlet extends HttpServlet {
                         InputStream content = fileContent;
                         byte[] imageBytes = IOUtils.toByteArray(content);
                         String data = Base64.getEncoder().encodeToString(imageBytes);
-                        updateInforToDatabase(eventID, eventName, courseID, discount, daystart, dayend, fileName, data);
-
+                        checkUpdate = updateInforToDatabase(eventID, eventName, courseID, discount, daystart, dayend, fileName, data);
+                        if (checkUpdate) {
+                            message = "Cập nhật sự kiện thành công!";
+                        } else {
+                            message = "Cập nhật sự kiện thất bại!";
+                        }
                     }
                 } else {
-                    response.getWriter().println("Error: Course name already exists in Database!");
-                    request.setAttribute("ErrorMessage", "Error: Course name already exists in Database!");
-                    EventDTO list = dao.getEventByName(eventName);
-                    request.setAttribute("c", list);
-                    request.getRequestDispatcher("updateEvent.jsp").forward(request, response);
+                    message = "Tên sự kiện " + rootEventName + " đã tồn tại! Vui lòng nhập tên sự kiện khác!";
                 }
 
             } else {
@@ -119,18 +121,23 @@ public class UpdateEventServlet extends HttpServlet {
                     InputStream content = fileContent;
                     byte[] imageBytes = IOUtils.toByteArray(content);
                     String data = Base64.getEncoder().encodeToString(imageBytes);
-                    updateInforToDatabase(eventID, eventName, courseID, discount, daystart, dayend, fileName, data);
-
+                    checkUpdate = updateInforToDatabase(eventID, eventName, courseID, discount, daystart, dayend, fileName, data);
+                    if (checkUpdate) {
+                        message = "Cập nhật sự kiện thành công!";
+                    } else {
+                        message = "Cập nhật sự kiện thất bại!";
+                    }
                 }
 
             }
         } catch (SQLException ex) {
             response.getWriter().println("ERROR: " + ex.getMessage());
         }
-        response.sendRedirect("event");
+        request.setAttribute("message", message);
+        request.getRequestDispatcher("event").forward(request, response);
     }
 
-    public void updateInforToDatabase(String eventID, String eventName, String courseID, String discount, String daystart, String dayend, String image, String data) throws SQLException {
+    public boolean updateInforToDatabase(String eventID, String eventName, String courseID, String discount, String daystart, String dayend, String image, String data) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
@@ -139,7 +146,10 @@ public class UpdateEventServlet extends HttpServlet {
                 String sql = "UPDATE Event set eventName=  N'" + eventName + "', courseID=" + courseID + " , discount= " + discount + ",daystart='" + daystart + "',dayend='" + dayend + "',"
                         + "image='" + image + "', data='" + data + "' where eventID=" + eventID;
                 ptm = conn.prepareStatement(sql);
-                ptm.executeUpdate();
+                int row = ptm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
             }
         } catch (Exception e) {
         } finally {
@@ -150,6 +160,7 @@ public class UpdateEventServlet extends HttpServlet {
                 conn.close();
             }
         }
+        return false;
     }
 
     @Override

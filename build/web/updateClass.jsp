@@ -61,7 +61,7 @@
                             <label for="cate">PT</label>
                             <select name="PT">
                                 <c:forEach var="tc" items="${listTC}">
-                                    <option value="${tc.ptPhone}">${tc.ptName}</option>
+                                    <option value="${tc.phone}">${tc.name}</option>
                                 </c:forEach>
                             </select>
                         </div>

@@ -240,6 +240,40 @@ public class GuestDAO {
         }
         return check;
     }
+    public boolean insertUserCourse1(String phone, String courseID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        boolean check = false;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                    String sql1 = "INSERT INTO UserCourse (courseID, phone, status)\n"
+                            + "VALUES (" + courseID + ",'" + phone + "',1)";
+                    ptm = conn.prepareStatement(sql1);
+                    int row = ptm.executeUpdate();
+                    if (row > 0) {
+                        System.out.println("Insert userCourse success!");
+                        return check = true;
+                    } else {
+                        System.out.println("Can't insert userCourse success!");
+                        return check = false;
+                    }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
     public List<CoursesDTO> getCourseName() throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;

@@ -22,7 +22,7 @@
         <title>Lớp Học</title>
     </head>
     <body>
-         <% String ErrorMessage = (String) request.getAttribute("ErrorMessage"); %>
+        <% String ErrorMessage = (String) request.getAttribute("ErrorMessage"); %>
         <c:if test="${empty sessionScope.STAFF}">
             <c:redirect url="login.jsp"></c:redirect>
         </c:if>
@@ -73,20 +73,20 @@
                     <tbody>
                         <c:if test="${sessionScope.ROLE == 'TC'}">
                             <c:forEach items="${list_class}" var="x">
-                                <c:if test="${sessionScope.USER.name == x.ptName}">
+                                <c:if test="${sessionScope.USER.name == x.name}">
                                     <tr>
                                         <td>${x.className}</td>
-                                        <td>${x.ptName}</td>
+                                        <td>${x.name}</td>
                                         <td>${x.courseName}</td>
                                         <td>${x.description}</td>
                                         <td>${x.totalSession}</td>
-                                        <td>${x.capacity}</td>
+                                        <td>${x.countTT} / ${x.capacity}</td>
                                         <td>
-                                        <a href="showStudent?classID=${x.classID}"><i class="fa-solid fa-graduation-cap fa-bounce" style="color: #34ea10;"></i></i></a>
-                                        <c:if test="${sessionScope.ROLE == 'AD'}">
-                                        |
-                                        <a onclick="showMess('${x.className}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
-                                        </c:if>
+                                            <a href="showStudent?classID=${x.classID}"><i class="fa-solid fa-graduation-cap fa-bounce" style="color: #34ea10;"></i></i></a>
+                                            <c:if test="${sessionScope.ROLE == 'AD'}">
+                                                |
+                                                <a onclick="showMess('${x.className}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
+                                                </c:if>
                                         </td>
                                     </tr>
                                 </c:if>
@@ -94,25 +94,29 @@
                         </c:if>
                         <c:if test="${sessionScope.ROLE == 'AD'|| sessionScope.ROLE == 'ST'}">
                             <c:forEach items="${list_class}" var="x">
-                                    <tr>
-                                        <td>${x.className}</td>
-                                        <td>${x.ptName}</td>
-                                        <td>${x.courseName}</td>
-                                        <td>${x.description}</td>
-                                        <td>${x.totalSession}</td>
-                                        <td>${x.capacity}</td>
-                                        <td>
-                                        <a href="showStudent?classID=${x.classID}"><i class="fa-solid fa-graduation-cap fa-bounce" style="color: #34ea10;"></i></i></a>
-                                        |
-                                        <a href="showLearner?id=${x.courseID}&classID=${x.classID}"><i class="fa-solid fa-users-line fa-fade" style="color: #300edd;"></i></i></a>
-                                        <c:if test="${sessionScope.ROLE == 'AD'}">
-                                        |
-                                        <a href="updateClass?classID=${x.classID}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
-                                        |
-                                        <a onclick="showMess('${x.className}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
+                                <tr>
+                                    <td>${x.className}</td>
+                                    <td>${x.name}</td>
+                                    <td>${x.courseName}</td>
+                                    <td>${x.description}</td>
+                                    <td>${x.totalSession}</td>
+                                    <td>${x.countTT} / ${x.capacity}</td>
+                                    <td>
+                                        <c:if test="${sessionScope.ROLE == 'AD'|| sessionScope.ROLE == 'ST'}">
+                                            <a href="showStudent?classID=${x.classID}"><i class="fa-solid fa-graduation-cap fa-bounce" style="color: #34ea10;"></i></i></a>
                                         </c:if>
-                                        </td>
-                                    </tr>
+                                        <c:if test="${sessionScope.ROLE == 'ST' && x.countTT < x.capacity}">
+                                            |
+                                            <a href="showLearner?id=${x.courseID}&classID=${x.classID}"><i class="fa-solid fa-users-line fa-fade" style="color: #300edd;"></i></i></a>
+                                        </c:if>
+                                        <c:if test="${sessionScope.ROLE == 'AD'}">
+                                            |
+                                            <a href="updateClass?classID=${x.classID}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
+                                            |
+                                            <a onclick="showMess('${x.className}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
+                                        </c:if>
+                                    </td>
+                                </tr>
                             </c:forEach>
                         </c:if>
                     </tbody>
@@ -129,9 +133,9 @@
 
             <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
             <script>
-                                                $(document).ready(function () {
-                                                    var table = $('#class1').DataTable();
-                                                });
+                                            $(document).ready(function () {
+                                                var table = $('#class1').DataTable();
+                                            });
             </script>
 
     </body>

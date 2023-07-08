@@ -59,12 +59,10 @@ public class DeleteCourseServlet extends HttpServlet {
             boolean check = dao.checkDelete(name);
             if(!check){
                 dao.deleteCourses(name);
-                System.out.println("Delete Success!");
-                request.setAttribute("ErrorMessage", "Success: Delete Successfully!");
-                response.sendRedirect("courses");
+                request.setAttribute("message", "Xóa khóa học thành công!");
+                request.getRequestDispatcher("courses").forward(request, response);
             } else {
-                System.out.println("Delete Fail!");
-                request.setAttribute("ErrorMessage", "Error: This course still have learning student!");
+                request.setAttribute("message", "Khóa học " + name + " vẫn còn người đang theo học!");
                 request.getRequestDispatcher("courses").forward(request, response);
             }
             

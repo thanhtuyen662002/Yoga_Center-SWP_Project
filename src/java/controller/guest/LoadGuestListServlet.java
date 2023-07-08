@@ -6,13 +6,16 @@
 package controller.guest;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.dao.BillDAO;
+import model.dao.CoursesDAO;
 import model.dao.GuestDAO;
+import model.dto.CoursesDTO;
 import model.dto.GuestDTO;
 
 /**
@@ -62,21 +65,37 @@ public class LoadGuestListServlet extends HttpServlet {
                         if (checkSetStatus) {
                             boolean checkInsertInToBill = bdao.insertUserToBill(phone);
                             if (checkInsertInToBill) {
-                                response.sendRedirect("guest");
+                                System.out.println("Thêm vào hóa đơn thành công!");
+                                request.getRequestDispatcher("guest").forward(request, response);
                             } else {
                                 System.out.println("Không thể thêm vào hóa đơn!");
-                                response.sendRedirect("guest");
+                                request.setAttribute("message", "Không thể thêm vào hóa đơn!");
+                                request.getRequestDispatcher("guest").forward(request, response);
                             }
                         } else {
                             System.out.println("Không thể cập nhật status trong bảng UserCourse!");
+                            request.setAttribute("message", "Không thể cập nhật status trong bảng UserCourse!");
+                            request.getRequestDispatcher("guest").forward(request, response);
                         }
+                    } else {
+                        System.out.println("Không thể tìm thấy khóa học trong bảng SignUp!");
+                        request.setAttribute("fullName", fullName);
+                        request.setAttribute("phone", phone);
+                        request.setAttribute("address", address);
+                        request.setAttribute("gender", gender);
+                        List<CoursesDTO> list = CoursesDAO.getAllCourses();
+                        request.setAttribute("listC", list);
+                        request.setAttribute("ErrorMessage", "Hãy chọn 1 khóa học!");
+                        request.getRequestDispatcher("chooseCourse.jsp").forward(request, response);
                     }
                 } else {
                     System.out.println("Thêm khách hàng thất bại!");
+                    request.setAttribute("message", "Thêm khách hàng thất bại!");
+                    request.getRequestDispatcher("guest").forward(request, response);
                 }
             } else {
                 String error = "Số điện thoại đã tồn tại!";
-                request.setAttribute("ErrorMessage", error);
+                request.setAttribute("message", error);
                 request.getRequestDispatcher("guest").forward(request, response);
             }
         } catch (Exception e) {

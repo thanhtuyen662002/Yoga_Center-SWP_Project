@@ -175,6 +175,16 @@ public class CoursesDAO {
                 }
             }
         } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return list;
     }
@@ -212,11 +222,11 @@ public class CoursesDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "SELECT co.name, cls.name, sch.customerID, COUNT(sch.customerID) AS TT FROM Courses AS  co\n"
-                        + "RIGHT JOIN Class AS cls ON co.courseID = cls.courseID\n"
-                        + "LEFT JOIN Schedule AS sch ON sch.classID = cls.classID\n"
-                        + "WHERE sch.deleteFlag = 1 AND co.name = N'" + name + "' AND co.status = 1\n"
-                        + "GROUP BY co.name, cls.name, sch.customerID";
+                String sql = "  SELECT co.name, cls.name, sch.ptPhone, COUNT(sch.ptPhone) AS TT FROM Courses AS  co\n"
+                        + "  RIGHT JOIN Class AS cls ON co.courseID = cls.courseID\n"
+                        + "  LEFT JOIN Schedule AS sch ON sch.classID = cls.classID\n"
+                        + "  WHERE sch.deleteFlag = 0 AND co.name = N'" + name + "' AND co.status = 1\n"
+                        + "  GROUP BY co.name, cls.name, sch.ptPhone";
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
                 if (rs.next()) {
@@ -309,7 +319,7 @@ public class CoursesDAO {
         return check;
     }
 
-    public void restoreCourses(String name) throws SQLException {
+    public boolean restoreCourses(String name) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
@@ -318,8 +328,10 @@ public class CoursesDAO {
                 String sql = "UPDATE Courses SET status = 1\n"
                         + "WHERE name = N'" + name + "'";
                 ptm = conn.prepareStatement(sql);
-                ptm.executeUpdate();
-
+                int row = ptm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
             }
         } catch (Exception e) {
         } finally {
@@ -330,19 +342,16 @@ public class CoursesDAO {
                 conn.close();
             }
         }
-
+        return false;
     }
 
     public static void main(String[] args) throws SQLException {
         CoursesDAO dao = new CoursesDAO();
-    
-  
-       CoursesDTO list = dao.getCourses("61");
-        
-       
-            System.out.println(list);
-        
-       
+
+        CoursesDTO list = dao.getCourses("61");
+
+        System.out.println(list);
+
     }
 
     public CoursesDTO getCourses(String id) throws SQLException {
@@ -352,7 +361,7 @@ public class CoursesDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "SELECT courseID, name FROM Courses WHERE courseID=" +id;
+                String sql = "SELECT courseID, name FROM Courses WHERE courseID=" + id;
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
@@ -436,12 +445,4 @@ public class CoursesDAO {
         }
         return list;
     }
-
-    //Ham dang ky khoa hoc
-    public boolean registerCourse() throws SQLException {
-        boolean checkRegister = false;
-
-        return checkRegister;
-    }
-
 }

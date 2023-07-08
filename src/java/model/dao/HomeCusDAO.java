@@ -18,11 +18,11 @@ public class HomeCusDAO {
         try {
             conn = DBUtils.getConnection();
             if(conn != null){
-                String sql = "SELECT * FROM MembershipStory";
+                String sql = "SELECT * FROM MembershipStory WHERE status = 1";
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
                 while (rs.next()) {                    
-                    list.add(new HomeCusDTO(rs.getInt("storyID"), rs.getString("image"), rs.getString("storyContent")));
+                    list.add(new HomeCusDTO(rs.getString("phone"), rs.getString("image"), rs.getString("storyContent")));
                 }
             }
         } catch (Exception e) {
@@ -39,7 +39,13 @@ public class HomeCusDAO {
         }
         return list;
     } 
-    
+//    public static void main(String[] args) throws SQLException {
+//        List<HomeCusDTO> List = HomeCusDAO.getMembershipStory();
+//        for (HomeCusDTO o : List){
+//            System.out.println(o);
+//        }
+//    }
+//    
     public List<HomeCusDTO> getClub() throws SQLException{
         List<HomeCusDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -127,11 +133,11 @@ public class HomeCusDAO {
         }
         return list;
     } 
-    public static void main(String[] args) throws SQLException {
-        HomeCusDAO dao = new HomeCusDAO();
-        List<HomeCusDTO> rs = dao.getTimeToCome();
-        for (HomeCusDTO r : rs) {
-            System.out.println(r);
-        }
-    }
+//    public static void main(String[] args) throws SQLException {
+//        HomeCusDAO dao = new HomeCusDAO();
+//        List<HomeCusDTO> rs = dao.getTimeToCome();
+//        for (HomeCusDTO r : rs) {
+//            System.out.println(r);
+//        }
+//    }
 }

@@ -55,6 +55,8 @@ public class NewsStaffServlet extends HttpServlet {
 //        processRequest(request, response);
 
         try {
+            String message = (String) request.getAttribute("message");
+            request.setAttribute("ErrorMessage", message);
             ArrayList<NewsDTO> list = NewsDAO.getAllNews();
             request.setAttribute("list_news", list);
             request.getRequestDispatcher("newsStaff.jsp").forward(request, response);
@@ -75,9 +77,15 @@ public class NewsStaffServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-           
-            
+        try {
+            String message = (String) request.getAttribute("message");
+            request.setAttribute("ErrorMessage", message);
+            ArrayList<NewsDTO> list = NewsDAO.getAllNews();
+            request.setAttribute("list_news", list);
+            request.getRequestDispatcher("newsStaff.jsp").forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(NewsStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }                               
     }
 
     /**
