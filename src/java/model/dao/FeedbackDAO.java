@@ -70,7 +70,7 @@ public class FeedbackDAO {
             if (conn != null) {
                 String query = "SELECT  u.name AS cusName, f.cusPhone, f.courseID, c.name AS courseName, f.comment, f.dayup, f.status FROM Feedback f \n"
                         + "JOIN [dbo].[User] u ON f.cusPhone = u.phone \n"
-                        + "JOIN Courses c ON f.courseID = c.courseID WHERE status = 0";
+                        + "JOIN Courses c ON f.courseID = c.courseID WHERE f.status = 0";
                 ptm = conn.prepareStatement(query);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
@@ -99,6 +99,60 @@ public class FeedbackDAO {
         return list;
     }
 
+    public boolean acceptFeedback(String cusPhone) throws ClassNotFoundException, SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            String sql = "UPDATE Feedback SET status = 1 WHERE cusPhone = " + cusPhone;
+            ptm = conn.prepareStatement(sql);
+            int row = ptm.executeUpdate();
+            if (row > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
+    }
+    
+    public boolean denyFeedback(String cusPhone) throws ClassNotFoundException, SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            String sql = "DELETE Feedback WHERE cusPhone = " + cusPhone;
+            ptm = conn.prepareStatement(sql);
+            int row = ptm.executeUpdate();
+            if (row > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
+    }
+    
     public void deleteFeedback(String phone) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         PreparedStatement ptm = null;

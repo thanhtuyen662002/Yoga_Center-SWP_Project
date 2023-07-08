@@ -51,7 +51,7 @@
                  <li onmouseover="showDropdown('feedback')" onmouseout="hideDropdown('feedback')">
                         <a href="mainController?action=feedback"><span class="fa-solid fa-comments mr-3"></span> ĐÁNH GIÁ KHÓA HỌC</a>
                         <ul id="feedback" class="dropdown">
-                            <li><a href="createClass">Đánh giá đang chờ</a></li>
+                            <li><a href="pendingfeedback">Đánh giá đang chờ</a></li>
                         </ul>
                     </li>
                 <li>

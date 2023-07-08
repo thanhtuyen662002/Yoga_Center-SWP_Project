@@ -8,11 +8,15 @@ package controller.feedback;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.dao.FeedbackDAO;
+import model.dto.FeedbackDTO;
 
 /**
  *
@@ -56,7 +60,15 @@ public class PendingFeedbackServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            String message = (String) request.getAttribute("message");
+            request.setAttribute("ErrorMessage", message);
+            ArrayList<FeedbackDTO> list = FeedbackDAO.getPendingFeedback();
+            request.setAttribute("list_pendingfeedback", list);
+            request.getRequestDispatcher("pendingfeedback.jsp").forward(request, response);
+        } catch (SQLException ex) {
+            
+        }
     } 
 
     /** 
@@ -69,7 +81,16 @@ public class PendingFeedbackServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            String message = (String) request.getAttribute("message");
+            request.setAttribute("ErrorMessage", message);
+            ArrayList<FeedbackDTO> list = FeedbackDAO.getPendingFeedback();
+            request.setAttribute("list_pendingfeedback", list);
+            request.getRequestDispatcher("pendingfeedback.jsp").forward(request, response);
+        } catch (SQLException ex) {
+            
+        }
+    
     }
 
     /** 
