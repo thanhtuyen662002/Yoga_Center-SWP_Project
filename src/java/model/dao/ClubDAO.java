@@ -165,7 +165,7 @@ public class ClubDAO {
         } return false;
     }
     
-    public boolean restoreClub(String clubID) throws SQLException {
+        public boolean restoreClub(String clubID) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {

@@ -22,6 +22,7 @@
         <title>Tin Tức</title>
     </head>
     <body>
+        <% String ErrorMessage = (String) request.getAttribute("ErrorMessage"); %>
         <c:if test="${empty sessionScope.STAFF}">
             <c:redirect url="login.jsp"></c:redirect>
         </c:if>
@@ -35,6 +36,11 @@
 
             <!-- Page Content  -->
             <div id="content">
+                <div style="text-align: center; color: red; font-size: 2rem;">
+                    <% if (ErrorMessage != null) {%>
+                    <p><%= ErrorMessage%></p>
+                    <% }%>
+                </div>
                 <div class="course-link">
                     <ul>
                         <li><a href="">Staff</a></li>
@@ -50,7 +56,6 @@
                 <table id="course" class="display" style="width:100%">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>TIÊU ĐỀ</th>
                             <th>NGÀY ĐĂNG</th>
                             <th>HÌNH ẢNH </th>
@@ -62,12 +67,9 @@
                     <tbody>
                         <c:forEach items="${list_news}" var="x">
                             <tr>
-                                <th scope="row" id="id">${x.newsID}</th>
-                                <!--<td>${x.stPhone}</td>-->
                                 <td id="title">${x.title}</td>
                                 <td >${x.postDate}</td>
                                 <td id="table-img"><img src="data:image;base64,${x.data}" alt=""></td>
-                                <!--<td ><div class="table-noidung">${x.content}</div> </td>-->
                                 <td>
                                     <c:if test="${x.categoryID == 1}"> Blog</c:if>
                                     <c:if test="${x.categoryID == 2}"> Product</c:if>
@@ -108,7 +110,7 @@
                     var name = arr[1];
                     var option = confirm("Bạn có chắc chắn muốn xóa tin tức " + name + " hay không?");
                     if (option === true) {
-                        window.location.href = 'deleteNews?sid=' + id;
+                        window.location.href = 'deleteNews?newsID=' + id;
                     }
                 }
             </script>

@@ -445,12 +445,4 @@ public class CoursesDAO {
         }
         return list;
     }
-
-    //Ham dang ky khoa hoc
-    public boolean registerCourse() throws SQLException {
-        boolean checkRegister = false;
-
-        return checkRegister;
-    }
-
 }

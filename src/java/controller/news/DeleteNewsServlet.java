@@ -22,7 +22,7 @@ import model.dao.NewsDAO;
  *
  * @author HOANG ANH
  */
-@WebServlet(name = "DeleteNewsServlet", urlPatterns = {"/deletenews"})
+@WebServlet(name = "DeleteNewsServlet", urlPatterns = {"/deleteNews"})
 public class DeleteNewsServlet extends HttpServlet {
    
     /** 
@@ -49,17 +49,21 @@ public class DeleteNewsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        String message = "";
         try {
-            //        processRequest(request, response);
-            int newsID = Integer.parseInt(request.getParameter("newsID"));
+            String newsID = request.getParameter("newsID");
             NewsDAO dao = new NewsDAO();
-            dao.softdeleteNews(newsID);
-            response.sendRedirect("news");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DeleteNewsServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+            boolean checkDelete = dao.softDeleteNews(newsID);
+            if (checkDelete) {
+                message = "Xóa tin tức thành công!";
+            } else {
+                message = "Xóa tin tức thất bại!";
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DeleteNewsServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        request.setAttribute("message", message);
+        request.getRequestDispatcher("news").forward(request, response);
     } 
 
     /** 

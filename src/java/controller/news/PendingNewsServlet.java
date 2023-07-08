@@ -65,13 +65,12 @@ public class PendingNewsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            //        processRequest(request, response);
+            String message = (String) request.getAttribute("message");
+            request.setAttribute("ErrorMessage", message);
             ArrayList<NewsDTO> list = NewsDAO.getsoftdeleteNews();
             request.setAttribute("list_pendingnews", list);
             request.getRequestDispatcher("pendingNews.jsp").forward(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PendingNewsServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(PendingNewsServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -87,7 +86,15 @@ public class PendingNewsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            String message = (String) request.getAttribute("message");
+            request.setAttribute("ErrorMessage", message);
+            ArrayList<NewsDTO> list = NewsDAO.getsoftdeleteNews();
+            request.setAttribute("list_pendingnews", list);
+            request.getRequestDispatcher("pendingNews.jsp").forward(request, response);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(PendingNewsServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

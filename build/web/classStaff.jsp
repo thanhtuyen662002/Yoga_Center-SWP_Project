@@ -80,7 +80,7 @@
                                         <td>${x.courseName}</td>
                                         <td>${x.description}</td>
                                         <td>${x.totalSession}</td>
-                                        <td>${x.capacity}</td>
+                                        <td>${x.countTT} / ${x.capacity}</td>
                                         <td>
                                             <a href="showStudent?classID=${x.classID}"><i class="fa-solid fa-graduation-cap fa-bounce" style="color: #34ea10;"></i></i></a>
                                             <c:if test="${sessionScope.ROLE == 'AD'}">
@@ -100,12 +100,12 @@
                                     <td>${x.courseName}</td>
                                     <td>${x.description}</td>
                                     <td>${x.totalSession}</td>
-                                    <td>${x.capacity}</td>
+                                    <td>${x.countTT} / ${x.capacity}</td>
                                     <td>
                                         <c:if test="${sessionScope.ROLE == 'AD'|| sessionScope.ROLE == 'ST'}">
                                             <a href="showStudent?classID=${x.classID}"><i class="fa-solid fa-graduation-cap fa-bounce" style="color: #34ea10;"></i></i></a>
                                         </c:if>
-                                        <c:if test="${sessionScope.ROLE == 'ST'}">
+                                        <c:if test="${sessionScope.ROLE == 'ST' && x.countTT < x.capacity}">
                                             |
                                             <a href="showLearner?id=${x.courseID}&classID=${x.classID}"><i class="fa-solid fa-users-line fa-fade" style="color: #300edd;"></i></i></a>
                                         </c:if>

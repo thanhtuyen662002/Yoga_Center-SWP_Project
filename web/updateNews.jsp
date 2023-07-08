@@ -33,7 +33,7 @@
                 </div>
                 <div class="course-title" >
                     <div class="text">WELCOME STAFF</div>
-                    <div class="insert"><a type="submit" name="insert">BACK</a></div>
+                    <div class="insert"><a type="submit" href="news">BACK</a></div>
                 </div>
                 <div class="table-name">
                     <h1>CHỈNH SỬA TIN TỨC</h1>

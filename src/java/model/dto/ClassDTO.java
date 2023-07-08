@@ -14,6 +14,7 @@ public class ClassDTO {
     private int numberOfMonths;
     private String phone;
     private String name;
+    private int countTT;
 
     public ClassDTO() {
     }
@@ -28,6 +29,18 @@ public class ClassDTO {
         this.status = status;
         this.courseName = courseName;
         this.capacity = capacity;
+    }
+    public ClassDTO(int classID, int courseID, String name, String className, String description, int totalSession, boolean status, String courseName, int capacity, int countTT) {
+        this.classID = classID;
+        this.courseID = courseID;
+        this.name = name;
+        this.className = className;
+        this.description = description;
+        this.totalSession = totalSession;
+        this.status = status;
+        this.courseName = courseName;
+        this.capacity = capacity;
+        this.countTT = countTT;
     }
     public ClassDTO(int classID, int courseID, String name, String phone, String className, String description, int totalSession, boolean status, String courseName, int capacity) {
         this.classID = classID;
@@ -73,6 +86,14 @@ public class ClassDTO {
     
     public ClassDTO(int numberOfMonths) {
         this.numberOfMonths = numberOfMonths;
+    }
+
+    public int getCountTT() {
+        return countTT;
+    }
+
+    public void setCountTT(int countTT) {
+        this.countTT = countTT;
     }
 
     public String getPhone() {
@@ -174,9 +195,8 @@ public class ClassDTO {
 
     @Override
     public String toString() {
-        return "ClassDTO{" + "classID=" + classID + ", courseID=" + courseID + ", capacity=" + capacity + ", className=" + className + ", description=" + description + ", totalSession=" + totalSession + ", status=" + status + ", courseName=" + courseName + ", staffName=" + staffName + ", numberOfMonths=" + numberOfMonths + ", phone=" + phone + ", name=" + name + '}';
+        return "ClassDTO{" + "classID=" + classID + ", courseID=" + courseID + ", capacity=" + capacity + ", className=" + className + ", description=" + description + ", totalSession=" + totalSession + ", status=" + status + ", courseName=" + courseName + ", staffName=" + staffName + ", numberOfMonths=" + numberOfMonths + ", phone=" + phone + ", name=" + name + ", countTT=" + countTT + '}';
     }
 
-
-  
+    
 }

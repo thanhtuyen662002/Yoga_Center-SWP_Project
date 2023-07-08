@@ -60,21 +60,21 @@ public class RestoreNewsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        String message = "";
         try {
-            //        processRequest(request, response);
-            
-            //        processRequest(request, response);
-            int newsID = Integer.parseInt(request.getParameter("newsID"));
+            String newsID = request.getParameter("newsID");
             NewsDAO dao = new NewsDAO();
-            dao.restoreNews(newsID);
-            response.sendRedirect("pendingnews");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(RestoreNewsServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+            boolean checkRestore = dao.restoreNews(newsID);
+            if (checkRestore) {
+                message = "Khôi phục tin tức thành công!";
+            } else {
+                message = "Khôi phục tin tức thất bại!";
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(RestoreNewsServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    
+        request.setAttribute("message", message);
+        request.getRequestDispatcher("pendingnews").forward(request, response);
     } 
 
     /** 
