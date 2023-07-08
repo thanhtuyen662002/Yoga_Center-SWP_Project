@@ -153,15 +153,8 @@ public class UpdateCourseServlet extends HttpServlet {
                     String sql = "UPDATE Class SET total_sessions = " + total_sessions + " WHERE courseID = " + id;
                     ptm = conn.prepareStatement(sql);
                     row = ptm.executeUpdate();
-                    if (row > 0) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                } else {
-                    return false;
                 }
-
+                return true;
             }
         } catch (Exception e) {
         } finally {

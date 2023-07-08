@@ -49,7 +49,7 @@
                             <label for="cate">PT Name</label>
                             <select name="ptPhone">
                                 <c:forEach var="s" items="${staff}">
-                                    <option value="${s.cusPhone}" onchange="">${s.cusName}</option>
+                                    <option value="${s.phone}" onchange="">${s.name}</option>
                                 </c:forEach>
                             </select>
                         </div>
