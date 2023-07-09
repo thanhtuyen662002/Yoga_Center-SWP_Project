@@ -346,12 +346,7 @@ public class CoursesDAO {
     }
 
     public static void main(String[] args) throws SQLException {
-        CoursesDAO dao = new CoursesDAO();
-
-        CoursesDTO list = dao.getCourses("61");
-
-        System.out.println(list);
-
+      
     }
 
     public CoursesDTO getCourses(String id) throws SQLException {

@@ -49,10 +49,8 @@
                         </div>
                         <div class="price-detail-content">
                             <h1>Nội dung của gói</h1>
-                            <ul>
-                                <li>
-                                    ${c.description}
-                                </li>
+                            <ul style="font-size: 2rem">
+                                ${c.description}
 
                             </ul>
                         </div>
@@ -83,21 +81,39 @@
                             </div>
                         </div>
                     </div>
-                    <c:set var="discount" value="${d.discount}"/>
-                    <c:set var="ID" value="${d.eventID}"/>
+
                     <div class="price-detail-right">
                         <div class="aa">
                             <div class="price-detail-box">
                                 <div class="price-detail-head">
                                     <h2>GIÁ KHÓA HỌC</h2>
-                                    <c:set var="total" value="${c.numberOfMonths * c.price}"/>
-                                    <c:set var="d" value="${discount/100}"/>
-                                    <c:set var="discount" value="${total - (total * d)}"/>
+                                    <c:set var="persent" value="${d.discount/100}"/>
+                                    <c:set var="ID" value="${d.eventID}"/>
+                                    <c:set var="total" value="${c.numberOfMonths * price}"/>
+                                    <c:set var="discount" value="${total - (total * persent)}"/>
+                                    <c:set var="totalPrice">
+                                        <fmt:formatNumber type="currency" value="${total}"/>
+                                    </c:set>
+                                    <c:set var="discountPrice" >
+                                        <fmt:formatNumber type="currency" value="${discount}"/>
+                                    </c:set>
+                                    <c:set var="rootPriceOfMonths" >
+                                        <fmt:formatNumber type="currency"  value="${price}" />
+                                    </c:set>
+                                    <c:set var="discountPriceOfMonths" >
+                                        <fmt:formatNumber type="currency"  value="${price - (price * persent)}" />
+                                    </c:set>
+                                    <c:set var="rootPriceOfSlot" >
+                                        <fmt:formatNumber type="currency"  value="${price/8}" />
+                                    </c:set>
+                                    <c:set var="discountPriceOfSlot" >
+                                        <fmt:formatNumber type="currency"  value="${(price - (price * persent))/8}" />
+                                    </c:set>
 
-                                    <c:if test="${d != 0 || d != '0.0' || d != 0.0 || d != '0'}">
-                                        <del style="color: #A50000"><h2><fmt:formatNumber type="currency" currencyCode="VND" value="${total}" /></h2></del>
+                                    <c:if test="${persent != 0 || persent != '0.0' || persent != 0.0 || persent != '0'}">
+                                        <del style="color: #A50000"><h2><c:out value="${totalPrice}"/></h2></del>
                                             </c:if>
-                                    <h1><fmt:formatNumber type="currency" currencyCode="VND" value="${discount}" /></h1>
+                                    <h1><c:out value="${discountPrice}"/></h1>
                                 </div>
                                 <div class="price-detail-bottom">
                                     <ul>
@@ -105,27 +121,32 @@
                                             <div class="price-detail-right-text">
                                                 Thời gian tập luyện:
                                             </div>
-                                            <div class="price-detail-right-price">${c.numberOfMonths} THÁNG</div>
+                                            <c:if test="${c.numberOfMonths > 0}">
+                                                <div class="price-detail-right-price">${c.numberOfMonths} THÁNG</div>
+                                            </c:if>
+                                            <c:if test="${c.numberOfMonths <= 0}">
+                                                <div class="price-detail-right-price">7 NGÀY</div>
+                                            </c:if>
                                         </li>
                                         <li>
                                             <div class="price-detail-right-text">Chi phí / tháng</div>
                                             <div class="price-detail-right-price">
-                                                <c:if test="${d != 0 || d != '0.0' || d != 0.0 || d != '0'}">
-                                                    <del style="color: #A50000"><h2><fmt:formatNumber type="currency" currencyCode="VND" value="${c.price}" /></h2></del>
+                                                <c:if test="${persent != 0 || persent != '0.0' || persent != 0.0 || persent != '0'}">
+                                                    <del style="color: #A50000"><h2><c:out value="${rootPriceOfMonths}"/></h2></del>
                                                         </c:if>
-                                                        <fmt:formatNumber type="currency"  value="${c.price - (c.price * d)}" currencyCode="VND"/>
+                                                        <c:out value="${discountPriceOfMonths}"/>
                                             </div>
                                         </li>
                                         <li>
-                                            <div class="price-detail-right-text">Chí phí / ngày</div>
+                                            <div class="price-detail-right-text">Chí phí / buổi học</div>
                                             <div class="price-detail-right-price">
-                                                <c:if test="${d != 0 || d != '0.0' || d != 0.0 || d != '0'}">
-                                                    <del style="color: #A50000"><h2><fmt:formatNumber type="currency" currencyCode="VND" value="${c.price/30}" /></h2></del>
+                                                <c:if test="${persent != 0 || persent != '0.0' || persent != 0.0 || persent != '0'}">
+                                                    <del style="color: #A50000"><h2><c:out value="${rootPriceOfSlot}"/></h2></del>
                                                         </c:if>
-                                                        <fmt:formatNumber type="currency"  value="${(c.price - (c.price * d))/30}" currencyCode="VND"/>
+                                                        <c:out value="${discountPriceOfSlot}"/>
                                             </div>
                                         </li>
-                                        <li>- Áp dụng ưu đãi giảm: ${d*100}%</li>
+                                        <li>- Áp dụng ưu đãi giảm: ${persent*100}%</li>
                                         <li>- Được sử dụng toàn bộ dịch vụ trung tâm</li>
                                         <li>
                                             <button type="submit" id="submit">ĐĂNG KÝ NGAY</button>

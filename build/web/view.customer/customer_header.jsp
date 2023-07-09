@@ -24,9 +24,6 @@
                     <div class="nav-menu">
                         <ul class="nav-menu-list">
                             <li class="nav-menu-item">
-                                <a class="nav-menu-link" href="aboutUs.jsp">ĐÁNH GIÁ</a>
-                            </li>
-                            <li class="nav-menu-item">
                                 <a class="nav-menu-link" href="clubCustomer">CLB</a>
                             </li>
                             <li class="nav-menu-item">
