@@ -76,6 +76,8 @@ public class LoginServlet extends HttpServlet {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
+        String message = (String) request.getAttribute("message");
+        request.setAttribute("ErrorMessage", message);
         try {
             if (user != null) {
                 HttpSession session = request.getSession();
@@ -101,7 +103,8 @@ public class LoginServlet extends HttpServlet {
                         break;
                 }
             } else {
-                response.sendRedirect("login.jsp");
+                request.setAttribute("ErrorMessage", "Sai tài khoản hoặc mật khẩu!");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
             }
         } catch (Exception e) {
             log("Error at LoginController: " + e.toString());

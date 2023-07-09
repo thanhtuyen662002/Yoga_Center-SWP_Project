@@ -21,6 +21,7 @@
     <title>Login</title>
 </head>
 <body>
+    <% String ErrorMessage = (String) request.getAttribute("ErrorMessage"); %>
     <div class="login"> 
         <div class="left">
             <div class="overlay"></div>
@@ -42,9 +43,14 @@
                     <i></i>
                 </div>
                 <div class="right-links">
-                    <a href="homeCustomer">Back</a>
-            
+                    <a href="homeCustomer">Back</a>       
                 </div>
+                <div style="text-align: center; color: red">
+                    <% if (ErrorMessage != null) {%>
+                    <p><%= ErrorMessage%></p>
+                    <% }%>
+                </div>
+                <div></div>
                 <input type="submit" value="LOGIN" name="action">
             </form>
         </span>
