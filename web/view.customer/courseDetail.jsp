@@ -60,7 +60,7 @@
                             <h1>Đánh Giá Khóa Học</h1>
                             <form  action="insertfb" method="Post">
                                 <div class="rating-box">
-<!--                                    <h3 id="notice">Viết bình luận thành công!!!</h3>-->
+                                    <!--                                    <h3 id="notice">Viết bình luận thành công!!!</h3>-->
                                     <h2>Viết Bình Luận ...<i class="fa-solid fa-pen fa-sm"></i></h2>
 
                                     <input name="comment" id="inputContent" type="text" 
@@ -231,16 +231,23 @@
             }
         </script>
         <script>
-            function showPopup() {
-                console.log("OK");
-                document.getElementById("popup").style.display = "block";
+            let qc = document.getElementsByClassName("aa")[0];
+            let form = document.getElementsByClassName("bb")[0];
+            let submit = document.getElementById("submit");
+            let back = document.getElementById("back");
 
-                setTimeout(function () {
-                    document.getElementById("popup").style.display = "none"; // Ẩn popup
-                }, 50000); // Đợi 5 giây trước khi ẩn popup
-            }
+            submit.addEventListener("click", function (event) {
+                event.preventDefault();
+                qc.style.display = "none";
+                form.style.display = "block";
+            });
+            back.addEventListener("click", (event) => {
+                event.preventDefault();
+                qc.style.display = "block";
+                form.style.display = "none";
+            });
         </script>
-        <script src="./js/showCourseDetails.js"></script>
+        <script src="../js/showCourseDetails.js"></script>
 
     </body>
 </html>
