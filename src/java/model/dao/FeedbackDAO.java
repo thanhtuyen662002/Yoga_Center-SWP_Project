@@ -31,7 +31,7 @@ public class FeedbackDAO {
             if (conn != null) {
                 String query = "SELECT  u.name AS cusName, f.cusPhone, f.courseID, c.name AS courseName, f.comment, f.dayup, f.status FROM Feedback f \n"
                         + "JOIN [dbo].[User] u ON f.cusPhone = u.phone \n"
-                        + "JOIN Courses c ON f.courseID = c.courseID";
+                        + "JOIN Courses c ON f.courseID = c.courseID WHERE f.status = 1";
                 ptm = conn.prepareStatement(query);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
