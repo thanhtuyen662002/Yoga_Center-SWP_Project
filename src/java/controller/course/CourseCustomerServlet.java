@@ -62,6 +62,8 @@ public class CourseCustomerServlet extends HttpServlet {
             String ID = request.getParameter("ID");
             
             CoursesDTO list = dao.getCourseDetail(id);
+            int price = (int) list.getPrice();
+            request.setAttribute("price", price);
             request.setAttribute("c", list);
             
             EventDTO discount = Edao.getEventByID(ID);
