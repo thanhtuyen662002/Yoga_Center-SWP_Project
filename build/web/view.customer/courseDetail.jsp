@@ -92,22 +92,25 @@
                                     <c:set var="total" value="${c.numberOfMonths * price}"/>
                                     <c:set var="discount" value="${total - (total * persent)}"/>
                                     <c:set var="totalPrice">
-                                        <fmt:formatNumber type="currency" value="${total}"/>
+                                        
+                                    <c:set var="vnCurrency" value="₫" />
+                                        
+                                        <fmt:formatNumber type="currency" currencySymbol="${vnCurrency}" value="${total}"/>
                                     </c:set>
                                     <c:set var="discountPrice" >
-                                        <fmt:formatNumber type="currency" value="${discount}"/>
+                                        <fmt:formatNumber type="currency" currencySymbol="${vnCurrency}" value="${discount}"/>
                                     </c:set>
                                     <c:set var="rootPriceOfMonths" >
-                                        <fmt:formatNumber type="currency"  value="${price}" />
+                                        <fmt:formatNumber type="currency" currencySymbol="${vnCurrency}"  value="${price}" />
                                     </c:set>
                                     <c:set var="discountPriceOfMonths" >
-                                        <fmt:formatNumber type="currency"  value="${price - (price * persent)}" />
+                                        <fmt:formatNumber type="currency" currencySymbol="${vnCurrency}"  value="${price - (price * persent)}" />
                                     </c:set>
                                     <c:set var="rootPriceOfSlot" >
-                                        <fmt:formatNumber type="currency"  value="${price/8}" />
+                                        <fmt:formatNumber type="currency" currencySymbol="${vnCurrency}"  value="${price/8}" />
                                     </c:set>
                                     <c:set var="discountPriceOfSlot" >
-                                        <fmt:formatNumber type="currency"  value="${(price - (price * persent))/8}" />
+                                        <fmt:formatNumber type="currency" currencySymbol="${vnCurrency}"  value="${(price - (price * persent))/8}" />
                                     </c:set>
 
                                     <c:if test="${persent != 0 || persent != '0.0' || persent != 0.0 || persent != '0'}">
