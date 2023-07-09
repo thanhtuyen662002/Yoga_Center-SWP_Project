@@ -38,7 +38,7 @@
                     <div class="insert"><a type="submit" name="guest">BACK</a></div>
                 </div>
                 <div class="table-name">
-                    <h1>CHỈNH SỬA THÔNG TIN KHÓA HỌC ĐĂNG KÝ</h1>
+                    <h1>CHỈNH SỬA THÔNG TIN KHÁCH HÀNG</h1>
                 </div>
                 <%@ page import="model.dto.CoursesDTO" %>
                 <%@ page import="java.util.List" %>
@@ -59,23 +59,15 @@
                             <label for="title">Địa Chỉ</label>
                             <input value="${list_guest.address}" type="text" name="address" />
                         </div>
-<!--                        <div class="update-title">
-                            <label for="title">Giới Tinh</label>
-                            <select>
-                                <option name="gender" value="Male">Male</option>
-                                <option name="gender" value="FeMale">FeMale</option>
-                                <option name="gender" value="Other">Other</option>
-                            </select>
-                        </div>-->
                         <div class="update-title">
                             <label for="cate">Course Name</label>
-                             <select name="courseID">
+                            <select name="courseID">
                                 <% for (CoursesDTO course : courses) {%>
                                 <option value="<%= course.getCourseID()%>"><%= course.getCourseName()%></option>
                                 <% }%>
                             </select>
                         </div>
-            </div>
+                    </div>
                     <div class="table-btn">
                         <button type="submit">Update</button>
                     </div>

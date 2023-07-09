@@ -59,6 +59,10 @@
                            ><span class="fa-solid fa-person fa-xl mr-3"></span> Staff</a
                         >
                     </li>
+                    <li>
+                        <a href="showListTeacher">
+                            <span class="fa-solid fa-person fa-xl mr-3"></span> Teacher</a>
+                    </li>
                     <li >
                         <a href="listScheduleAdmin"
                            ><span class="fa-solid fa-calendar-days mr-3"></span> Schedule</a
