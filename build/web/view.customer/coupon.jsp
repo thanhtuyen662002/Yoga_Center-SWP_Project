@@ -21,7 +21,7 @@
       href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
     />
     <link rel="stylesheet" href="./css/coupon.css" />
-    <title>Coupon</title>
+    <title>KHUYẾN MÃI</title>
   </head>
   <body>
       <c:import url="customer_header.jsp"/>

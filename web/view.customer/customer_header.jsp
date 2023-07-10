@@ -45,13 +45,7 @@
                                 <div id="dropDownContent" class="d-none bg-white text-start position-absolute shadow">
                                     <c:if test="${not empty sessionScope.USER}"> 
                                         <a href="account" class="nav-link mb-2 text-decoration-none p-2" id="item">Cài đặt tài khoản</a>
-                                    </c:if>
-                                    <c:if test="${sessionScope.USER.roleID eq 'ST'}">
-                                        <a href="sellerPage" class="nav-link mb-2 text-decoration-none p-2" id="item">Quản lý</a>
-                                    </c:if>
-                                    <c:if test="${sessionScope.USER.roleID eq 'AD'}">
-                                        <a href="dashboard" class="nav-link mb-2 text-decoration-none p-2" id="item">Quản lý cửa hàng</a>
-                                    </c:if>
+                                    </c:if>                                  
                                     <!--<a href="logOut" class="nav-link text-decoration-none p-2" id="item">Đăng xuất</a>-->
                                 </div>
                                 <c:if test="${sessionScope.USER.roleID eq 'US'}">
@@ -60,7 +54,7 @@
                                 <a href="logout" class="nav-link text-decoration-none p-2" id="item">Đăng xuất</a>
                             </div>
                         </c:if>
-                        <c:if test="${empty sessionScope.USER}"><div><a href="login.jsp" class="btn_contact">Đăng nhập</a></div>
+                        <c:if test="${empty sessionScope.USER}"><div><a href="login.jsp" class="btn_contact">ĐĂNG NHẬP</a></div>
                         </c:if>
                     </div>
                 </div>
