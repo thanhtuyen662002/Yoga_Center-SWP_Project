@@ -70,7 +70,7 @@ public class CoursesDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "SELECT courseID, name, description FROM Courses";
+                String sql = "SELECT courseID, name, description FROM Courses WHERE status = 1";
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
 
