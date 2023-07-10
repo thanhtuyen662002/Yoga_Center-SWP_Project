@@ -71,6 +71,11 @@ public class EventDTO {
         this.status = status;
     }
 
+    public EventDTO(int eventID, float discount) {
+        this.eventID = eventID;
+        this.discount = discount;
+    }
+
 
     public int getEventID() {
         return eventID;

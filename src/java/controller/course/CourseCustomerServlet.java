@@ -1,6 +1,5 @@
 package controller.course;
 
-
 import model.dao.CoursesDAO;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -49,26 +48,27 @@ public class CourseCustomerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String error = (String) request.getAttribute("ERROR");
-            request.setAttribute("ERROR", error);
-            
             String message = (String) request.getAttribute("Message");
             request.setAttribute("message", message);
-            
+
             CoursesDAO dao = new CoursesDAO();
             EventDAO Edao = new EventDAO();
-              
+            String eventID = "";
+
             String id = request.getParameter("id");
             String ID = request.getParameter("ID");
-            
+            eventID = Edao.getEventByCourseID(id);
+            if (eventID != null && ID == null) {
+                request.setAttribute("d", Edao.getEventByID(eventID));
+            } else {
+                EventDTO discount = Edao.getEventByID(ID);
+                request.setAttribute("d", discount);
+            }
             CoursesDTO list = dao.getCourseDetail(id);
             int price = (int) list.getPrice();
             request.setAttribute("price", price);
             request.setAttribute("c", list);
-            
-            EventDTO discount = Edao.getEventByID(ID);
-            request.setAttribute("d", discount);
-            
+
             CoursesDTO course = dao.getCourses(id);
             List<CoursesDTO> time = dao.getTime();
             List<CoursesDTO> timeToCome = dao.getTimeToCome();
@@ -76,7 +76,7 @@ public class CourseCustomerServlet extends HttpServlet {
             request.setAttribute("time", time);
             request.setAttribute("timeToCome", timeToCome);
             List<FeedbackDTO> feedbackList = FeedbackDAO.getFeedbackByCourseID(id);
-            request.setAttribute("feedbackList", feedbackList);                   
+            request.setAttribute("feedbackList", feedbackList);
             request.getRequestDispatcher("view.customer/courseDetail.jsp").forward(request, response);
         } catch (SQLException | ClassNotFoundException ex) {
         }

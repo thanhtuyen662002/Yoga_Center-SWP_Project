@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model.dao;
 
 import java.sql.Connection;
@@ -17,10 +12,6 @@ import model.dto.EventDTO;
 import model.dto.CoursesDTO;
 import utils.DBUtils;
 
-/**
- *
- * @author nguye
- */
 public class EventDAO {
 
     private static final String SHOW = "Select e.*,c.name FROM Event as e\n"
@@ -356,10 +347,11 @@ public class EventDAO {
     }
 
     public static void main(String[] args) throws SQLException {
-        List<EventDTO> list = EventDAO.getCusEvent();
-        for (EventDTO event : list) {
-            System.out.println(event);
-        }
+        EventDAO dao = new EventDAO();
+//        EventDTO list = dao.getEventByCourseID("62");
+        EventDTO list = dao.getEventByID("2");
+            System.out.println(list);
+        
     }
 
     public static ArrayList<EventDTO> getCusEvent() throws SQLException {
@@ -418,7 +410,8 @@ public class EventDAO {
             if (conn != null) {
                 conn.close();
             }
-        } return false;
+        }
+        return false;
     }
 
     public boolean checkDayStart() throws SQLException {
@@ -574,4 +567,32 @@ public class EventDAO {
         }
         return false;
     }
+
+    public String getEventByCourseID(String courseID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        String eventID = "";
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT eventID FROM Event WHERE status = 1 AND courseID = " + courseID;
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    return eventID = Integer.toString(rs.getInt("eventID"));
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return eventID;
+    }
+
 }

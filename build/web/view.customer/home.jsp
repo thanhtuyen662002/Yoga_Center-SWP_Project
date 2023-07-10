@@ -113,7 +113,12 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </h3>
+                                <c:if test="${c.price > 0}">
                                 <p>1 Tháng</p>
+                                </c:if>
+                                <c:if test="${c.price == 0}">
+                                <p>1 Tuần</p>
+                                </c:if>
                             </div>
                             <div class="plan-content-list">
                                 <ul>
