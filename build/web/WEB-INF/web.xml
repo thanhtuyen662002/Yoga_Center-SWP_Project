@@ -180,4 +180,8 @@
     <welcome-file-list>
         <welcome-file>homeCustomer</welcome-file>
     </welcome-file-list>
+    <context-param>
+        <param-name>javax.servlet.jsp.jstl.fmt.locale</param-name>
+        <param-value>vi_VN</param-value>
+    </context-param>
 </web-app>
