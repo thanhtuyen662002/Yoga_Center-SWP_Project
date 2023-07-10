@@ -111,6 +111,7 @@ body {
   transition: 0.3s;
   font-weight: bold;
   font-size: 16px;
+  text-decoration: none;
 }
 
 .btn_contact:hover {
