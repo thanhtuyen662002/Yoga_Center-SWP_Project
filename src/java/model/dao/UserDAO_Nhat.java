@@ -83,7 +83,7 @@ public class UserDAO_Nhat extends DBUtils {
         try {
             String sql = "SELECT *\n"
                     + "  FROM [User]\n"
-                    + "  where role = 'TC'";
+                    + "  where role = 'ST'";
             PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
