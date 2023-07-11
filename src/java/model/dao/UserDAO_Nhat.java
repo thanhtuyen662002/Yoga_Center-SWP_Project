@@ -108,7 +108,7 @@ public class UserDAO_Nhat extends DBUtils {
             int count = 1;
 
             textSearch = "%" + textSearch + "%";
-            sql += "\n Where (phone like ? or [name] like ?)  and role = 'TC'\n";
+            sql += "\n Where (phone like ? or [name] like ?)  and role = 'ST'\n";
             setter.put(count, textSearch);
             count++;
             setter.put(count, textSearch);
@@ -153,7 +153,7 @@ public class UserDAO_Nhat extends DBUtils {
             int count = 1;
 
             textSearch = "%" + textSearch + "%";
-            sql += "\n Where (phone like ? or [name] like ?) and role = 'TC'\n";
+            sql += "\n Where (phone like ? or [name] like ?) and role = 'ST'\n";
             setter.put(count, textSearch);
             count++;
             setter.put(count, textSearch);
