@@ -96,6 +96,11 @@ public class LoginServlet extends HttpServlet {
                         session.setAttribute("STAFF", user);
                         response.sendRedirect("courses");
                         break;
+                    case "SV":
+                        session.setAttribute("ROLE", "SV");
+                        session.setAttribute("STAFF", user);
+                        response.sendRedirect("courses");
+                        break;
                     case "TC":
                         session.setAttribute("ROLE", "TC");
                         session.setAttribute("STAFF", user);

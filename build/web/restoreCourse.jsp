@@ -22,7 +22,7 @@
             <c:redirect url="login.jsp"></c:redirect>
         </c:if>
         <div class="wrapper d-flex align-items-stretch">
-            <c:import url="./views/Admin_Nhat/Header_Admin.jsp"/>
+                <c:import url="./view.service/service_header.jsp"/>
             <!-- Page Content  -->
             <div id="content">
                 <div style="text-align: center; color: red; font-size: 2rem;">

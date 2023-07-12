@@ -30,8 +30,8 @@
             <c:if test="${sessionScope.ROLE == 'ST'}">
                 <c:import url="cashier_header.jsp"/>
             </c:if>
-            <c:if test="${sessionScope.ROLE == 'AD'}">
-                <c:import url="./views/Admin_Nhat/Header_Admin.jsp"/>
+            <c:if test="${sessionScope.ROLE == 'SV'}">
+                <c:import url="./view.service/service_header.jsp"/>
             </c:if>
 
             <!-- Page Content  -->
@@ -56,12 +56,13 @@
                 <table id="course" class="display" style="width:100%">
                     <thead>
                         <tr>
-                            <th>TIÊU ĐỀ</th>
-                            <th>NGÀY ĐĂNG</th>
-                            <th>HÌNH ẢNH </th>
+                            <th>Title</th>
+                            <th>Date Submitted</th>
+                            <th>Image</th>
                             <!--<th>NỘI DUNG</th>-->
-                            <th>THỂ LOẠI</th>
-                            <th>Action</th>
+                            <th>Category</th>
+                            <th>Update</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -77,11 +78,10 @@
 
                                     </td>
                                     <td>                             
-                                    <a href="updatenews?newsID=${x.newsID}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
-                                    |
+                                        <a href="updatenews?newsID=${x.newsID}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
+                                </td>
+                                <td>
                                     <a onclick="showMess('${x.newsID}-${x.title}')" href="#"> <i class="fa-sharp fa-solid fa-trash"></i></a>
-
-
                                 </td>
                             </tr>
                         </c:forEach>
@@ -99,9 +99,9 @@
 
             <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
             <script>
-                $(document).ready(function () {
-                    var table = $('#course').DataTable();
-                });
+                                        $(document).ready(function () {
+                                            var table = $('#course').DataTable();
+                                        });
             </script>
             <script>
                 function showMess(param) {

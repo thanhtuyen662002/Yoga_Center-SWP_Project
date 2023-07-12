@@ -23,8 +23,8 @@
             <c:if test="${sessionScope.ROLE == 'ST'}">
                 <c:import url="cashier_header.jsp"/>
             </c:if>
-            <c:if test="${sessionScope.ROLE == 'AD'}">
-                <c:import url="./views/Admin_Nhat/Header_Admin.jsp"/>
+            <c:if test="${sessionScope.ROLE == 'SV'}">
+                <c:import url="./view.service/service_header.jsp"/>
             </c:if>
 
             <!-- Page Content  -->
@@ -56,8 +56,9 @@
                             <th>DayStart</th>
                             <th>DayEnd</th>
                             <th>Image</th>
-                                <c:if test="${sessionScope.ROLE == 'AD'}">
-                                <th>Action</th>
+                                <c:if test="${sessionScope.ROLE == 'SV'}">
+                                <th>Update</th>
+                                <th>Delete</th>
                                 </c:if>
                         </tr>
                     </thead>
@@ -71,12 +72,12 @@
                                 <td>${e.daystart}</td>
                                 <td>${e.dayend}</td>
                                 <td class="event-img"><img src="data:image;base64,${e.data}" /></td>
-                                    <c:if test="${sessionScope.ROLE == 'AD'}">
+                                    <c:if test="${sessionScope.ROLE == 'SV'}">
                                     <td id="tool">
                                         <a href="updateEvent?name=${e.eventName}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
-                                        |
+                                    </td>
+                                    <td>
                                         <a href="#" onclick="showMess('${e.eventID} - ${e.eventName}')"><i class="fa-sharp fa-solid fa-trash"></i></a>
-
                                     </td>
                                 </c:if>
                             </tr>

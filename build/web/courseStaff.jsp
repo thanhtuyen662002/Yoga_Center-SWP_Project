@@ -26,8 +26,8 @@
             <c:if test="${sessionScope.ROLE == 'ST'}">
                 <c:import url="cashier_header.jsp"/>
             </c:if>
-            <c:if test="${sessionScope.ROLE == 'AD'}">
-                <c:import url="./views/Admin_Nhat/Header_Admin.jsp"/>
+            <c:if test="${sessionScope.ROLE == 'SV'}">
+                <c:import url="./view.service/service_header.jsp"/>
             </c:if>
             <!-- Page Content  -->
             <div id="content">
@@ -56,8 +56,9 @@
                             <th>Description</th>
                             <th>Image</th>
                             <th>Price</th>
-                                <c:if test="${sessionScope.ROLE == 'AD'}">
-                                <th>Action</th>
+                                <c:if test="${sessionScope.ROLE == 'SV'}">
+                                <th>Update</th>
+                                <th>Delete</th>
                                 </c:if>
                         </tr>
                     </thead>
@@ -74,10 +75,11 @@
                                 <td><div class="table-noidung">${c.description}</div></td>
                                 <td id="table-img"><img src="data:image;base64,${c.courseData}"/></td>
                                 <td><c:out value="${price}"/></td>
-                                <c:if test="${sessionScope.ROLE == 'AD'}">
+                                <c:if test="${sessionScope.ROLE == 'SV'}">
                                     <td id="tool">
-                                        <a href="updateCourse?name=${c.courseName}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
-                                        |
+                                        <a href="updateCourse?name=${c.courseName}" ><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
+                                    </td>
+                                    <td>
                                         <a onclick="showMess('${c.courseName}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
                                     </td>
                                 </c:if>

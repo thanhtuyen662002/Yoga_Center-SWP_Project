@@ -20,8 +20,8 @@
             <c:redirect url="login.jsp"></c:redirect>
         </c:if>
         <div class="wrapper d-flex align-items-stretch">
-            <c:if test="${sessionScope.ROLE == 'AD'}">
-                <c:import url="./views/Admin_Nhat/Header_Admin.jsp"/>
+            <c:if test="${sessionScope.ROLE == 'SV'}">
+                <c:import url="./view.service/service_header.jsp"/>
             </c:if>
 
             <!-- Page Content  -->
