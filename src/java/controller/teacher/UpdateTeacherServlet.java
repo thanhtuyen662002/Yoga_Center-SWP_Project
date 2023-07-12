@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.dao.TeacherDAO;
 import model.dto.UserDTO;
 
-@WebServlet(name = "UpdateTeacherServlet", urlPatterns = {"/updateTeacher"})
+//@WebServlet(name = "UpdateTeacherServlet", urlPatterns = {"/updateTeacher"})
 public class UpdateTeacherServlet extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

@@ -26,6 +26,8 @@
         <title>Khóa Học</title>
     </head>
     <body>
+        <% String Message = (String) request.getAttribute("Message"); %>
+
         <!-- Header -->
         <c:import url="customer_header.jsp"/>
 
@@ -56,8 +58,14 @@
                         </div>
                         <div class="price-detail-rating">
                             <h1>Đánh Giá Khóa Học</h1>
+                <c:if test="${sessionScope.USER.roleID eq 'US'}">
                             <form  action="insertfb" method="Post">
                                 <div class="rating-box">
+                                    <div style="text-align: center; color: red">
+                                        <% if (Message != null) {%>
+                                        <p><%= Message%></p>
+                                        <% }%>
+                                    </div>
                                     <!--                                    <h3 id="notice">Viết bình luận thành công!!!</h3>-->
                                     <h2>Viết Bình Luận ...<i class="fa-solid fa-pen fa-sm"></i></h2>
 
@@ -68,6 +76,7 @@
                                     <button  type="submit">Gửi</button>
                                 </div>
                             </form>
+                                    </c:if>
                             <div class="rating-box-question">
                                 <c:forEach var="feedback" items="${feedbackList}">
                                     <div class="question-card">
@@ -92,9 +101,9 @@
                                     <c:set var="total" value="${c.numberOfMonths * price}"/>
                                     <c:set var="discount" value="${total - (total * persent)}"/>
                                     <c:set var="totalPrice">
-                                        
-                                    <c:set var="vnCurrency" value="₫" />
-                                        
+
+                                        <c:set var="vnCurrency" value="₫" />
+
                                         <fmt:formatNumber type="currency" currencySymbol="${vnCurrency}" value="${total}"/>
                                     </c:set>
                                     <c:set var="discountPrice" >

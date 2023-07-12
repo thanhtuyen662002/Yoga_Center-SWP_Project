@@ -88,6 +88,18 @@
         <servlet-name>HomeRedirect</servlet-name>
         <servlet-class>controller.schedule.HomeRedirect</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListTeacherController</servlet-name>
+        <servlet-class>controller.admin.ListTeacherController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InsertTeacherController</servlet-name>
+        <servlet-class>controller.admin.InsertTeacherController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateTeacherController</servlet-name>
+        <servlet-class>controller.admin.UpdateTeacherController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CoursesServlet</servlet-name>
         <url-pattern>/CoursesServlet</url-pattern>
@@ -171,6 +183,18 @@
     <servlet-mapping>
         <servlet-name>HomeRedirect</servlet-name>
         <url-pattern>/homeRedirect</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListTeacherController</servlet-name>
+        <url-pattern>/listTeacher</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertTeacherController</servlet-name>
+        <url-pattern>/insertTeacher</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateTeacherController</servlet-name>
+        <url-pattern>/updateTeacher</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

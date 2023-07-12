@@ -60,7 +60,7 @@
                         >
                     </li>
                     <li>
-                        <a href="showListTeacher">
+                        <a href="listTeacher">
                             <span class="fa-solid fa-person fa-xl mr-3"></span> Teacher</a>
                     </li>
                     <li >
