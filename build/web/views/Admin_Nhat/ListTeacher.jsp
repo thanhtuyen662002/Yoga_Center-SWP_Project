@@ -91,48 +91,18 @@
         </style>
     </head>
     <body>
-        <!--        <div class="wrapper d-flex align-items-stretch h-100">
-                    <nav id="sidebar">
-                        <div class="img bg-wrap text-center py-2" style="background-image: url(images/bg_1.jpg);">
-                            <div class="user-logo">
-                                <div class="img" style="background-image: url(../../image/logo-yoga.jpg);"></div>
-                                <h3>YOGA CENTER</h3>
-                            </div>
-                        </div>
-                        <ul class="list-unstyled components mb-5">
-                            <li class="active">
-                                <a href="#"><span class="fa-solid fa-book mr-3"></span>Staff</a>
-                            </li>
-                            <li>
-                                <a href="#"><span class="fa fa-gift mr-3"></span> KHUYẾN MÃI</a>
-                            </li>
-                            <li>
-                                <a href="#"><span class="fa-solid fa-calendar-days mr-3"></span> LỊCH DẠY</a>
-                            </li>
-                            <li>
-                                <a href="#"><span class="fa-solid fa-newspaper mr-3"></span> TIN TỨC</a>
-                            </li> 
-                            <li>
-                                <a href="#"><span class="fa-solid fa-people-group mr-3"></span> KHÁCH HÀNG</a>
-                            </li> 
-                            <li>
-                                <a href="#"><span class="fa fa-sign-out mr-3"></span> Đăng Xuất</a>
-                            </li>
-                        </ul>
-        
-                    </nav>-->
         <c:import url="Header_Admin.jsp"/>
         <!-- Page Content  -->
         <div id="content">
             <div>
                 <div class="course-link">
                     <ul>
-                        <li><a href="listStaff">Admin</a></li>
-                        <li><a href="listStaff">List Staff</a></li>
+                        <li><a href="listTeacher">Admin</a></li>
+                        <li><a href="listTeacher">List Teacher</a></li>
                     </ul>
                 </div>
                 <div class="table-name border" style="height: 15%">
-                    <h4>List Staff</h4>
+                    <h4>List Teacher</h4>
                 </div>
             </div>
             <div id="snackbar"></div>
@@ -157,13 +127,13 @@
                     }, 3000);
                 </script>
             </c:if>
-            <form action="listStaff" method="post">
+            <form action="listTeacher" method="post">
                 <input type="hidden" value="create" name="action"/>
                 <div class="text-center pt-2 d-flex w-100 justify-content-end pr-4">
-                    <button class="btn-primary rounded-2 border-0 pr-2 pl-2" style="font-size: 24px">Create Staff</button>
+                    <button class="btn-primary rounded-2 border-0 pr-2 pl-2" style="font-size: 24px">Create Teacher</button>
                 </div>
             </form>
-            <form action="listStaff" method="post">
+            <form action="listTeacher" method="post">
                 <input type="hidden" value="search" name="action"/>
                 <div class="row m-3">
                     <div class="col-6 ">
@@ -219,39 +189,39 @@
                     </thead>
                     <tbody>
 
-                        <c:forEach var="st" items="${listStaff}">
+                        <c:forEach var="tc" items="${listTeacher}">
                             <tr>
-                                <th scope="row">${st.phone}</th>
-                                <td>${st.name}</td>
-                                <td>${st.address}</td>
-                                <td>${st.gender}</td>
+                                <th scope="row">${tc.phone}</th>
+                                <td>${tc.name}</td>
+                                <td>${tc.address}</td>
+                                <td>${tc.gender}</td>
                                 <td>
-                                    <c:if test="${st.status == true}">
-                                        <form action="listStaff" method="post">
+                                    <c:if test="${tc.status == true}">
+                                        <form action="listTeacher" method="post">
                                             <input type="hidden" name="action" value="deactive"/>
-                                            <input type="hidden" name="phone" value="${st.phone}"/>
+                                            <input type="hidden" name="phone" value="${tc.phone}"/>
                                             <button type="submit" class="btn-primary rounded-4 border pr-2 pl-2" style="background-color: white; border-color: greenyellow;color: black">Active</button>
                                         </form>
                                     </c:if>
-                                    <c:if test="${st.status == false}">
-                                        <form action="listStaff" method="post">
+                                    <c:if test="${tc.status == false}">
+                                        <form action="listTeacher" method="post">
                                             <input type="hidden" name="action" value="active"/>
-                                            <input type="hidden" name="phone" value="${st.phone}"/>
+                                            <input type="hidden" name="phone" value="${tc.phone}"/>
                                             <button type="submit" class="btn-primary rounded-4 border pr-2 pl-2" style="background-color: white; border-color: greenyellow;color: black">Deactive</button>
                                         </form>
                                     </c:if>
                                 </td>
                                 <td>
-                                    <form action="updateStaff" method="post">
+                                    <form action="updateTeacher" method="post">
                                         <input type="hidden" name="action" value="view"/>
-                                        <input type="hidden" name="phone" value="${st.phone}"/>
+                                        <input type="hidden" name="phone" value="${tc.phone}"/>
                                         <button class="btn-primary rounded-4 border-0 pr-2 pl-2" style="background-color: grey">View</button>
                                     </form>
                                 </td>
                                 <td>
                                     <form action="listStaff" method="post">
                                         <input type="hidden" name="action" value="delete"/>
-                                        <input type="hidden" name="phone" value="${st.phone}"/>
+                                        <input type="hidden" name="phone" value="${tc.phone}"/>
                                         <button class="btn-primary rounded-4 border-0 pr-2 pl-2" style="background-color: grey" onclick="return confirmSubmit()">Delete</button>
                                     </form>
                                 </td>
@@ -263,7 +233,7 @@
             <div class="d-flex justify-content-center w-100" style="width: 100%">
                 <%--For displaying Previous link except for the 1st page --%>
                 <c:if test="${currentPage != 1}">
-                    <td><a class="a-page" href="listStaff?page=${currentPage - 1}">Previous</a></td>
+                    <td><a class="a-page" href="listTeacher?page=${currentPage - 1}">Previous</a></td>
                 </c:if>
                 <%--For displaying Page numbers. The when condition does not display
                             a link for the current page--%>
@@ -273,18 +243,18 @@
                             <a class="a-page" href="#" style="background-color: white;color: black">${i}</a>
                         </c:when>
                         <c:otherwise>
-                            <a class="a-page" href="listStaff?page=${i}">${i}</a>
+                            <a class="a-page" href="listTeacher?page=${i}">${i}</a>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
 
                 <%--For displaying Next link --%>
                 <c:if test="${currentPage lt noOfPages}">
-                    <a class="a-page" href="listStaff?page=${currentPage + 1}">Next</a>
+                    <a class="a-page" href="listTeacher?page=${currentPage + 1}">Next</a>
                 </c:if>
             </div>
             <div class="text-center w-100 mt-2">
-                <a class="btn-primary rounded-4 border-0 pr-2 pl-2" style="font-size: 24px;background-color: grey" type="submit" href="listStaff">Home</a>
+                <a class="btn-primary rounded-4 border-0 pr-2 pl-2" style="font-size: 24px;background-color: grey" type="submit" href="listTeacher">Home</a>
             </div>
         </div>
 

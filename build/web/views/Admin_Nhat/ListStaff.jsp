@@ -284,7 +284,7 @@
                 </c:if>
             </div>
             <div class="text-center w-100 mt-2">
-                <button class="btn-primary rounded-4 border-0 pr-2 pl-2" style="font-size: 24px;background-color: grey">Home</button>
+                <a class="btn-primary rounded-4 border-0 pr-2 pl-2" style="font-size: 24px;background-color: grey" type="submit" href="listStaff">Home</a>
             </div>
         </div>
 
