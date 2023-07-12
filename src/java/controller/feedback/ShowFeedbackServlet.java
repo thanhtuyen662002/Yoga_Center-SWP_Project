@@ -31,20 +31,29 @@ public class ShowFeedbackServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String message = (String) request.getAttribute("Message");
-            request.setAttribute("message", message);
+            String message = request.getParameter("Message");
+            if (message != null) {
+                request.setAttribute("Message", message);
+            }
+            
 
             CoursesDAO dao = new CoursesDAO();
             EventDAO Edao = new EventDAO();
+            String eventID = "";
 
             String id = request.getParameter("id");
             String ID = request.getParameter("ID");
-
+            eventID = Edao.getEventByCourseID(id);
+            if (eventID != null && ID == null) {
+                request.setAttribute("d", Edao.getEventByID(eventID));
+            } else {
+                EventDTO discount = Edao.getEventByID(ID);
+                request.setAttribute("d", discount);
+            }
             CoursesDTO list = dao.getCourseDetail(id);
+            int price = (int) list.getPrice();
+            request.setAttribute("price", price);
             request.setAttribute("c", list);
-
-            EventDTO discount = Edao.getEventByID(ID);
-            request.setAttribute("d", discount);
 
             CoursesDTO course = dao.getCourses(id);
             List<CoursesDTO> time = dao.getTime();
@@ -58,26 +67,35 @@ public class ShowFeedbackServlet extends HttpServlet {
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(ShowFeedbackServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+        }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             String message = (String) request.getAttribute("Message");
-            request.setAttribute("message", message);
+            if (message != null) {
+                request.setAttribute("Message", message);
+            }
+           
 
             CoursesDAO dao = new CoursesDAO();
             EventDAO Edao = new EventDAO();
+            String eventID = "";
 
             String id = request.getParameter("id");
             String ID = request.getParameter("ID");
-
+            eventID = Edao.getEventByCourseID(id);
+            if (eventID != null && ID == null) {
+                request.setAttribute("d", Edao.getEventByID(eventID));
+            } else {
+                EventDTO discount = Edao.getEventByID(ID);
+                request.setAttribute("d", discount);
+            }
             CoursesDTO list = dao.getCourseDetail(id);
+            int price = (int) list.getPrice();
+            request.setAttribute("price", price);
             request.setAttribute("c", list);
-
-            EventDTO discount = Edao.getEventByID(ID);
-            request.setAttribute("d", discount);
 
             CoursesDTO course = dao.getCourses(id);
             List<CoursesDTO> time = dao.getTime();
