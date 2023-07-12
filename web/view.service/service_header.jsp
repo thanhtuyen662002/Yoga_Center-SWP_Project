@@ -42,52 +42,32 @@
                 </div>
                 <ul class="list-unstyled components mb-5">
                     <li >
-                        <a href="views/Admin_Nhat/DashBoard.jsp"
-                           ><span class="fa-solid fa-chart-line mr-3"></span>Dashboard
-                        </a>
-                    </li>
-
-                    <li >
                         <a href="editProfileAdmin"
                            ><span class="fa-solid fa-pen-to-square mr-3"></span> Edit
                             Profile</a
                         >
                     </li>
-
-                    <li >
-                        <a href="listStaff"
-                           ><span class="fa-solid fa-person fa-xl mr-3"></span> Staff</a
-                        >
-                    </li>
-                    <li>
-                        <a href="showListTeacher">
-                            <span class="fa-solid fa-person fa-xl mr-3"></span> Teacher</a>
-                    </li>
-                    <li >
-                        <a href="listScheduleAdmin"
-                           ><span class="fa-solid fa-calendar-days mr-3"></span> Schedule</a
-                        >
-                    </li>
-                    <li onmouseover="showDropdown('showclass')" onmouseout="hideDropdown('showclass')">
-                        <a href="mainController?action=showclass"><span class="fa-solid fa-people-group mr-3"></span> LỚP HỌC</a>
-                        <ul id="showclass" class="dropdown">
-                            <li><a href="createClass">Tạo lớp học</a></li>
-                            <li><a href="showDeleteClass">Lớp học đã xóa</a></li>
+                    <li onmouseover="showDropdown('courses')" onmouseout="hideDropdown('courses')">
+                        <a href="mainController?action=courses"><span class="fa-solid fa-book mr-3"></span> KHÓA HỌC</a>
+                        <ul id="courses" class="dropdown">
+                            <li><a href="insertCourse.jsp">Thêm khóa học</a></li>
+                            <li><a href="getDelete">Khóa học đã xóa</a></li>
                         </ul>
                     </li>
-                    <li onmouseover="showDropdown('showclub')" onmouseout="hideDropdown('showclub')">
-                        <a href="mainController?action=club"><span class="fa-solid fa-house-chimney mr-3"></span> CÂU LẠC BỘ</a>
-                        <ul id="showclub" class="dropdown">
-                            <li><a href="insertClub">Tạo câu lạc bộ</a></li>
-                            <li><a href="showDeleteClub">Câu lạc bộ đã xóa</a></li>
+                    <li onmouseover="showDropdown('event')" onmouseout="hideDropdown('event')">
+                        <a href="mainController?action=event"><span class="fa-solid fa-tag mr-3"></span> KHUYẾN MÃI</a>
+                        <ul id="event" class="dropdown">
+                            <li><a href="insertEvent">Thêm khuyến mãi</a></li>
+                            <li><a href="pendingevent">Khuyến mãi đã xóa</a></li>
                         </ul>
                     </li>
-                    <li onmouseover="showDropdown('learner')" onmouseout="hideDropdown('learner')">
-                        <a href="mainController?action=learner"><span class="fa-solid fa-user-graduate mr-3"></span> HỌC VIÊN</a>
-                    </li>                 
-                    <li onmouseover="showDropdown('bill')" onmouseout="hideDropdown('bill')">
-                        <a href="mainController?action=bill"><span class="fa-solid fa-money-bill-1-wave mr-3"></span> HÓA ĐƠN</a>
-                    </li> 
+                    <li onmouseover="showDropdown('news')" onmouseout="hideDropdown('news')">
+                        <a href="mainController?action=news"><span class="fa-solid fa-newspaper mr-3"></span> TIN TỨC</a>
+                        <ul id="news" class="dropdown">
+                            <li><a href="insertnews">Thêm tin tức</a></li>
+                            <li><a href="pendingnews">Tin tức đã xóa</a></li>
+                        </ul>
+                    </li>
                     <li >
                         <a href="logout"><span class="fa fa-sign-out mr-3"></span> Logout</a>
                     </li>

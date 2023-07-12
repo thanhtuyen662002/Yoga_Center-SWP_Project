@@ -68,27 +68,6 @@
                            ><span class="fa-solid fa-calendar-days mr-3"></span> Schedule</a
                         >
                     </li>
-                    <li onmouseover="showDropdown('courses')" onmouseout="hideDropdown('courses')">
-                        <a href="mainController?action=courses"><span class="fa-solid fa-book mr-3"></span> KHÓA HỌC</a>
-                        <ul id="courses" class="dropdown">
-                            <li><a href="insertCourse.jsp">Thêm khóa học</a></li>
-                            <li><a href="getDelete">Khóa học đã xóa</a></li>
-                        </ul>
-                    </li>
-                    <li onmouseover="showDropdown('event')" onmouseout="hideDropdown('event')">
-                        <a href="mainController?action=event"><span class="fa-solid fa-tag mr-3"></span> KHUYẾN MÃI</a>
-                        <ul id="event" class="dropdown">
-                            <li><a href="insertEvent">Thêm khuyến mãi</a></li>
-                            <li><a href="pendingevent">Khuyến mãi đã xóa</a></li>
-                        </ul>
-                    </li>
-                    <li onmouseover="showDropdown('news')" onmouseout="hideDropdown('news')">
-                        <a href="mainController?action=news"><span class="fa-solid fa-newspaper mr-3"></span> TIN TỨC</a>
-                        <ul id="news" class="dropdown">
-                            <li><a href="insertnews">Thêm tin tức</a></li>
-                            <li><a href="pendingnews">Tin tức đã xóa</a></li>
-                        </ul>
-                    </li>
                     <li onmouseover="showDropdown('showclass')" onmouseout="hideDropdown('showclass')">
                         <a href="mainController?action=showclass"><span class="fa-solid fa-people-group mr-3"></span> LỚP HỌC</a>
                         <ul id="showclass" class="dropdown">
