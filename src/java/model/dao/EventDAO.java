@@ -348,8 +348,7 @@ public class EventDAO {
 
     public static void main(String[] args) throws SQLException {
         EventDAO dao = new EventDAO();
-//        EventDTO list = dao.getEventByCourseID("62");
-        EventDTO list = dao.getEventByID("2");
+        int list = dao.getDiscountByCourseID("2");
             System.out.println(list);
         
     }
@@ -593,6 +592,32 @@ public class EventDAO {
             }
         }
         return eventID;
+    }
+    public int getDiscountByCourseID(String courseID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        int discount = 0;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT discount FROM Event WHERE status = 1 AND flag = 1 AND courseID = " + courseID;
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    discount = (int) rs.getFloat("discount");
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return discount;
     }
 
 }
