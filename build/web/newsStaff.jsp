@@ -48,7 +48,7 @@
                     </ul>
                 </div>
                 <div class="course-title" >
-                    <div class="text">WELCOME STAFF</div>
+                    <div class="text">Welcome ${sessionScope.USER.name}</div>
                 </div>
                 <div class="table-name">
                     <h1>BẢNG DỮ LIỆU TIN TỨC</h1>

@@ -36,7 +36,7 @@
                         </ul>
                     </div>
                     <div class="course-title" >
-                        <div class="text">WELCOME STAFF</div>
+                        <div class="text">Welcome ${sessionScope.USER.name}</div>
                         <div class="insert"><a type="submit" name="insert">BACK</a></div>
                     </div>
                     <div class="table-name">
@@ -50,8 +50,7 @@
                             </div>
                             <div class="update-select">
                                 <label>Category</label>
-                                <select name="categoryID">
-                                    <option value="" selected>Chọn Loại Tin Tức</option>
+                                <select name="categoryID">        
                                     <option value="1">Blog</option>
                                     <option value="2">Product</option>
                                     <option value="3">Other</option>

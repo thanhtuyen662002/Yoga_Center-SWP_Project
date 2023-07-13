@@ -44,7 +44,7 @@
                     </ul>
                 </div>
                 <div class="course-title" >
-                    <div class="text">WELCOME STAFF</div>
+                    <div class="text">Welcome ${sessionScope.USER.name}</div>
                     <div class="insert"><a type="submit" name="insert" href="guest">BACK</a></div>
                 </div>
                 <div class="table-name">
@@ -54,11 +54,11 @@
                     <div class="update-box">
                         <div class="update-title">
                             <label for="title">Full Name</label>
-                            <input type="text" name="fullName" value="${g.fullName}"/>
+                            <input type="text" required = "required" name="fullName" value="${g.fullName}"/>
                         </div>
                         <div class="update-cate">
                             <label for="cate">Phone Number</label>
-                            <input type="text" name="phone" value="${g.phone}"/>
+                            <input type="text" required = "required" name="phone" value="${g.phone}"/>
                         </div>
                         <div class="update-cate">
                             <label for="cate">Password</label>
@@ -66,7 +66,7 @@
                         </div>
                         <div class="update-cate">
                             <label for="cate">Address</label>
-                            <input type="text" name="address" value="${g.address}"/>
+                            <input type="text" required = "required" name="address" value="${g.address}"/>
                         </div>
                         <div class="update-cate">
                             <label for="cate">Gender</label>

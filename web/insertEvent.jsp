@@ -33,7 +33,7 @@
                 </div>
                 </form>
                 <div class="course-title" >
-                    <div class="text">WELCOME STAFF</div>
+                    <div class="text">Welcome ${sessionScope.USER.name}</div>
                     <div class="insert"><a class="btn-back" type="button" style="margin-left: 0px;border-radius: 5px;border: none" onclick="goBack()">Back</a></div>                   
                 </div>
                 <div class="table-name">
