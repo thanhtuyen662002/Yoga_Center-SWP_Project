@@ -25,12 +25,12 @@
                 <div class="course-link">
                     <ul>
                         <li><a href="listStaff">Admin</a></li>
-                        <li><a href="listTeacher">List Teacher</a></li>
-                        <li><a href="updateTeacher">View Teacher</a></li>
+                        <li><a href="listService">List Teacher</a></li>
+                        <li><a href="updateService">View Teacher</a></li>
                     </ul>
                 </div>
                 <div class="table-name border" style="height: 15%">
-                    <h4>Update Teacher</h4>
+                    <h4>Update Service</h4>
                 </div>
             </div>
             <div class="text-center pt-2 d-flex w-100 justify-content-end pr-4">
@@ -42,35 +42,35 @@
                         <span id="error-fullname" class="error-message" style="color: red;">${msgError}</span>
                     </c:if>
                 </div> 
-                <form action="updateTeacher" method="post" style="padding-right: 30%">
+                <form action="updateService" method="post" style="padding-right: 30%">
                     <div class="mb-3 row" >  
                         <label for="inputPassword" class="col-sm-2 col-form-label">Phone<i style="color: red">*</i></label>
                         <div class="col-sm-10">
-                            <input type="tel" class="form-control" oninput="validatePhone()" maxlength="10" id="input-phone" placeholder="Enter Phone" name="phone" value="${tc.phone}" required readonly>
+                            <input type="tel" class="form-control" oninput="validatePhone()" maxlength="10" id="input-phone" placeholder="Enter Phone" name="phone" value="${sv.phone}" required readonly>
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Full Name<i style="color: red">*</i></label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" oninput="validateFullName()" id="input-fullname" placeholder="Enter full name" name="fullName" value="${tc.name}" required>
+                            <input type="text" class="form-control" oninput="validateFullName()" id="input-fullname" placeholder="Enter full name" name="fullName" value="${sv.name}" required>
                         </div>
                         <span id="error-fullname" class="error-message" style="color: red;"></span>
                     </div>
                     <div class="mb-3 row">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Address</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputPassword" placeholder="Enter address" name="address" value="${tc.address}" required>
+                            <input type="text" class="form-control" id="inputPassword" placeholder="Enter address" name="address" value="${sv.address}" required>
                         </div>
                     </div>
                     <div class="row">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Gender</label>
                         <div class="col-sm-10">
                             <input type="radio" name="gender" value="Male" 
-                                   <c:if test="${tc.gender.trim() eq 'Male'}">checked</c:if>
+                                   <c:if test="${sv.gender.trim() eq 'Male'}">checked</c:if>
 
                                        /> Male
                                    <input type="radio" name="gender" value="FeMale"
-                                   <c:if test="${tc.gender.trim() eq 'FeMale'}">
+                                   <c:if test="${sv.gender.trim() eq 'FeMale'}">
                                        checked
                                    </c:if>
                                    /> FeMale
@@ -80,11 +80,11 @@
                         <label for="inputPassword" class="col-sm-2 col-form-label">Status</label>
                         <div class="col-sm-10">
                             <input type="radio" name="status" value="true" 
-                                   <c:if test="${tc.status == true}"></c:if>
+                                   <c:if test="${sv.status == true}"></c:if>
                                        checked
                                        /> Active
                                    <input type="radio" name="status" value="false"
-                                   <c:if test="${tc.status == false}">
+                                   <c:if test="${sv.status == false}">
                                        checked
                                    </c:if>
                                    /> Deactive
@@ -97,9 +97,9 @@
                 <input type="hidden" name="action" value="update"/>
                 <button class="btn-primary rounded-4 border-0 pr-2 pl-2 mr-2" id="btn-submit" style="font-size: 24px;background-color: grey">Update</button>
                 </form>
-                <form action="listTeacher" method="post">
+                <form action="listService" method="post">
                     <input type="hidden" name="action" value="delete"/>
-                    <input type="hidden" name="phone" value="${tc.phone}"/>
+                    <input type="hidden" name="phone" value="${sv.phone}"/>
                     <button class="btn-primary rounded-4 border-0 pr-2 pl-2" id="btn-submit" style="font-size: 24px;background-color: grey" onclick="return confirmSubmit()">Delete</button>
                 </form>
             </div>

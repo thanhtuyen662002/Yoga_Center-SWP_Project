@@ -100,6 +100,18 @@
         <servlet-name>UpdateTeacherController</servlet-name>
         <servlet-class>controller.admin.UpdateTeacherController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InsertServiceContrller</servlet-name>
+        <servlet-class>controller.admin.InsertServiceContrller</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListServiceContrller</servlet-name>
+        <servlet-class>controller.admin.ListServiceContrller</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateServiceContrller</servlet-name>
+        <servlet-class>controller.admin.UpdateServiceContrller</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CoursesServlet</servlet-name>
         <url-pattern>/CoursesServlet</url-pattern>
@@ -195,6 +207,18 @@
     <servlet-mapping>
         <servlet-name>UpdateTeacherController</servlet-name>
         <url-pattern>/updateTeacher</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertServiceContrller</servlet-name>
+        <url-pattern>/insertService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListServiceContrller</servlet-name>
+        <url-pattern>/listService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateServiceContrller</servlet-name>
+        <url-pattern>/updateService</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

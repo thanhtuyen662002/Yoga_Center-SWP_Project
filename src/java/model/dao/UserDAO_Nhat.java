@@ -121,6 +121,28 @@ public class UserDAO_Nhat extends DBUtils {
         }
         return list;
     }
+    
+    public ArrayList<UserDTO> getAllService() {
+        ArrayList<UserDTO> list = new ArrayList<>();
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM [User]\n"
+                    + "  where role = 'SV'";
+            PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                list.add(new UserDTO(rs.getString("phone"),
+                        rs.getString("name"),
+                        rs.getString("address"),
+                        rs.getString("gender"),
+                        rs.getString("role"),
+                        rs.getBoolean("status")));
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ClassSlotDAO_Nhat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
 
     public int getTotalRecords(String gender, String status, String textSearch) {
         try {
@@ -339,6 +361,63 @@ public class UserDAO_Nhat extends DBUtils {
         }
         return list;
     }
+    
+    public ArrayList<UserDTO> getAllService(int offset, int recordsPerPage,
+            String gender, String status, String textSearch) {
+        ArrayList<UserDTO> list = new ArrayList<>();
+        try {
+
+            HashMap<Integer, Object> setter = new HashMap<>();
+            String sql = "Select * from [User]";
+            int count = 1;
+
+            textSearch = "%" + textSearch + "%";
+            sql += "\n Where (phone like ? or [name] like ?) and role = 'SV'\n";
+            setter.put(count, textSearch);
+            count++;
+            setter.put(count, textSearch);
+            count++;
+
+            if (!gender.equalsIgnoreCase("All")) {
+                sql += " and gender = ?\n";
+                setter.put(count, gender);
+                count++;
+            }
+
+            if (!status.equalsIgnoreCase("All")) {
+                sql += " and status = ?\n";
+                setter.put(count, Boolean.valueOf(status));
+                count++;
+            }
+
+            sql += " order by phone ASC\n"
+                    + "offset ? ROW\n"
+                    + "FETCH Next ? Rows only";
+            setter.put(count, offset);
+            count++;
+            setter.put(count, recordsPerPage);
+
+            PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
+            for (Map.Entry<Integer, Object> entry : setter.entrySet()) {
+                stm.setObject(entry.getKey(), entry.getValue());
+            }
+
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                list.add(new UserDTO(rs.getString("phone"),
+                        rs.getString("name"),
+                        rs.getString("address"),
+                        rs.getString("gender"),
+                        rs.getString("role"),
+                        rs.getBoolean("status")));
+            }
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(UserDAO_Nhat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
 
     public int getTotalRecords(int classID, String gender, String status, String textSearch) {
         try {
@@ -396,6 +475,49 @@ public class UserDAO_Nhat extends DBUtils {
 
             textSearch = "%" + textSearch + "%";
             sql += "\n Where (phone like ? or [name] like ?)  and role = 'TC'\n";
+            setter.put(count, textSearch);
+            count++;
+            setter.put(count, textSearch);
+            count++;
+
+            if (!gender.equalsIgnoreCase("All")) {
+                sql += " and gender = ?";
+                setter.put(count, gender);
+                count++;
+            }
+
+            if (!status.equalsIgnoreCase("All")) {
+                sql += " and status = ?";
+                setter.put(count, Boolean.valueOf(status));
+                count++;
+            }
+
+            PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
+            for (Map.Entry<Integer, Object> entry : setter.entrySet()) {
+                stm.setObject(entry.getKey(), entry.getValue());
+            }
+
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("total");
+            }
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(UserDAO_Nhat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+    }
+    
+    public int getTotalRecordsSV(String gender, String status, String textSearch) {
+        try {
+
+            HashMap<Integer, Object> setter = new HashMap<>();
+            String sql = "Select Count(*) as 'total' from [User]";
+            int count = 1;
+
+            textSearch = "%" + textSearch + "%";
+            sql += "\n Where (phone like ? or [name] like ?)  and role = 'SV'\n";
             setter.put(count, textSearch);
             count++;
             setter.put(count, textSearch);

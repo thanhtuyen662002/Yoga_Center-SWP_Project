@@ -219,7 +219,7 @@
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="listStaff" method="post">
+                                    <form action="listTeacher" method="post">
                                         <input type="hidden" name="action" value="delete"/>
                                         <input type="hidden" name="phone" value="${tc.phone}"/>
                                         <button class="btn-primary rounded-4 border-0 pr-2 pl-2" style="background-color: grey" onclick="return confirmSubmit()">Delete</button>
