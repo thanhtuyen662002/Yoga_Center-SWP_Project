@@ -97,7 +97,7 @@
                 <input type="hidden" name="action" value="update"/>
                 <button class="btn-primary rounded-4 border-0 pr-2 pl-2 mr-2" id="btn-submit" style="font-size: 24px;background-color: grey">Update</button>
                 </form>
-                <form action="listStaff" method="post">
+                <form action="listTeacher" method="post">
                     <input type="hidden" name="action" value="delete"/>
                     <input type="hidden" name="phone" value="${tc.phone}"/>
                     <button class="btn-primary rounded-4 border-0 pr-2 pl-2" id="btn-submit" style="font-size: 24px;background-color: grey" onclick="return confirmSubmit()">Delete</button>

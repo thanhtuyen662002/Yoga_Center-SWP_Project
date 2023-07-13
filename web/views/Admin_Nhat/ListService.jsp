@@ -97,12 +97,12 @@
             <div>
                 <div class="course-link">
                     <ul>
-                        <li><a href="listTeacher">Admin</a></li>
-                        <li><a href="listTeacher">List Teacher</a></li>
+                        <li><a href="listStaff">Admin</a></li>
+                        <li><a href="listService">List Service</a></li>
                     </ul>
                 </div>
                 <div class="table-name border" style="height: 15%">
-                    <h4>List Teacher</h4>
+                    <h4>List Service</h4>
                 </div>
             </div>
             <div id="snackbar"></div>
@@ -127,13 +127,13 @@
                     }, 3000);
                 </script>
             </c:if>
-            <form action="listTeacher" method="post">
+            <form action="listService" method="post">
                 <input type="hidden" value="create" name="action"/>
                 <div class="text-center pt-2 d-flex w-100 justify-content-end pr-4">
-                    <button class="btn-primary rounded-2 border-0 pr-2 pl-2" style="font-size: 24px">Create Teacher</button>
+                    <button class="btn-primary rounded-2 border-0 pr-2 pl-2" style="font-size: 24px">Create Service</button>
                 </div>
             </form>
-            <form action="listTeacher" method="post">
+            <form action="listService" method="post">
                 <input type="hidden" value="search" name="action"/>
                 <div class="row m-3">
                     <div class="col-6 ">
@@ -189,39 +189,39 @@
                     </thead>
                     <tbody>
 
-                        <c:forEach var="tc" items="${listTeacher}">
+                        <c:forEach var="sv" items="${listService}">
                             <tr>
-                                <th scope="row">${tc.phone}</th>
-                                <td>${tc.name}</td>
-                                <td>${tc.address}</td>
-                                <td>${tc.gender}</td>
+                                <th scope="row">${sv.phone}</th>
+                                <td>${sv.name}</td>
+                                <td>${sv.address}</td>
+                                <td>${sv.gender}</td>
                                 <td>
-                                    <c:if test="${tc.status == true}">
-                                        <form action="listTeacher" method="post">
+                                    <c:if test="${sv.status == true}">
+                                        <form action="listService" method="post">
                                             <input type="hidden" name="action" value="deactive"/>
-                                            <input type="hidden" name="phone" value="${tc.phone}"/>
+                                            <input type="hidden" name="phone" value="${sv.phone}"/>
                                             <button type="submit" class="btn-primary rounded-4 border pr-2 pl-2" style="background-color: white; border-color: greenyellow;color: black">Active</button>
                                         </form>
                                     </c:if>
-                                    <c:if test="${tc.status == false}">
-                                        <form action="listTeacher" method="post">
+                                    <c:if test="${sv.status == false}">
+                                        <form action="listService" method="post">
                                             <input type="hidden" name="action" value="active"/>
-                                            <input type="hidden" name="phone" value="${tc.phone}"/>
+                                            <input type="hidden" name="phone" value="${sv.phone}"/>
                                             <button type="submit" class="btn-primary rounded-4 border pr-2 pl-2" style="background-color: white; border-color: greenyellow;color: black">Deactive</button>
                                         </form>
                                     </c:if>
                                 </td>
                                 <td>
-                                    <form action="updateTeacher" method="post">
+                                    <form action="updateService" method="post">
                                         <input type="hidden" name="action" value="view"/>
-                                        <input type="hidden" name="phone" value="${tc.phone}"/>
+                                        <input type="hidden" name="phone" value="${sv.phone}"/>
                                         <button class="btn-primary rounded-4 border-0 pr-2 pl-2" style="background-color: grey">View</button>
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="listTeacher" method="post">
+                                    <form action="listService" method="post">
                                         <input type="hidden" name="action" value="delete"/>
-                                        <input type="hidden" name="phone" value="${tc.phone}"/>
+                                        <input type="hidden" name="phone" value="${sv.phone}"/>
                                         <button class="btn-primary rounded-4 border-0 pr-2 pl-2" style="background-color: grey" onclick="return confirmSubmit()">Delete</button>
                                     </form>
                                 </td>
@@ -233,7 +233,7 @@
             <div class="d-flex justify-content-center w-100" style="width: 100%">
                 <%--For displaying Previous link except for the 1st page --%>
                 <c:if test="${currentPage != 1}">
-                    <td><a class="a-page" href="listTeacher?page=${currentPage - 1}">Previous</a></td>
+                    <td><a class="a-page" href="listService?page=${currentPage - 1}">Previous</a></td>
                 </c:if>
                 <%--For displaying Page numbers. The when condition does not display
                             a link for the current page--%>
@@ -243,18 +243,18 @@
                             <a class="a-page" href="#" style="background-color: white;color: black">${i}</a>
                         </c:when>
                         <c:otherwise>
-                            <a class="a-page" href="listTeacher?page=${i}">${i}</a>
+                            <a class="a-page" href="listService?page=${i}">${i}</a>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
 
                 <%--For displaying Next link --%>
                 <c:if test="${currentPage lt noOfPages}">
-                    <a class="a-page" href="listTeacher?page=${currentPage + 1}">Next</a>
+                    <a class="a-page" href="listService?page=${currentPage + 1}">Next</a>
                 </c:if>
             </div>
             <div class="text-center w-100 mt-2">
-                <a class="btn-primary rounded-4 border-0 pr-2 pl-2" style="font-size: 24px;background-color: grey" type="submit" href="listTeacher">Home</a>
+                <a class="btn-primary rounded-4 border-0 pr-2 pl-2" style="font-size: 24px;background-color: grey" type="submit" href="listService">Home</a>
             </div>
         </div>
 

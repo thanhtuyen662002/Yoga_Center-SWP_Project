@@ -68,11 +68,25 @@
                             <span class="fa-solid fa-person fa-xl mr-3"></span>Service Manager</a>
                     </li>
                     <li >
+                        <a href="listService"
+                           ><span class="fa-solid fa-person fa-xl mr-3"></span> Service</a
+                        >
+                    </li>
+                    <li >
                         <a href="listScheduleAdmin"
                            ><span class="fa-solid fa-calendar-days mr-3"></span> Schedule</a
                         >
                     </li>
-                    <li onmouseover="showDropdown('showclass')" onclick="hideDropdown('showclass')">
+
+                    <li onmouseover="showDropdown('listStaff')" onmouseout="hideDropdown('listStaff')">
+                        <a><span class="fa-solid fa-people-group mr-3"></span> Human</a>
+                        <ul id="showhuman" class="dropdown">
+                            <li><a href="listStaff">Danh sách staff</a></li>
+                            <li><a href="listTeacher">Danh sách Teacher</a></li>
+                            <li><a href="listService">Danh sách Service</a></li>
+                        </ul>
+                    </li>
+                    <li onmouseover="showDropdown('showclass')" onmouseout="hideDropdown('showclass')">
                         <a href="mainController?action=showclass"><span class="fa-solid fa-people-group mr-3"></span> LỚP HỌC</a>
                         <ul id="showclass" class="dropdown">
                             <li><a href="createClass">Tạo lớp học</a></li>

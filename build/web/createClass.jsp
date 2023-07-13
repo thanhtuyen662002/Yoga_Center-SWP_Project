@@ -33,7 +33,7 @@
                     </div>
                 </form>
                 <div class="course-title" >
-                    <div class="text">WELCOME STAFF</div>
+                    <div class="text">Welcome ${sessionScope.USER.name}</div>
                     <div class="insert"><a class="btn-back" type="button" style="margin-left: 0px;border-radius: 5px;border: none" onclick="goBack()">Back</a></div>                   
                 </div>
                 <div class="table-name">
@@ -43,7 +43,7 @@
                     <div class="update-box">
                         <div class="update-cate">
                             <label for="cate">Class Name</label>
-                            <input type="text" name="className"/>
+                            <input type="text" required = "required" name="className"/>
                         </div>                       
                         <div class="update-cate">
                             <label for="cate">PT Name</label>
@@ -55,7 +55,7 @@
                         </div>
                         <div class="update-cate">
                             <label for="cate">Capacity</label>
-                            <input type="number" name="capacity"/>
+                            <input type="number" required = "required" name="capacity"/>
                         </div>
                         <div class="update-cate">
                             <label for="cate">Course Name</label>

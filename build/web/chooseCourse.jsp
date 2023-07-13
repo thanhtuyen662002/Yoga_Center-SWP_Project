@@ -41,7 +41,7 @@
                     </ul>
                 </div>
                 <div class="course-title" >
-                    <div class="text">WELCOME STAFF</div>
+                    <div class="text">Welcome ${sessionScope.USER.name}</div>
                     <div class="insert"><a type="submit" name="insert" href="guest">BACK</a></div>
                 </div>
                 <div class="table-name">
