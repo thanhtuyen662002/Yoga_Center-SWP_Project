@@ -23,15 +23,15 @@
             <c:if test="${sessionScope.ROLE == 'SV'}">
                 <c:import url="./view.service/service_header.jsp"/>
             </c:if>
-     
+
             <!-- Page Content  -->
             <div id="content">
-                
+
                 <!--<div class="alert alert-danger" role="alert" style="text-align: center">-->
                 <div style="text-align: center; color: red; font-size: 2rem;">
-                    <% if( ErrorMessage != null) { %>
-                    <p><%= ErrorMessage %></p>
-                    <% } %>
+                    <% if (ErrorMessage != null) {%>
+                    <p><%= ErrorMessage%></p>
+                    <% }%>
                 </div>
                 <div class="course-link">
                     <ul>
@@ -48,40 +48,61 @@
                 <div class="table-name">
                     <h1>THÊM KHÓA HỌC</h1>
                 </div>
-                <form enctype="multipart/form-data" action="insertCourse" method="POST">
-                <div class="update-box">
-                    <div class="update-title">
-                        <label for="title">Name</label>
-                        <input type="text" name="name" />
-                    </div>
-                    <div class="update-cate">
-                        <label for="cate">Price</label>
-                        <input type="number" name="price" />
-                    </div>
-                    <div class="update-cate">
-                        <label for="cate">Number of months</label>
-                        <input type="number" name="numberOfMonths" />
-                    </div>
-                    <div class="update-img">
-                        <label for="cate">Image</label>
-                        <input type="file" name="image" id="fileInput" onchange="previewImage(event)" accept="image/*" />
-                        <div class="file-img">
-                            <img id="preview" src="#" alt="Preview"/>
+                <form  id="myForm" enctype="multipart/form-data" action="insertCourse" method="POST">
+                    <div class="update-box">
+                        <div class="update-title">
+                            <label for="title">Name</label>
+                            <input type="text" required = "required" name="name" />
+                        </div>
+                        <div class="update-cate">
+                            <label for="cate">Price</label>
+                            <input type="number" required = "required" name="price" />
+                        </div>
+                        <div class="update-cate">
+                            <label for="cate">Number of months</label>
+                            <input type="number" required = "required" name="numberOfMonths" />
+                        </div>
+                        <div class="update-img">
+                            <label for="cate">Image</label>
+                            <input type="file" name="image" required = "required" id="fileInput" onchange="previewImage(event)" accept="image/*" />
+                            <div class="file-img">
+                                <img id="preview" src="#" alt="Preview"/>
+                            </div>
+                        </div>
+                        <div class="update-content-wrapper">
+                            <div class="update-content">
+                                <label for="">Describe</label>
+                                <textarea id="myTextarea" required = "required" name="description"></textarea>
+                            </div>
+                            <div id="errorMsg" style="display:none; color:red;">Vui lòng nhập mô tả khóa học</div>
                         </div>
                     </div>
-                    <div class="update-content-wrapper">
-                        <div class="update-content">
-                            <label for="">Describe</label>
-                            <textarea id="myTextarea" name="description"></textarea>
-                        </div>
+                    <div class="table-button">
+                        <button type="submit">INSERT</button>
                     </div>
-                </div>
-                <div class="table-button">
-                    <button type="submit">INSERT</button>
-                </div>
                 </form>
             </div>
-                
+            <script>
+                var myTextarea = document.getElementById("myTextarea");
+                var errorMsg = document.getElementById("errorMsg");
+
+                myTextarea.addEventListener("input", function () {
+                    if (myTextarea.value.trim() === "") {
+                        errorMsg.style.display = "block";
+                    } else {
+                        errorMsg.style.display = "none";
+                    }
+                });
+                var myForm = document.getElementById("myForm");
+                myForm.addEventListener("submit", function (event) {
+                    if (myTextarea.value.trim() === "") {
+                        errorMsg.style.display = "block";
+                        event.preventDefault();
+                    } else {
+                        errorMsg.style.display = "none";
+                    }
+                });
+            </script>
             <script>
                 function previewImage(event) {
                     var reader = new FileReader();
