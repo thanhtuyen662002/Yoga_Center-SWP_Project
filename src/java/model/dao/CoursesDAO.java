@@ -356,11 +356,11 @@ public class CoursesDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "SELECT courseID, name FROM Courses WHERE courseID=" + id;
+                String sql = "SELECT courseID, name, data FROM Courses WHERE courseID=" + id;
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
-                    return new CoursesDTO(rs.getInt("courseID"), rs.getString("name"));
+                    return new CoursesDTO(rs.getString("name"), rs.getInt("courseID"), rs.getString("data"));
                 }
             }
         } catch (Exception e) {

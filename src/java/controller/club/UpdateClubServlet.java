@@ -72,9 +72,9 @@ public class UpdateClubServlet extends HttpServlet {
                 
                 boolean checkUpdate = updateClub(clubID, clubName, address, district, hotline, dataImage);
                 if (checkUpdate) {
-                    message = "Cập nhật câu lạc bộ thành công!";
+                    message = "Update club " + clubName + " successfully!";
                 } else {
-                    message = "Cập nhật câu lạc bộ thất bại!";
+                    message = "Can't update club " + clubName + " !";
                 }
             }
         } catch (Exception e) {

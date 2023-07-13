@@ -47,19 +47,27 @@ public class CreateClass extends HttpServlet {
         String courseID = request.getParameter("course");
 
         ClassDAO dao = new ClassDAO();
+        String message = "";
+        boolean check;
         try {
             ClassDTO list = dao.getNumberOfMonths(courseID);
             int totalSession = list.getNumberOfMonths() * 8;
-            boolean check = dao.saveClassToDatabase(courseID, ptPhone, className, description, totalSession, capacity);
+            check = dao.checkNameClass(className);
             if (check) {
-                System.out.println("Insert class success!");
-                response.sendRedirect("showclass");
+                message = "Name of class alredy exist!";
             } else {
-                System.out.println("Can't insert class!");
+                check = dao.saveClassToDatabase(courseID, ptPhone, className, description, totalSession, capacity);
+                if (check) {
+                    message = "Insert class success!";
+
+                } else {
+                    message = "Can't insert class!";
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(CreateClass.class.getName()).log(Level.SEVERE, null, ex);
         }
+        response.sendRedirect("showclass?message=" + message);
     }
 
     @Override

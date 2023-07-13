@@ -59,10 +59,10 @@
                             <th>Title</th>
                             <th>Date Submitted</th>
                             <th>Image</th>
-                            <!--<th>NỘI DUNG</th>-->
                             <th>Category</th>
-                            <th>Update</th>
-                            <th>Delete</th>
+                            <c:if test="${sessionScope.ROLE == 'SV'}">
+                            <th>Action</th>
+                            </c:if>
                         </tr>
                     </thead>
                     <tbody>
@@ -76,13 +76,14 @@
                                     <c:if test="${x.categoryID == 2}"> Product</c:if>
                                     <c:if test="${x.categoryID == 3}"> Other</c:if>
 
-                                    </td>
-                                    <td>                             
-                                        <a href="updatenews?newsID=${x.newsID}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
                                 </td>
-                                <td>
+                                <c:if test="${sessionScope.ROLE == 'SV'}">
+                                <td>                             
+                                    <a href="updatenews?newsID=${x.newsID}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
+                                    |
                                     <a onclick="showMess('${x.newsID}-${x.title}')" href="#"> <i class="fa-sharp fa-solid fa-trash"></i></a>
                                 </td>
+                                </c:if>
                             </tr>
                         </c:forEach>
                         </tfoot>

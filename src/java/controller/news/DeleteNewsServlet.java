@@ -1,13 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package controller.news;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,28 +17,13 @@ import model.dao.NewsDAO;
  */
 @WebServlet(name = "DeleteNewsServlet", urlPatterns = {"/deleteNews"})
 public class DeleteNewsServlet extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
     } 
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
-     * Handles the HTTP <code>GET</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
@@ -55,9 +33,9 @@ public class DeleteNewsServlet extends HttpServlet {
             NewsDAO dao = new NewsDAO();
             boolean checkDelete = dao.softDeleteNews(newsID);
             if (checkDelete) {
-                message = "Xóa tin tức thành công!";
+                message = "Delete news successfully!";
             } else {
-                message = "Xóa tin tức thất bại!";
+                message = "Can't delete news!";
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DeleteNewsServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -66,23 +44,12 @@ public class DeleteNewsServlet extends HttpServlet {
         request.getRequestDispatcher("news").forward(request, response);
     } 
 
-    /** 
-     * Handles the HTTP <code>POST</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /** 
-     * Returns a short description of the servlet.
-* @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";

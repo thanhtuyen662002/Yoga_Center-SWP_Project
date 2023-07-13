@@ -54,11 +54,11 @@ public class UpdateClassServlet extends HttpServlet {
             
             boolean checkUpdateClass = updateClass(classID, className, ptPhone, courseID, description, totalSession, capacity);
             if (checkUpdateClass) {
-                message = "Cập nhật lớp học thành công!";
+                message = "Update class successfully!";
                 request.setAttribute("message", message);
                 request.getRequestDispatcher("showclass").forward(request, response);
             } else {
-                message = "Cập nhật lớp học thất bại!";
+                message = "Can't update class! Please try again!";
                 request.setAttribute("message", message);
                 request.getRequestDispatcher("showclass").forward(request, response);
             }

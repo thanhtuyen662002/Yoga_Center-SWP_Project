@@ -26,7 +26,7 @@
             <c:redirect url="login.jsp"></c:redirect>
         </c:if>
         <div class="wrapper d-flex align-items-stretch">
-                <c:import url="./view.service/service_header.jsp"/>
+            <c:import url="./view.service/service_header.jsp"/>
             <!-- Page Content  -->
             <div id="content">
                 <div style="text-align: center; color: red; font-size: 2rem;">
@@ -59,18 +59,18 @@
                         </div>
                         <div class="update-cate">
                             <label for="cate">Price</label>
-                            <input type="number" name="price" value="${c.price}"/>
+                            <input type="number" name="price" value="${price}" id="price-course"/>
                         </div>
                         <div class="update-cate">
                             <label for="cate">Number of months</label>
-                            <input type="number" name="numberOfMonths" value="${c.numberOfMonths}"/>
+                            <input type="number" name="numberOfMonths" value="${c.numberOfMonths}" id="months-input"/>
                         </div>
                         <div class="update-img">
                             <label for="cate">Image</label>
-                            <input type="file" name="image" id="fileInput"
-                                   onchange="previewImage(event)" accept="image/*" />
+                            <input type="file" name="image" id="fileInput" onchange="previewImage(event)" accept="image/*" />
+                            
                             <div class="file-img">
-                                <img id="preview" src="data:image;base64,${c.courseData}" alt="Preview"/>
+                                <img id="preview" src="data:image;base64,${c.courseData}" alt="Preview" />
                             </div>
                         </div>
                         <div class="update-content-wrapper">
@@ -86,6 +86,44 @@
                 </form>
 
             </div>
+            <script>
+                const priceInput = document.getElementById('price-course');
+                const monthsInput = document.getElementById('months-input');
+
+                priceInput.step = '100000';
+                priceInput.max = '100000000';
+
+                monthsInput.step = '0';
+                monthsInput.max = '36';
+
+                priceInput.addEventListener('input', function () {
+                    let value = this.value;
+
+                    if (value < 0) {
+                        alert("Please enter a non-negative value!");
+                        this.value = "";
+                    }
+                    if (value > 100000000) {
+                        alert("Max value is 100.000.000đ!");
+                        this.value = "";
+                    }
+                });
+
+                monthsInput.addEventListener('input', function () {
+                    let value = this.value;
+
+                    if (value < 0) {
+                        alert("Please enter a non-negative value!");
+                        this.value = "";
+                    }
+                    if (value > 36) {
+                        alert("Max value is 36!");
+                        this.value = "";
+                    }
+                });
+            </script>
+
+
             <script>
                 function previewImage(event) {
                     var reader = new FileReader();

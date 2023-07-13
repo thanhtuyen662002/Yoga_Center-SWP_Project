@@ -75,6 +75,11 @@ public class CoursesDTO implements Serializable {
         this.courseID = courseID;
         this.courseName = courseName;
     }
+    public CoursesDTO(String courseName, int courseID,  String courseData) {
+        this.courseID = courseID;
+        this.courseName = courseName;
+        this.courseData = courseData;
+    }
 
     public CoursesDTO(int slotID, Time startTime, Time endTime) {
         this.slotID = slotID;

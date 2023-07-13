@@ -70,9 +70,9 @@ public class InsertClubServlet extends HttpServlet {
 
                 boolean checkUpdate = insertClub(clubName, address, district, hotline, dataImage);
                 if (checkUpdate) {
-                    message = "Tạo câu lạc bộ thành công!";
+                    message = "Create club " + clubName + " successfully!";
                 } else {
-                    message = "Tạo câu lạc bộ thất bại!";
+                    message = "Can't create club " + clubName + " !";
                 }
             }
         } catch (Exception e) {

@@ -56,9 +56,11 @@
                         <div class="update-course">
                             <label for="cate">Course Name</label>
                             <select name="Course">
-                                <% for (CoursesDTO course : courses) {%>
-                                <option value="<%= course.getCourseID()%>"><%= course.getCourseName()%></option>
-                                <% }%>
+                                <c:forEach var="c" items="${list}">
+                                    <option value="${c.courseID}" 
+                                            <c:if test="${c.courseID == e.courseID}">selected=""</c:if>
+                                            >${c.courseName}</option>
+                                </c:forEach>
                             </select>
                         </div>
                         <div class="update-cate">
@@ -73,6 +75,7 @@
                         <div class="update-img">
                             <label for="cate">Image</label>
                             <input type="file" name="image" id="fileInput" onchange="previewImage(event)" accept="image/*" />
+                           
                             <div class="file-img" >
                                 <img id="preview"  src="data:image;base64,${e.data}" alt="Preview"/>
                                 <input type="text" hidden="" name="id" value="${e.eventID}" />

@@ -391,6 +391,33 @@ public class ClassDAO {
         return false;
     }
 
+    public boolean checkNameClass(String className) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT name FROM Class\n"
+                        + "WHERE name = '" + className + "'";
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
+    }
+
     public boolean deleteClass(String name) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;

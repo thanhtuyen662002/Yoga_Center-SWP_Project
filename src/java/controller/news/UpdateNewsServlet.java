@@ -1,9 +1,3 @@
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */ 
 package controller.news;
 
 import java.sql.Connection;
@@ -68,32 +62,39 @@ public class UpdateNewsServlet extends HttpServlet {
         String content = new String(request.getParameter("content").getBytes("ISO-8859-1"), "UTF-8");
         String message = "";
 
-        // Xử lý yêu cầu tải lên ảnh
-        List<Part> fileParts = new ArrayList<>();
-        for (Part part : request.getParts()) {
-            String partName = new String(part.getName().getBytes("iso-8859-1"), "UTF-8");
-            if (partName.startsWith("image")) {
-                fileParts.add(part);
+        try {
+            NewsDAO dao = new NewsDAO();
+            NewsDTO news = dao.getNewsByID(newsID);
+            String dataRoot = news.getData();
+            // Xử lý yêu cầu tải lên ảnh
+            List<Part> fileParts = new ArrayList<>();
+            for (Part part : request.getParts()) {
+                String partName = new String(part.getName().getBytes("iso-8859-1"), "UTF-8");
+                if (partName.startsWith("image")) {
+                    fileParts.add(part);
+                }
             }
-        }
 
-        for (Part filePart : fileParts) {
-            try {
+            for (Part filePart : fileParts) {
                 String filename = filePart.getSubmittedFileName();
                 InputStream fileContent = filePart.getInputStream();
 
                 InputStream content1 = fileContent;
                 byte[] imageBytes = IOUtils.toByteArray(content1);
                 String data = Base64.getEncoder().encodeToString(imageBytes);
+                if (data == null || data.equals("")) {
+                    data = dataRoot;
+                }
                 boolean checkUpdate = updateNews(newsID, title, filename, categoryID, content, data);
                 if (checkUpdate) {
-                    message = "Cập nhật tin tức thành công!";
+                    message = "Update news successfully!";
                 } else {
-                    message = "Cập nhật tin tức thất bại!";
+                    message = "Can't update news!";
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(UpdateNewsServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateNewsServlet.class.getName()).log(Level.SEVERE, null, ex);
+
         }
         request.setAttribute("message", message);
         request.getRequestDispatcher("news").forward(request, response);
@@ -121,7 +122,8 @@ public class UpdateNewsServlet extends HttpServlet {
             if (conn != null) {
                 conn.close();
             }
-        } return false;
+        }
+        return false;
     }
 
     @Override

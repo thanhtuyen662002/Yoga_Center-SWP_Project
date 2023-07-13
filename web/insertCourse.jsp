@@ -56,11 +56,11 @@
                         </div>
                         <div class="update-cate">
                             <label for="cate">Price</label>
-                            <input type="number" required = "required" name="price" />
+                            <input type="number" required="required" name="price" id="price-course" />
                         </div>
                         <div class="update-cate">
                             <label for="cate">Number of months</label>
-                            <input type="number" required = "required" name="numberOfMonths" />
+                            <input type="number" required = "required" name="numberOfMonths" id="months-input"/>
                         </div>
                         <div class="update-img">
                             <label for="cate">Image</label>
@@ -82,6 +82,43 @@
                     </div>
                 </form>
             </div>
+            <script>
+                const priceInput = document.getElementById('price-course');
+                const monthsInput = document.getElementById('months-input');
+
+                priceInput.step = '100000';
+                priceInput.max = '100000000';
+
+                monthsInput.step = '0';
+                monthsInput.max = '36';
+
+                priceInput.addEventListener('input', function () {
+                    let value = this.value;
+
+                    if (value < 0) {
+                        alert("Please enter a non-negative value!");
+                        this.value = "";
+                    }
+                    if (value > 100000000) {
+                        alert("Max value is 100.000.000đ!");
+                        this.value = "";
+                    }
+                });
+
+                monthsInput.addEventListener('input', function () {
+                    let value = this.value;
+
+                    if (value < 0) {
+                        alert("Please enter a non-negative value!");
+                        this.value = "";
+                    }
+                    if (value > 36) {
+                        alert("Max value is 36!");
+                        this.value = "";
+                    }
+                });
+            </script>
+
             <script>
                 var myTextarea = document.getElementById("myTextarea");
                 var errorMsg = document.getElementById("errorMsg");

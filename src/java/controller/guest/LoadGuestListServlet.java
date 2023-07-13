@@ -66,15 +66,14 @@ public class LoadGuestListServlet extends HttpServlet {
                             boolean checkInsertInToBill = bdao.insertUserToBill(phone);
                             if (checkInsertInToBill) {
                                 System.out.println("Thêm vào hóa đơn thành công!");
+                                request.setAttribute("message", "Create account successfully!");
                                 request.getRequestDispatcher("guest").forward(request, response);
                             } else {
                                 System.out.println("Không thể thêm vào hóa đơn!");
-                                request.setAttribute("message", "Không thể thêm vào hóa đơn!");
                                 request.getRequestDispatcher("guest").forward(request, response);
                             }
                         } else {
                             System.out.println("Không thể cập nhật status trong bảng UserCourse!");
-                            request.setAttribute("message", "Không thể cập nhật status trong bảng UserCourse!");
                             request.getRequestDispatcher("guest").forward(request, response);
                         }
                     } else {
@@ -85,16 +84,16 @@ public class LoadGuestListServlet extends HttpServlet {
                         request.setAttribute("gender", gender);
                         List<CoursesDTO> list = CoursesDAO.getAllCourses();
                         request.setAttribute("listC", list);
-                        request.setAttribute("ErrorMessage", "Hãy chọn 1 khóa học!");
+                        request.setAttribute("ErrorMessage", "Please choose a course!");
                         request.getRequestDispatcher("chooseCourse.jsp").forward(request, response);
                     }
                 } else {
                     System.out.println("Thêm khách hàng thất bại!");
-                    request.setAttribute("message", "Thêm khách hàng thất bại!");
+                    request.setAttribute("message", "Can't create account!");
                     request.getRequestDispatcher("guest").forward(request, response);
                 }
             } else {
-                String error = "Số điện thoại đã tồn tại!";
+                String error = "This number phone " + phone + " alredy exist!";
                 request.setAttribute("message", error);
                 request.getRequestDispatcher("guest").forward(request, response);
             }

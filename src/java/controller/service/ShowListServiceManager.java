@@ -31,7 +31,7 @@ public class ShowListServiceManager extends HttpServlet {
             ServiceDAO dao = new ServiceDAO();
             List<UserDTO> list = dao.getListServiceManager();
             request.setAttribute("list", list);
-            request.getRequestDispatcher("").forward(request, response);
+            request.getRequestDispatcher("serviceStaff.jsp").forward(request, response);
         } catch (Exception e) {
         }
     }

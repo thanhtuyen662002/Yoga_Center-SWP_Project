@@ -43,7 +43,7 @@ public class AddGuestToBillServlet extends HttpServlet {
         try {
             check = dao.insertUserCourse1(phone, courseID);
             if (check) {
-                message = "Tạo tài khoản thành công!";
+                message = "Create account successfully!";
                 check = bdao.insertUserToBill(phone);
                 if (check) {
                     System.out.println("Sử dụng dữ liệu điền form! Thêm vào hóa đơn thành công!");
@@ -62,7 +62,7 @@ public class AddGuestToBillServlet extends HttpServlet {
                     }
                 }
             } else {
-                message = "Tạo tài khoản thất bại!";
+                message = "Can't create account!";
             }
         } catch (Exception e) {
         } 

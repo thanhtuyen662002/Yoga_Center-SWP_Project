@@ -38,9 +38,9 @@ public class RestoreCourseServlet extends HttpServlet {
         try {
             boolean checkRestore = dao.restoreCourses(name);
             if (checkRestore) {
-                message = "Khôi phục khóa học thành công!";
+                message = "Successful recovery!";
             } else {
-                message = "Khôi phục khóa học thất bại!";
+                message = "Can't recovery!";
             }
         } catch (SQLException ex) {
             Logger.getLogger(RestoreCourseServlet.class.getName()).log(Level.SEVERE, null, ex);

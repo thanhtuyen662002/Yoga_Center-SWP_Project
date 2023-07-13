@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller.event;
 
 import java.io.IOException;
@@ -35,15 +30,6 @@ import utils.DBUtils;
         maxRequestSize=1024*1024*50)
 public class InsertEventServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -52,15 +38,6 @@ public class InsertEventServlet extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -68,14 +45,6 @@ public class InsertEventServlet extends HttpServlet {
         request.getRequestDispatcher("insertEvent.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -111,14 +80,14 @@ public class InsertEventServlet extends HttpServlet {
                     String data = Base64.getEncoder().encodeToString(imageBytes);
                     boolean checkInsert = saveInforToDatabase(ename, eCourseName, ediscount, edaystart, edayend, fileName, data);
                     if (checkInsert) {
-                        message = "Thêm sự kiện thành công!";
+                        message = "Create event " + ename + " successfully!";
                     } else {
-                        message = "Thêm sự kiện thất bại!";
+                        message = "Can't create event " + ename + " !";
                     }
                 }
 
             } else {
-                message = "Tên sự kiện đã tồn tại!";
+                message = "This event name " + ename + " alredy exist!";
             }
 
         } catch (SQLException ex) {

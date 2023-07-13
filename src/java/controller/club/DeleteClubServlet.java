@@ -29,9 +29,9 @@ public class DeleteClubServlet extends HttpServlet {
             ClubDAO dao = new ClubDAO();
             boolean checkDelete = dao.deleteClub(clubID);
             if (checkDelete) {
-                message = "Xóa câu lạc bộ thành công!";
+                message = "Delete club successfully!";
             } else {
-                message = "Xóa câu lạc bộ thất bại!";
+                message = "Can't delete club!";
             }
         } catch (SQLException ex) {
             Logger.getLogger(DeleteClubServlet.class.getName()).log(Level.SEVERE, null, ex);

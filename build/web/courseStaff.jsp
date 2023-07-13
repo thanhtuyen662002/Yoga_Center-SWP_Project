@@ -56,10 +56,9 @@
                             <th>Description</th>
                             <th>Image</th>
                             <th>Price</th>
-                                <c:if test="${sessionScope.ROLE == 'SV'}">
-                                <th>Update</th>
-                                <th>Delete</th>
-                                </c:if>
+                            <c:if test="${sessionScope.ROLE == 'SV'}">
+                            <th>Action</th>
+                            </c:if>
                         </tr>
                     </thead>
                     <tbody>
@@ -78,8 +77,7 @@
                                 <c:if test="${sessionScope.ROLE == 'SV'}">
                                     <td id="tool">
                                         <a href="updateCourse?name=${c.courseName}" ><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
-                                    </td>
-                                    <td>
+                                        |
                                         <a onclick="showMess('${c.courseName}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
                                     </td>
                                 </c:if>
@@ -98,9 +96,9 @@
             <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
             <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
             <script>
-                $(document).ready(function () {
-                    $('#course').DataTable();
-                });
+                                            $(document).ready(function () {
+                                                $('#course').DataTable();
+                                            });
             </script>
 
     </body>

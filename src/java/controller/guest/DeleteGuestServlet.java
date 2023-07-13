@@ -6,7 +6,6 @@
 package controller.guest;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,9 +37,9 @@ public class DeleteGuestServlet extends HttpServlet {
             GuestDAO dao = new GuestDAO();
             boolean check = dao.deleteGuest(id);
             if (check) {
-                message = "Xóa khách hàng thành công!";
+                message = "Delete account successfully!";
             } else {
-                message = "Không thể xóa khách hàng";
+                message = "Can't delete account!";
             }
             request.setAttribute("ErrorMessage", message);
             request.getRequestDispatcher("guest").forward(request, response);

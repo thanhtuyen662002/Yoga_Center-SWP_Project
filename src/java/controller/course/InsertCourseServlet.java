@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller.course;
 
 import java.io.IOException;
@@ -37,15 +32,6 @@ import utils.DBUtils;
         maxRequestSize = 1024 * 1024 * 50)
 public class InsertCourseServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -53,15 +39,6 @@ public class InsertCourseServlet extends HttpServlet {
 
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -102,11 +79,11 @@ public class InsertCourseServlet extends HttpServlet {
                     boolean checkInsertCourse = saveInforToDatabase(name, price, des, numberOfMonths, fileName, data);
                     if (checkInsertCourse) {
                         saveCourseTypeToDatabase(name);
-                        message = "Thêm khóa học thành công!";
+                        message = "Create course " + name + " successfully!";
                     }
                 }
             } else {
-                message = "Tên khóa học đã tồn tại!";
+                message = "Course name " + name + " alredy exist!";
             }
         } catch (SQLException ex) {
             response.getWriter().println("ERROR: " + ex.getMessage());

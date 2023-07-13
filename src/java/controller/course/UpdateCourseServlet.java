@@ -32,7 +32,7 @@ import utils.DBUtils;
 @WebServlet(name = "UpdateCourseServlet", urlPatterns = {"/updateCourse"})
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2,
         maxFileSize = 1024 * 1024 * 10,
-        maxRequestSize = 1024 * 1024 * 50)
+        maxRequestSize = 1024 * 1024 * 10)
 public class UpdateCourseServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -49,7 +49,9 @@ public class UpdateCourseServlet extends HttpServlet {
 //            String name = new String(request.getParameter("name").getBytes("ISO-8859-1"), "UTF-8");
             CoursesDAO dao = new CoursesDAO();
             CoursesDTO course = dao.getCourseByName(name);
+            int price = (int) course.getPrice();
             request.setAttribute("c", course);
+            request.setAttribute("price", price);
             request.getRequestDispatcher("updateCourse.jsp").forward(request, response);
         } catch (SQLException ex) {
         }
@@ -62,9 +64,9 @@ public class UpdateCourseServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         String id = request.getParameter("id");
+        String des = new String(request.getParameter("description").getBytes("ISO-8859-1"), "UTF-8");
         String name = new String(request.getParameter("name").getBytes("ISO-8859-1"), "UTF-8");
         String price = new String(request.getParameter("price").getBytes("ISO-8859-1"), "UTF-8");
-        String des = new String(request.getParameter("description").getBytes("ISO-8859-1"), "UTF-8");
         String numberOfMonths = request.getParameter("numberOfMonths");
         String message = "";
         boolean checkUpdate;
@@ -76,6 +78,7 @@ public class UpdateCourseServlet extends HttpServlet {
             boolean checkDuplicate2 = dao.checkCourseDuplicate2(id, name);
             CoursesDTO course = dao.getCourses(id);
             String rootCourseName = course.getCourseName();
+            String dataRoot = course.getCourseData();
 
             if (checkDuplicate) {
                 if (checkDuplicate2) {
@@ -94,15 +97,18 @@ public class UpdateCourseServlet extends HttpServlet {
                         InputStream content = fileContent;
                         byte[] imageBytes = IOUtils.toByteArray(content);
                         String data = Base64.getEncoder().encodeToString(imageBytes);
+                        if (data == null || data.equals("")) {
+                            data = dataRoot;
+                        }
                         checkUpdate = updateInforToDatabase(name, price, des, numberOfMonths, fileName, data, id);
                         if (checkUpdate) {
-                            message = "Cập nhật khóa học thành công!";
+                            message = "Update course " + name + " successfully!";
                         } else {
-                            message = "Cập nhật khóa học thất bại!";
+                            message = "Can't update course " + name + " !";
                         }
                     }
                 } else {
-                    message = "Tên khóa học đã tồn tại! Vui lòng cập nhật khóa học " + rootCourseName + " bằng tên khác!";
+                    message = "Course name allredy exist! Please update course name " + rootCourseName + " by other name!";
                 }
 
             } else {
@@ -121,11 +127,14 @@ public class UpdateCourseServlet extends HttpServlet {
                     InputStream content = fileContent;
                     byte[] imageBytes = IOUtils.toByteArray(content);
                     String data = Base64.getEncoder().encodeToString(imageBytes);
+                   if (data == null || data.equals("")) {
+                            data = dataRoot;
+                    }
                     checkUpdate = updateInforToDatabase(name, price, des, numberOfMonths, fileName, data, id);
                     if (checkUpdate) {
-                        message = "Cập nhật khóa học thành công!";
+                        message = "Update course " + name + " successfully!";
                     } else {
-                        message = "Cập nhật khóa học thất bại!";
+                        message = "Can't update course " + name + " !";
                     }
                 }
             }

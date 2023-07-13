@@ -56,36 +56,40 @@
 
                     <li >
                         <a href="listStaff"
-                           ><span class="fa-solid fa-person fa-xl mr-3"></span> Staff</a
+                           ><span class="fa-solid fa-person fa-xl mr-3"></span>Staff</a
                         >
                     </li>
                     <li>
                         <a href="listTeacher">
-                            <span class="fa-solid fa-person fa-xl mr-3"></span> Teacher</a>
+                            <span class="fa-solid fa-person fa-xl mr-3"></span>Teacher</a>
+                    </li>
+                    <li>
+                        <a href="showListServiceManager">
+                            <span class="fa-solid fa-person fa-xl mr-3"></span>Service Manager</a>
                     </li>
                     <li >
                         <a href="listScheduleAdmin"
                            ><span class="fa-solid fa-calendar-days mr-3"></span> Schedule</a
                         >
                     </li>
-                    <li onmouseover="showDropdown('showclass')" onmouseout="hideDropdown('showclass')">
+                    <li onmouseover="showDropdown('showclass')" onclick="hideDropdown('showclass')">
                         <a href="mainController?action=showclass"><span class="fa-solid fa-people-group mr-3"></span> LỚP HỌC</a>
                         <ul id="showclass" class="dropdown">
                             <li><a href="createClass">Tạo lớp học</a></li>
                             <li><a href="showDeleteClass">Lớp học đã xóa</a></li>
                         </ul>
                     </li>
-                    <li onmouseover="showDropdown('showclub')" onmouseout="hideDropdown('showclub')">
+                    <li onmouseover="showDropdown('showclub')" onclick="hideDropdown('showclub')">
                         <a href="mainController?action=club"><span class="fa-solid fa-house-chimney mr-3"></span> CÂU LẠC BỘ</a>
                         <ul id="showclub" class="dropdown">
                             <li><a href="insertClub">Tạo câu lạc bộ</a></li>
                             <li><a href="showDeleteClub">Câu lạc bộ đã xóa</a></li>
                         </ul>
                     </li>
-                    <li onmouseover="showDropdown('learner')" onmouseout="hideDropdown('learner')">
+                    <li onmouseover="showDropdown('learner')" onclick="hideDropdown('learner')">
                         <a href="mainController?action=learner"><span class="fa-solid fa-user-graduate mr-3"></span> HỌC VIÊN</a>
                     </li>                 
-                    <li onmouseover="showDropdown('bill')" onmouseout="hideDropdown('bill')">
+                    <li onmouseover="showDropdown('bill')" onclick="hideDropdown('bill')">
                         <a href="mainController?action=bill"><span class="fa-solid fa-money-bill-1-wave mr-3"></span> HÓA ĐƠN</a>
                     </li> 
                     <li >

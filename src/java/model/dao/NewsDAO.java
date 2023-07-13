@@ -67,14 +67,6 @@ public class NewsDAO {
         return list;
     }
     
-//     public static void main(String[] args) throws NamingException, SQLException, ClassNotFoundException {
-//        NewsDAO dao = new NewsDAO();
-//        ArrayList<NewsDTO> List = dao.g;
-//        for (NewsDTO o : List) {
-//            System.out.println(o);
-//        }
-//    }
-
     public NewsDTO getNewsByID(String id) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;

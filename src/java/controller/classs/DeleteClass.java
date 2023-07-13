@@ -33,19 +33,18 @@ public class DeleteClass extends HttpServlet {
             ClassDAO dao = new ClassDAO();
             check = dao.checkDeleteClass(name);
             if (check) {
-                message = "Không thể xóa! Lớp học còn học viên đang theo học!";
+                message = "Can not delete! The classes still have students attending!";
             } else {
                 check = dao.deleteClass(name);
                 if (check) {
-                    message = "Xóa lớp học thành công!";
+                    message = "Delete class successfully!";
                 } else {
-                    message = "Xóa lớp học thất bại!";
+                    message = "Can't delete class!";
                 }
             }
         } catch (Exception e) {
         }
-        request.setAttribute("message", message);
-        request.getRequestDispatcher("showclass").forward(request, response);
+        response.sendRedirect("showclass?message=" + message);
     }
 
 

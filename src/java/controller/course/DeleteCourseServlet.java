@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller.course;
 
 import java.io.IOException;
@@ -24,15 +19,6 @@ import model.dao.CoursesDAO;
 @WebServlet(name = "DeleteCourseServlet", urlPatterns = {"/deleteCourse"})
 public class DeleteCourseServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
@@ -41,15 +27,6 @@ public class DeleteCourseServlet extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -59,10 +36,10 @@ public class DeleteCourseServlet extends HttpServlet {
             boolean check = dao.checkDelete(name);
             if(!check){
                 dao.deleteCourses(name);
-                request.setAttribute("message", "Xóa khóa học thành công!");
+                request.setAttribute("message", "Delete course " + name + " successfully!");
                 request.getRequestDispatcher("courses").forward(request, response);
             } else {
-                request.setAttribute("message", "Khóa học " + name + " vẫn còn người đang theo học!");
+                request.setAttribute("message", "Course name " + name + " still have students attending!");
                 request.getRequestDispatcher("courses").forward(request, response);
             }
             

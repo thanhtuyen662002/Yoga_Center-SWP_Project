@@ -56,15 +56,15 @@ public class InsertFeedbackServlet extends HttpServlet {
             if (checkusercourse) {
                 insertFeedback = dao.insertFeedback(cusPhone, courseID, comment, dayup);
                 if (insertFeedback) {
-                    message = "Đánh giá của bạn đã được ghi nhận!";
+                    message = "Your review has been sent to us!";
                     System.out.println("Đánh giá của bạn đã được ghi nhận!");
                 } else {
-                    message = "Đánh giá thất bại! Bạn đánh giá khóa học này rồi!";
+                    message = "Review failure! You had rated this course!";
                     System.out.println("Bạn đã gửi đánh giá rồi!");
                 }
             } else {
                 // Nếu người dùng chưa học khóa học này, trả về thông báo lỗi
-                message = "Bạn chưa học khóa học này!";
+                message = "You have not studied this course yet!";
             }
             if (message != null) {
                 request.setAttribute("Message", message);

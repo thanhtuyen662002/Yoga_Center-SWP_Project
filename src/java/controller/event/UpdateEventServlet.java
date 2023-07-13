@@ -20,7 +20,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import model.dao.CoursesDAO;
 import model.dao.EventDAO;
+import model.dto.CoursesDTO;
 import model.dto.EventDTO;
 import org.apache.commons.io.IOUtils;
 import utils.DBUtils;
@@ -46,9 +48,13 @@ public class UpdateEventServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             String name = request.getParameter("name");
-//            String name = new String(request.getParameter("name").getBytes("ISO-8859-1"), "UTF-8");
+            String courseID = request.getParameter("courseID");
             EventDAO dao = new EventDAO();
             EventDTO event = dao.getEventByName(name);
+            List<CoursesDTO> list = CoursesDAO.getAllCourses();
+            request.setAttribute(name, dao);
+            request.setAttribute("courseID", courseID);
+            request.setAttribute("list", list);
             request.setAttribute("e", event);
             request.getRequestDispatcher("updateEvent.jsp").forward(request, response);
         } catch (SQLException ex) {
@@ -77,6 +83,7 @@ public class UpdateEventServlet extends HttpServlet {
             boolean checkDuplicate2 = dao.checkEventDuplicate2(eventID, eventName);
             EventDTO event = dao.getEventByID(eventID);
             String rootEventName = event.getEventName();
+            String dataRoot = event.getData();
             if (checkDuplicate) {
                 if (checkDuplicate2) {
                     List<Part> fileParts = new ArrayList<>();
@@ -94,15 +101,18 @@ public class UpdateEventServlet extends HttpServlet {
                         InputStream content = fileContent;
                         byte[] imageBytes = IOUtils.toByteArray(content);
                         String data = Base64.getEncoder().encodeToString(imageBytes);
+                        if (data == null || data.equals("")) {
+                            data = dataRoot;
+                        }
                         checkUpdate = updateInforToDatabase(eventID, eventName, courseID, discount, daystart, dayend, fileName, data);
                         if (checkUpdate) {
-                            message = "Cập nhật sự kiện thành công!";
+                            message = "Update event " + eventName + " successfully!";
                         } else {
-                            message = "Cập nhật sự kiện thất bại!";
+                            message = "Can't update event " + eventName + " !";
                         }
                     }
                 } else {
-                    message = "Tên sự kiện " + rootEventName + " đã tồn tại! Vui lòng nhập tên sự kiện khác!";
+                    message = "This event name " + rootEventName + " alredy exist! Please try with other name!";
                 }
 
             } else {
@@ -121,6 +131,9 @@ public class UpdateEventServlet extends HttpServlet {
                     InputStream content = fileContent;
                     byte[] imageBytes = IOUtils.toByteArray(content);
                     String data = Base64.getEncoder().encodeToString(imageBytes);
+                    if (data == null || data.equals("")) {
+                            data = dataRoot;
+                        }
                     checkUpdate = updateInforToDatabase(eventID, eventName, courseID, discount, daystart, dayend, fileName, data);
                     if (checkUpdate) {
                         message = "Cập nhật sự kiện thành công!";

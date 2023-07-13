@@ -25,9 +25,9 @@ public class RestoreClass extends HttpServlet {
             ClassDAO dao = new ClassDAO();
             boolean check = dao.restoreClass(name);
             if (check) {
-                message = "Khôi phục lớp học thành công!";
+                message = "Success recovery!";
             } else {
-                message = "Khôi phục lớp học thất bại!";
+                message = "Can't recovery!";
             }
         } catch (Exception e) {
         }

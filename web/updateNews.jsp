@@ -47,18 +47,32 @@
                         <div class="update-select">
                             <label>Category</label>
                             <select name="categoryID">
+                                <c:if test="${ns.categoryID == '1'}">
+                                <option value="" selected>Chọn Loại Tin Tức</option>
+                                <option value="1" selected="">Blog</option>
+                                <option value="2">Product</option>
+                                <option value="3">Other</option>
+                                </c:if>
+                                <c:if test="${ns.categoryID == '2'}">
+                                <option value="" selected>Chọn Loại Tin Tức</option>
+                                <option value="1">Blog</option>
+                                <option value="2" selected="">Product</option>
+                                <option value="3">Other</option>
+                                </c:if>
+                                <c:if test="${ns.categoryID == '3'}">
                                 <option value="" selected>Chọn Loại Tin Tức</option>
                                 <option value="1">Blog</option>
                                 <option value="2">Product</option>
-                                <option value="3">Other</option>
+                                <option value="3" selected="">Other</option>
+                                </c:if>
                             </select>
                         </div>
 
                         <div class="update-cate">
                             <label>Image</label>
                             <input type="file" name="image" id="fileInput" onchange="previewImage(event)" accept="image/*" />
+                            
                             <div class="file-img">
-
                                 <c:if test="${not empty ns.image}">
                                     <img id="preview" src="data:image;base64,${ns.data}" width="50px" height="50px" alt="Preview">
                                 </c:if>

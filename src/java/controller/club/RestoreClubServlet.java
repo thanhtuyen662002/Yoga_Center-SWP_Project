@@ -30,9 +30,9 @@ public class RestoreClubServlet extends HttpServlet {
             ClubDAO dao = new ClubDAO();
             boolean checkDelete = dao.restoreClub(clubID);
             if (checkDelete) {
-                message = "Khôi phục câu lạc bộ thành công!";
+                message = "Success recovery!";
             } else {
-                message = "Khôi phục câu lạc bộ thất bại!";
+                message = "Can't recovery!";
             }
         } catch (SQLException ex) {
             Logger.getLogger(DeleteClubServlet.class.getName()).log(Level.SEVERE, null, ex);

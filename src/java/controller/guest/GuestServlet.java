@@ -32,6 +32,13 @@ public class GuestServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            String message = "";
+            String error = (String) request.getAttribute("message");
+            request.setAttribute("ErrorMessage", error);
+            message = request.getParameter("message");
+            if (message != null) {
+                request.setAttribute("ErrorMessage", message);
+            }
             GuestDAO dao = new GuestDAO();
             List<GuestDTO> list = dao.getListGuest();
             request.setAttribute("list", list);
@@ -46,8 +53,13 @@ public class GuestServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            String message = "";
             String error = (String) request.getAttribute("message");
             request.setAttribute("ErrorMessage", error);
+            message = request.getParameter("message");
+            if (message != null) {
+                request.setAttribute("ErrorMessage", message);
+            }
             GuestDAO dao = new GuestDAO();
             List<GuestDTO> list = dao.getListGuest();
             request.setAttribute("list", list);

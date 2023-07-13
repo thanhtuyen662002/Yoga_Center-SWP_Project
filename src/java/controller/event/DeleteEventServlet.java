@@ -1,13 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package controller.event;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.dao.EventDAO;
-import model.dao.NewsDAO;
 
 /**
  *
@@ -25,28 +17,13 @@ import model.dao.NewsDAO;
  */
 @WebServlet(name = "DeleteEventServlet", urlPatterns = {"/deleteEvent"})
 public class DeleteEventServlet extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
     } 
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
-     * Handles the HTTP <code>GET</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
@@ -56,9 +33,9 @@ public class DeleteEventServlet extends HttpServlet {
             EventDAO dao = new EventDAO();           
             boolean checkDelete = dao.softDeleteEvent(EventID);
             if (checkDelete) {
-                message = "Xóa sự kiện thành công!";
+                message = "Delete event successfully!";
             } else {
-                message = "Xóa sự kiện thất bại!";
+                message = "Can't delete event!";
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DeleteEventServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -67,13 +44,6 @@ public class DeleteEventServlet extends HttpServlet {
         request.getRequestDispatcher("event").forward(request, response);
     } 
 
-    /** 
-     * Handles the HTTP <code>POST</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
