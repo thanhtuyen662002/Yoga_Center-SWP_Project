@@ -42,7 +42,7 @@
                 </div>
                 <ul class="list-unstyled components mb-5">
                     <li >
-                        <a href="editProfileAdmin"
+                        <a href="editProfileService?phone=${sessionScope.USER.phone}"
                            ><span class="fa-solid fa-pen-to-square mr-3"></span> Edit
                             Profile</a
                         >

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="vi">
     <head>
@@ -27,7 +28,7 @@
     </head>
     <body>
         <c:import url="./view.service/service_header.jsp"/>
-        <!-- Content ? ?ây -->
+        <!-- Content ? ?Ã¢y -->
         <div id="content">
             <div class="container bootstrap snippets bootdey">
                 <h1 class="text-primary">Edit Profile</h1>
@@ -41,7 +42,7 @@
                                 class="avatar img-circle img-thumbnail"
                                 alt="avatar"
                                 />
-                            <h3 style="font-weight: 700;">ADMIN</h3>
+                            <h3 style="font-weight: 700;">SERVICE MANAGER</h3>
                         </div>
                     </div>
 

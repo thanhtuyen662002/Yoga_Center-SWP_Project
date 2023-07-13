@@ -6,12 +6,10 @@
 package model.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -132,6 +130,37 @@ public class BillDAO {
         return list;
     }
 
+    public boolean makeBill(String phone, String courseID, String name, int price) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                LocalDateTime currentTime = LocalDateTime.now();
+                // Tạo đối tượng DateTimeFormatter với định dạng yyyy-MM-dd
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                // Chuyển đổi thành chuỗi theo định dạng yyyy-MM-dd
+                String time = currentTime.format(formatter);
+                String sql = "INSERT INTO Bill (courseID, cusName, cusPhone, price, time)\n"
+                        + "  VALUES (" + courseID + ",N'" + name + "','" + phone 
+                        + "','" + price + "','" + time + "')";
+                ptm = conn.prepareStatement(sql);
+                int row = ptm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+
+        } catch (Exception e) {
+        } finally {
+            if (ptm != null){
+                ptm.close();
+            }
+            if (conn != null){
+                conn.close();
+            }
+        } return false;
+    }
 
     public static void main(String[] args) throws SQLException, ParseException {
         BillDAO dao = new BillDAO();

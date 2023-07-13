@@ -12,7 +12,6 @@ public class UserDTO {
 
     private String phone;
     private String password;
-    private String userlogin;
     private String name;
     private String address;
     private String gender;
@@ -24,16 +23,7 @@ public class UserDTO {
     
     
 
-    public UserDTO(String phone, String password, String userlogin, String name, String address, String gender, String role, boolean status) {
-        this.phone = phone;
-        this.password = password;
-        this.userlogin = userlogin;
-        this.name = name;
-        this.address = address;
-        this.gender = gender;
-        this.roleID = role;
-        this.status = status;
-    }
+
 
     public UserDTO(String phone, String password, String name, String address, String gender, String roleID, boolean status) {
         this.phone = phone;
@@ -81,14 +71,6 @@ public class UserDTO {
         this.password = password;
     }
 
-    public String getUserlogin() {
-        return userlogin;
-    }
-
-    public void setUserlogin(String userlogin) {
-        this.userlogin = userlogin;
-    }
-
     public String getName() {
         return name;
     }
@@ -131,8 +113,10 @@ public class UserDTO {
 
     @Override
     public String toString() {
-        return "User" + "phone=" + phone + ", password=" + password + ", userlogin=" + userlogin + ", name=" + name + ", address=" + address + ", gender=" + gender + ", role=" + roleID + ", status=" + status + '}';
+        return "UserDTO{" + "phone=" + phone + ", password=" + password + ", name=" + name + ", address=" + address + ", gender=" + gender + ", roleID=" + roleID + ", status=" + status + '}';
     }
+
+
 
 
 }
