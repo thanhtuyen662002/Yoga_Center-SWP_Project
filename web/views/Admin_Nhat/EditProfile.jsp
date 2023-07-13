@@ -24,7 +24,7 @@
             href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"
             />
         <link rel="stylesheet" href="./../../css/editProfile.css" />
-        <title>Header</title>
+        <title>Edit Profile</title>
     </head>
     <body>
         <c:import url="Header_Admin.jsp"/>

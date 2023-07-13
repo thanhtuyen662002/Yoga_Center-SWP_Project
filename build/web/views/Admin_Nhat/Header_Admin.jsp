@@ -54,7 +54,7 @@
                         >
                     </li>
 
-                    <li >
+<!--                    <li >
                         <a href="listStaff"
                            ><span class="fa-solid fa-person fa-xl mr-3"></span>Staff</a
                         >
@@ -71,6 +71,14 @@
                         <a href="listService"
                            ><span class="fa-solid fa-person fa-xl mr-3"></span> Service</a
                         >
+                    </li>-->
+                    <li onmouseover="showDropdown('listStaff')" onmouseout="hideDropdown('listStaff')">
+                        <a><span class="fa-solid fa-people-group mr-3"></span>Users</a>
+                        <ul id="listStaff" class="dropdown">
+                            <li><a href="listStaff">Staff</a></li>
+                            <li><a href="listTeacher">Teacher</a></li>
+                            <li><a href="listService">Service</a></li>
+                        </ul>
                     </li>
                     <li >
                         <a href="listScheduleAdmin"
@@ -78,14 +86,6 @@
                         >
                     </li>
 
-                    <li onmouseover="showDropdown('listStaff')" onmouseout="hideDropdown('listStaff')">
-                        <a><span class="fa-solid fa-people-group mr-3"></span> Human</a>
-                        <ul id="showhuman" class="dropdown">
-                            <li><a href="listStaff">Danh sách staff</a></li>
-                            <li><a href="listTeacher">Danh sách Teacher</a></li>
-                            <li><a href="listService">Danh sách Service</a></li>
-                        </ul>
-                    </li>
                     <li onmouseover="showDropdown('showclass')" onmouseout="hideDropdown('showclass')">
                         <a href="mainController?action=showclass"><span class="fa-solid fa-people-group mr-3"></span> LỚP HỌC</a>
                         <ul id="showclass" class="dropdown">

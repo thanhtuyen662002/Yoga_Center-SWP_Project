@@ -36,9 +36,9 @@
                 <li onmouseover="showDropdown('showclass')" onmouseout="hideDropdown('showclass')" class="">
                     <a href="mainController?action=showclass"><span class="fa-solid fa-people-group mr-3"></span> LỚP HỌC</a>
                 </li> 
-                <li>
+<!--                <li>
                     <a href="mainController?action=listSchedule"><span class="fa-solid fa-calendar-days mr-3" ></span> LỊCH DẠY</a>
-                </li>
+                </li>-->
                 <li onmouseover="showDropdown('learner')" onmouseout="hideDropdown('learner')" class="">
                     <a href="mainController?action=learner"><span class="fa-solid fa-user-graduate mr-3"></span> HỌC VIÊN</a>
                 </li> 
