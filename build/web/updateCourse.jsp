@@ -50,12 +50,12 @@
                     <h1>CHỈNH SỬA KHÓA HỌC</h1>
                 </div>
 
-                <form enctype="multipart/form-data" action="updateCourse" method="POST">
+                <form id="myForm" enctype="multipart/form-data" action="updateCourse" method="POST">
                     <input type="text" name="id" value="${c.courseID}" hidden=""/>
                     <div class="update-box">
                         <div class="update-title">
                             <label for="title">Name</label>
-                            <input type="text" name="name" value="${c.courseName}"/>
+                            <input type="text" name="name" value="${c.courseName}" id="name-input" required=""/>
                         </div>
                         <div class="update-cate">
                             <label for="cate">Price</label>
@@ -68,7 +68,7 @@
                         <div class="update-img">
                             <label for="cate">Image</label>
                             <input type="file" name="image" id="fileInput" onchange="previewImage(event)" accept="image/*" />
-                            
+
                             <div class="file-img">
                                 <img id="preview" src="data:image;base64,${c.courseData}" alt="Preview" />
                             </div>
@@ -78,6 +78,7 @@
                                 <label for="">Describe</label>
                                 <textarea id="myTextarea" name="description">${c.description}</textarea>
                             </div>
+                            <div id="errorMsg" style="display:none; color:red;">Please enter description!</div>
                         </div>
                     </div>
                     <div class="table-button">
@@ -89,12 +90,17 @@
             <script>
                 const priceInput = document.getElementById('price-course');
                 const monthsInput = document.getElementById('months-input');
+                const nameInput = document.getElementById('name-input');
+                const myTextarea = document.getElementById("myTextarea");
+                var errorMsg = document.getElementById("errorMsg");
 
                 priceInput.step = '100000';
                 priceInput.max = '100000000';
 
                 monthsInput.step = '0';
                 monthsInput.max = '36';
+
+                const specialCharacters = "!@#$%^&*()_+{}[]|\\:;'<>?,./";
 
                 priceInput.addEventListener('input', function () {
                     let value = this.value;
@@ -121,8 +127,43 @@
                         this.value = "";
                     }
                 });
-            </script>
 
+                nameInput.addEventListener('input', function () {
+                    let value = this.value;
+
+                    if (value.charAt(0).trim() !== value.charAt(0).toUpperCase()) {
+                        alert("The first character shoule be uppercase!");
+                        this.value = "";
+                    }
+                    if (/[!@#$%^&*()_+{}[\]|\\:;'<>?,./]/.test(value)) {
+                        alert("You are not allowed to use special characters to name the course!");
+                        this.value = "";
+                    }
+
+                });
+
+                myTextarea.addEventListener('input', function () {
+                    if (myTextarea.value.trim() === "") {
+                        errorMsg.style.display = "block";
+                    } else {
+                        errorMsg.style.display = "none";
+                    }
+                });
+                var myForm = document.getElementById("myForm");
+                myForm.addEventListener("submit", function (event) {
+                    if (myTextarea.value.trim() === "") {
+                        errorMsg.style.display = "block";
+                        event.preventDefault();
+                    } else {
+                        errorMsg.style.display = "none";
+                    }
+
+                    if (nameInput.value.trim() === "") {
+                        alert("Please input course name!");
+                        event.preventDefault();
+                    }
+                });
+            </script>
 
             <script>
                 function previewImage(event) {

@@ -52,7 +52,7 @@
                     <div class="update-box">
                         <div class="update-title">
                             <label for="title">Name</label>
-                            <input type="text" required = "required" name="name" />
+                            <input type="text" required = "required" name="name" id="name-input"/>
                         </div>
                         <div class="update-cate">
                             <label for="cate">Price</label>
@@ -74,7 +74,7 @@
                                 <label for="">Describe</label>
                                 <textarea id="myTextarea" required = "required" name="description"></textarea>
                             </div>
-                            <div id="errorMsg" style="display:none; color:red;">Vui lòng nhập mô tả khóa học</div>
+                            <div id="errorMsg" style="display:none; color:red;">Please enter description!</div>
                         </div>
                     </div>
                     <div class="table-button">
@@ -85,12 +85,17 @@
             <script>
                 const priceInput = document.getElementById('price-course');
                 const monthsInput = document.getElementById('months-input');
+                const nameInput = document.getElementById('name-input');
+                const myTextarea = document.getElementById("myTextarea");
+                var errorMsg = document.getElementById("errorMsg");
 
                 priceInput.step = '100000';
                 priceInput.max = '100000000';
 
                 monthsInput.step = '0';
                 monthsInput.max = '36';
+
+                const specialCharacters = "!@#$%^&*()_+{}[]|\\:;'<>?,./";
 
                 priceInput.addEventListener('input', function () {
                     let value = this.value;
@@ -103,6 +108,7 @@
                         alert("Max value is 100.000.000đ!");
                         this.value = "";
                     }
+
                 });
 
                 monthsInput.addEventListener('input', function () {
@@ -115,6 +121,49 @@
                     if (value > 36) {
                         alert("Max value is 36!");
                         this.value = "";
+                    }
+                    if (/^0+$/.test(value)) {
+                        this.value = "0";
+                    }
+                    if (value.startsWith('0') && value.length > 1) {
+                        value = value.slice(1);
+                        this.value = value;
+                    }
+                });
+
+                nameInput.addEventListener('input', function () {
+                    let value = this.value;
+
+                    if (value.charAt(0).trim() !== value.charAt(0).toUpperCase()) {
+                        alert("The first character shoule be uppercase!");
+                        this.value = "";
+                    }
+                    if (/[!@#$%^&*()_+{}[\]|\\:;'<>?,./]/.test(value)) {
+                        alert("You are not allowed to use special characters to name the course!");
+                        this.value = "";
+                    }
+
+                });
+
+                myTextarea.addEventListener('input', function () {
+                    if (myTextarea.value.trim() === "") {
+                        errorMsg.style.display = "block";
+                    } else {
+                        errorMsg.style.display = "none";
+                    }
+                });
+                var myForm = document.getElementById("myForm");
+                myForm.addEventListener("submit", function (event) {
+                    if (myTextarea.value.trim() === "") {
+                        errorMsg.style.display = "block";
+                        event.preventDefault();
+                    } else {
+                        errorMsg.style.display = "none";
+                    }
+
+                    if (nameInput.value.trim() === "") {
+                        alert("Please input course name!");
+                        event.preventDefault();
                     }
                 });
             </script>

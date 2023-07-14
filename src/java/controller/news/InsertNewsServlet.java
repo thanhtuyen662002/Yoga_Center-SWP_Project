@@ -59,7 +59,7 @@ public class InsertNewsServlet extends HttpServlet {
         String content = new String(request.getParameter("content").getBytes("ISO-8859-1"), "UTF-8");
         String categoryID = request.getParameter("categoryID");
 
-        String stPhone = "0123456788";
+        String stPhone = request.getParameter("stPhone");
         boolean checkDuplicate;
         String message = "";
         // Xử lý yêu cầu tải lên ảnh

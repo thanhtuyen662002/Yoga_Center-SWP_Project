@@ -54,7 +54,7 @@ public class HomeCusDAO {
         try {
             conn = DBUtils.getConnection();
             if(conn != null){
-                String sql = "SELECT clubID, name FROM Club";
+                String sql = "SELECT clubID, name FROM Club status = 1";
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
                 while (rs.next()) {                    

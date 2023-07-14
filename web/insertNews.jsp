@@ -70,8 +70,9 @@
 
                                     <input type="hidden" name="newsID" value=""/>
                                 </div>
-                                <div id="errorMsg" style="display:none; color:red;">Vui lòng nhập nội dung tin tức</div>
+                                <div id="errorMsg" style="display:none; color:red;">Please enter description!</div>
                             </div>
+                             <input name="stPhone" type="hidden" value="${sessionScope.USER.phone}"/>
                         </div>
                         <div class="table-btn">
                             <!--<a href="#">UPDATE</a>-->
