@@ -76,7 +76,7 @@
                         </div>
                         <div class="update-cate">
                             <label for="cate">Discount</label>
-                            <input type="text" name="Discount" value="${e.discount}" required="required" id="discount-input"/>
+                            <input type="number" name="Discount" value="${e.discount}" required="required" id="discount-input"/>
                         </div>
                     </div>
                     <div class="table-btn">
