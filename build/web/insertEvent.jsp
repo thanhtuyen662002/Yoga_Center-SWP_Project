@@ -48,11 +48,11 @@
                     <div class="update-box">
                         <div class="update-cate">
                             <label for="cate">EventName</label>
-                            <input type="Text" name="EventName" value ="${e.eventName}"/>
+                            <input type="Text" name="EventName" value ="${e.eventName}" required="required" id="name-input"/>
                         </div>                       
                         <div class="update-cate">
                             <label for="cate">CourseName</label>
-                            <select name="Course">
+                            <select name="Course" required="required">
                                 <% for (CoursesDTO course : courses) {%>
                                 <option value="<%= course.getCourseID()%>"><%= course.getCourseName()%></option>
                                 <% }%>
@@ -60,15 +60,15 @@
                         </div>
                         <div class="update-cate">
                             <label for="cate">DayStart</label>
-                            <input type="date" name="daystart" id="day-start" value="${e.daystart}"/>
+                            <input type="date" name="daystart" id="day-start" value="${e.daystart}" required="required"/>
                         </div>
                         <div class="update-cate">
                             <label for="cate">DayEnd</label>
-                            <input type="date" name="dayend" id="day-end" value="${e.dayend}"/>
+                            <input type="date" name="dayend" id="day-end" value="${e.dayend}" required="required"/>
                         </div>     
                         <div class="update-img">
                             <label for="cate">Image</label>
-                            <input type="file" name="image" id="fileInput" onchange="previewImage(event)" accept="image/*" />
+                            <input type="file" name="image" id="fileInput" onchange="previewImage(event)" accept="image/*" required="required"/>
                             <div class="file-img" >
                                 <img id="preview"  src="data:image;base64,${e.data}" alt="Preview"/>
                                 <input type="text" hidden="" name="id" value="${e.eventID}" />
@@ -76,7 +76,7 @@
                         </div>
                         <div class="update-cate">
                             <label for="cate">Discount</label>
-                            <input type="text" name="Discount" value="${e.discount}"/>
+                            <input type="text" name="Discount" value="${e.discount}" required="required" id="discount-input"/>
                         </div>
                     </div>
                     <div class="table-btn">
@@ -94,6 +94,12 @@
             <script>
                                 const dayStartInput = document.querySelector('input[name="daystart"]');
                                 const dayEndInput = document.querySelector('input[name="dayend"]');
+                                const nameInput = document.getElementById('name-input');
+                                const discountInput = document.getElementById('discount-input');
+
+                                discountInput.step = '0';
+                                discountInput.max = '100';
+
                                 dayStartInput.addEventListener('change', validateDateRange);
                                 dayEndInput.addEventListener('change', validateDateRange);
                                 console.log(dayStartInput.value);
@@ -113,6 +119,38 @@
                                         dayEndInput.value = "";
                                     }
                                 }
+                                nameInput.addEventListener('input', function () {
+                                    let value = this.value;
+
+                                    if (value.charAt(0).trim() !== value.charAt(0).toUpperCase()) {
+                                        alert("The first character shoule be uppercase!");
+                                        this.value = "";
+                                    }
+                                    if (/[!@#$%^&*()_+{}[\]|\\:;'<>?,./]/.test(value)) {
+                                        alert("You are not allowed to use special characters to name the course!");
+                                        this.value = "";
+                                    }
+
+                                });
+                                discountInput.addEventListener('input', function () {
+                                    let value = this.value;
+
+                                    if (value < 0) {
+                                        alert("Please enter a non-negative value!");
+                                        this.value = "";
+                                    }
+                                    if (value > 100) {
+                                        alert("Max discount is 100%!");
+                                        this.value = "";
+                                    }
+                                    if (/^0+$/.test(value)) {
+                                        this.value = "0";
+                                    }
+                                    if (value.startsWith('0') && value.length > 1) {
+                                        value = value.slice(1);
+                                        this.value = value;
+                                    }
+                                });
             </script>
 
             <script>

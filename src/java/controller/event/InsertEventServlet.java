@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -54,7 +56,6 @@ public class InsertEventServlet extends HttpServlet {
         String ediscount = new String(request.getParameter("Discount").getBytes("ISO-8859-1"), "UTF-8");
         String edaystart = new String(request.getParameter("daystart").getBytes("ISO-8859-1"), "UTF-8");
         String edayend = new String(request.getParameter("dayend").getBytes("ISO-8859-1"), "UTF-8");
-
         boolean checkDuplicate;
         String message = "";
         try {
@@ -80,12 +81,12 @@ public class InsertEventServlet extends HttpServlet {
                     String data = Base64.getEncoder().encodeToString(imageBytes);
                     checkDuplicate = dao.checkDuplicateCourse(eCourseID);
                     if (checkDuplicate) {
-                        checkDuplicate = dao.checkDayStart(edaystart, eCourseID);
+                        checkDuplicate = dao.checkDayStart(edaystart  + " 00:00:00", eCourseID);
                         if (checkDuplicate) {
                             message = "Duplicate start date, please re-enter!";
                             
                         } else {
-                            checkDuplicate = dao.checkDayEnd(edayend, eCourseID);
+                            checkDuplicate = dao.checkDayEnd(edayend  + " 00:00:00", eCourseID);
                             if (checkDuplicate) {
                                 message = "Duplicate end date, please re-enter!";
                             } else {
