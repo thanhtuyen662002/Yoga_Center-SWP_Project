@@ -19,18 +19,18 @@
             <c:redirect url="login.jsp"></c:redirect>
         </c:if>
         <div class="wrapper d-flex align-items-stretch">
-                <c:import url="./view.service/service_header.jsp"/>
+            <c:import url="./view.service/service_header.jsp"/>
             <!-- Page Content  -->
             <div id="content">
                 <form >
-                <div class="course-link">
-                    <ul>
-                        <li><a href="mainController?action=event">Staff</a></li>
-                        <li><a href="event">Khuyến Mãi</a></li>
-                        <li><a href="" id="active">Thêm Khuyến Mãi</a></li>
+                    <div class="course-link">
+                        <ul>
+                            <li><a href="mainController?action=event">Staff</a></li>
+                            <li><a href="event">Khuyến Mãi</a></li>
+                            <li><a href="" id="active">Thêm Khuyến Mãi</a></li>
 
-                    </ul>
-                </div>
+                        </ul>
+                    </div>
                 </form>
                 <div class="course-title" >
                     <div class="text">Welcome ${sessionScope.USER.name}</div>
@@ -50,7 +50,7 @@
                             <label for="cate">EventName</label>
                             <input type="Text" name="EventName" value ="${e.eventName}"/>
                         </div>                       
-                       <div class="update-cate">
+                        <div class="update-cate">
                             <label for="cate">CourseName</label>
                             <select name="Course">
                                 <% for (CoursesDTO course : courses) {%>
@@ -67,12 +67,13 @@
                             <input type="date" name="dayend" id="day-end" value="${e.dayend}"/>
                         </div>     
                         <div class="update-img">
-                        <label for="cate">Image</label>
-                        <input type="file" name="image" id="fileInput" onchange="previewImage(event)" accept="image/*" />
-  <div class="file-img">
-                            <img id="preview" src="#" alt="Preview"/>
+                            <label for="cate">Image</label>
+                            <input type="file" name="image" id="fileInput" onchange="previewImage(event)" accept="image/*" />
+                            <div class="file-img" >
+                                <img id="preview"  src="data:image;base64,${e.data}" alt="Preview"/>
+                                <input type="text" hidden="" name="id" value="${e.eventID}" />
+                            </div>
                         </div>
-                    </div>
                         <div class="update-cate">
                             <label for="cate">Discount</label>
                             <input type="text" name="Discount" value="${e.discount}"/>
@@ -91,29 +92,29 @@
             <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
             <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
             <script>
-                        const dayStartInput = document.querySelector('input[name="daystart"]');
-                        const dayEndInput = document.querySelector('input[name="dayend"]');
-                        dayStartInput.addEventListener('change', validateDateRange);
-                        dayEndInput.addEventListener('change', validateDateRange);
-                        console.log(dayStartInput.value);
-                        function validateDateRange() {
-                            const dayStart = new Date(dayStartInput.value);
-                            const dayEnd = new Date(dayEndInput.value);
-                            const currentDate = new Date();
+                                const dayStartInput = document.querySelector('input[name="daystart"]');
+                                const dayEndInput = document.querySelector('input[name="dayend"]');
+                                dayStartInput.addEventListener('change', validateDateRange);
+                                dayEndInput.addEventListener('change', validateDateRange);
+                                console.log(dayStartInput.value);
+                                function validateDateRange() {
+                                    const dayStart = new Date(dayStartInput.value);
+                                    const dayEnd = new Date(dayEndInput.value);
+                                    const currentDate = new Date();
 
-                            if (dayStart <= currentDate) {
-                                alert('Giá trị của DayStart phải lớn hơn ngày hiện tại.');
-                                dayStartInput.value = "";
-                                return;
-                            }
+                                    if (dayStart <= currentDate) {
+                                        alert('Giá trị của DayStart phải lớn hơn ngày hiện tại.');
+                                        dayStartInput.value = "";
+                                        return;
+                                    }
 
-                            if (dayEnd <= dayStart) {
-                                alert('Giá trị của DayEnd phải lớn hơn DayStart.');
-                                dayEndInput.value = "";
-                            }
-                        }
+                                    if (dayEnd <= dayStart) {
+                                        alert('Giá trị của DayEnd phải lớn hơn DayStart.');
+                                        dayEndInput.value = "";
+                                    }
+                                }
             </script>
-            
+
             <script>
                 function goBack() {
                     window.history.back();

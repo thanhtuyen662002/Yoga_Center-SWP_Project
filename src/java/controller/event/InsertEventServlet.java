@@ -25,9 +25,9 @@ import utils.DBUtils;
  * @author Nguye
  */
 @WebServlet("/insertEvent")
-@MultipartConfig(fileSizeThreshold=1024*1024*2,
-        maxFileSize=1024*1024*10,
-        maxRequestSize=1024*1024*50)
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2,
+        maxFileSize = 1024 * 1024 * 10,
+        maxRequestSize = 1024 * 1024 * 50)
 public class InsertEventServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -50,27 +50,27 @@ public class InsertEventServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String ename = new String(request.getParameter("EventName").getBytes("ISO-8859-1"), "UTF-8");
-        String eCourseName = new String(request.getParameter("Course").getBytes("ISO-8859-1"), "UTF-8");
+        String eCourseID = new String(request.getParameter("Course").getBytes("ISO-8859-1"), "UTF-8");
         String ediscount = new String(request.getParameter("Discount").getBytes("ISO-8859-1"), "UTF-8");
         String edaystart = new String(request.getParameter("daystart").getBytes("ISO-8859-1"), "UTF-8");
         String edayend = new String(request.getParameter("dayend").getBytes("ISO-8859-1"), "UTF-8");
 
         boolean checkDuplicate;
         String message = "";
-        try { 
+        try {
             EventDAO dao = new EventDAO();
             checkDuplicate = dao.checkEventDuplicate(ename);
             if (!checkDuplicate) {
                 // Specify that we expect a multipart request               
                 List<Part> fileParts = new ArrayList<>();
                 for (Part part : request.getParts()) {
-                    String partName = new String(part.getName().getBytes("iso-8859-1"), "UTF-8");                
+                    String partName = new String(part.getName().getBytes("iso-8859-1"), "UTF-8");
                     if (partName.startsWith("image")) {
                         fileParts.add(part);
-                        
+
                     }
-                    
-                }                
+
+                }
                 for (Part filePart : fileParts) {
                     String fileName = filePart.getSubmittedFileName();
                     InputStream fileContent = filePart.getInputStream();
@@ -78,12 +78,35 @@ public class InsertEventServlet extends HttpServlet {
                     InputStream content = fileContent;
                     byte[] imageBytes = IOUtils.toByteArray(content);
                     String data = Base64.getEncoder().encodeToString(imageBytes);
-                    boolean checkInsert = saveInforToDatabase(ename, eCourseName, ediscount, edaystart, edayend, fileName, data);
-                    if (checkInsert) {
-                        message = "Create event " + ename + " successfully!";
+                    checkDuplicate = dao.checkDuplicateCourse(eCourseID);
+                    if (checkDuplicate) {
+                        checkDuplicate = dao.checkDayStart(edaystart, eCourseID);
+                        if (checkDuplicate) {
+                            message = "Duplicate start date, please re-enter!";
+                            
+                        } else {
+                            checkDuplicate = dao.checkDayEnd(edayend, eCourseID);
+                            if (checkDuplicate) {
+                                message = "Duplicate end date, please re-enter!";
+                            } else {
+                                boolean check = saveInforToDatabase(ename, eCourseID, ediscount, edaystart, edayend, fileName, data);
+                                if (check) {
+                                    message = "Insert event successfully!";
+                                } else {
+                                    message = "Can't insert event!";
+                                }
+                            }
+                        }
+
                     } else {
-                        message = "Can't create event " + ename + " !";
+                        boolean check = saveInforToDatabase(ename, eCourseID, ediscount, edaystart, edayend, fileName, data);
+                        if (check) {
+                            message = "Insert event successfully!";
+                        } else {
+                            message = "Can't insert event!";
+                        }
                     }
+
                 }
 
             } else {
@@ -125,6 +148,7 @@ public class InsertEventServlet extends HttpServlet {
             if (conn != null) {
                 conn.close();
             }
-        } return false;
+        }
+        return false;
     }
 }
