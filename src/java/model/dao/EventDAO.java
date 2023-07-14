@@ -312,21 +312,22 @@ public class EventDAO {
         }
         return check;
     }
-    public boolean checkDuplicateCourse(String courseID) throws SQLException{
-         Connection conn = null;
+
+    public boolean checkDuplicateCourse(String courseID) throws SQLException {
+        Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         boolean check = false;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String query = "SELECT * FROM Event WHERE CourseID = " + courseID ;
+                String query = "SELECT * FROM Event WHERE CourseID = " + courseID;
                 ptm = conn.prepareStatement(query);
                 rs = ptm.executeQuery();
-                              
+
                 if (rs.next()) {
                     check = true;
-                } 
+                }
             }
         } catch (Exception e) {
         } finally {
@@ -341,31 +342,72 @@ public class EventDAO {
             }
         }
         return check;
-        
+
     }
-     public boolean checkDay(String daystart, String dayend, String courseID) throws SQLException {
+
+    public boolean checkDayStart(String daystart, String courseID) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         boolean check = false;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); // Specify the appropriate format
+        LocalDateTime dayStart = LocalDateTime.parse(daystart, formatter);
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String query = "SELECT daystart, dayend FROM Event WHERE CourseID = " + courseID;
+                String query = "SELECT daystart, dayend FROM Event WHERE CourseID = ?";
                 ptm = conn.prepareStatement(query);
                 ptm.setString(1, courseID);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
-                    String mocdaystart = rs.getString("daystart");
-                    String mocdayend = rs.getString("dayend");
-                    if (isBetweenDates(daystart, mocdaystart, mocdayend) && isBetweenDates(dayend, mocdaystart, mocdayend)) {
+                    LocalDateTime mocdaystart = LocalDateTime.parse(rs.getString("daystart") + " 00:00:00", formatter);
+                    LocalDateTime mocdayend = LocalDateTime.parse(rs.getString("dayend") + " 00:00:00", formatter);
+                    if (dayStart.isBefore(mocdayend) && dayStart.isAfter(mocdaystart)) {
                         check = true;
                         break;
                     }
                 }
             }
         } catch (Exception e) {
-            // Xử lý exception
+            // Handle exception
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    public boolean checkDayEnd( String dayend, String courseID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        boolean check = false;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); // Specify the appropriate format
+        LocalDateTime dayEnd = LocalDateTime.parse(dayend, formatter);
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String query = "SELECT daystart, dayend FROM Event WHERE CourseID = ?";
+                ptm = conn.prepareStatement(query);
+                ptm.setString(1, courseID);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    LocalDateTime mocdaystart = LocalDateTime.parse(rs.getString("daystart") + " 00:00:00", formatter);
+                    LocalDateTime mocdayend = LocalDateTime.parse(rs.getString("dayend") + " 00:00:00", formatter);
+                    if (dayEnd.isBefore(mocdayend) && dayEnd.isAfter(mocdaystart)) {
+                        check = true;
+                        break;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            // Handle exception
         } finally {
             if (rs != null) {
                 rs.close();
@@ -380,10 +422,10 @@ public class EventDAO {
         return check;
     }
 
-    private boolean isBetweenDates(String dateToCheck, String startDate, String endDate) {
-        return dateToCheck.compareTo(startDate) >= 0 && dateToCheck.compareTo(endDate) <= 0;
+    public static void main(String[] args) throws SQLException {
+
     }
-    
+
     public EventDTO getEventDetail(String id) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -417,16 +459,6 @@ public class EventDAO {
 
         return null;
     }
-
-    public static void main(String[] args) throws SQLException {
-    EventDAO dao = new EventDAO();
-    boolean check = dao.checkDay("2023-12-10", "2023-12-30", "2");
-        if (check) {
-            System.out.println("true");
-        } else {
-            System.out.println("false");
-        }
-}
 
     public static ArrayList<EventDTO> getCusEvent() throws SQLException {
         ArrayList<EventDTO> list = new ArrayList<>();
@@ -529,7 +561,6 @@ public class EventDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-
                 String sql = "UPDATE Event SET status = 0\n"
                         + "WHERE dayend = '" + formattedDate + "'";
                 ptm = conn.prepareStatement(sql);
@@ -668,6 +699,7 @@ public class EventDAO {
         }
         return eventID;
     }
+
     public int getDiscountByCourseID(String courseID) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
