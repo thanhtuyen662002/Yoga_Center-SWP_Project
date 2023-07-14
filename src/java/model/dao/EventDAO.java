@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -311,7 +312,78 @@ public class EventDAO {
         }
         return check;
     }
+    public boolean checkDuplicateCourse(String courseID) throws SQLException{
+         Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        boolean check = false;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String query = "SELECT * FROM Event WHERE CourseID = " + courseID ;
+                ptm = conn.prepareStatement(query);
+                rs = ptm.executeQuery();
+                              
+                if (rs.next()) {
+                    check = true;
+                } 
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+        
+    }
+     public boolean checkDay(String daystart, String dayend, String courseID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        boolean check = false;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String query = "SELECT daystart, dayend FROM Event WHERE CourseID = " + courseID;
+                ptm = conn.prepareStatement(query);
+                ptm.setString(1, courseID);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String mocdaystart = rs.getString("daystart");
+                    String mocdayend = rs.getString("dayend");
+                    if (isBetweenDates(daystart, mocdaystart, mocdayend) && isBetweenDates(dayend, mocdaystart, mocdayend)) {
+                        check = true;
+                        break;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            // Xử lý exception
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
 
+    private boolean isBetweenDates(String dateToCheck, String startDate, String endDate) {
+        return dateToCheck.compareTo(startDate) >= 0 && dateToCheck.compareTo(endDate) <= 0;
+    }
+    
     public EventDTO getEventDetail(String id) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -347,11 +419,14 @@ public class EventDAO {
     }
 
     public static void main(String[] args) throws SQLException {
-        EventDAO dao = new EventDAO();
-        int list = dao.getDiscountByCourseID("2");
-            System.out.println(list);
-        
-    }
+    EventDAO dao = new EventDAO();
+    boolean check = dao.checkDay("2023-12-10", "2023-12-30", "2");
+        if (check) {
+            System.out.println("true");
+        } else {
+            System.out.println("false");
+        }
+}
 
     public static ArrayList<EventDTO> getCusEvent() throws SQLException {
         ArrayList<EventDTO> list = new ArrayList<>();
