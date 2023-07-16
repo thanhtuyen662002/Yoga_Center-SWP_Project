@@ -137,7 +137,7 @@
                     }
                     if (/[!@#$%^&*()_+{}[\]|\\:;'<>?,./]/.test(value)) {
                         alert("You are not allowed to use special characters to name the course!");
-                        this.value = "";
+                        this.value = value.replace(/[^a-zA-Z0-9\s]/g, '');
                     }
 
                 });

@@ -39,7 +39,11 @@ public class UpdateClubServlet extends HttpServlet {
             String clubID = request.getParameter("clubID");
             ClubDAO dao = new ClubDAO();
             ClubDTO club = dao.getClubByID(clubID);
+            String hotline = club.getHotline().trim();
+            List<ClubDTO> list = dao.getAllDistrict();
             request.setAttribute("c", club);
+            request.setAttribute("hotline", hotline);
+            request.setAttribute("district", list);
             request.getRequestDispatcher("updateClub.jsp").forward(request, response);
         } catch (Exception e) {
         }
@@ -55,6 +59,8 @@ public class UpdateClubServlet extends HttpServlet {
         String hotline = request.getParameter("hotline");
         String message = "";
         try {
+            ClubDAO dao = new ClubDAO();
+            String dataRoot = dao.getClubByID(clubID).getDataImage();
             List<Part> fileParts = new ArrayList<>();
             for (Part part : request.getParts()) {
                 String partName = new String(part.getName().getBytes("iso-8859-1"), "UTF-8");
@@ -69,7 +75,9 @@ public class UpdateClubServlet extends HttpServlet {
                 InputStream content = fileContent;
                 byte[] imageBytes = IOUtils.toByteArray(content);
                 String dataImage = Base64.getEncoder().encodeToString(imageBytes);
-                
+                if (dataImage == null || dataImage.equals("")) {
+                    dataImage = dataRoot;
+                }
                 boolean checkUpdate = updateClub(clubID, clubName, address, district, hotline, dataImage);
                 if (checkUpdate) {
                     message = "Update club " + clubName + " successfully!";

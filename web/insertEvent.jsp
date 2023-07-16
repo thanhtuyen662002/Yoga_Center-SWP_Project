@@ -92,65 +92,65 @@
             <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
             <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
             <script>
-                                const dayStartInput = document.querySelector('input[name="daystart"]');
-                                const dayEndInput = document.querySelector('input[name="dayend"]');
-                                const nameInput = document.getElementById('name-input');
-                                const discountInput = document.getElementById('discount-input');
+                const dayStartInput = document.querySelector('input[name="daystart"]');
+                const dayEndInput = document.querySelector('input[name="dayend"]');
+                const nameInput = document.getElementById('name-input');
+                const discountInput = document.getElementById('discount-input');
 
-                                discountInput.step = '0';
-                                discountInput.max = '100';
+                discountInput.step = '0';
+                discountInput.max = '100';
 
-                                dayStartInput.addEventListener('change', validateDateRange);
-                                dayEndInput.addEventListener('change', validateDateRange);
-                                console.log(dayStartInput.value);
-                                function validateDateRange() {
-                                    const dayStart = new Date(dayStartInput.value);
-                                    const dayEnd = new Date(dayEndInput.value);
-                                    const currentDate = new Date();
+                dayStartInput.addEventListener('change', validateDateRange);
+                dayEndInput.addEventListener('change', validateDateRange);
+                console.log(dayStartInput.value);
+                function validateDateRange() {
+                    const dayStart = new Date(dayStartInput.value);
+                    const dayEnd = new Date(dayEndInput.value);
+                    const currentDate = new Date();
 
-                                    if (dayStart <= currentDate) {
-                                        alert('Giá trị của DayStart phải lớn hơn ngày hiện tại.');
-                                        dayStartInput.value = "";
-                                        return;
-                                    }
+                    if (dayStart <= currentDate) {
+                        alert('Giá trị của DayStart phải lớn hơn ngày hiện tại.');
+                        dayStartInput.value = "";
+                        return;
+                    }
 
-                                    if (dayEnd <= dayStart) {
-                                        alert('Giá trị của DayEnd phải lớn hơn DayStart.');
-                                        dayEndInput.value = "";
-                                    }
-                                }
-                                nameInput.addEventListener('input', function () {
-                                    let value = this.value;
+                    if (dayEnd <= dayStart) {
+                        alert('Giá trị của DayEnd phải lớn hơn DayStart.');
+                        dayEndInput.value = "";
+                    }
+                }
+                nameInput.addEventListener('input', function () {
+                    let value = this.value;
 
-                                    if (value.charAt(0).trim() !== value.charAt(0).toUpperCase()) {
-                                        alert("The first character shoule be uppercase!");
-                                        this.value = "";
-                                    }
-                                    if (/[!@#$%^&*()_+{}[\]|\\:;'<>?,./]/.test(value)) {
-                                        alert("You are not allowed to use special characters to name the course!");
-                                        this.value = "";
-                                    }
+                    if (value.charAt(0).trim() !== value.charAt(0).toUpperCase()) {
+                        alert("The first character shoule be uppercase!");
+                        this.value = "";
+                    }
+                    if (/[!@#$%^&*()_+{}[\]|\\:;'<>?,./]/.test(value)) {
+                        alert("You are not allowed to use special characters to name the course!");
+                        this.value = value.replace(/[^a-zA-Z0-9\s]/g, '');
+                    }
 
-                                });
-                                discountInput.addEventListener('input', function () {
-                                    let value = this.value;
+                });
+                discountInput.addEventListener('input', function () {
+                    let value = this.value;
 
-                                    if (value < 0) {
-                                        alert("Please enter a non-negative value!");
-                                        this.value = "";
-                                    }
-                                    if (value > 100) {
-                                        alert("Max discount is 100%!");
-                                        this.value = "";
-                                    }
-                                    if (/^0+$/.test(value)) {
-                                        this.value = "0";
-                                    }
-                                    if (value.startsWith('0') && value.length > 1) {
-                                        value = value.slice(1);
-                                        this.value = value;
-                                    }
-                                });
+                    if (value < 0) {
+                        alert("Please enter a non-negative value!");
+                        this.value = "";
+                    }
+                    if (value > 100) {
+                        alert("Max discount is 100%!");
+                        this.value = "";
+                    }
+                    if (/^0+$/.test(value)) {
+                        this.value = "0";
+                    }
+                    if (value.startsWith('0') && value.length > 1) {
+                        value = value.slice(1);
+                        this.value = value;
+                    }
+                });
             </script>
 
             <script>

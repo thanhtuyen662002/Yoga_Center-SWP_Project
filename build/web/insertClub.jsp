@@ -52,11 +52,11 @@
                     <div class="update-box">
                         <div class="update-title">
                             <label for="title">Club Name</label>
-                            <input type="text" name="clubName"/>
+                            <input type="text" name="clubName" id="name-input" required="required"/>
                         </div>
                         <div class="update-title">
                             <label for="title">Address</label>
-                            <input type="text" name="address"/>
+                            <input type="text" name="address" id="address" required="required"/>
                         </div>
                         <div class="update-title">
                             <label for="title">District</label>
@@ -68,24 +68,91 @@
                         </div>
                         <div class="update-title">
                             <label for="title">Hotline</label>
-                            <input type="text" name="hotline"/>
+                            <input type="text" name="hotline" id="hotline" required="required"/>
                         </div>
                         <div></div>
                         <div class="update-img">
                             <label for="cate">Image</label>
                             <input type="file" name="image" id="fileInput"
-                                   onchange="previewImage(event)" accept="image/*" />
+                                   onchange="previewImage(event)" accept="image/*" required="required"/>
                             <div class="file-img">
                                 <img id="preview" src="#" alt="Preview"/>
                             </div>
                         </div>
                     </div>
                     <div class="table-button">
-                        <button type="submit">INSERT</button>
+                        <button type="submit" onclick="hotlineCheck(event)">INSERT</button>
                     </div>
                 </form>
             </div>
+            <script>
+                const nameInput = document.getElementById('name-input');
+                const address = document.getElementById('address');
+                const hotline = document.getElementById('hotline');
+                let check = false;
 
+                nameInput.addEventListener('input', function () {
+                    let value = this.value;
+                    if (value.charAt(0).trim() !== value.charAt(0).toUpperCase()) {
+                        alert("The first character shoule be uppercase!");
+                        this.value = "";
+                        check = false;
+                    }
+                    if (/[!@#$%^&*()+{}[\]|\\:;'<>?,./]/.test(value)) {
+                        alert("You are not allowed to use special characters to name the club!");
+                        this.value = value.replace(/[^a-zA-Z0-9_\s]/g, '');
+                        check = false;
+                    }
+
+                });
+                address.addEventListener('input', function () {
+                    let value = this.value;
+                    if (/[!@#$%^&*()+{}[\]|\\:;'<>?/]/.test(value)) {
+                        alert("You are not allowed to use special characters to address!");
+                        this.value = value.replace(/[^a-zA-Z0-9.,\s]/g, '');
+                        check = false;
+                    }
+
+                });
+                hotline.addEventListener('input', function () {
+                    let value = this.value;
+                    if (/[!@#$%^&*()+{}[\]|\\:;'<>?,./]/.test(value)) {
+                        alert("You are not allowed to use special characters in the hotline!");
+                        this.value = value.replace(/[^0-9\s]/g, '');
+                        check = true;
+                    } else if (/[^0-9\s]/.test(value)) {
+                        alert("Only numbers are allowed in the hotline!");
+                        this.value = value.replace(/[^0-9\s]/g, '');
+                        check = true;
+                    } else if (value.length > 12) {
+                        alert("The hotline must be maximum 10 digits!");
+                        value = value.replace(/(\d{4})(\d{3})(\d{3})/, '$1 $2 $3');
+                        this.value = value.slice(0, 12);
+                        check = true;
+                    } else {
+                        value = value.replace(/\s/g, '');
+                        value = value.replace(/(\d{4})(\d{3})(\d+)/, '$1 $2 $3');
+                        this.value = value;
+                        check = true;
+                    }
+                });
+                hotline.addEventListener('blur', function () {
+                    let value = this.value;
+                    if (value.length < 12 && !check) {
+                        alert("The hotline must be at least 10 digits!");
+                    }
+                });
+
+                function hotlineCheck(event) {
+                    let value = hotline.value;
+                    if (value.length < 12) {
+                        alert("The hotline must be at least 10 digits!");
+                        event.preventDefault();
+                    } else {
+                        document('my-form').submit();
+                    }
+                };
+            </script>
             <script>
                 function previewImage(event) {
                     var reader = new FileReader();

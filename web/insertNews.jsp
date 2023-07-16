@@ -21,8 +21,8 @@
         </c:if>
         <div class="wrapper d-flex align-items-stretch">
 
-                <c:import url="./view.service/service_header.jsp"/>
-            
+            <c:import url="./view.service/service_header.jsp"/>
+
             <!-- Page Content  -->
             <c:if test="${not empty sessionScope.STAFF}">
                 <c:set var="USER" value="${sessionScope.STAFF}" scope="session"/>
@@ -46,7 +46,7 @@
                         <div class="update-box">
                             <div class="update-title">
                                 <label for="title">Title</label>
-                                <input type="text" required = "required" name="title" />
+                                <input type="text" required = "required" name="title" id="name-input"/>
                             </div>
                             <div class="update-select">
                                 <label>Category</label>
@@ -66,26 +66,36 @@
                             <div class="update-content-wrapper">
                                 <div class="update-content">
                                     <label for="">Content</label>
-                                    <textarea id="myTextarea" required = "required" name="content"></textarea>
+                                    <textarea id="myTextarea" required = "required" name="content" required = "required"></textarea>
 
                                     <input type="hidden" name="newsID" value=""/>
                                 </div>
                                 <div id="errorMsg" style="display:none; color:red;">Please enter description!</div>
                             </div>
-                             <input name="stPhone" type="hidden" value="${sessionScope.USER.phone}"/>
+                            <input name="stPhone" type="hidden" value="${sessionScope.USER.phone}"/>
                         </div>
                         <div class="table-btn">
-                            <!--<a href="#">UPDATE</a>-->
-                            <!--<input class="btn btn-danger btn-lg" type="submit" name="action" value="UPDATE" />--> 
                             <button type="submit">Insert</button>
                         </div>
                     </form>
                 </div>
                 <script>
-                    var myTextarea = document.getElementById("myTextarea");
+                    const nameInput = document.getElementById('name-input');
+                    const myTextarea = document.getElementById("myTextarea");
                     var errorMsg = document.getElementById("errorMsg");
-
-                    myTextarea.addEventListener("input", function () {
+                    
+                    nameInput.addEventListener('input', function () {
+                        let value = this.value;
+                        if (value.charAt(0).trim() !== value.charAt(0).toUpperCase()) {
+                            alert("The first character shoule be uppercase!");
+                            this.value = "";
+                        }
+                        if (/[!@#$%^&*()+{}[\]|\\:;'<>?,./]/.test(value)) {
+                            alert("You are not allowed to use special characters to name the club!");
+                            this.value = value.replace(/[^a-zA-Z0-9\s]/g, '');
+                        }
+                    });
+                    myTextarea.addEventListener('input', function () {
                         if (myTextarea.value.trim() === "") {
                             errorMsg.style.display = "block";
                         } else {
@@ -99,6 +109,11 @@
                             event.preventDefault();
                         } else {
                             errorMsg.style.display = "none";
+                        }
+
+                        if (nameInput.value.trim() === "") {
+                            alert("Please input course name!");
+                            event.preventDefault();
                         }
                     });
                 </script>
