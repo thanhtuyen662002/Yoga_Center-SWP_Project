@@ -19,7 +19,7 @@
             <c:redirect url="login.jsp"></c:redirect>
         </c:if>
         <div class="wrapper d-flex align-items-stretch">
-                <c:import url="./view.service/service_header.jsp"/>
+            <c:import url="./view.service/service_header.jsp"/>
 
             <!-- Page Content  -->
             <div id="content">
@@ -42,16 +42,17 @@
                 <%@ page import="java.util.List" %>
                 <%@ page import="model.dao.EventDAO" %>
                 <% EventDAO dao = new EventDAO(); %>
-                <% List<CoursesDTO> courses = dao.getCourseName(); %>
+                <% List<CoursesDTO> courses = dao.getCourseName();%>
                 <form action="updateEvent" method="POST" enctype="multipart/form-data">
                     <div class="update-box">
                         <div class="update-title">
                             <label for="title">Event Name</label>
-                            <input type="text" name="EventName" value="${e.eventName}" id="name-input"/>
+
+                            <input type="text" name="EventName" value="${e.eventName}" required="required" id="name-input" />
                         </div>
                         <div class="update-cate">
                             <label for="cate">Discount</label>
-                            <input type="text" name="Discount" value="${e.discount}" id="discount-input"/>
+                            <input type="number" name="Discount" value="${e.discount}" required="required" id="discount-input"/>
                         </div>
                         <div class="update-course">
                             <label for="cate">Course Name</label>
@@ -65,17 +66,17 @@
                         </div>
                         <div class="update-cate">
                             <label for="cate">Day Start</label>
-                            <input type="date" name="daystart" id="day-start" value="${e.daystart}" />
+                            <input type="date" name="daystart" id="day-start" value="${e.daystart}" required="required"/>
                         </div>
 
                         <div class="update-cate">
                             <label for="cate">Day End</label>
-                            <input type="date" name="dayend" id="day-end" value="${e.dayend}"/>        
+                            <input type="date" name="dayend" id="day-end" value="${e.dayend}" required="required"/>        
                         </div>
                         <div class="update-img">
                             <label for="cate">Image</label>
-                            <input type="file" name="image" id="fileInput" onchange="previewImage(event)" accept="image/*" />
-                           
+                            <input type="file" name="image" id="fileInput" onchange="previewImage(event)" accept="image/*" required="required" />
+
                             <div class="file-img" >
                                 <img id="preview"  src="data:image;base64,${e.data}" alt="Preview"/>
                                 <input type="text" hidden="" name="id" value="${e.eventID}" />
@@ -89,10 +90,23 @@
                 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
                 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
                 <script>
-                    const dayStartInput = document.querySelector('input[name="daystart"]');
-                const dayEndInput = document.querySelector('input[name="dayend"]');
-                const nameInput = document.getElementById('name-input');
-                const discountInput = document.getElementById('discount-input');
+
+                                const dayStartInput = document.querySelector('input[name="day-start"]');
+                                const dayEndInput = document.querySelector('input[name="day-end"]');
+                                const nameInput = document.getElementById('name-input');
+                                const discountInput = document.getElementById('discount-input');
+
+                                discountInput.step = '0';
+                                discountInput.max = '100';
+
+                                dayStartInput.addEventListener('change', validateDateRange);
+                                dayEndInput.addEventListener('change', validateDateRange);
+                                console.log(dayStartInput.value);
+                                function validateDateRange() {
+                                    const dayStart = new Date(dayStartInput.value);
+                                    const dayEnd = new Date(dayEndInput.value);
+                                    const currentDate = new Date();
+
 
                 discountInput.step = '0';
                 discountInput.max = '100';
@@ -148,6 +162,7 @@
                         this.value = value;
                     }
                 });
+
                 </script>
                 <script>
                     function previewImage(event) {
@@ -168,6 +183,6 @@
                         }
                     }
                 </script>
-    </body>
+                </body>
 
-</html>
+                </html>
