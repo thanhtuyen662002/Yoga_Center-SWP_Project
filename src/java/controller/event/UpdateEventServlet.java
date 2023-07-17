@@ -75,12 +75,13 @@ public class UpdateEventServlet extends HttpServlet {
         String eventID = request.getParameter("id");
         String message = "";
         boolean checkUpdate;
-
+        boolean checkDuplicate;
+        boolean checkDuplicate2;
         try {
             //Kiểm tra tên khóa học đã có trong database hay chưa
             EventDAO dao = new EventDAO();
-            boolean checkDuplicate = dao.checkEventDuplicate(eventName);
-            boolean checkDuplicate2 = dao.checkEventDuplicate2(eventID, eventName);
+            checkDuplicate = dao.checkEventDuplicate(eventName);
+            checkDuplicate2 = dao.checkEventDuplicate2(eventID, eventName);
             EventDTO event = dao.getEventByID(eventID);
             String rootEventName = event.getEventName();
             String dataRoot = event.getData();
@@ -103,43 +104,39 @@ public class UpdateEventServlet extends HttpServlet {
                         String data = Base64.getEncoder().encodeToString(imageBytes);
                         if (data == null || data.equals("")) {
                             data = dataRoot;
+                            
                         }
-                        checkUpdate = updateInforToDatabase(eventID, eventName, courseID, discount, daystart, dayend, fileName, data);
-                        if (checkUpdate) {
+                        
+                        checkDuplicate = dao.checkDuplicateCourse(courseID);
+                    if (checkDuplicate) {
+                        checkDuplicate = dao.checkDayStart(daystart  + " 00:00:00", courseID);
+                        if (checkDuplicate) {
+                            message = "Duplicate start date, please re-enter!";
+                            
+                        } else {
+                            checkDuplicate = dao.checkDayEnd(dayend  + " 00:00:00", courseID);
+                            if (checkDuplicate) {
+                                message = "Duplicate end date, please re-enter!";
+                            } else {
+                                boolean check = updateInforToDatabase(eventID, eventName, courseID, discount, daystart, dayend, fileName, data);
+                                if (check) {
+                                    message = "Insert event successfully!";
+                                } else {
+                                    message = "Can't insert event!";
+                                }
+                            }
+                        }
+                    }else {
+                        boolean check = updateInforToDatabase(eventID, eventName, courseID, discount, daystart, dayend, fileName, data);
+                        if (check) {
                             message = "Update event " + eventName + " successfully!";
                         } else {
                             message = "Can't update event " + eventName + " !";
                         }
                     }
+                    }
                 } else {
                     message = "This event name " + rootEventName + " alredy exist! Please try with other name!";
-                }
-
-            } else {
-                List<Part> fileParts = new ArrayList<>();
-                for (Part part : request.getParts()) {
-                    String partName = new String(part.getName().getBytes("iso-8859-1"), "UTF-8");
-                    if (partName.startsWith("image")) {
-                        fileParts.add(part);
-                    }
-                }
-
-                for (Part filePart : fileParts) {
-                    String fileName = filePart.getSubmittedFileName();
-                    InputStream fileContent = filePart.getInputStream();
-
-                    InputStream content = fileContent;
-                    byte[] imageBytes = IOUtils.toByteArray(content);
-                    String data = Base64.getEncoder().encodeToString(imageBytes);
-                    if (data == null || data.equals("")) {
-                            data = dataRoot;
-                        }
-                    checkUpdate = updateInforToDatabase(eventID, eventName, courseID, discount, daystart, dayend, fileName, data);
-                    if (checkUpdate) {
-                        message = "Cập nhật sự kiện thành công!";
-                    } else {
-                        message = "Cập nhật sự kiện thất bại!";
-                    }
                 }
 
             }
