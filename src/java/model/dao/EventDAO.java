@@ -355,7 +355,7 @@ public class EventDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String query = "SELECT daystart, dayend FROM Event WHERE CourseID = ?";
+                String query = "SELECT daystart, dayend FROM Event WHERE CourseID = ? and status = 1 and flag =1 ";
                 ptm = conn.prepareStatement(query);
                 ptm.setString(1, courseID);
                 rs = ptm.executeQuery();
@@ -393,7 +393,7 @@ public class EventDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String query = "SELECT daystart, dayend FROM Event WHERE CourseID = ?";
+                String query = "SELECT daystart, dayend FROM Event WHERE CourseID = ? and status = 1 and flag =1 ";
                 ptm = conn.prepareStatement(query);
                 ptm.setString(1, courseID);
                 rs = ptm.executeQuery();
