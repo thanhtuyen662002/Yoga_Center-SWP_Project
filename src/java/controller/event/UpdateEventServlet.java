@@ -74,7 +74,6 @@ public class UpdateEventServlet extends HttpServlet {
         String dayend = request.getParameter("dayend");
         String eventID = request.getParameter("id");
         String message = "";
-        boolean checkUpdate;
         boolean checkDuplicate;
         boolean checkDuplicate2;
         try {
@@ -109,20 +108,20 @@ public class UpdateEventServlet extends HttpServlet {
                         
                         checkDuplicate = dao.checkDuplicateCourse(courseID);
                     if (checkDuplicate) {
-                        checkDuplicate = dao.checkDayStart(daystart  + " 00:00:00", courseID);
+                        checkDuplicate = dao.checkDayStart(daystart  + " 00:00:00", dayend + " 00:00:00", courseID);
                         if (checkDuplicate) {
-                            message = "Duplicate start date, please re-enter!";
+                            message = "The time the input event has existed. Please try again!";
                             
                         } else {
-                            checkDuplicate = dao.checkDayEnd(dayend  + " 00:00:00", courseID);
+                            checkDuplicate = dao.checkDayEnd(daystart  + " 00:00:00", dayend  + " 00:00:00", courseID);
                             if (checkDuplicate) {
-                                message = "Duplicate end date, please re-enter!";
+                                message = "The time the input event has existed. Please try again!";
                             } else {
                                 boolean check = updateInforToDatabase(eventID, eventName, courseID, discount, daystart, dayend, fileName, data);
                                 if (check) {
-                                    message = "Insert event successfully!";
+                                    message = "Update event successfully!";
                                 } else {
-                                    message = "Can't insert event!";
+                                    message = "Can't update event!";
                                 }
                             }
                         }

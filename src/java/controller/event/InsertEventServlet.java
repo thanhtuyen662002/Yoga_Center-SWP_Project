@@ -81,14 +81,14 @@ public class InsertEventServlet extends HttpServlet {
                     String data = Base64.getEncoder().encodeToString(imageBytes);
                     checkDuplicate = dao.checkDuplicateCourse(eCourseID);
                     if (checkDuplicate) {
-                        checkDuplicate = dao.checkDayStart(edaystart  + " 00:00:00", eCourseID);
+                        checkDuplicate = dao.checkDayStart(edaystart  + " 00:00:00", edayend + " 00:00:00", eCourseID);
                         if (checkDuplicate) {
-                            message = "Duplicate start date, please re-enter!";
+                            message = "The time the input event has existed. Please try again!";
                             
                         } else {
-                            checkDuplicate = dao.checkDayEnd(edayend  + " 00:00:00", eCourseID);
+                            checkDuplicate = dao.checkDayEnd(edaystart  + " 00:00:00", edayend  + " 00:00:00", eCourseID);
                             if (checkDuplicate) {
-                                message = "Duplicate end date, please re-enter!";
+                                message = "The time the input event has existed. Please try again!";
                             } else {
                                 boolean check = saveInforToDatabase(ename, eCourseID, ediscount, edaystart, edayend, fileName, data);
                                 if (check) {
@@ -134,7 +134,7 @@ public class InsertEventServlet extends HttpServlet {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "INSERT INTO Event (eventName, courseID, discount, daystart , dayend, image, data, status, flag)\n"
-                        + "VALUES  (N'" + eventName + "'," + CourseID + "," + discount + ",'" + daystart + "','" + dayend + "','" + image + "', '" + data + "', 0, 1)";
+                        + "VALUES  (N'" + eventName + "'," + CourseID + "," + discount + ",'" + daystart + "','" + dayend + "','" + image + "', '" + data + "', 1, 0)";
                 ptm = conn.prepareStatement(sql);
                 int row = ptm.executeUpdate();
                 if (row > 0) {
