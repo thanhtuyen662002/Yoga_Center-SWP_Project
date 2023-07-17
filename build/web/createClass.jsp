@@ -93,10 +93,10 @@
             <script>
                 const nameInput = document.getElementById('name-input');
                 const capacity = document.getElementById('capacity');
-                const myTextarea = document.querySelector('#myTextarea');
+                const myTextarea = document.getElementById('myTextarea');
 
                 capacity.step = '1';
-                capacity.max = '30';
+                capacity.max = '50';
 
 
                 capacity.addEventListener('input', function () {
@@ -106,16 +106,9 @@
                         alert("Please enter least at 1 capacity!");
                         this.value = "";
                     }
-                    if (value > 30) {
-                        alert("Max value is 30 capacity!");
+                    if (value > 50) {
+                        alert("Max value is 50 capacity!");
                         this.value = "";
-                    }
-                    if (/^0+$/.test(value)) {
-                        this.value = "0";
-                    }
-                    if (value.startsWith('0') && value.length > 1) {
-                        value = value.slice(1);
-                        this.value = value;
                     }
                 });
 
@@ -128,17 +121,16 @@
                     }
                     if (/[!@#$%^&*()_+{}[\]|\\:;'<>?,./]/.test(value)) {
                         alert("You are not allowed to use special characters to name the class!");
-                        this.value = "";
+                        this.value = value.replace(/[^a-zA-Z0-9\s]/g, '');
                     }
 
                 });
 
-                myTextarea.addEventListener('input', function (event) {
-                    const regex = /^[a-zA-Z0-9]+$/; // Chỉ chấp nhận chữ và số
-                    const input = event.target.value;
+                myTextarea.addEventListener('input', function () {
+                    let value = this.value;
                     
-                    if (!regex.test(input)) {
-                        event.target.value = input.replace(/[^a-zA-Z0-9]/g, ''); // Loại bỏ các ký tự khác chữ và số
+                    if (/^[a-zA-Z0-9\s]+$/.test(value)) {
+                        this.value = value.replace(/[^a-zA-Z0-9\s]/g, '');
                     }
                 });
             </script>

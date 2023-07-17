@@ -54,11 +54,11 @@
 
                     <div class="update-box">
                         <div class="update-title">
-                            <label for="title">Tên lớp</label>
+                            <label for="title">Class Name</label>
                             <input type="text" name="className" value="${cls.className}"/>
                         </div>
                         <div class="update-cate">
-                            <label for="cate">PT</label>
+                            <label for="cate">PT Name</label>
                             <select name="PT">
                                 <c:forEach var="tc" items="${listTC}">
                                     <option value="${tc.phone}">${tc.name}</option>
@@ -66,26 +66,29 @@
                             </select>
                         </div>
                         <div class="update-cate">
-                            <label for="cate">Khóa học</label>
+                            <label for="cate">Course Name</label>
                             <select name="courseID">
                                 <c:forEach var="c" items="${listCourse}">
                                     <option value="${c.courseID}">${c.courseName}</option>
                                 </c:forEach>
                             </select>
                         </div>
+
                         <div class="update-cate">
-                            <label for="cate">Nội dung</label>
-                            <input type="text" name="description" value="${cls.description}"/>
-                        </div>
-                        <div class="update-cate">
-                            <label for="cate">Số slot</label>
+                            <label for="cate">Total Session</label>
                             <input type="number" name="totalSession" value="${cls.totalSession}" readonly=""/>
                         </div>
                         <div class="update-cate">
-                            <label for="cate">Số học viên</label>
+                            <label for="cate">Capacity</label>
                             <input type="number" name="capacity" value="${cls.capacity}"/>
                         </div>
-
+                        <div></div>
+                        <div class="update-content-wrapper">
+                            <div class="update-content">
+                                <label for="cate">Describe</label>
+                                <textarea id="myTextarea" name="description" required="required" >${cls.description}</textarea>
+                            </div>
+                        </div>
                     </div>
                     <div class="table-button">
                         <button type="submit">UPDATE</button>

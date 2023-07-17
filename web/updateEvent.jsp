@@ -75,7 +75,7 @@
                         </div>
                         <div class="update-img">
                             <label for="cate">Image</label>
-                            <input type="file" name="image" id="fileInput" onchange="previewImage(event)" accept="image/*" required="required" />
+                            <input type="file" name="image" id="fileInput" onchange="previewImage(event)" accept="image/*" />
 
                             <div class="file-img" >
                                 <img id="preview"  src="data:image;base64,${e.data}" alt="Preview"/>
@@ -86,27 +86,14 @@
                     <div class="table-btn">
                         <button type="submit">UPDATE</button>
                     </div>
-                </form>
-                <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-                <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-                <script>
-
-                                const dayStartInput = document.querySelector('input[name="day-start"]');
-                                const dayEndInput = document.querySelector('input[name="day-end"]');
-                                const nameInput = document.getElementById('name-input');
-                                const discountInput = document.getElementById('discount-input');
-
-                                discountInput.step = '0';
-                                discountInput.max = '100';
-
-                                dayStartInput.addEventListener('change', validateDateRange);
-                                dayEndInput.addEventListener('change', validateDateRange);
-                                console.log(dayStartInput.value);
-                                function validateDateRange() {
-                                    const dayStart = new Date(dayStartInput.value);
-                                    const dayEnd = new Date(dayEndInput.value);
-                                    const currentDate = new Date();
-
+        </form>
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+        <script>
+                const dayStartInput = document.querySelector('input[name="day-start"]');
+                const dayEndInput = document.querySelector('input[name="day-end"]');
+                const nameInput = document.getElementById('name-input');
+                const discountInput = document.getElementById('discount-input');
 
                 discountInput.step = '0';
                 discountInput.max = '100';
@@ -119,69 +106,81 @@
                     const dayEnd = new Date(dayEndInput.value);
                     const currentDate = new Date();
 
-                    if (dayStart <= currentDate) {
-                        alert('Giá trị của DayStart phải lớn hơn ngày hiện tại.');
-                        dayStartInput.value = "";
-                        return;
-                    }
 
-                    if (dayEnd <= dayStart) {
-                        alert('Giá trị của DayEnd phải lớn hơn DayStart.');
-                        dayEndInput.value = "";
-                    }
-                }
-                nameInput.addEventListener('input', function () {
-                    let value = this.value;
+                    discountInput.step = '0';
+                    discountInput.max = '100';
 
-                    if (value.charAt(0).trim() !== value.charAt(0).toUpperCase()) {
-                        alert("The first character shoule be uppercase!");
-                        this.value = "";
-                    }
-                    if (/[!@#$%^&*()_+{}[\]|\\:;'<>?,./]/.test(value)) {
-                        alert("You are not allowed to use special characters to name the course!");
-                        this.value = value.replace(/[^a-zA-Z0-9\s]/g, '');
-                    }
+                    dayStartInput.addEventListener('change', validateDateRange);
+                    dayEndInput.addEventListener('change', validateDateRange);
+                    console.log(dayStartInput.value);
+                    function validateDateRange() {
+                        const dayStart = new Date(dayStartInput.value);
+                        const dayEnd = new Date(dayEndInput.value);
+                        const currentDate = new Date();
 
-                });
-                discountInput.addEventListener('input', function () {
-                    let value = this.value;
+                        if (dayStart <= currentDate) {
+                            alert('Giá trị của DayStart phải lớn hơn ngày hiện tại.');
+                            dayStartInput.value = "";
+                            return;
+                        }
 
-                    if (value < 0) {
-                        alert("Please enter a non-negative value!");
-                        this.value = "";
+                        if (dayEnd <= dayStart) {
+                            alert('Giá trị của DayEnd phải lớn hơn DayStart.');
+                            dayEndInput.value = "";
+                        }
                     }
-                    if (value > 100) {
-                        alert("Max discount is 100%!");
-                        this.value = "";
-                    }
-                    if (/^0+$/.test(value)) {
-                        this.value = "0";
-                    }
-                    if (value.startsWith('0') && value.length > 1) {
-                        value = value.slice(1);
-                        this.value = value;
-                    }
-                });
+                    nameInput.addEventListener('input', function () {
+                        let value = this.value;
+
+                        if (value.charAt(0).trim() !== value.charAt(0).toUpperCase()) {
+                            alert("The first character shoule be uppercase!");
+                            this.value = "";
+                        }
+                        if (/[!@#$%^&*()_+{}[\]|\\:;'<>?,./]/.test(value)) {
+                            alert("You are not allowed to use special characters to name the course!");
+                            this.value = value.replace(/[^a-zA-Z0-9\s]/g, '');
+                        }
+
+                    });
+                    discountInput.addEventListener('input', function () {
+                        let value = this.value;
+
+                        if (value < 0) {
+                            alert("Please enter a non-negative value!");
+                            this.value = "";
+                        }
+                        if (value > 100) {
+                            alert("Max discount is 100%!");
+                            this.value = "";
+                        }
+                        if (/^0+$/.test(value)) {
+                            this.value = "0";
+                        }
+                        if (value.startsWith('0') && value.length > 1) {
+                            value = value.slice(1);
+                            this.value = value;
+                        }
+                    });
 
                 </script>
                 <script>
-                    function previewImage(event) {
-                        var reader = new FileReader();
-                        reader.onload = function () {
-                            var output = document.getElementById("preview");
-                            output.src = reader.result;
-                        };
+                        function previewImage(event) {
+                            var reader = new FileReader();
+                            reader.onload = function () {
+                                var output = document.getElementById("preview");
+                                output.src = reader.result;
+                            };
 
-                        var fileInput = event.target;
-                        var files = fileInput.files;
+                            var fileInput = event.target;
+                            var files = fileInput.files;
 
-                        if (files.length > 0) {
-                            reader.readAsDataURL(files[0]);
-                        } else {
-                            var output = document.getElementById("preview");
-                            output.src = "#";
+                            if (files.length > 0) {
+                                reader.readAsDataURL(files[0]);
+                            } else {
+                                var output = document.getElementById("preview");
+                                output.src = "#";
+                            }
                         }
-                    }
                 </script>
                 </body>
 

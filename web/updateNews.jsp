@@ -19,7 +19,7 @@
             <c:redirect url="login.jsp"></c:redirect>
         </c:if>
         <div class="wrapper d-flex align-items-stretch">
-                <c:import url="./view.service/service_header.jsp"/>
+            <c:import url="./view.service/service_header.jsp"/>
 
             <!-- Page Content  -->
             <div id="content">
@@ -38,32 +38,32 @@
                 <div class="table-name">
                     <h1>CHỈNH SỬA TIN TỨC</h1>
                 </div>
-                <form action="updatenews" method="Post" enctype="multipart/form-data">
+                    <form id="myForm" action="updatenews" method="Post" enctype="multipart/form-data">
                     <div class="update-box">
                         <div class="update-title">
                             <label for="title">Title</label>
-                            <input value="${ns.title}" type="text" name="title" />
+                            <input value="${ns.title}" type="text" name="title" id="name-input"/>
                         </div>
                         <div class="update-select">
                             <label>Category</label>
                             <select name="categoryID">
                                 <c:if test="${ns.categoryID == '1'}">
-                                <option value="" selected>Chọn Loại Tin Tức</option>
-                                <option value="1" selected="">Blog</option>
-                                <option value="2">Product</option>
-                                <option value="3">Other</option>
+                                    <option value="" selected>Chọn Loại Tin Tức</option>
+                                    <option value="1" selected="">Blog</option>
+                                    <option value="2">Product</option>
+                                    <option value="3">Other</option>
                                 </c:if>
                                 <c:if test="${ns.categoryID == '2'}">
-                                <option value="" selected>Chọn Loại Tin Tức</option>
-                                <option value="1">Blog</option>
-                                <option value="2" selected="">Product</option>
-                                <option value="3">Other</option>
+                                    <option value="" selected>Chọn Loại Tin Tức</option>
+                                    <option value="1">Blog</option>
+                                    <option value="2" selected="">Product</option>
+                                    <option value="3">Other</option>
                                 </c:if>
                                 <c:if test="${ns.categoryID == '3'}">
-                                <option value="" selected>Chọn Loại Tin Tức</option>
-                                <option value="1">Blog</option>
-                                <option value="2">Product</option>
-                                <option value="3" selected="">Other</option>
+                                    <option value="" selected>Chọn Loại Tin Tức</option>
+                                    <option value="1">Blog</option>
+                                    <option value="2">Product</option>
+                                    <option value="3" selected="">Other</option>
                                 </c:if>
                             </select>
                         </div>
@@ -71,19 +71,20 @@
                         <div class="update-cate">
                             <label>Image</label>
                             <input type="file" name="image" id="fileInput" onchange="previewImage(event)" accept="image/*" />
-                            
+
                             <div class="file-img">
-                                <c:if test="${not empty ns.image}">
                                     <img id="preview" src="data:image;base64,${ns.data}" width="50px" height="50px" alt="Preview">
-                                </c:if>
                             </div>
                         </div>
                         <div class="update-content-wrapper">
                             <div class="update-content">
                                 <label for="">Content</label>
-                                <textarea id="myTextarea" name="content">${ns.content}</textarea>
+                                <textarea id="myTextarea" name="content" required="required">${ns.content}</textarea>
 
                                 <input type="hidden" name="newsID" value="${ns.newsID}"/>
+                            </div>
+                            <div>
+                                <div id="errorMsg" style="display:none; color:red;">Please enter description!</div>
                             </div>
                         </div>
                     </div>
@@ -92,6 +93,44 @@
                     </div>
                 </form>
             </div>
+            <script>
+                const nameInput = document.getElementById('name-input');
+                const myTextarea = document.getElementById("myTextarea");
+                var errorMsg = document.getElementById("errorMsg");
+
+                nameInput.addEventListener('input', function () {
+                    let value = this.value;
+                    if (value.charAt(0).trim() !== value.charAt(0).toUpperCase()) {
+                        alert("The first character shoule be uppercase!");
+                        this.value = "";
+                    }
+                    if (/[!@#$%^&*()+{}[\]|\\:;'<>?,./]/.test(value)) {
+                        alert("You are not allowed to use special characters to name the club!");
+                        this.value = value.replace(/[^a-zA-Z0-9\s]/g, '');
+                    }
+                });
+                myTextarea.addEventListener('input', function () {
+                    if (myTextarea.value.trim() === "") {
+                        errorMsg.style.display = "block";
+                    } else {
+                        errorMsg.style.display = "none";
+                    }
+                });
+                var myForm = document.getElementById("myForm");
+                myForm.addEventListener("submit", function (event) {
+                    if (myTextarea.value.trim() === "") {
+                        errorMsg.style.display = "block";
+                        event.preventDefault();
+                    } else {
+                        errorMsg.style.display = "none";
+                    }
+
+                    if (nameInput.value.trim() === "") {
+                        alert("Please input course name!");
+                        event.preventDefault();
+                    }
+                });
+            </script>
             <script>
                 function previewImage(event) {
                     var reader = new FileReader();
