@@ -44,7 +44,7 @@ public class AcceptFeedbackServlet extends HttpServlet {
                 FeedbackDAO dao = new FeedbackDAO();
                 boolean checkRestore = dao.acceptFeedback(cusPhone);
                 if (checkRestore) {
-                    message = "Update feedback successfully!";
+                    message = "Accept feedback successfully!";
                 } else {
                     message = "Can't update feedback!";
                 }
@@ -54,7 +54,7 @@ public class AcceptFeedbackServlet extends HttpServlet {
             Logger.getLogger(AcceptFeedbackServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        request.setAttribute("ErrorMessage", message);
+        request.setAttribute("message", message);
         request.getRequestDispatcher("pendingfeedback").forward(request, response);
     }
 
@@ -77,7 +77,7 @@ public class AcceptFeedbackServlet extends HttpServlet {
                 FeedbackDAO dao = new FeedbackDAO();
                 boolean checkRestore = dao.acceptFeedback(cusPhone);
                 if (checkRestore) {
-                    message = "Update feedback successfully!";
+                    message = "Accept feedback successfully!";
                 } else {
                     message = "Can't update feedback!";
                 }
@@ -87,8 +87,8 @@ public class AcceptFeedbackServlet extends HttpServlet {
             Logger.getLogger(AcceptFeedbackServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        request.setAttribute("ErrorMessage", message);
-        request.getRequestDispatcher("pendingfeedback.jsp").forward(request, response);
+        request.setAttribute("message", message);
+        request.getRequestDispatcher("pendingfeedback").forward(request, response);
     }
 
     /**

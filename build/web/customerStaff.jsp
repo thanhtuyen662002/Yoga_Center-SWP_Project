@@ -50,10 +50,12 @@
                 <table id="course" class="display" style="width:100%">
                     <thead>
                         <tr>
-                            <th>SỐ ĐIỆN THOẠI</th>
-                            <th>TÊN HỌC VIÊN</th>
-                            <th>ĐỊA CHỈ</th>
-                            <th>GIỚI TÍNH</th>
+                            <th>Phone Number</th>
+                            <th>Full Name</th>
+                            <th>Address</th>
+                            <th>Gender</th>
+                            <th>Course</th>
+                            <th>Class</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,6 +66,11 @@
                                 <td id="title">${x.name}</td>
                                 <td >${x.address}</td>
                                 <td >${x.gender}</td>
+                                <td >${x.courseName}</td>
+                                <c:if test="${x.className == null}">
+                                    <td >Chưa có lớp học</td>
+                                </c:if>
+                                <td >${x.className}</td>
                             </tr>
                         </c:forEach>
                 </table>
