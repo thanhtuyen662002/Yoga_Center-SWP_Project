@@ -47,7 +47,7 @@
                 <div class="container card-list">
 
                     <c:forEach items="${list}" var="c" varStatus="status">
-                        <form action="courseCustomer?id=${c.courseID}" method="POST">
+                        <form action="courseCustomer?id=${c.courseID}&phone=${sessionScope.USER.phone}" method="POST">
                             <c:set var="index" value="${status.index + 1}"/>
                             <c:if test="${index < 10}">
                                 <c:set var="index" value="0${status.index + 1}"/>

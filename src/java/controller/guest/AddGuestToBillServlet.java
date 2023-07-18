@@ -31,7 +31,8 @@ public class AddGuestToBillServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String phone = request.getParameter("phone");
+        String phoneTrim = request.getParameter("phone");
+        String phone = phoneTrim.replace(" ", "");
         String courseID = request.getParameter("chooseCourse");
         String name = new String(request.getParameter("fullName").getBytes("ISO-8859-1"), "UTF-8");
         GuestDAO dao = new GuestDAO();

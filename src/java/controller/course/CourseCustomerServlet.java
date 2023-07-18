@@ -3,12 +3,8 @@ package controller.course;
 import model.dao.CoursesDAO;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -50,12 +46,16 @@ public class CourseCustomerServlet extends HttpServlet {
         try {
             String message = (String) request.getAttribute("Message");
             request.setAttribute("message", message);
-
+            String phone = request.getParameter("phone");
             CoursesDAO dao = new CoursesDAO();
+            List<CoursesDTO> listCoursesID = dao.getCourseIDByPhone(phone);
+            request.setAttribute("coursesID", listCoursesID);
+
             EventDAO Edao = new EventDAO();
             String eventID = "";
 
             String id = request.getParameter("id");
+            request.setAttribute("id", id);
             String ID = request.getParameter("ID");
             eventID = Edao.getEventByCourseID(id);
             if (eventID != null && ID == null) {

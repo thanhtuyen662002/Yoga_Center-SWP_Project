@@ -41,7 +41,7 @@ public class UpdateGuestServlet extends HttpServlet {
             GuestDAO dao = new GuestDAO();
             GuestDTO guest = dao.getListGuestByID(signupID);
             List<CoursesDTO> clist = CoursesDAO.getAllCourses();
-            
+
             request.setAttribute("list", guest);
             request.setAttribute("clist", clist);
             request.getRequestDispatcher("updateGuest.jsp").forward(request, response);
@@ -63,7 +63,8 @@ public class UpdateGuestServlet extends HttpServlet {
         try {
             String signupID = request.getParameter("id");
             String courseID = request.getParameter("courseID");
-            String phone = request.getParameter("phone");
+            String phoneTrim = request.getParameter("phone");
+            String phone = phoneTrim.replace(" ", "");
             String address = new String(request.getParameter("address").getBytes("ISO-8859-1"), "UTF-8");
             String fullName = new String(request.getParameter("fullName").getBytes("ISO-8859-1"), "UTF-8");
             String message = "";
@@ -109,7 +110,8 @@ public class UpdateGuestServlet extends HttpServlet {
             if (conn != null) {
                 conn.close();
             }
-        } return false;
+        }
+        return false;
     }
 
     @Override

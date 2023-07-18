@@ -91,7 +91,9 @@ public class CoursesDTO implements Serializable {
         this.timeToCome = timeToCome;
     }
 
-
+    public CoursesDTO(int courseID) {
+        this.courseID = courseID;
+    }
 
     public Time getStartTime() {
         return startTime;

@@ -139,7 +139,7 @@
                 hotline.addEventListener('blur', function () {
                     let value = this.value;
                     if (value.length < 12 && !check) {
-                        alert("The hotline must be at least 10 digits!");
+                        alert("The hotline must be 10 digits!");
                     }
                 });
 

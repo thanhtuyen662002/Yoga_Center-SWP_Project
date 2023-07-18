@@ -50,7 +50,7 @@
                 <div class="table-name">
                     <h1>TẠO TÀI KHOẢN</h1>
                 </div>
-                <form action="loadGuest" method="POST">
+                <form action="loadGuest" method="POST" id="my-form">
                     <div class="update-box">
                         <div class="update-title">
                             <label for="title">Full Name</label>
@@ -58,7 +58,7 @@
                         </div>
                         <div class="update-cate">
                             <label for="cate">Phone Number</label>
-                            <input type="text" required = "required" name="phone" value="${g.phone}" id="phone"/>
+                            <input type="text" required = "required" name="phone" value="${phone}" id="phone"/>
                         </div>
                         <div class="update-cate">
                             <label for="cate">Password</label>
@@ -79,7 +79,7 @@
                         </div>   
                     </div>
                     <div class="table-button">
-                        <button type="submit">CREATE</button>
+                        <button type="submit" onclick="hotlineCheck(event)">CREATE</button>
                     </div>
                 </form>
             </div>
@@ -118,12 +118,48 @@
                 address.addEventListener('input', function () {
                     let value = this.value;
 
-                    if (/[!@#$%^&*()_+{}[\]|\\:;'<>?,./]/.test(value)) {
+                    if (/[!@#$%^&*()_+{}[\]|\\:;'<>?/]/.test(value)) {
                         alert("You are not allowed to use special characters to name the class!");
                         this.value = value.replace(/[^a-zA-Z0-9\s]/g, '');
                     }
 
                 });
+
+                phone.addEventListener('input', function () {
+                    let value = this.value;
+
+                    if (/[!@#$%^&*()+{}[\]|\\:;'<>?,./]/.test(value)) {
+                        alert("You are not allowed to use special characters in the phone number!");
+                        this.value = value.replace(/[^0-9\s]/g, '');
+                    } else if (/[^0-9\s]/.test(value)) {
+                        alert("Only numbers are allowed in the phone number!");
+                        this.value = value.replace(/[^0-9\s]/g, '');
+                    } else if (value.length > 12) {
+                        alert("The phone number must be maximum 10 digits!");
+                        value = value.replace(/(\d{4})(\d{3})(\d{3})/, '$1 $2 $3');
+                        this.value = value.slice(0, 12);
+                    } else if (value.charAt(0) !== '0') {
+                        alert("The first digit of phone number must be start with 0!");
+                        this.value = '0';
+                    } else if (value.charAt(1) === '0') {
+                        alert("Invalid phone number!");
+                        this.value = '0';
+                    } else {
+                        value = value.replace(/\s/g, '');
+                        value = value.replace(/(\d{4})(\d{3})(\d{3})/, '$1 $2 $3');
+                        this.value = value;
+                    }
+                });
+                function hotlineCheck(event) {
+                    let value = phone.value;
+                    if (value.length < 12) {
+                        alert("The phone number must be 10 digits!");
+                        event.preventDefault();
+                    } else {
+                        document('my-form').submit();
+                    }
+                }
+                ;
             </script>
             <script>
                 CKEDITOR.replace("myTextarea");

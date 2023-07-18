@@ -58,25 +58,23 @@
                         </div>
                         <div class="price-detail-rating">
                             <h1>Đánh Giá Khóa Học</h1>
-                <c:if test="${sessionScope.USER.roleID eq 'US'}">
-                            <form  action="insertfb" method="Post">
-                                <div class="rating-box">
-                                    <div style="text-align: center; color: red">
-                                        <% if (Message != null) {%>
-                                        <p><%= Message%></p>
-                                        <% }%>
+                            <c:if test="${sessionScope.USER.roleID eq 'US'}">
+                                <form  action="insertfb" method="Post">
+                                    <div class="rating-box">
+                                        <div style="text-align: center; color: red">
+                                            <% if (Message != null) {%>
+                                            <p><%= Message%></p>
+                                            <% }%>
+                                        </div>
+                                        <h2>Viết Bình Luận ...<i class="fa-solid fa-pen fa-sm"></i></h2>
+                                        <input name="comment" id="inputContent" type="text" 
+                                               placeholder="Mời bạn bình luận và đánh giá khóa học" required />
+                                        <input name="cusPhone" type="hidden" value="${sessionScope.USER.phone}"/>
+                                        <input name="courseID" type="hidden" value="<%= request.getParameter("id")%>">
+                                        <button  type="submit">Gửi</button>
                                     </div>
-                                    <!--                                    <h3 id="notice">Viết bình luận thành công!!!</h3>-->
-                                    <h2>Viết Bình Luận ...<i class="fa-solid fa-pen fa-sm"></i></h2>
-
-                                    <input name="comment" id="inputContent" type="text" 
-                                           placeholder="Mời bạn bình luận và đánh giá khóa học" required />
-                                    <input name="cusPhone" type="hidden" value="${sessionScope.USER.phone}"/>
-                                    <input name="courseID" type="hidden" value="<%= request.getParameter("id")%>">
-                                    <button  type="submit">Gửi</button>
-                                </div>
-                            </form>
-                                    </c:if>
+                                </form>
+                            </c:if>
                             <div class="rating-box-question">
                                 <c:forEach var="feedback" items="${feedbackList}">
                                     <div class="question-card">
@@ -103,7 +101,6 @@
                                     <c:set var="totalPrice">
 
                                         <c:set var="vnCurrency" value="₫" />
-
                                         <fmt:formatNumber type="currency" currencySymbol="${vnCurrency}" value="${total}"/>
                                     </c:set>
                                     <c:set var="discountPrice" >
@@ -160,9 +157,29 @@
                                         </li>
                                         <li>- Áp dụng ưu đãi giảm: ${persent*100}%</li>
                                         <li>- Được sử dụng toàn bộ dịch vụ trung tâm</li>
-                                        <li>
-                                            <button type="submit" id="submit">ĐĂNG KÝ NGAY</button>
+                                        <li style="text-align: center">
+                                            <c:set var="isRegistered" value="false" />
+                                            <c:forEach var="cID" items="${coursesID}">
+                                                <c:if test="${cID.courseID == id}">
+                                                    <c:set var="isRegistered" value="true"/>  
+                                                </c:if>
+                                            </c:forEach>
+                                            <c:choose>
+                                                <c:when test="${isRegistered}">
+                                                    <h3 style="color: #f3ba00;
+                                                        font-weight: 600;
+                                                        text-align: center;
+                                                        line-height: 2rem;
+                                                        width: 100%;
+                                                        margin-top: 6rem;
+                                                        font-size: 2.5rem;">BẠN ĐÃ ĐĂNG KÝ KHÓA HỌC NÀY!</h3>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <button type="submit" id="submit">ĐĂNG KÝ NGAY</button>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </li>
+
                                     </ul>
                                 </div>
                             </div>

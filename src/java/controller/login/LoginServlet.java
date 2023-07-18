@@ -38,44 +38,7 @@ public class LoginServlet extends HttpServlet {
         String phone = request.getParameter("txtPhone");
         String password = request.getParameter("txtPassword");
         UserDTO user = UserDAO.getUser(phone, password);
-//        try {
-//            if (user != null) {
-//                if (user.getRoleID().equals("AD")) {
-//                    HttpSession session = request.getSession(true);
-//                    if (session != null) {
-//                        session.setAttribute("txtphone", user.getPhone());
-//                        session.setAttribute("txtname", user.getName());
-//                        session.setAttribute("user", user);
-//                        request.getRequestDispatcher("home.jsp").forward(request, response);
-//
-//                    }
-//                } else if (user.getRoleID().equals("ST")) {
-//                    HttpSession session = request.getSession(true);
-//                    if (session != null) {
-//                        session.setAttribute("txtSTphone", user.getPhone());
-//                        session.setAttribute("txtname", user.getName());
-//                        session.setAttribute("user", user);
-//                        request.getRequestDispatcher("courseStaff.jsp").forward(request, response);
-//                    }
-//                } else if (user.getRoleID().equals("US")) {
-//                    HttpSession session = request.getSession(true);
-//                    if (session != null) {
-//                        session.setAttribute("txtphone", user.getPhone());
-//                        session.setAttribute("txtname", user.getName());
-//                        session.setAttribute("user", user);
-//                        request.getRequestDispatcher("home.jsp").forward(request, response);
-//
-//                    }
-//                }
-//            } else {
-//                request.setAttribute("message", "Login fail");
-//                request.getRequestDispatcher("login.jsp").forward(request, response);
-//
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        
         String message = (String) request.getAttribute("message");
         request.setAttribute("ErrorMessage", message);
         try {
@@ -84,6 +47,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("USER", user);
                 switch (user.getRoleID()) {
                     case "US":
+                        request.setAttribute("phone", phone);
                         request.getRequestDispatcher("view.customer/home.jsp").forward(request, response);
                         break;
                     case "AD":

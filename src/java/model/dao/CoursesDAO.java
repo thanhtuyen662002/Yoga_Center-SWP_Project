@@ -346,7 +346,11 @@ public class CoursesDAO {
     }
 
     public static void main(String[] args) throws SQLException {
-      
+        CoursesDAO dao = new CoursesDAO();
+        List<CoursesDTO> listCoursesID = dao.getCourseIDByPhone("0321789654");
+        for (int i = 0; i < listCoursesID.size(); i++) {
+            System.out.println(listCoursesID);
+        }
     }
 
     public CoursesDTO getCourses(String id) throws SQLException {
@@ -423,6 +427,37 @@ public class CoursesDAO {
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     list.add(new CoursesDTO(rs.getTime("timeToCome")));
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return list;
+    }
+
+    public List<CoursesDTO> getCourseIDByPhone(String phone) throws SQLException {
+        List<CoursesDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT courseID FROM UserCourse WHERE phone = '" + phone + "'";
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    list.add(new CoursesDTO(rs.getInt("courseID")));
                 }
             }
         } catch (Exception e) {

@@ -38,7 +38,10 @@ public class LoadGuestListServlet extends HttpServlet {
         try {
             GuestDAO dao = new GuestDAO();
             GuestDTO list = dao.getListGuestByID(id);
+            String phoneSub = list.getPhone();
+            String phone = phoneSub.substring(0, 4) + " " + phoneSub.substring(4, 7) + " " + phoneSub.substring(7);
             request.setAttribute("g", list);
+            request.setAttribute("phone", phone);
             request.getRequestDispatcher("insertGuest.jsp").forward(request, response);
         } catch (Exception e) {
         }
@@ -48,7 +51,8 @@ public class LoadGuestListServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String fullName = new String(request.getParameter("fullName").getBytes("ISO-8859-1"), "UTF-8");
-        String phone = request.getParameter("phone");
+        String phoneTrim = request.getParameter("phone");
+        String phone = phoneTrim.replace(" ", "");
         String password = request.getParameter("password");
         String address = new String(request.getParameter("address").getBytes("ISO-8859-1"), "UTF-8");
         String gender = request.getParameter("gender");
@@ -79,7 +83,7 @@ public class LoadGuestListServlet extends HttpServlet {
                     } else {
                         System.out.println("Không thể tìm thấy khóa học trong bảng SignUp!");
                         request.setAttribute("fullName", fullName);
-                        request.setAttribute("phone", phone);
+                        request.setAttribute("phone", phoneTrim);
                         request.setAttribute("address", address);
                         request.setAttribute("gender", gender);
                         List<CoursesDTO> list = CoursesDAO.getAllCourses();
