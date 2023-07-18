@@ -20,6 +20,7 @@ public class EventDTO {
     private String image;
     private String data;
     private boolean status;
+    private boolean flag;
 
     public EventDTO(int eventID, String eventName, int courseID, float discount, String daystart, String dayend, String image, String data, boolean status) {
         this.eventID = eventID;
@@ -58,7 +59,7 @@ public class EventDTO {
         this.status = status;
     }
 
-    public EventDTO(int eventID, String eventName, int courseID, String courseName, float discount, String daystart, String dayend, String image, String data, boolean status) {
+    public EventDTO(int eventID, String eventName, int courseID, String courseName, float discount, String daystart, String dayend, String image, String data, boolean flag) {
         this.eventID = eventID;
         this.eventName = eventName;
         this.courseID = courseID;
@@ -68,7 +69,7 @@ public class EventDTO {
         this.dayend = dayend;
         this.image = image;
         this.data = data;
-        this.status = status;
+        this.flag = flag;
     }
 
     public EventDTO(int eventID, float discount) {
@@ -155,6 +156,14 @@ public class EventDTO {
 
     public void setCourseName(String courseName) {
         this.courseName = courseName;
+    }
+
+    public boolean isFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
     }
 
     @Override

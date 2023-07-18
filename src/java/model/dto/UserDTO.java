@@ -17,8 +17,34 @@ public class UserDTO {
     private String gender;
     private String roleID;
     private boolean status;
+    private String courseName;
+    private String className;
+    
     
     public UserDTO() {
+    }
+
+    public UserDTO(String phone, String password, String name, String address, String gender, String roleID, boolean status, String courseName) {
+        this.phone = phone;
+        this.password = password;
+        this.name = name;
+        this.address = address;
+        this.gender = gender;
+        this.roleID = roleID;
+        this.status = status;
+        this.courseName = courseName;
+    }
+
+    public UserDTO(String phone, String password, String name, String address, String gender, String roleID, boolean status, String courseName, String className) {
+        this.phone = phone;
+        this.password = password;
+        this.name = name;
+        this.address = address;
+        this.gender = gender;
+        this.roleID = roleID;
+        this.status = status;
+        this.courseName = courseName;
+        this.className = className;
     }
     
     
@@ -53,6 +79,22 @@ public class UserDTO {
         this.phone = phone;
         this.name = name;
         this.roleID = role;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
     public String getPhone() {

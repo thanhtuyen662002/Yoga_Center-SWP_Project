@@ -73,9 +73,11 @@
                                 <td class="event-img"><img src="data:image;base64,${e.data}" /></td>
                                     <c:if test="${sessionScope.ROLE == 'SV'}">
                                     <td id="tool">
-                                        <a href="updateEvent?name=${e.eventName}&courseID=${e.courseID}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
+                                        <c:if test="${e.flag != 'true'}" >
+                                             <a href="updateEvent?name=${e.eventName}&courseID=${e.courseID}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
                                         |
                                         <a href="#" onclick="showMess('${e.eventID} - ${e.eventName}')"><i class="fa-sharp fa-solid fa-trash"></i></a>
+                                        </c:if>
                                     </td>
                                 </c:if>
                             </tr>

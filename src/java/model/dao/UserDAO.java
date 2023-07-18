@@ -23,6 +23,7 @@ import utils.DBUtils;
  * @author HP Pro
  */
 public class UserDAO {
+
     public static UserDTO getUser(String phone, String password) {
         Connection cn = null;
         UserDTO user = null;
@@ -59,7 +60,7 @@ public class UserDAO {
         }
         return user;
     }
-    
+
     public static ArrayList<UserDTO> getAllCus() throws SQLException {
         ArrayList<UserDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -68,7 +69,12 @@ public class UserDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                ptm = conn.prepareStatement("SELECT * FROM [dbo].[User] WHERE role = 'US'");
+                ptm = conn.prepareStatement("SELECT u.phone, u.password, u.name, u.address, u.gender, u.role, c.name AS courseName, uc.status, cl.name AS className\n"
+                        + "FROM [dbo].[User] u\n"
+                        + "INNER JOIN UserCourse uc ON u.phone = uc.phone\n"
+                        + "INNER JOIN Courses c ON uc.courseID = c.courseID\n"
+                        + "LEFT JOIN UserClass us ON u.phone = us.phone\n"
+                        + "LEFT JOIN Class cl ON us.classID = cl.classID;");
                 rs = ptm.executeQuery();
 
                 while (rs.next()) {
@@ -78,8 +84,10 @@ public class UserDAO {
                     String address = rs.getString("address");
                     String gender = rs.getString("gender");
                     String role = rs.getString("role");
+                    String courseName = rs.getString("courseName");
+                    String className = rs.getString("className");
                     boolean status = rs.getBoolean("status");
-                    list.add(new UserDTO(phone, password, name, address, gender, role, status));
+                    list.add(new UserDTO(phone, password, name, address, gender, role, status, courseName, className));
                 }
             }
         } catch (Exception e) {
@@ -96,24 +104,22 @@ public class UserDAO {
         }
         return list;
     }
-    
-    
-        private static final String CHECK_DUPLICATE_ACCOUNT = "SELECT * FROM [Yoga Center].[dbo].[User] WHERE [phone] = '?'";
 
+    private static final String CHECK_DUPLICATE_ACCOUNT = "SELECT * FROM [Yoga Center].[dbo].[User] WHERE [phone] = '?'";
 
     public UserDTO getUserByPhone(String phone) throws SQLException, NamingException, ClassNotFoundException {
-       
+
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String query = "SELECT * FROM [dbo].[User] WHERE [phone] = '"+ phone +"'";
+                String query = "SELECT * FROM [dbo].[User] WHERE [phone] = '" + phone + "'";
                 ptm = conn.prepareStatement(query);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
-                    return new UserDTO(rs.getString("phone"),rs.getString("password"),rs.getString("name"), rs.getString("address"), rs.getString("gender"), rs.getString("roleID"), rs.getBoolean("status"));
+                    return new UserDTO(rs.getString("phone"), rs.getString("password"), rs.getString("name"), rs.getString("address"), rs.getString("gender"), rs.getString("roleID"), rs.getBoolean("status"));
                 }
             }
         } finally {
@@ -130,16 +136,17 @@ public class UserDAO {
         return null;
     }
     private static final String INSERT = "INSERT INTO [User]([phone], [password], [name], [address], [gender], [role], [status] )"
-           + "VALUES('?','?','?','?','?','?','?','?')";
-    public void insert(String phone,String password,String name,String address,String gender,String role) throws SQLException, NamingException, ClassNotFoundException {
+            + "VALUES('?','?','?','?','?','?','?','?')";
+
+    public void insert(String phone, String password, String name, String address, String gender, String role) throws SQLException, NamingException, ClassNotFoundException {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
             conn = DBUtils.getConnection();
-            if (conn != null) {               
+            if (conn != null) {
                 String sql = "INSERT INTO [User]([phone], [password], [name], [address], [gender], [role], [status] )"
-                        + "VALUES('" + phone + "','" + password + "',N'" + name  + "',N'" + address + "','" + gender + "','" + role + "', 1)";
-                ptm = conn.prepareStatement(sql);               
+                        + "VALUES('" + phone + "','" + password + "',N'" + name + "',N'" + address + "','" + gender + "','" + role + "', 1)";
+                ptm = conn.prepareStatement(sql);
                 ptm.executeUpdate();
             }
         } finally {
@@ -176,5 +183,4 @@ public class UserDAO {
         }
     }
 
-   
 }
