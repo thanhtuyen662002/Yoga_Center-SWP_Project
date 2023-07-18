@@ -24,7 +24,7 @@
                 <c:import url="cashier_header.jsp"/>
             </c:if>
             <c:if test="${sessionScope.ROLE == 'AD'}">
-            <c:import url="./views/Admin_Nhat/Header_Admin.jsp"/>
+                <c:import url="./views/Admin_Nhat/Header_Admin.jsp"/>
             </c:if>
             <!-- Page Content  -->
             <div id="content">
@@ -54,27 +54,28 @@
                     <div class="update-box">
                         <div class="update-title">
                             <label for="title">Full Name</label>
-                            <input type="text" required = "required" name="fullName" value="${g.fullName}"/>
+                            <input type="text" required = "required" name="fullName" value="${g.fullName}" id="fullname"/>
                         </div>
                         <div class="update-cate">
                             <label for="cate">Phone Number</label>
-                            <input type="text" required = "required" name="phone" value="${g.phone}"/>
+                            <input type="text" required = "required" name="phone" value="${g.phone}" id="phone"/>
                         </div>
                         <div class="update-cate">
                             <label for="cate">Password</label>
-                            <input type="text" name="password" value="123@" readonly=""/>
+                            <input type="text" name="password" value="123@" readonly="" 
+                                   style="background-color: #808080"/>
                         </div>
                         <div class="update-cate">
                             <label for="cate">Address</label>
-                            <input type="text" required = "required" name="address" value="${g.address}"/>
+                            <input type="text" required = "required" name="address" value="${g.address}" id="address"/>
                         </div>
                         <div class="update-cate">
                             <label for="cate">Gender</label>
-                            <label>
-                                <input type="radio" name="gender" value="Male" checked> Male
-                                <input type="radio" name="gender" value="Female"> Female
-                                <input type="radio" name="gender" value="Other"> Other
-                            </label>
+                            <select name="gender">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
                         </div>   
                     </div>
                     <div class="table-button">
@@ -92,8 +93,41 @@
             <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
             <script src="./ckeditor/ckeditor.js"></script>
             <script>
+                const fullname = document.getElementById('fullname');
+                const phone = document.getElementById('phone');
+                const address = document.getElementById('address');
+
+                fullname.addEventListener('input', function () {
+                    let value = this.value;
+
+                    value = value.toLowerCase();
+                    const words = value.split(/\s+/);
+                    for (let i = 0; i < words.length; i++) {
+                        const word = words[i];
+                        const firstChar = word.charAt(0);
+                        words[i] = firstChar.toUpperCase() + word.slice(1);
+                    }
+                    value = words.join(' ');
+                    this.value = value;
+                    if (/[!@#$%^&*()_+{}[\]|\\:;'<>?,./]/.test(value)) {
+                        alert("You are not allowed to use special characters to name the class!");
+                        this.value = "";
+                    }
+                });
+
+                address.addEventListener('input', function () {
+                    let value = this.value;
+
+                    if (/[!@#$%^&*()_+{}[\]|\\:;'<>?,./]/.test(value)) {
+                        alert("You are not allowed to use special characters to name the class!");
+                        this.value = value.replace(/[^a-zA-Z0-9\s]/g, '');
+                    }
+
+                });
+            </script>
+            <script>
                 CKEDITOR.replace("myTextarea");
             </script>
             <script src="./js/course.js"></script>
-            </body>
-            </html>
+    </body>
+</html>

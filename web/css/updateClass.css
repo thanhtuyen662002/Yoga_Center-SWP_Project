@@ -11115,3 +11115,12 @@ a[data-toggle="collapse"] {
     background-color: #0b2e13;
     color: #fff;
 }
+.update-content-wrapper {
+  grid-column: span 2;
+}
+
+.update-content {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.update-content label

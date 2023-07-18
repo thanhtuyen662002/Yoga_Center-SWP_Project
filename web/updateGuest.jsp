@@ -40,59 +40,43 @@
                 <div class="table-name">
                     <h1>CHỈNH SỬA THÔNG TIN KHÁCH HÀNG</h1>
                 </div>
-                <%@ page import="model.dto.CoursesDTO" %>
-                <%@ page import="java.util.List" %>
-                <%@ page import="model.dao.GuestDAO" %>
-                <% GuestDAO dao = new GuestDAO(); %>
-                <% List<CoursesDTO> courses = dao.getCourseName(); %>
                 <form action="updateguest?id=${list_guest.signupID}" method="Post" >
                     <div class="update-box">
                         <div class="update-title">
-                            <label for="title">Tên Khách Hàng</label>
-                            <input value="${list_guest.fullName}" type="text" name="fullName" />
+                            <label for="title">Full Name</label>
+                            <input value="${list.fullName}" type="text" name="fullName" required = "required"/>
                         </div>
                         <div class="update-title">
-                            <label for="title">Số Điện Thoại</label>
-                            <input value="${list_guest.phone}" type="text" name="phone" />
+                            <label for="title">Phone Number</label>
+                            <input value="${list.phone}" type="text" name="phone" required = "required"/>
                         </div>
                         <div class="update-title">
-                            <label for="title">Địa Chỉ</label>
-                            <input value="${list_guest.address}" type="text" name="address" />
+                            <label for="title">Address</label>
+                            <input value="${list.address}" type="text" name="address" required = "required"/>
                         </div>
                         <div class="update-title">
                             <label for="cate">Course Name</label>
-                            <select name="courseID">
-                                <% for (CoursesDTO course : courses) {%>
-                                <option value="<%= course.getCourseID()%>"><%= course.getCourseName()%></option>
-                                <% }%>
+                            <select name="courseID" class="red-select">
+                                <c:forEach var="c" items="${clist}">
+                                    <option value="${c.courseID}" <c:if test="${c.courseID == list.courseID}">selected=""</c:if>
+                                            >${c.courseName}</option>
+                                </c:forEach>
                             </select>
                         </div>
+                        <div class="update-title">
+                            <label for="cate">Gender</label>
+                            <select name="gender" class="red-select">
+                                <option value="Male" <c:if test="${list.gender == 'Male'}">selected=""</c:if>>Male</option>
+                                <option value="Female" <c:if test="${list.gender == 'Female'}">selected=""</c:if>>Female</option>
+                                <option value="Other" <c:if test="${list.gender == 'Other'}">selected=""</c:if>>Other</option>
+                            </select>
+                        </div>  
                     </div>
                     <div class="table-btn">
-                        <button type="submit">Update</button>
+                        <button type="submit">UPDATE</button>
                     </div>
                 </form>
             </div>
-            <script>
-                function previewImage(event) {
-                    var reader = new FileReader();
-                    reader.onload = function () {
-                        var output = document.getElementById("preview");
-                        output.src = reader.result;
-                    };
-
-                    var fileInput = event.target;
-                    var files = fileInput.files;
-
-                    if (files.length > 0) {
-                        reader.readAsDataURL(files[0]);
-                    } else {
-                        // Nếu không có file được chọn, đặt lại ảnh về trạng thái ban đầu
-                        var output = document.getElementById("preview");
-                        output.src = "#";
-                    }
-                }
-            </script>
             <script src="./courseNav/bootstrap.min.js"></script>
             <script src="./courseNav/jquery.min.js"></script>
             <script src="./courseNav/main.js"></script>

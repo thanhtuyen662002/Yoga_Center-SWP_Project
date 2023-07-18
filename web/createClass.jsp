@@ -39,7 +39,7 @@
                 <div class="table-name">
                     <h1>THÊM LỚP HỌC</h1>
                 </div>
-                <form action="createClass" method="POST">
+                <form action="createClass" id="myForm" method="POST">
                     <div class="update-box">
                         <div class="update-cate">
                             <label for="cate">Class Name</label>
@@ -59,7 +59,7 @@
                         </div>
                         <div class="update-cate">
                             <label for="cate">Course Name</label>
-                            <select name="course" onchange="updateTotalSession()">
+                            <select name="course">
                                 <c:forEach var="c" items="${course}">
                                     <option value="${c.courseID}" >${c.courseName}</option>
                                 </c:forEach>
@@ -68,10 +68,12 @@
                         <div class="update-content-wrapper">
                             <div class="update-content">
                                 <label for="cate">Describe</label>
-                                <textarea id="myTextarea" name="description" required="required"></textarea>
+                                <textarea id="myTextarea" name="description" required = "required"></textarea>
+                            </div>
+                            <div>
+                                <div id="errorMsg" style="display:none; color:red;">Please enter description!</div>
                             </div>
                         </div>
-
                     </div>
                     <div class="table-btn">
                         <input type="submit" value="CREATE">
@@ -88,12 +90,13 @@
             <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
             <script src="./ckeditor/ckeditor.js"></script>
             <script>
-                                CKEDITOR.replace("myTextarea");
+                CKEDITOR.replace("myTextarea");
             </script>
             <script>
                 const nameInput = document.getElementById('name-input');
                 const capacity = document.getElementById('capacity');
                 const myTextarea = document.getElementById('myTextarea');
+                var errorMsg = document.getElementById("errorMsg");
 
                 capacity.step = '1';
                 capacity.max = '50';
@@ -125,12 +128,25 @@
                     }
 
                 });
-
                 myTextarea.addEventListener('input', function () {
-                    let value = this.value;
-                    
-                    if (/^[a-zA-Z0-9\s]+$/.test(value)) {
-                        this.value = value.replace(/[^a-zA-Z0-9\s]/g, '');
+                    if (myTextarea.value.trim() === "") {
+                        errorMsg.style.display = "block";
+                    } else {
+                        errorMsg.style.display = "none";
+                    }
+                });
+                var myForm = document.getElementById("myForm");
+                myForm.addEventListener("submit", function (event) {
+                    if (myTextarea.value.trim() === "") {
+                        errorMsg.style.display = "block";
+                        event.preventDefault();
+                    } else {
+                        errorMsg.style.display = "none";
+                    }
+
+                    if (nameInput.value.trim() === "") {
+                        alert("Please input course name!");
+                        event.preventDefault();
                     }
                 });
             </script>

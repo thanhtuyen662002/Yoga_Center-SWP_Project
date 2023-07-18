@@ -11056,6 +11056,11 @@ a[data-toggle="collapse"] {
   border-radius: 5px;
   font-size: 20px;
 }
+.update-cate select {
+    padding: 12px;
+    font-size: 20px;
+    border-radius: 5px;
+}
 .file-img {
   width: 300px;
   height: 200px;

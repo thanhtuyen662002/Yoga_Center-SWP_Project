@@ -50,18 +50,20 @@
                     <h1>CHỈNH SỬA LỚP HỌC</h1>
                 </div>
 
-                <form  action="updateClass?classID=${cls.classID}" method="POST">
+                    <form id="myForm"  action="updateClass?classID=${cls.classID}" method="POST">
 
                     <div class="update-box">
                         <div class="update-title">
                             <label for="title">Class Name</label>
-                            <input type="text" name="className" value="${cls.className}"/>
+                            <input type="text" name="className" value="${cls.className}" id="name-input" required="required"/>
                         </div>
                         <div class="update-cate">
                             <label for="cate">PT Name</label>
                             <select name="PT">
                                 <c:forEach var="tc" items="${listTC}">
-                                    <option value="${tc.phone}">${tc.name}</option>
+                                    <option value="${tc.phone}" 
+                                            <c:if test="${tc.phone == ptPhone}">selected=""</c:if>
+                                            >${tc.name}</option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -69,24 +71,29 @@
                             <label for="cate">Course Name</label>
                             <select name="courseID">
                                 <c:forEach var="c" items="${listCourse}">
-                                    <option value="${c.courseID}">${c.courseName}</option>
+                                    <option value="${c.courseID}" <c:if test="${c.courseID == courseID}">selected=""</c:if>
+                                            >${c.courseName}</option>
                                 </c:forEach>
                             </select>
                         </div>
 
                         <div class="update-cate">
                             <label for="cate">Total Session</label>
-                            <input type="number" name="totalSession" value="${cls.totalSession}" readonly=""/>
+                            <input type="number" name="totalSession" value="${cls.totalSession}" readonly=""
+                                   style="background-color: #808080"/>
                         </div>
                         <div class="update-cate">
                             <label for="cate">Capacity</label>
-                            <input type="number" name="capacity" value="${cls.capacity}"/>
+                            <input type="number" name="capacity" value="${cls.capacity}" id="capacity" required="required"/>
                         </div>
                         <div></div>
                         <div class="update-content-wrapper">
                             <div class="update-content">
                                 <label for="cate">Describe</label>
-                                <textarea id="myTextarea" name="description" required="required" >${cls.description}</textarea>
+                                <textarea id="myTextarea" name="description" required="required">${cls.description}</textarea>
+                            </div>
+                            <div>
+                                <div id="errorMsg" style="display:none; color:red;">Please enter description!</div>
                             </div>
                         </div>
                     </div>
@@ -97,24 +104,62 @@
 
             </div>
             <script>
-                function previewImage(event) {
-                    var reader = new FileReader();
-                    reader.onload = function () {
-                        var output = document.getElementById("preview");
-                        output.src = reader.result;
-                    };
+                const nameInput = document.getElementById('name-input');
+                const capacity = document.getElementById('capacity');
+                const myTextarea = document.getElementById('myTextarea');
+                var errorMsg = document.getElementById("errorMsg");
 
-                    var fileInput = event.target;
-                    var files = fileInput.files;
+                capacity.step = '1';
+                capacity.max = '50';
 
-                    if (files.length > 0) {
-                        reader.readAsDataURL(files[0]);
-                    } else {
-                        // Nếu không có file được chọn, đặt lại ảnh về trạng thái ban đầu
-                        var output = document.getElementById("preview");
-                        output.src = "#";
+
+                capacity.addEventListener('input', function () {
+                    let value = this.value;
+
+                    if (value < 1) {
+                        alert("Please enter least at 1 capacity!");
+                        this.value = "";
                     }
-                }
+                    if (value > 50) {
+                        alert("Max value is 50 capacity!");
+                        this.value = "";
+                    }
+                });
+
+                nameInput.addEventListener('input', function () {
+                    let value = this.value;
+
+                    if (value.charAt(0).trim() !== value.charAt(0).toUpperCase()) {
+                        alert("The first character shoule be uppercase!");
+                        this.value = "";
+                    }
+                    if (/[!@#$%^&*()_+{}[\]|\\:;'<>?,./]/.test(value)) {
+                        alert("You are not allowed to use special characters to name the class!");
+                        this.value = value.replace(/[^a-zA-Z0-9\s]/g, '');
+                    }
+
+                });
+                myTextarea.addEventListener('input', function () {
+                    if (myTextarea.value.trim() === "") {
+                        errorMsg.style.display = "block";
+                    } else {
+                        errorMsg.style.display = "none";
+                    }
+                });
+                var myForm = document.getElementById("myForm");
+                myForm.addEventListener("submit", function (event) {
+                    if (myTextarea.value.trim() === "") {
+                        errorMsg.style.display = "block";
+                        event.preventDefault();
+                    } else {
+                        errorMsg.style.display = "none";
+                    }
+
+                    if (nameInput.value.trim() === "") {
+                        alert("Please input course name!");
+                        event.preventDefault();
+                    }
+                });
             </script>
             <script src="./courseNav/bootstrap.min.js"></script>
             <script src="./courseNav/jquery.min.js"></script>

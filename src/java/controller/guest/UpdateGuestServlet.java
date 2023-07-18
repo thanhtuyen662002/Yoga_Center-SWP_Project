@@ -2,10 +2,10 @@ package controller.guest;
 
 import controller.news.UpdateNewsServlet;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -13,7 +13,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.dao.CoursesDAO;
 import model.dao.GuestDAO;
+import model.dto.CoursesDTO;
 import model.dto.GuestDTO;
 import utils.DBUtils;
 
@@ -38,12 +40,10 @@ public class UpdateGuestServlet extends HttpServlet {
             String signupID = request.getParameter("signupID");
             GuestDAO dao = new GuestDAO();
             GuestDTO guest = dao.getListGuestByID(signupID);
-            if (guest == null) {
-                response.sendRedirect(request.getContextPath() + "/error");
-                return;
-            }
-
-            request.setAttribute("list_guest", guest);
+            List<CoursesDTO> clist = CoursesDAO.getAllCourses();
+            
+            request.setAttribute("list", guest);
+            request.setAttribute("clist", clist);
             request.getRequestDispatcher("updateGuest.jsp").forward(request, response);
         } catch (Exception e) {
         }

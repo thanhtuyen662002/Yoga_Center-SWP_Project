@@ -137,14 +137,14 @@ public class ClassDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                ptm = conn.prepareStatement("SELECT c.classID, c.courseID, co.name AS courseName, u.name AS ptName, c.name AS className, \n"
+                ptm = conn.prepareStatement("SELECT c.classID, c.courseID, co.name AS courseName, u.name AS ptName, u.phone AS ptPhone, c.name AS className, \n"
                         + "c.description, c.total_sessions, c.capacity, c.status, COUNT(uc.phone) AS TT\n"
                         + "FROM Class AS c\n"
                         + "INNER JOIN [dbo].[User] u ON c.ptPhone = u.phone\n"
                         + "INNER JOIN Courses AS co On co.courseID = c.courseID\n"
                         + "LEFT JOIN UserClass AS uc ON uc.classID = c.classID\n"
                         + "WHERE c.status = 1\n"
-                        + "GROUP BY c.classID, c.courseID, co.name, u.name, c.name, \n"
+                        + "GROUP BY c.classID, c.courseID, co.name, u.phone, u.name, c.name, \n"
                         + "c.description, c.total_sessions, c.capacity, c.status");
                 rs = ptm.executeQuery();
 
@@ -153,13 +153,14 @@ public class ClassDAO {
                     int courseID = rs.getInt("courseID");
                     String courseName = rs.getString("courseName");
                     String ptName = rs.getString("ptName");
+                    String ptPhone = rs.getString("ptPhone");
                     String className = rs.getString("className");
                     String description = rs.getString("description");
                     int totalSession = rs.getInt("total_sessions");
                     int capacity = rs.getInt("capacity");
                     boolean status = rs.getBoolean("status");
                     int countTT = rs.getInt("TT");
-                    list.add(new ClassDTO(classID, courseID, ptName, className, description, totalSession, status, courseName, capacity, countTT));
+                    list.add(new ClassDTO(classID, courseID, ptName, ptPhone, className, description, totalSession, status, courseName, capacity, countTT));
                 }
             }
         } catch (Exception e) {

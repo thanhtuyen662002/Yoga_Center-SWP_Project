@@ -56,8 +56,8 @@
                 <table id="class" class="display" style="width:100%">
                     <thead>
                         <tr>
-                            <th>TÊN HỌC VIÊN </th>
-                            <th>SỐ ĐIỆN THOẠI</th>
+                            <th>Learner Name</th>
+                            <th>Phone Number</th>
                     </thead>
                     <tbody>
                         <c:forEach var="l" items="${list}">

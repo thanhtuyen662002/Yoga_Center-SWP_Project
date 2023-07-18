@@ -66,7 +66,7 @@
                             <div class="update-content-wrapper">
                                 <div class="update-content">
                                     <label for="">Content</label>
-                                    <textarea id="myTextarea" required = "required" name="content" required = "required"></textarea>
+                                    <textarea id="myTextarea" name="content" required = "required"></textarea>
 
                                     <input type="hidden" name="newsID" value=""/>
                                 </div>

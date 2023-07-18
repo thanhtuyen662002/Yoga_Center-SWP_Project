@@ -35,10 +35,11 @@ public class ClassDTO {
         this.courseName = courseName;
         this.capacity = capacity;
     }
-    public ClassDTO(int classID, int courseID, String name, String className, String description, int totalSession, boolean status, String courseName, int capacity, int countTT) {
+    public ClassDTO(int classID, int courseID, String name, String phone, String className, String description, int totalSession, boolean status, String courseName, int capacity, int countTT) {
         this.classID = classID;
         this.courseID = courseID;
         this.name = name;
+        this.phone = phone;
         this.className = className;
         this.description = description;
         this.totalSession = totalSession;

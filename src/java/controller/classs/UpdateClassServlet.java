@@ -27,6 +27,8 @@ public class UpdateClassServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             String ClassID = request.getParameter("classID");
+            String courseID = request.getParameter("courseID");
+            String ptPhone = request.getParameter("ptPhone");
             ClassDAO dao = new ClassDAO();
             List<ClassDTO> listC = dao.getListCourse();
             List<ClassDTO> listTC = dao.getStaff();
@@ -34,6 +36,8 @@ public class UpdateClassServlet extends HttpServlet {
             request.setAttribute("listCourse", listC);
             request.setAttribute("listTC", listTC);
             request.setAttribute("cls", cls);
+            request.setAttribute("courseID", courseID);
+            request.setAttribute("ptPhone", ptPhone);
             request.getRequestDispatcher("updateClass.jsp").forward(request, response);
         } catch (Exception e) {
         }
@@ -49,10 +53,20 @@ public class UpdateClassServlet extends HttpServlet {
             String ptPhone = request.getParameter("PT");
             String courseID = request.getParameter("courseID");
             String description = new String(request.getParameter("description").getBytes("ISO-8859-1"), "UTF-8");
-            String totalSession = request.getParameter("totalSession");
             String capacity = request.getParameter("capacity");
             
-            boolean checkUpdateClass = updateClass(classID, className, ptPhone, courseID, description, totalSession, capacity);
+            ClassDAO dao = new ClassDAO();
+            ClassDTO list = dao.getNumberOfMonths(courseID);
+            int numberOfMonths = list.getNumberOfMonths();
+            int totalSession;
+            if (numberOfMonths == 0) {
+                totalSession = 7;
+            } else {
+                totalSession = numberOfMonths * 8;
+            }
+            String totalSession1 = Integer.toString(totalSession);
+            
+            boolean checkUpdateClass = updateClass(classID, className, ptPhone, courseID, description, totalSession1, capacity);
             if (checkUpdateClass) {
                 message = "Update class successfully!";
                 request.setAttribute("message", message);

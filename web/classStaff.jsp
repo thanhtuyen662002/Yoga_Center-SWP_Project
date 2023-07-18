@@ -61,12 +61,12 @@
                 <table id="class1" class="display" style="width:100%">
                     <thead>
                         <tr>
-                            <th>TÊN LỚP </th>
+                            <th>Class</th>
                             <th>PT</th>
-                            <th>KHÓA HỌC</th>
-                            <th>NỘI DUNG</th>
-                            <th>SỐ SLOT</th>
-                            <th>SỐ HỌC VIÊN</th>
+                            <th>Course</th>
+                            <th>Description</th>
+                            <th>Total Session</th>
+                            <th>Capacity</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -82,11 +82,9 @@
                                         <td>${x.totalSession}</td>
                                         <td>${x.countTT} / ${x.capacity}</td>
                                         <td>
-                                            <a href="showStudent?classID=${x.classID}"><i class="fa-solid fa-graduation-cap fa-bounce" style="color: #34ea10;"></i></i></a>
-                                            <c:if test="${sessionScope.ROLE == 'AD'}">
-                                                |
-                                                <a onclick="showMess('${x.className}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
-                                                </c:if>
+                                            <a href="showStudent?classID=${x.classID}">
+                                                <i class="fa-solid fa-graduation-cap fa-bounce" style="color: #34ea10;"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 </c:if>
@@ -109,9 +107,9 @@
                                             |
                                             <a href="showLearner?id=${x.courseID}&classID=${x.classID}&countTT=${x.countTT}&total=${x.capacity}&message="><i class="fa-solid fa-users-line fa-fade" style="color: #300edd;"></i></i></a>
                                         </c:if>
-                                        <c:if test="${sessionScope.ROLE == 'AD'}">
+                                        <c:if test="${sessionScope.ROLE == 'AD' && x.countTT == 0}">
                                             |
-                                            <a href="updateClass?classID=${x.classID}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
+                                            <a href="updateClass?classID=${x.classID}&ptPhone=${x.phone}&courseID=${x.courseID}"><i class="fa-regular fa-pen-to-square" style="color: #33e31c;"></i></a>
                                             |
                                             <a onclick="showMess('${x.className}')" href="#" > <i class="fa-sharp fa-solid fa-trash"></i></a>
                                         </c:if>
@@ -120,7 +118,6 @@
                             </c:forEach>
                         </c:if>
                     </tbody>
-
                 </table>
 
             </div>
@@ -133,9 +130,9 @@
 
             <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
             <script>
-                                            $(document).ready(function () {
-                                                var table = $('#class1').DataTable();
-                                            });
+                $(document).ready(function () {
+                    var table = $('#class1').DataTable();
+                });
             </script>
 
     </body>

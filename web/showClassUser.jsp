@@ -46,13 +46,13 @@
                     </ul>
                 </div>
                 <div class="table-name">
-                    <h1>DANH SÁCH HỌC VIÊN</h1>
+                    <h1>DANH SÁCH KHÁCH HÀNG</h1>
                 </div>
                 <table id="class" class="display" style="width:100%">
                     <thead>
                         <tr>
-                            <th>TÊN HỌC VIÊN </th>
-                            <th>SỐ ĐIỆN THOẠI</th> 
+                            <th>Customer Name</th>
+                            <th>Phone Number</th> 
                             <th>ACTION</th>
                         </tr>
                     </thead>

@@ -14,8 +14,8 @@ public class GuestDAO {
 
     public static void main(String[] args) throws SQLException {
         GuestDAO dao = new GuestDAO();
-        boolean check = dao.insertUserCourse("0321456987");
-        System.out.println(check);
+        GuestDTO list = dao.getListGuestByID("2");
+        System.out.println(list);
     }
 
     public List<GuestDTO> getListGuest() throws SQLException {
@@ -32,8 +32,9 @@ public class GuestDAO {
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
+                    String gender =  rs.getString("gender").trim();
                     list.add(new GuestDTO(rs.getInt("signupID"), rs.getString("fullName"), rs.getString("phone"),
-                            rs.getString("address"), rs.getString("gender"), rs.getInt("courseID"), rs.getString("name"), rs.getFloat("discount"),
+                            rs.getString("address"), gender, rs.getInt("courseID"), rs.getString("name"), rs.getFloat("discount"),
                             rs.getBoolean("status"), rs.getBoolean("flag")));
                 }
             }
@@ -90,8 +91,9 @@ public class GuestDAO {
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
+                    String gender =  rs.getString("gender").trim();
                     return new GuestDTO(rs.getInt("signupID"), rs.getString("fullName"), rs.getString("phone"), rs.getString("address"),
-                            rs.getInt("courseID"), rs.getFloat("discount"), rs.getBoolean("status"), rs.getBoolean("flag"));
+                           gender, rs.getInt("courseID"), rs.getFloat("discount"), rs.getBoolean("status"), rs.getBoolean("flag"));
                 }
             }
         } catch (Exception e) {
