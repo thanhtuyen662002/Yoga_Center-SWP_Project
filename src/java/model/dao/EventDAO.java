@@ -16,9 +16,9 @@ import utils.DBUtils;
 public class EventDAO {
 
     private static final String SHOW = "Select e.*,c.name FROM Event as e\n"
-            + " join Courses as c  on e.courseID=c.courseID WHERE e.flag = 1";
+            + " join Courses as c  on e.courseID=c.courseID WHERE e.status = 1";
     private static final String SHOW_PENDINGEVENT = "Select e.*,c.name FROM Event as e\n"
-            + " join Courses as c  on e.courseID=c.courseID WHERE e.flag = 0";
+            + " join Courses as c  on e.courseID=c.courseID WHERE e.status = 0";
     private static final String DELETE = "DELETE FROM Event Where eventID =?";
 
     public static ArrayList<EventDTO> getALlEvent() throws SQLException {
@@ -36,7 +36,7 @@ public class EventDAO {
                     list.add(new EventDTO(rs.getInt("eventID"), rs.getString("eventName"),
                             rs.getInt("courseID"), rs.getString("name"), rs.getFloat("discount"),
                             rs.getString("daystart"), rs.getString("dayend"), rs.getString("image"),
-                            rs.getString("data"), rs.getBoolean("status")));
+                            rs.getString("data"), rs.getBoolean("flag")));
                 }
             }
         } catch (Exception e) {
@@ -69,7 +69,7 @@ public class EventDAO {
                     list.add(new EventDTO(rs.getInt("eventID"), rs.getString("eventName"),
                             rs.getInt("courseID"), rs.getString("name"), rs.getFloat("discount"),
                             rs.getString("daystart"), rs.getString("dayend"), rs.getString("image"),
-                            rs.getString("data"), rs.getBoolean("status")));
+                            rs.getString("data"), rs.getBoolean("flag")));
                 }
             }
         } catch (Exception e) {
@@ -345,28 +345,35 @@ public class EventDAO {
 
     }
 
-    public boolean checkDayStart(String daystart, String courseID) throws SQLException {
+    public boolean checkDayStart(String dayend, String daystart, String courseID) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         boolean check = false;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); // Specify the appropriate format
         LocalDateTime dayStart = LocalDateTime.parse(daystart, formatter);
+        LocalDateTime dayEnd = LocalDateTime.parse(dayend, formatter);
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String query = "SELECT daystart, dayend FROM Event WHERE CourseID = ? and status = 1 and flag =1 ";
+                String query = "SELECT daystart, dayend FROM Event WHERE CourseID = ? and status = 1 and flag =0 ";
                 ptm = conn.prepareStatement(query);
                 ptm.setString(1, courseID);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     LocalDateTime mocdaystart = LocalDateTime.parse(rs.getString("daystart") + " 00:00:00", formatter);
                     LocalDateTime mocdayend = LocalDateTime.parse(rs.getString("dayend") + " 00:00:00", formatter);
-                    if (dayStart.isBefore(mocdayend) && dayStart.isAfter(mocdaystart)) {
+                    if (dayStart.isBefore(mocdaystart) && dayEnd.isBefore(mocdaystart)
+                            && dayStart.isBefore(mocdayend) && dayEnd.isBefore(mocdayend)||
+                            dayEnd.isAfter(mocdaystart) && dayStart.isAfter(mocdaystart)
+                            && dayEnd.isAfter(mocdayend) && dayStart.isAfter(mocdayend))  {
+                        check = false;
+                    }
+                    else {
                         check = true;
-                        break;
                     }
                 }
+                
             }
         } catch (Exception e) {
             // Handle exception
@@ -383,28 +390,35 @@ public class EventDAO {
         }
         return check;
     }
-    public boolean checkDayEnd( String dayend, String courseID) throws SQLException {
+    public boolean checkDayEnd( String daystart, String dayend, String courseID) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         boolean check = false;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); // Specify the appropriate format
         LocalDateTime dayEnd = LocalDateTime.parse(dayend, formatter);
+        LocalDateTime dayStart = LocalDateTime.parse(daystart, formatter);
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String query = "SELECT daystart, dayend FROM Event WHERE CourseID = ? and status = 1 and flag =1 ";
+                String query = "SELECT daystart, dayend FROM Event WHERE CourseID = ? and status = 1 and flag =0 ";
                 ptm = conn.prepareStatement(query);
                 ptm.setString(1, courseID);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     LocalDateTime mocdaystart = LocalDateTime.parse(rs.getString("daystart") + " 00:00:00", formatter);
                     LocalDateTime mocdayend = LocalDateTime.parse(rs.getString("dayend") + " 00:00:00", formatter);
-                    if (dayEnd.isBefore(mocdayend) && dayEnd.isAfter(mocdaystart)) {
+                    if (dayStart.isBefore(mocdaystart) && dayEnd.isBefore(mocdaystart)
+                            && dayStart.isBefore(mocdayend) && dayEnd.isBefore(mocdayend)||
+                            dayEnd.isAfter(mocdaystart) && dayStart.isAfter(mocdaystart)
+                            && dayEnd.isAfter(mocdayend) && dayStart.isAfter(mocdayend))  {
+                        check = false;                  
+                    }
+                    else {
                         check = true;
-                        break;
                     }
                 }
+                
             }
         } catch (Exception e) {
             // Handle exception
@@ -434,14 +448,14 @@ public class EventDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "SELECT eventName, courseID, courseName, discount, daystart, dayend, image, data FROM Event WHERE EventID = "
-                        + id + " AND status = 1";
+                        + id + " AND flag = 1";
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     return new EventDTO(rs.getInt("eventID"), rs.getString("eventName"), rs.getInt("courseID"),
                             rs.getString("courseName"), rs.getFloat("discount"),
                             rs.getString("daystart"), rs.getString("dayend"), rs.getString("image"),
-                            rs.getString("data"), rs.getBoolean("status"));
+                            rs.getString("data"), rs.getBoolean("flag"));
                 }
             }
         } catch (Exception e) {
@@ -469,7 +483,7 @@ public class EventDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "SELECT E.eventID, E.eventName, E.courseID, C.name , E.discount, E.daystart, E.dayend, E.image, E.data, E.status FROM Event AS E\n"
-                        + "JOIN Courses AS C ON C.courseID = E.courseID WHERE E.status = 1";
+                        + "JOIN Courses AS C ON C.courseID = E.courseID WHERE E.flag = 1 and E.status = 1";
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
@@ -531,7 +545,7 @@ public class EventDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
 
-                String sql = "UPDATE Event SET status = 1\n"
+                String sql = "UPDATE Event SET flag = 1\n"
                         + "WHERE daystart = '" + formattedDate + "'";
                 ptm = conn.prepareStatement(sql);
                 int row = ptm.executeUpdate();
@@ -561,7 +575,7 @@ public class EventDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "UPDATE Event SET status = 0\n"
+                String sql = "UPDATE Event SET flag = 0\n"
                         + "WHERE dayend = '" + formattedDate + "'";
                 ptm = conn.prepareStatement(sql);
                 int row = ptm.executeUpdate();
