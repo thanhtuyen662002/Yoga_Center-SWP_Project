@@ -15,6 +15,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.dto.BillDTO;
 import utils.DBUtils;
 
@@ -142,7 +144,7 @@ public class BillDAO {
                 // Chuyển đổi thành chuỗi theo định dạng yyyy-MM-dd
                 String time = currentTime.format(formatter);
                 String sql = "INSERT INTO Bill (courseID, cusName, cusPhone, price, time)\n"
-                        + "  VALUES (" + courseID + ",N'" + name + "','" + phone 
+                        + "  VALUES (" + courseID + ",N'" + name + "','" + phone
                         + "','" + price + "','" + time + "')";
                 ptm = conn.prepareStatement(sql);
                 int row = ptm.executeUpdate();
@@ -153,13 +155,14 @@ public class BillDAO {
 
         } catch (Exception e) {
         } finally {
-            if (ptm != null){
+            if (ptm != null) {
                 ptm.close();
             }
-            if (conn != null){
+            if (conn != null) {
                 conn.close();
             }
-        } return false;
+        }
+        return false;
     }
 
     public static void main(String[] args) throws SQLException, ParseException {
@@ -168,5 +171,37 @@ public class BillDAO {
         for (BillDTO billDTO : check) {
             System.out.println(billDTO);
         }
+    }
+
+    public double getTotalPrice(int currentMonth) {
+        try {
+            String sql = "SELECT SUM(price) as 'total'\n"
+                    + "  FROM [Bill] Where MONTH(time) = ?";
+            PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
+            stm.setInt(1, currentMonth);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return rs.getDouble("total");
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+    }
+
+    public double getTotalPriceYear(int currentYear) {
+        try {
+            String sql = "SELECT Sum(price) as 'total'\n"
+                    + "  FROM [Bill] Where Year(time) = ?";
+            PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
+            stm.setInt(1, currentYear);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return rs.getDouble("total");
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
     }
 }
