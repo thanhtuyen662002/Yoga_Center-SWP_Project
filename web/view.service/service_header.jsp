@@ -35,7 +35,7 @@
                     <div class="user-logo">
                         <div
                             class="img"
-                            style="background-image: url(${pageContext.request.contextPath}/image/logo-yoga.jpg)"
+                            style="background-image: url(${pageContext.request.contextPath}/image/newlogo.png)"
                             ></div>
                         <h3>YOGA CENTER</h3>
                     </div>

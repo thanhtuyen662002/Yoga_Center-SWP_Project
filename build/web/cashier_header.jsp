@@ -22,7 +22,7 @@
             </div>
             <div class="img bg-wrap text-center py-4" style="background-image: url(./image/bg_1.jpg);">
                 <div class="user-logo">
-                    <div class="img" style="background-image: url(./image/logo-yoga.jpg);"></div>
+                    <div class="img" style="background-image: url(./image/newlogo.png);"></div>
                     <h3>YOGA CENTER</h3>
                 </div>
             </div>
