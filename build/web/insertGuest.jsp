@@ -140,10 +140,10 @@
                         this.value = value.slice(0, 12);
                     } else if (value.charAt(0) !== '0') {
                         alert("The first digit of phone number must be start with 0!");
-                        this.value = '0';
+                        this.value = '';
                     } else if (value.charAt(1) === '0') {
                         alert("Invalid phone number!");
-                        this.value = '0';
+                        this.value = '';
                     } else {
                         value = value.replace(/\s/g, '');
                         value = value.replace(/(\d{4})(\d{3})(\d{3})/, '$1 $2 $3');
