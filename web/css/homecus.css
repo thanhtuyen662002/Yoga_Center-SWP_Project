@@ -48,3 +48,7 @@
 .sub-menu-link:hover p{
     font-weight: 600;
 }
+.nav-logo img{
+    width: 8rem;
+    height: 8rem;
+}

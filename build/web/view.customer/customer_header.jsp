@@ -18,6 +18,7 @@
             <div class="container">
                 <div class="nav">
                     <div class="nav-logo">
+                        <a href="homeCustomer"><img src="./image/newlogo.png"/></a>
                         <a href="homeCustomer">YO<span>GA</span> </a>
                     </div>
                     <input type="checkbox" id="toggler" />

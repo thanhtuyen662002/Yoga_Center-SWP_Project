@@ -454,4 +454,22 @@ public class ScheduleDAO_Nhat extends DBUtils {
         return list;
     }
 
+    public int getStudentStudy(int currentMonth) {
+        try {
+            String sql = "Select COUNT(distinct(uc.phone)) as 'total'\n"
+                    + "  from UserClass uc\n"
+                    + "  left join Schedule sc\n"
+                    + "  on uc.classID = sc.classID\n"
+                    + "  Where MONTH(sc.day) = ?";
+            PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
+            stm.setInt(1, currentMonth);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("total");
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ScheduleDAO_Nhat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+    }
 }

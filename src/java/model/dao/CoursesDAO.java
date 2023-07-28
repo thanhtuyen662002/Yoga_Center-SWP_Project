@@ -5,12 +5,15 @@
  */
 package model.dao;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.dto.CoursesDTO;
 import utils.DBUtils;
 
@@ -475,4 +478,42 @@ public class CoursesDAO {
         }
         return list;
     }
+    
+    
+    public int getTotalCourseStudyMonth(int currentMonth) {
+        try {
+            String sql = "  Select count(distinct(c.courseID)) as 'total'\n"
+                    + "  from Class c\n"
+                    + "  left join Courses co\n"
+                    + "  on c.courseID = co.courseID\n"
+                    + "  left join Schedule sc\n"
+                    + "  on c.classID = sc.classID\n"
+                    + "  Where MONTH(sc.day) = ?";
+            PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
+            stm.setInt(1, currentMonth);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("total");
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(CoursesDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+    }
+
+    public int getTotalCourse() {
+        try {
+            String sql = "Select COUNT(*) as 'total'\n"
+                    + "  From Courses";
+            PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("total");
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(CoursesDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+    }
+    
 }

@@ -35,14 +35,14 @@
                     <div class="user-logo">
                         <div
                             class="img"
-                            style="background-image: url(${pageContext.request.contextPath}/image/logo-yoga.jpg)"
+                            style="background-image: url(${pageContext.request.contextPath}/image/newlogo.png)"
                             ></div>
                         <h3>YOGA CENTER</h3>
                     </div>
                 </div>
                 <ul class="list-unstyled components mb-5">
                     <li >
-                        <a href="views/Admin_Nhat/DashBoard.jsp"
+                        <a href="dashBoard"
                            ><span class="fa-solid fa-chart-line mr-3"></span>Dashboard
                         </a>
                     </li>
