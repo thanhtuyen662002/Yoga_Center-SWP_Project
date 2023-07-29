@@ -36,7 +36,7 @@
             <div class="text-center pt-2 d-flex w-100 justify-content-end pr-4">
                 <button onclick="goBack()" class="btn-primary rounded-2 border-0 pr-2 pl-2" style="font-size: 24px">Back</button>
             </div>
-            <div class="m-3 parent pl-3" style="height: 60%;background-color: white;border-radius: 10px;padding-top: 2%">
+            <div class="m-3 parent pl-3" style="height: 60%;background-color: rgba(0, 0, 0, 0.1);border-radius: 10px;padding-top: 2%">
                 <div class="justify-content-center d-flex">
                     <c:if test="${fn:length(msgError) >= 1}">
                         <span id="error-fullname" class="error-message" style="color: red;">${msgError}</span>

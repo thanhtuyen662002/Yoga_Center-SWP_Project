@@ -104,6 +104,7 @@ public class InsertCourseServlet extends HttpServlet {
         PreparedStatement ptm = null;
         CoursesDAO dao = new CoursesDAO();
         boolean check = false;
+        int week;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
@@ -111,7 +112,12 @@ public class InsertCourseServlet extends HttpServlet {
                 if (list != null) {
                     int id = list.getCourseID();
                     int numberOfMonths = list.getNumberOfMonths();
-                    int week = numberOfMonths * 4;
+                    if (numberOfMonths > 0) {
+                        week = numberOfMonths * 4;
+                    } else {
+                        week = 1;
+                    }
+                    
 
                     String query = "INSERT INTO CourseType (courseID, name, week)\n"
                             + "VALUES (" + id + ",N'" + name + "'," + week + ")";

@@ -26,7 +26,7 @@
             />
         <link rel="stylesheet" href="./../../css/dashboard.css">
         <link rel="stylesheet" href="./../../css/Header_Admin.css" />
-        <title>Header</title>
+        <title>Dash Board</title>
     </head>
     <body>
         <c:import url="Header_Admin.jsp"/>

@@ -26,11 +26,11 @@
     </head>
 
     <body>
-        <div class="back" style="background-image: url(	https://img6.thuthuatphanmem.vn/uploads/2022/07/01/anh-nen-dep-yoga_011708114.jpg);
+        <div class="back" style="background-color: pink;
              width: 100%; position: absolute; top: 0; bottom: 0;
              ">
             <section class="table-section" style="padding: 40px">
-                <div style="background-color: whitesmoke; border-radius: 5px;padding: 5%">
+                <div style="background-color: whitesmoke; border-radius: 5px;padding: 3%">
                     <button class="btn-back" type="button" style="margin-left: 0px;border-radius: 5px;border: none" onclick="goBack()">< Back</button>
                     <p style="text-align: center; font-size: 24px; font-style: italic;font-weight: bold" >Create Schedule</p>
                     <form style="padding: 24px;" action="insertSchedule" method="post" onsubmit="return validateForm()">
