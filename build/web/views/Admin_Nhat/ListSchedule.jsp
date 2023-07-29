@@ -96,137 +96,139 @@
     </head>
     <body>
         <%@ include file="Header_Admin.jsp" %>
-        <section class="table-section vw-100" style="padding: 40px">
-            <p style="text-align: center; font-size: 24px; font-style: italic;font-weight: bold" >Schedule List</p>
-            <div style="width: 100%; display: block">
-            </div>
-            <table class="table ">
-                <thead>
-                    <tr style="background-color: #6b90d9;">
-                        <th rowspan="2" class="select-year-custom" style="max-width: 50px;">
-                            <div class="d-flex gap-2 align-items-center">
-                                <h8 class="text-danger mb-0">YEAR</h8>
-                                <select class="form-select" style="height: fit-content;"
-                                        aria-label="Default select example">
-                                    <option selected>2023</option>
-                                    <option >2024</option>
-                                </select>
-                            </div>
-                            <div class="d-flex gap-2 align-items-center">
-                                <h8 class="mb-0">Week</h8>
-                                <form id="myForm" action="listScheduleAdmin" method="post">
-                                    <select id="mySelect" name="currentDay"
-                                            class="form-select" style="height: fit-content;margin-top: 3%"
+        <div id="content">   
+            <section class="table-section" style="padding: 40px">
+                <p style="text-align: center; font-size: 24px; font-style: italic;font-weight: bold" >Schedule List</p>
+                <div style="width: 100%; display: block">
+                </div>
+                <table class="table ">
+                    <thead>
+                        <tr style="background-color: #6b90d9;">
+                            <th rowspan="2" class="select-year-custom" style="max-width: 50px;">
+                                <div class="d-flex gap-2 align-items-center">
+                                    <h8 class="text-danger mb-0">YEAR</h8>
+                                    <select class="form-select" style="height: fit-content;"
                                             aria-label="Default select example">
-                                        <c:forEach items="${mondays}" var="monday">
-                                            <c:set var="sunday" value="${monday.plusDays(6)}" />
-                                            <option ${(monday eq currentMonday)?"selected":""} value="${monday}">${monday} to ${sunday}</option>
-                                        </c:forEach>
+                                        <option selected>2023</option>
+                                        <option >2024</option>
                                     </select>
-                                </form>
-                            </div>
-                        </th>
-                        <th>
-                            MON
-                        </th>
-                        <th>
-                            TUE
-                        </th>
-                        <th>
-                            WED
-                        </th>
-                        <th>
-                            THU
-                        </th>
-                        <th>
-                            FRI
-                        </th>
-                        <th>
-                            SAT
-                        </th>
-                        <th>SUN</th>
-                    </tr>
-                    <tr style="background-color: #6b90d9;">
-                        <c:forEach var="day" items="${requestScope.week}">
+                                </div>
+                                <div class="d-flex gap-2 align-items-center">
+                                    <h8 class="mb-0">Week</h8>
+                                    <form id="myForm" action="listScheduleAdmin" method="post">
+                                        <select id="mySelect" name="currentDay"
+                                                class="form-select" style="height: fit-content;margin-top: 3%"
+                                                aria-label="Default select example">
+                                            <c:forEach items="${mondays}" var="monday">
+                                                <c:set var="sunday" value="${monday.plusDays(6)}" />
+                                                <option ${(monday eq currentMonday)?"selected":""} value="${monday}">${monday} to ${sunday}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </form>
+                                </div>
+                            </th>
                             <th>
-                                ${day}
+                                MON
+                            </th>
+                            <th>
+                                TUE
+                            </th>
+                            <th>
+                                WED
+                            </th>
+                            <th>
+                                THU
+                            </th>
+                            <th>
+                                FRI
+                            </th>
+                            <th>
+                                SAT
+                            </th>
+                            <th>SUN</th>
+                        </tr>
+                        <tr style="background-color: #6b90d9;">
+                            <c:forEach var="day" items="${requestScope.week}">
+                                <th>
+                                    ${day}
+                                </th>
+                            </c:forEach>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:set var="sche" value="${schedule}" />
+                        <c:set var="day" value="${week}" />
+                        <c:set var="slot" value="${slots}" />
+                        <c:set var="slotsSize" value="${fn:length(slots)}" />
+                        <c:forEach var="i" begin="0" end="${slotsSize-1}" step="1">
+                            <tr style="background-color: white;">
+                                <th>Slot ${slot[i].id}<br>(${slot[i].startTime}-${slot[i].endTime})</th>
+                                    <c:forEach var="j" begin="0" end="6" step="1">
+                            <form id="frm${i}${j}" action="mainController" method="get">
+                                <input type="hidden" name="id" id="id${i}${j}"/>
+                                <input type="hidden" name="action" value="ViewDetails"/>
+                            </form>
+                            <th id="${i}${j}">
+                                <div id='div-${i}${j}' style="display: none">
+                                    <form id="frm-details-${i}${j}" action="listScheduleClass" method="post">
+                                        <input type="hidden" name="slotID" value="${slot[i].id}"/>
+                                        <input type="hidden" name="day" value="${day[j]}"/>
+                                        <button type="submit" class="badge-pill badge-light btn-outline-info border-0">
+                                            View Slot Schedule
+                                        </button>
+                                    </form>
+                                </div>
                             </th>
                         </c:forEach>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:set var="sche" value="${schedule}" />
-                    <c:set var="day" value="${week}" />
-                    <c:set var="slot" value="${slots}" />
-                    <c:set var="slotsSize" value="${fn:length(slots)}" />
-                    <c:forEach var="i" begin="0" end="${slotsSize-1}" step="1">
-                        <tr style="background-color: white;">
-                            <th>Slot ${slot[i].id}<br>(${slot[i].startTime}-${slot[i].endTime})</th>
-                                <c:forEach var="j" begin="0" end="6" step="1">
-                        <form id="frm${i}${j}" action="mainController" method="get">
-                            <input type="hidden" name="id" id="id${i}${j}"/>
-                            <input type="hidden" name="action" value="ViewDetails"/>
-                        </form>
-                        <th id="${i}${j}">
-                            <div id='div-${i}${j}' style="display: none">
-                                <form id="frm-details-${i}${j}" action="listScheduleClass" method="post">
-                                    <input type="hidden" name="slotID" value="${slot[i].id}"/>
-                                    <input type="hidden" name="day" value="${day[j]}"/>
-                                    <button type="submit" class="badge-pill badge-light btn-outline-info border-0">
-                                        View Slot Schedule
-                                    </button>
-                                </form>
-                            </div>
-                        </th>
+                        </tr>
                     </c:forEach>
-                    </tr>
-                </c:forEach>
-                <c:forEach var="sc" items="${schedule}">
-                    <c:forEach var="i" begin="0" end="${slotsSize-1}" step="1">
-                        <c:if test="${sc.slot.id eq slot[i].id}">
-                            <c:set var="row" value="${i}" />
-                        </c:if>
+                    <c:forEach var="sc" items="${schedule}">
+                        <c:forEach var="i" begin="0" end="${slotsSize-1}" step="1">
+                            <c:if test="${sc.slot.id eq slot[i].id}">
+                                <c:set var="row" value="${i}" />
+                            </c:if>
+                        </c:forEach>
+                        <c:forEach var="j" begin="0" end="6" step="1">
+                            <c:if test="${sc.date eq day[j]}">
+                                <c:set var="column" value="${j}" />
+                            </c:if>
+                        </c:forEach>
+                        <script>
+                            var header = document.getElementById('div-${row}${column}');
+                            header.style.display = "block";
+                        </script>
                     </c:forEach>
-                    <c:forEach var="j" begin="0" end="6" step="1">
-                        <c:if test="${sc.date eq day[j]}">
-                            <c:set var="column" value="${j}" />
-                        </c:if>
-                    </c:forEach>
-                    <script>
-                        var header = document.getElementById('div-${row}${column}');
-                        header.style.display = "block";
-                    </script>
-                </c:forEach>
-                </tbody>
-            </table>
-        </section>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
 
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/8d39de38b8.js" crossorigin="anonymous"></script>
+    <script>
+                            // Get the select element
+                            var selectElement = document.getElementById("mySelect");
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-        crossorigin="anonymous"></script>
-        <script src="https://kit.fontawesome.com/8d39de38b8.js" crossorigin="anonymous"></script>
-        <script>
-                        // Get the select element
-                        var selectElement = document.getElementById("mySelect");
-
-                        // Add an event listener for the change event
-                        selectElement.addEventListener("change", function () {
-                            // Submit the form when the option changes
-                            document.getElementById("myForm").submit();
-                        });
-                        function goBack() {
-                            window.history.back();
-                        }
-        </script>
-        <script src="./../../courseNav/bootstrap.min.js"></script>
-        <script src="./../../courseNav/jquery.min.js"></script>
-        <script src="./../../courseNav/main.js"></script>
-        <script src="./../../courseNav/popper.js"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-        <script src="./../../ckeditor/ckeditor.js"></script>
-        <script src="./course.js"></script>
-    </body>
+                            // Add an event listener for the change event
+                            selectElement.addEventListener("change", function () {
+                                // Submit the form when the option changes
+                                document.getElementById("myForm").submit();
+                            });
+                            function goBack() {
+                                window.history.back();
+                            }
+    </script>
+    <script src="./../../courseNav/bootstrap.min.js"></script>
+    <script src="./../../courseNav/jquery.min.js"></script>
+    <script src="./../../courseNav/main.js"></script>
+    <script src="./../../courseNav/popper.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="./../../ckeditor/ckeditor.js"></script>
+    <script src="./course.js"></script>
+</body>
 </html>
