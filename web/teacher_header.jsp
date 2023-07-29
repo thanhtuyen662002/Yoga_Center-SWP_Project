@@ -23,10 +23,17 @@
                 <div class="img bg-wrap text-center py-4" style="background-image: url(./image/bg_1.jpg);">
                     <div class="user-logo">
                         <div class="img" style="background-image: url(./image/newlogo.png);"></div>
-                        <h3>YOGA CENTER</h3>
+                        <a href="homeCustomer"><h3>YOGA CENTER</h3></a>
+                        <!--<a href="homeCustomer">YO<span>GA</span> </a>-->
                     </div>
                 </div>
                 <ul class="list-unstyled components mb-5">
+                    <li >
+                        <a href="editprofilecus?phone=${sessionScope.USER.phone}"
+                           ><span class="fa-solid fa-pen-to-square mr-3"></span> Edit
+                            Profile</a
+                        >
+                    </li>
                     <li onmouseover="showDropdown('showclass')" onmouseout="hideDropdown('showclass')">
                         <a href="mainController?action=showclass"><span class="fa-solid fa-people-group mr-3"></span> LỚP HỌC</a>
                     </li> 
