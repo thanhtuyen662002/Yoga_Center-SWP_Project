@@ -19,11 +19,11 @@ public class RestoreClass extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String name = request.getParameter("name");
+        String id = request.getParameter("id");
         String message = "";
         try {
             ClassDAO dao = new ClassDAO();
-            boolean check = dao.restoreClass(name);
+            boolean check = dao.restoreClass(id);
             if (check) {
                 message = "Success recovery!";
             } else {

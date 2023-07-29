@@ -34,7 +34,13 @@
         <div class="container">
 
             <div class="priceDetail">
-
+                <div class="alert">
+                    <span class="fas fa-exclamation-circle"></span>
+                    <span class="msg">Success: Bạn đã đăng kí thành công!</span>
+                    <span class="close-btn">
+                        <span class="fas fa-times"></span>
+                    </span>
+                </div>
                 <div class="price-title">
                     <ul>
                         <li><a href="#">Khóa Học</a></li>

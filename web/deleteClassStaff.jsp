@@ -67,7 +67,7 @@
                                 <td>${x.totalSession}</td>
                                 <td>${x.capacity}</td>
                                 <td>
-                                    <a href="restoreClass?name=${x.className}"><i class="fa-solid fa-trash-arrow-up fa-bounce" style="color: #1dd33b;"></i></a>
+                                    <a href="restoreClass?id=${x.classID}"><i class="fa-solid fa-trash-arrow-up fa-bounce" style="color: #1dd33b;"></i></a>
                                 </td>
                             </tr>
                         </c:forEach>

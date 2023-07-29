@@ -445,14 +445,14 @@ public class ClassDAO {
         return false;
     }
 
-    public boolean restoreClass(String name) throws SQLException {
+    public boolean restoreClass(String id) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "UPDATE Class SET status = 1\n"
-                        + "WHERE name = N'" + name + "'";
+                        + "WHERE classID = N'" + id + "'";
                 ptm = conn.prepareStatement(sql);
                 int row = ptm.executeUpdate();
                 if (row > 0) {
