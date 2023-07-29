@@ -74,7 +74,10 @@ public class InsertFeedbackServlet extends HttpServlet {
             CoursesDAO dao1 = new CoursesDAO();
             EventDAO Edao = new EventDAO();
             String eventID = "";
-
+            
+            List<CoursesDTO> listCoursesID = dao1.getCourseIDByPhone(cusPhone);
+            request.setAttribute("coursesID", listCoursesID);
+            
             String id = idcourse;
             String ID = request.getParameter("ID");
             eventID = Edao.getEventByCourseID(id);
