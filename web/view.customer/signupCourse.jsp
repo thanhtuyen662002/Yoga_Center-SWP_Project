@@ -22,7 +22,7 @@
             />
         <link rel="stylesheet" href="./css/signupCourse.css" />
 
-        <title>Document</title>
+        <title>Sign Up Course</title>
     </head>
     <body>
         <c:import url="customer_header.jsp"/>

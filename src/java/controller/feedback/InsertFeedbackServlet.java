@@ -56,15 +56,15 @@ public class InsertFeedbackServlet extends HttpServlet {
             if (checkusercourse) {
                 insertFeedback = dao.insertFeedback(cusPhone, courseID, comment, dayup);
                 if (insertFeedback) {
-                    message = "Your review has been sent to us!";
+                    message = "Đánh giá của bạn đã được gửi đi!";
                     System.out.println("Đánh giá của bạn đã được ghi nhận!");
                 } else {
-                    message = "Review failure! You had rated this course!";
+                    message = "Đánh giá thất bại! Bạn đã đánh giá khóa học này!";
                     System.out.println("Bạn đã gửi đánh giá rồi!");
                 }
             } else {
                 // Nếu người dùng chưa học khóa học này, trả về thông báo lỗi
-                message = "You have not studied this course yet!";
+                message = "Bạn chưa học khóa này!";
             }
             if (message != null) {
                 request.setAttribute("Message", message);
@@ -74,7 +74,10 @@ public class InsertFeedbackServlet extends HttpServlet {
             CoursesDAO dao1 = new CoursesDAO();
             EventDAO Edao = new EventDAO();
             String eventID = "";
-
+            
+            List<CoursesDTO> listCoursesID = dao1.getCourseIDByPhone(cusPhone);
+            request.setAttribute("coursesID", listCoursesID);
+            
             String id = idcourse;
             String ID = request.getParameter("ID");
             eventID = Edao.getEventByCourseID(id);

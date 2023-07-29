@@ -25,12 +25,12 @@
                 <div class="course-link">
                     <ul>
                         <li><a href="listStaff">Admin</a></li>
-                        <li><a href="listService">List Staff</a></li>
-                        <li><a href="#">Create Staff</a></li>
+                        <li><a href="listService">List Service</a></li>
+                        <li><a href="#">Create Service</a></li>
                     </ul>
                 </div>
                 <div class="table-name border" style="height: 15%">
-                    <h4>Create Teacher</h4>
+                    <h4>Create Service</h4>
                 </div>
             </div>
             <div class="text-center pt-2 d-flex w-100 justify-content-end pr-4">

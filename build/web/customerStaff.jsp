@@ -70,7 +70,9 @@
                                 <c:if test="${x.className == null}">
                                     <td >Chưa có lớp học</td>
                                 </c:if>
-                                <td >${x.className}</td>
+                                <c:if test="${x.className != null}">
+                                    <td >${x.className}</td>
+                                </c:if>
                             </tr>
                         </c:forEach>
                 </table>

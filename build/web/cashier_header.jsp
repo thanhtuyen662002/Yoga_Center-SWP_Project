@@ -27,6 +27,12 @@
                 </div>
             </div>
             <ul class=" components mb-5">
+                <li >
+                    <a href="editprofilecus?phone=${sessionScope.USER.phone}"
+                       ><span class="fa-solid fa-pen-to-square mr-3"></span> Edit
+                        Profile</a
+                    >
+                </li>
                 <li onmouseover="showDropdown('courses')" onmouseout="hideDropdown('courses')" class="">
                     <a href="mainController?action=courses"><span class="fa-solid fa-book mr-3"></span> KHÓA HỌC</a>
                 </li>
@@ -36,9 +42,9 @@
                 <li onmouseover="showDropdown('showclass')" onmouseout="hideDropdown('showclass')" class="">
                     <a href="mainController?action=showclass"><span class="fa-solid fa-people-group mr-3"></span> LỚP HỌC</a>
                 </li> 
-<!--                <li>
-                    <a href="mainController?action=listSchedule"><span class="fa-solid fa-calendar-days mr-3" ></span> LỊCH DẠY</a>
-                </li>-->
+                <!--                <li>
+                                    <a href="mainController?action=listSchedule"><span class="fa-solid fa-calendar-days mr-3" ></span> LỊCH DẠY</a>
+                                </li>-->
                 <li onmouseover="showDropdown('learner')" onmouseout="hideDropdown('learner')" class="">
                     <a href="mainController?action=learner"><span class="fa-solid fa-user-graduate mr-3"></span> HỌC VIÊN</a>
                 </li> 
@@ -48,12 +54,12 @@
                         <li><a href="insertGuest.jsp" class="">Tạo tài khoản</a></li>
                     </ul>
                 </li>
-                 <li onmouseover="showDropdown('feedback')" onmouseout="hideDropdown('feedback')">
-                        <a href="mainController?action=feedback"><span class="fa-solid fa-comments mr-3"></span> ĐÁNH GIÁ KHÓA HỌC</a>
-                        <ul id="feedback" class="dropdown">
-                            <li><a href="pendingfeedback">Đánh giá đang chờ</a></li>
-                        </ul>
-                    </li>
+                <li onmouseover="showDropdown('feedback')" onmouseout="hideDropdown('feedback')">
+                    <a href="mainController?action=feedback"><span class="fa-solid fa-comments mr-3"></span> ĐÁNH GIÁ KHÓA HỌC</a>
+                    <ul id="feedback" class="dropdown">
+                        <li><a href="pendingfeedback">Đánh giá đang chờ</a></li>
+                    </ul>
+                </li>
                 <li>
                     <a href="logout"><span class="fa fa-sign-out mr-3"></span> Đăng Xuất</a>
                 </li>

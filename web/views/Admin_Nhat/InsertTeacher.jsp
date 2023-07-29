@@ -25,8 +25,8 @@
                 <div class="course-link">
                     <ul>
                         <li><a href="listTeacher">Admin</a></li>
-                        <li><a href="listTeacher">List Staff</a></li>
-                        <li><a href="insertTeacher">Create Staff</a></li>
+                        <li><a href="listTeacher">List Teacher</a></li>
+                        <li><a href="insertTeacher">Create Teacher</a></li>
                     </ul>
                 </div>
                 <div class="table-name border" style="height: 15%">
