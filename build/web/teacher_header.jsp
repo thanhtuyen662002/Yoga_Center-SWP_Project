@@ -14,8 +14,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        
-        <nav id="sidebar">
+        <div class="wrapper d-flex align-items-stretch">
+            <nav id="sidebar">
                 <div class="custom-menu">
                     <button type="button" id="sidebarCollapse" class="btn btn-primary">
                     </button>
@@ -46,7 +46,7 @@
                 </ul>
 
             </nav>
-        
+
     </body>
     <script src="./js/staffDropdown.js"></script>
 </html>
