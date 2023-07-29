@@ -49,9 +49,16 @@ public class CreateClass extends HttpServlet {
         ClassDAO dao = new ClassDAO();
         String message = "";
         boolean check;
+        int numberOfMonths;
+        int totalSession;
         try {
             ClassDTO list = dao.getNumberOfMonths(courseID);
-            int totalSession = list.getNumberOfMonths() * 8;
+            numberOfMonths = list.getNumberOfMonths();
+            if (numberOfMonths > 0) {
+                totalSession = numberOfMonths * 8;
+            } else {
+                totalSession = 7;
+            }
             check = dao.checkNameClass(className);
             if (check) {
                 message = "Name of class alredy exist!";
