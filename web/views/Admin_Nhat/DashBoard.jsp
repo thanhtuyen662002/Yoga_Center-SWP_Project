@@ -26,6 +26,7 @@
             />
         <link rel="stylesheet" href="./../../css/dashboard.css">
         <link rel="stylesheet" href="./../../css/Header_Admin.css" />
+        <link rel="icon" type="image/png" href="./image/newlogo.png">
         <title>Dash Board</title>
     </head>
     <body>

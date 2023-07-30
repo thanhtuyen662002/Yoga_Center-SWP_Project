@@ -13,7 +13,7 @@
             />
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="./css/clubStaff.css" />
-
+        <link rel="icon" type="image/png" href="./image/newlogo.png">
         <title>CLub</title>
 
     </head>
@@ -82,9 +82,9 @@
             <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
             <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
             <script>
-                $(document).ready(function () {
-                    $('#course').DataTable();
-                });
+                                        $(document).ready(function () {
+                                            $('#course').DataTable();
+                                        });
             </script>
             <script>
                 function showMess(param) {
