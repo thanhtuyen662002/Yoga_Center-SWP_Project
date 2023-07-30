@@ -94,7 +94,8 @@ public class EventDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "SELECT eventID, eventName, courseID, discount, daystart, dayend, image, data, status, flag FROM Event WHERE eventID = " + id;
+                String sql = "SELECT eventID, eventName, courseID, discount, daystart, dayend, image, data, status, flag FROM Event WHERE eventID = " + id 
+                        + "AND flag = 1 AND status = 1";
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
