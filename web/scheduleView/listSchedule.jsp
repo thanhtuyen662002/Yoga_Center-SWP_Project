@@ -35,6 +35,8 @@
                 background-color: grey;
             }
         </style>
+
+        
     </head>  
     <body>
         <div class="back" style="background-color: pink;
@@ -42,6 +44,7 @@
              ">
             <section class="table-section" style="padding: 40px">
                 <p style="text-align: center; font-size: 24px; font-style: italic;font-weight: bold" >Schedule Details</p>
+                <jsp:include page="../include/Toast.jsp" />  
                 <div style="width: 100%; display: block">
                     <button class="left-button btn-back" type="button" style="margin-left: 0px;border-radius: 5px;border: none" onclick="goBack()">Back</button>
                     <form action="homeRedirect" method="post">

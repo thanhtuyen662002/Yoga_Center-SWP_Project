@@ -76,7 +76,7 @@
                         ><i class="fas fa-download fa-sm text-white-50"></i> Generate
                         Report</a
                     >
-                </div>
+                </div> 
 
                 <!-- Content Row -->
                 <div class="row">
@@ -189,8 +189,8 @@
 
                 <div class="row">
                     <!-- Area Chart -->
-                    <div class="col-xl-12 col-lg-7">
-                        <div class="card shadow" style="height: 473px;">
+                    <div class="col-xl-8 col-lg-7">
+                        <div class="card shadow" style="height: 100%;">
                             <!-- Card Header - Dropdown -->
                             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                 <h6 class="m-0 font-weight-bold text-primary">Tổng quan doanh thu (Nghìn đồng)</h6>
@@ -204,32 +204,27 @@
                         </div>
                     </div>
 
-                    <!-- Pie Chart -->
-<!--                    <div class="col-xl-4 col-lg-5">
-                        <div class="card shadow">
-                             Card Header - Dropdown 
+                    <!--Pie Chart--> 
+                    <div class="col-xl-4 col-lg-5">
+                        <div class="card shadow">   
                             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Khóa học học nhiều nhất (%)</h6>
                             </div>
-                             Card Body 
                             <div class="card-body">
                                 <div class="chart-pie pt-4 pb-2">
                                     <canvas id="myPieChart"></canvas>
                                 </div>
                                 <div class="mt-4 text-center small">
                                     <span class="mr-2">
-                                        <i class="fas fa-circle text-primary"></i> Direct
+                                        <i class="fas fa-circle text-primary"></i> ${bestCourse.name}
                                     </span>
                                     <span class="mr-2">
-                                        <i class="fas fa-circle text-success"></i> Social
-                                    </span>
-                                    <span class="mr-2">
-                                        <i class="fas fa-circle text-info"></i> Referral
+                                        <i class="fas fa-circle text-success"></i> Other
                                     </span>
                                 </div>
                             </div>
                         </div>
-                    </div>-->
+                    </div>
                 </div>
             </div>
 
@@ -346,11 +341,11 @@
             var myPieChart = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
-                    labels: ["Direct", "Referral", "Social"],
+                    labels: ["${bestCourse.name}", "Other"],
                     datasets: [{
-                            data: [55, 30, 15],
-                            backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-                            hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+                            data: [parseFloat(${percentBest}), parseFloat(${percentOther})],
+                            backgroundColor: ['#4e73df', '#1cc88a'],
+                            hoverBackgroundColor: ['#2e59d9', '#17a673'],
                             hoverBorderColor: "rgba(234, 236, 244, 1)",
                         }],
                 },

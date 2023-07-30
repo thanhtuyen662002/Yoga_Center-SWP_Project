@@ -99,7 +99,23 @@ public class listScheduleController_Nhat extends BaseAuthentication_Nhat {
 //        //ST 0987654444 0913277862 US 0987658686 0987657766
 //        request.getSession().setAttribute("user", user);
 //        get current date
+
         LocalDate currentDate = LocalDate.now();
+        if (request.getSession().getAttribute("insert") != null) {
+            request.setAttribute("msg", (String) request.getSession().getAttribute("insert"));
+            request.getSession().setAttribute("insert", null);
+        }
+        else if (request.getSession().getAttribute("update") != null) {
+            request.setAttribute("msg", (String) request.getSession().getAttribute("update"));
+            request.getSession().setAttribute("update", null);
+        }
+        else if (request.getSession().getAttribute("delete") != null) {
+            request.setAttribute("msg", (String) request.getSession().getAttribute("delete"));
+            request.getSession().setAttribute("delete", null);
+        }
+        else{
+            request.setAttribute("msg", null);
+        }
         getScheduleByDate(currentDate, request, response);
     }
 
@@ -135,6 +151,7 @@ public class listScheduleController_Nhat extends BaseAuthentication_Nhat {
 
             ArrayList<LocalDate> week = getWeek(mondayOfWeek);
 
+            //get all schedule by date
             List<ScheduleDTO_Nhat> listSchedule
                     = new ArrayList<>();
             if (user.getRoleID().equals("US")) {
@@ -151,7 +168,6 @@ public class listScheduleController_Nhat extends BaseAuthentication_Nhat {
             }
 
             Collections.sort(listSchedule, (ScheduleDTO_Nhat o1, ScheduleDTO_Nhat o2) -> o1.getDate().compareTo(o2.getDate()));
-
             request.setAttribute("slots", slots);
             request.setAttribute("mondays", mondays);
             request.setAttribute("currentMonday", mondayOfWeek);
@@ -165,8 +181,9 @@ public class listScheduleController_Nhat extends BaseAuthentication_Nhat {
     }
 //
 //
+
     public static void main(String[] args) {
-        
+
         LocalDate currentDate = LocalDate.now();
 
         ScheduleDAO_Nhat sDao = new ScheduleDAO_Nhat();
@@ -185,5 +202,6 @@ public class listScheduleController_Nhat extends BaseAuthentication_Nhat {
             System.out.println(scheduleDTO_Nhat.getClassStudy().getCourse().getName());
         }
     }
-
+//get => chajy dau tien
+//post => xu ly cac su kien cua thk client tac dong
 }

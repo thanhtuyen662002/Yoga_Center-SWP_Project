@@ -14,8 +14,10 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Calendar;
 import model.dao.BillDAO;
+import model.dao.CourseDAO_Nhat;
 import model.dao.CoursesDAO;
 import model.dao.ScheduleDAO_Nhat;
+import model.dto.CourseDTO_Nhat;
 
 /**
  *
@@ -52,14 +54,14 @@ public class DashboardController extends HttpServlet {
 
         //calculate total bill in this month
         LocalDate currentDate = LocalDate.now();
-        
+
         BillDAO bDao = new BillDAO();
-        
+
         //get all total bill of year
         int currentYear = currentDate.getYear();
         double totalPriceYear = bDao.getTotalPriceYear(currentYear);
         request.setAttribute("totalPriceYear", totalPriceYear);
-        
+
         // Get the current month
         int currentMonth = currentDate.getMonthValue();
         double totalPriceMonth = bDao.getTotalPrice(currentMonth);
@@ -72,30 +74,41 @@ public class DashboardController extends HttpServlet {
 
         for (int i = 1; i <= 12; i++) {
             double price = bDao.getTotalPrice(i);
-            request.setAttribute("month"+i, price);
+            request.setAttribute("month" + i, price);
         }
-        
+
         //get total coure
-        int totalCourse = cDao.getTotalCourse();
+        double totalCourse = cDao.getTotalCourse();
         request.setAttribute("totalCourse", totalCourse);
 
         //get total current student is studying this month
-        ScheduleDAO_Nhat scDao = new ScheduleDAO_Nhat();   
+        ScheduleDAO_Nhat scDao = new ScheduleDAO_Nhat();
         int totalStudent = scDao.getStudentStudy(currentMonth);
         request.setAttribute("totalStudent", totalStudent);
+
+        double totalCourseBill = cDao.getTotalCourseStudy();
+        double bestCourse = cDao.getBestCourse();
+        double percentBest = (bestCourse / totalCourseBill) * 100;
+        double percentOther = 100 - percentBest;
         
-        
+        CourseDAO_Nhat cDao_Nhat = new CourseDAO_Nhat();
+        CourseDTO_Nhat getBestCourse = cDao_Nhat.getBestCourse();
+
+        request.setAttribute("bestCourse", getBestCourse);
+        request.setAttribute("percentOther", percentOther);
+        request.setAttribute("percentBest", percentBest);
         request.getRequestDispatcher("views/Admin_Nhat/DashBoard.jsp").forward(request, response);
     }
 //
 //    public static void main(String[] args) {
-//        LocalDate currentDate = LocalDate.now();
-//        // Get the current month
-//        int currentMonth = currentDate.getMonthValue();
-//        BillDAO bDao = new BillDAO();
-//        double price = bDao.getTotalPrice(currentMonth);
-//        System.out.println(price);
+//        CoursesDAO cDao = new CoursesDAO();
+//        double bestCourse = cDao.getBestCourse();
+//        double totalCourseBill = cDao.getTotalCourseStudy();
+//        double percentBest = (bestCourse / totalCourseBill) * 100;
+//        double percentOther = 100 - percentBest;
+//        System.out.println(percentBest);
 //    }
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *

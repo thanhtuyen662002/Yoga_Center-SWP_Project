@@ -202,6 +202,7 @@ public class insertScheduleController_Nhat extends BaseAuthentication_Nhat {
                 }
                 error = false;
                 errorRoom = false;
+                request.getSession().setAttribute("insert", "Insert succesfull!");
                 response.sendRedirect("listSchedule");
             } else {
                 errorRoom = true;

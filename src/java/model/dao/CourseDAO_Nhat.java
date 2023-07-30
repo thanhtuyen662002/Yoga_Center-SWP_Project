@@ -16,7 +16,7 @@ import utils.DBUtils;
  *
  * @author dell
  */
-public class CourseDAO_Nhat extends DBUtils{
+public class CourseDAO_Nhat extends DBUtils {
 
     public CourseDTO_Nhat getCourseByID(int id) {
         try {
@@ -40,4 +40,22 @@ public class CourseDAO_Nhat extends DBUtils{
         return null;
     }
 
+    public CourseDTO_Nhat getBestCourse() {
+        try {
+            String sql = "SELECT \n"
+                    + "Top 1\n"
+                    + "courseID, Count(courseID) as total\n"
+                    + "FROM [Bill]\n"
+                    + "Group by courseID\n"
+                    + "Order by total desc";
+            PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return getCourseByID(rs.getInt("courseID"));
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ClassSlotDAO_Nhat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

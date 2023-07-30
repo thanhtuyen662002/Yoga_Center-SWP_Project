@@ -137,6 +137,7 @@ public class viewScheduleController_Nhat extends HttpServlet {
                 if (!isExist) {
                     scheDao.update(id, roomId, slotId, date);
                     request.getSession().setAttribute("error", false);
+                    request.getSession().setAttribute("update", "Update succesfull!");
                     response.sendRedirect("listSchedule");
                 } else {
                     request.getSession().setAttribute("error", true);
@@ -145,6 +146,7 @@ public class viewScheduleController_Nhat extends HttpServlet {
                 break;
             case "delete":
                 scheDao.delete(id);
+                request.getSession().setAttribute("delete", "Delete succesfull!");
                 response.sendRedirect("listSchedule");
                 break;
         }

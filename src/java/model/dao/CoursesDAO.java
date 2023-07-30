@@ -5,7 +5,6 @@
  */
 package model.dao;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -478,8 +477,7 @@ public class CoursesDAO {
         }
         return list;
     }
-    
-    
+
     public int getTotalCourseStudyMonth(int currentMonth) {
         try {
             String sql = "  Select count(distinct(c.courseID)) as 'total'\n"
@@ -515,5 +513,39 @@ public class CoursesDAO {
         }
         return -1;
     }
-    
+
+    public int getBestCourse() {
+        try {
+            String sql = "SELECT \n"
+                    + "Top 1\n"
+                    + "courseID, Count(courseID) as total\n"
+                    + "FROM [Bill]\n"
+                    + "Group by courseID\n"
+                    + "Order by total desc";
+            PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("total");
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(CoursesDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+    }
+
+    public double getTotalCourseStudy() {
+        try {
+            String sql = "SELECT Count(*) as total\n"
+                    + "FROM [Bill]";
+            PreparedStatement stm = DBUtils.getConnection().prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("total");
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(CoursesDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+    }
+
 }
