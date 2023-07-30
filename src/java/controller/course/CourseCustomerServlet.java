@@ -70,11 +70,7 @@ public class CourseCustomerServlet extends HttpServlet {
             request.setAttribute("c", list);
 
             CoursesDTO course = dao.getCourses(id);
-            List<CoursesDTO> time = dao.getTime();
-            List<CoursesDTO> timeToCome = dao.getTimeToCome();
             request.setAttribute("course", course);
-            request.setAttribute("time", time);
-            request.setAttribute("timeToCome", timeToCome);
             List<FeedbackDTO> feedbackList = FeedbackDAO.getFeedbackByCourseID(id);
             request.setAttribute("feedbackList", feedbackList);
             request.getRequestDispatcher("view.customer/courseDetail.jsp").forward(request, response);

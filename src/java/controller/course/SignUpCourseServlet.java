@@ -67,7 +67,7 @@ public class SignUpCourseServlet extends HttpServlet {
         String ID = request.getParameter("ID");
         String success = "Đăng ký thành công!";
         String error = "Đăng ký thất bại!";
-        String phoneError = "ERROR";
+        String phoneError = "Số điện thoại đã có tài khoản!";
         boolean check;
         boolean checkPhoneDuplicate;
         GuestDAO dao = new GuestDAO();
@@ -91,7 +91,7 @@ public class SignUpCourseServlet extends HttpServlet {
                     } else {
                         request.setAttribute("id", course);
                         request.setAttribute("ID", ID);
-                        request.setAttribute("ERROR", phoneError);
+                        request.setAttribute("Message", phoneError);
                         request.getRequestDispatcher("courseCustomer").forward(request, response);
                     }
                 } catch (SQLException ex) {
@@ -114,7 +114,7 @@ public class SignUpCourseServlet extends HttpServlet {
                         }
                     } else {
                         request.setAttribute("id", course);
-                        request.setAttribute("ERROR", phoneError);
+                        request.setAttribute("Message", phoneError);
                         request.getRequestDispatcher("courseCustomer").forward(request, response);
                     }
                 } catch (SQLException ex) {

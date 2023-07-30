@@ -24,6 +24,7 @@
             href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"
             />
         <link rel="stylesheet" href="./../../css/editProfile.css" />
+        <link rel="icon" type="image/png" href="./image/newlogo.png">
         <title>Edit Profile</title>
     </head>
     <body>

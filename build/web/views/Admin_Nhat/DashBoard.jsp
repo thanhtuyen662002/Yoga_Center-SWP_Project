@@ -26,6 +26,7 @@
             />
         <link rel="stylesheet" href="./../../css/dashboard.css">
         <link rel="stylesheet" href="./../../css/Header_Admin.css" />
+        <link rel="icon" type="image/png" href="./image/newlogo.png">
         <title>Dash Board</title>
     </head>
     <body>
@@ -188,8 +189,8 @@
 
                 <div class="row">
                     <!-- Area Chart -->
-                    <div class="col-xl-8 col-lg-7">
-                        <div class="card shadow" style="height: 100%;">
+                    <div class="col-xl-12 col-lg-7">
+                        <div class="card shadow" style="height: 473px;">
                             <!-- Card Header - Dropdown -->
                             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                 <h6 class="m-0 font-weight-bold text-primary">Tổng quan doanh thu (Nghìn đồng)</h6>
@@ -204,13 +205,13 @@
                     </div>
 
                     <!-- Pie Chart -->
-                    <div class="col-xl-4 col-lg-5">
+<!--                    <div class="col-xl-4 col-lg-5">
                         <div class="card shadow">
-                            <!-- Card Header - Dropdown -->
+                             Card Header - Dropdown 
                             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                 <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
                             </div>
-                            <!-- Card Body -->
+                             Card Body 
                             <div class="card-body">
                                 <div class="chart-pie pt-4 pb-2">
                                     <canvas id="myPieChart"></canvas>
@@ -228,7 +229,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
 

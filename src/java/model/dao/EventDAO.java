@@ -94,11 +94,14 @@ public class EventDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "SELECT eventID, eventName, courseID, discount, daystart, dayend, image, data, status  FROM Event WHERE eventID = " + id;
+                String sql = "SELECT eventID, eventName, courseID, discount, daystart, dayend, image, data, status, flag FROM Event WHERE eventID = " + id 
+                        + "AND flag = 1 AND status = 1";
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
-                    return new EventDTO(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getFloat(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getBoolean(9));
+                    return new EventDTO(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getFloat(4), 
+                            rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), 
+                            rs.getBoolean(9), rs.getBoolean(10));
 
                 }
 

@@ -12,6 +12,7 @@
             />
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="./css/insertEvent.css" />
+        <link rel="icon" type="image/png" href="./image/newlogo.png">
         <title>InsertEvent</title>
     </head>
     <body>
@@ -109,13 +110,13 @@
                     const currentDate = new Date();
 
                     if (dayStart <= currentDate) {
-                        alert('Giá trị của DayStart phải lớn hơn ngày hiện tại.');
+                        alert('The value of DayStart must be greater than the current date!');
                         dayStartInput.value = "";
                         return;
                     }
 
                     if (dayEnd <= dayStart) {
-                        alert('Giá trị của DayEnd phải lớn hơn DayStart.');
+                        alert('The value of DayEnd must be greater than DayStart!');
                         dayEndInput.value = "";
                     }
                 }
@@ -127,7 +128,7 @@
                         this.value = "";
                     }
                     if (/[!@#$%^&*()_+{}[\]|\\:;'<>?,./]/.test(value)) {
-                        alert("You are not allowed to use special characters to name the course!");
+                        alert("You are not allowed to use special characters to name the event!");
                         this.value = value.replace(/[^a-zA-Z0-9\s]/g, '');
                     }
 

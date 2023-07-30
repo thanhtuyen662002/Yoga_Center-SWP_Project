@@ -35,7 +35,7 @@ public abstract class BaseAuthentication_Nhat extends HttpServlet {
         if (user != null) {
             processGet(request, response);
         } else {
-            response.sendRedirect("login");
+            response.sendRedirect("login.jsp");
         }
     }
 

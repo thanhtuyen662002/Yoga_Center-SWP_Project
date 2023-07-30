@@ -79,6 +79,7 @@ public class InsertFeedbackServlet extends HttpServlet {
             request.setAttribute("coursesID", listCoursesID);
             
             String id = idcourse;
+            request.setAttribute("id", id);
             String ID = request.getParameter("ID");
             eventID = Edao.getEventByCourseID(id);
             if (eventID != null && ID == null) {
@@ -93,11 +94,7 @@ public class InsertFeedbackServlet extends HttpServlet {
             request.setAttribute("c", list);
 
             CoursesDTO course = dao1.getCourses(id);
-            List<CoursesDTO> time = dao1.getTime();
-            List<CoursesDTO> timeToCome = dao1.getTimeToCome();
             request.setAttribute("course", course);
-            request.setAttribute("time", time);
-            request.setAttribute("timeToCome", timeToCome);
             List<FeedbackDTO> feedbackList = FeedbackDAO.getFeedbackByCourseID(id);
             request.setAttribute("feedbackList", feedbackList);
             request.getRequestDispatcher("view.customer/courseDetail.jsp").forward(request, response);
