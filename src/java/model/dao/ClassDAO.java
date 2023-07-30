@@ -452,7 +452,8 @@ public class ClassDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "UPDATE Class SET status = 1\n"
-                        + "WHERE classID = N'" + id + "'";
+                        + "WHERE classID = N'" + id
+                        + "'";
                 ptm = conn.prepareStatement(sql);
                 int row = ptm.executeUpdate();
                 if (row > 0) {

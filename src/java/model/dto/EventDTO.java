@@ -33,6 +33,18 @@ public class EventDTO {
         this.data = data;
         this.status = status;
     }
+    public EventDTO(int eventID, String eventName, int courseID, float discount, String daystart, String dayend, String image, String data, boolean status, boolean flag) {
+        this.eventID = eventID;
+        this.eventName = eventName;
+        this.courseID = courseID;
+        this.discount = discount;
+        this.daystart = daystart;
+        this.dayend = dayend;
+        this.image = image;
+        this.data = data;
+        this.status = status;
+        this.flag = flag;
+    }
 
     public EventDTO(String eventName, int courseID, float discount, String daystart, String dayend, String image, String data, boolean status) {
         this.eventName = eventName;

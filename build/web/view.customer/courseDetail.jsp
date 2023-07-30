@@ -34,13 +34,6 @@
         <div class="container">
 
             <div class="priceDetail">
-                <div class="alert">
-                    <span class="fas fa-exclamation-circle"></span>
-                    <span class="msg">Success: Bạn đã đăng kí thành công!</span>
-                    <span class="close-btn">
-                        <span class="fas fa-times"></span>
-                    </span>
-                </div>
                 <div class="price-title">
                     <ul>
                         <li><a href="#">Khóa Học</a></li>
@@ -65,7 +58,7 @@
                         <div class="price-detail-rating">
                             <h1>Đánh Giá Khóa Học</h1>
                             <c:if test="${sessionScope.USER.roleID eq 'US'}">
-                                <form  action="insertfb" method="Post">
+                                <form  action="insertfb?id=${id}" method="Post">
                                     <div class="rating-box">
                                         <div style="text-align: center; color: red">
                                             <% if (Message != null) {%>
@@ -185,6 +178,17 @@
                                                 </c:otherwise>
                                             </c:choose>
                                         </li>
+                                        <c:if test="${message != '' || message != null || !empty message}">
+                                            <li >
+                                                <p style="color: #f3ba00;
+                                                        font-weight: 600;
+                                                        text-align: center;
+                                                        line-height: 2rem;
+                                                        width: 100%;
+                                                        margin-top: 6rem;
+                                                        font-size: 2.5rem;">${message}</p>
+                                            </li>   
+                                        </c:if>
 
                                     </ul>
                                 </div>
@@ -236,34 +240,6 @@
                                                     </select>
                                                 </div>
                                             </li>
-                                            <!--                                            <li>
-                                                                                            <div class="price-detail-right-label">
-                                                                                                Thời gian muốn học:
-                                                                                            </div>
-                                                                                            <div class="price-detail-right-input">
-                                                                                                <select class="timeStudy" name="time" id="">
-                                                                                                    <option value="" selected>Chọn thời gian học</option>
-                                            <c:forEach var="t" items="${time}">
-                                                <option value="${t.slotID}">${t.startTime} - ${t.endTime}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="price-detail-right-label">
-                                        Thời gian có thể đến trung tâm Yoga:
-                                    </div>
-                                    <div class="price-detail-right-input">
-                                        <select class="timeCome" name="timeToCome" id="">
-                                            <option value="" selected>
-                                                Chọn thời gian có thể đến trung tâm
-                                            </option>
-                                            <c:forEach var="T" items="${timeToCome}">
-                                                <option value="${T.timeToCome}">${T.timeToCome}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </li>-->
                                             <input type="hidden" name="time" value="3" />
                                             <input type="hidden" name="timeToCome" value="14:00:00" />
                                             <div class="price-detail-price-button">
