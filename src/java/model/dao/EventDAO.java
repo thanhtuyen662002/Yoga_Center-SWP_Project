@@ -94,7 +94,41 @@ public class EventDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "SELECT eventID, eventName, courseID, discount, daystart, dayend, image, data, status, flag FROM Event WHERE eventID = " + id 
+                String sql = "SELECT eventID, eventName, courseID, discount, daystart, dayend, image, data, status, flag FROM Event WHERE eventID = " + id; 
+//                        + "AND flag = 1 AND status = 1";
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    return new EventDTO(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getFloat(4), 
+                            rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), 
+                            rs.getBoolean(9), rs.getBoolean(10));
+
+                }
+
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
+    public EventDTO getEventByID1(String id) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT eventID, eventName, courseID, discount, daystart, dayend, image, data, status, flag FROM Event WHERE eventID = " + id
                         + "AND flag = 1 AND status = 1";
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
@@ -698,7 +732,7 @@ public class EventDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "SELECT eventID FROM Event WHERE status = 1 AND courseID = " + courseID;
+                String sql = "SELECT eventID FROM Event WHERE status = 1 AND flag = 1 AND courseID = " + courseID;
                 ptm = conn.prepareStatement(sql);
                 rs = ptm.executeQuery();
                 if (rs.next()) {
