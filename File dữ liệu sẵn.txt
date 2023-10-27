@@ -1,0 +1,44 @@
+Service: Phone: 0891345762 Pass: T12345678
+
+Tên khóa học: Hardcore 
+Price: 2000000
+Number of months: 3
+Description: 
+Khóa học yoga là một khóa học thực hành tập luyện cơ thể và tinh thần, giúp bạn tăng cường sức khỏe, sự linh hoạt, và giảm stress. 
+Trong khóa học này, bạn sẽ được hướng dẫn các động tác yoga cơ bản và nâng cao bởi các giáo viên có kinh nghiệm, kèm theo lời giải thích về các lợi ích của các động tác đó cho sức khỏe và tinh thần của bạn. Bạn sẽ học cách hít thở đúng, giúp cơ thể thư giãn và giảm stress, cũng như tập trung vào sự tập trung và tăng cường sự tập trung của bản thân. 
+Khóa học cũng cung cấp cho bạn một không gian yên tĩnh để tập trung vào bản thân và thực hành yoga một cách hiệu quả nhất. Cuối cùng, khóa học yoga sẽ giúp bạn tạo ra một cơ thể khỏe mạnh, linh hoạt và tâm trí sảng khoái.
+
+* TRƯỜNG HỢP TẠO THẤT BẠI
+EventName: Yoga hòa nhịp
+Discount: 30
+
+* TRƯỜNG HỢP TẠO THÀNH CÔNG 
+EventName: Trung thu siêu sales
+Discount: 50 
+
+Admin: Phone: 0913277862 Pass: Nhat@123
+
+ClassName: HA0001
+PT: Maria Garcia
+Capa: 10
+Course: Hardcore
+Decri: Slot 3 Thursday Sunday
+
+Guest: Phone: 0913113432 Name: Lê Tiến Đạt Address: 12 Hồ Xuân Hương, Quận 9
+ 
+Staff: Phone: 0963710928 Pass: Tuyen123@
+Phone: 0822797959 
+Name: Hoàng Thanh Tú 
+Address: 12 Hoàng Diệu, Quận 8 
+(*chọn khóa học hardcore)
+
+Teacher: Phone: 0836586092 Pass: Maria123@
+Room: DE001
+Class: HA0001
+Slot 3 Thursday Sunday
+
+Learner: Phone: 0913113432 Pass: 123@
+
+Feedback: 
+Tôi đã tham gia khóa học yoga và thật sự rất hài lòng với trải nghiệm của mình. Giáo viên đã rất dễ thương và tận tâm trong việc hướng dẫn các động tác yoga, giúp tôi cảm thấy tự tin hơn trong việc thực hành.
+
